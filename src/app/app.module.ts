@@ -19,7 +19,7 @@ import { ErrorComponent } from './notif-to-user/errors/error.component';
 import { GuestbookModule } from './Guestbook/guestbook.module';
 import { MailService } from './services/mail/mail.service';
 import { SuccessComponent } from './notif-to-user/success/success.component';
-
+import { AdminModule } from './admin-space/admin.module';
 
 
 @NgModule({
@@ -30,7 +30,8 @@ import { SuccessComponent } from './notif-to-user/success/success.component';
     AboutComponent,
     ContactMeComponent,
     ErrorComponent,
-    SuccessComponent
+    SuccessComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -39,7 +40,8 @@ import { SuccessComponent } from './notif-to-user/success/success.component';
     HttpModule,
     AuthModule,
     TrainingModule,
-    GuestbookModule
+    GuestbookModule,
+    AdminModule
   ],
   providers:[AuthService,ErrorService,SuccessService,MailService],
   bootstrap: [AppComponent]
