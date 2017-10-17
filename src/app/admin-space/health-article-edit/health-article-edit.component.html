@@ -1,42 +1,56 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-			<div class="row">
-				<div class="col-md-12">
-					<form role="form">
+			<form [formGroup]="rForm" (ngSubmit)="addPost(rForm.value)">
+				<div class="row">
+					<div class="col-md-12">
 						<div class="form-group">
-							 
+
 							<label for="title">
 								Title
 							</label>
-							<input type="text" class="form-control" id="title" />
-						</div>
-					</form>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<img alt="Bootstrap Image Preview" src="http://lorempixel.com/140/140/" style="display:block;width:auto;margin-left:auto;margin-right:auto;" />
-					<div class="row">
-						<div class="col-md-12">
+							<input type="text" class="form-control" id="title" formControlName="title" style="text-align:center;" />
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<form role="form">
+				<div class="row">
+					<div class="col-md-12">
+						<img *ngIf="loaded" alt="Image" [src]="imageBase64Temp" style="display:block;width:auto;margin-left:auto;margin-right:auto;width: 400px;height: 400px;"
+						/>
+						<div class="row">
+							<div class="col-md-12">
+								<div>
+									<div class="form-group">
+										<div style="display: flex;align-items: center;justify-content: center;">
+											<label for="imageFile">Image:
+												<input type="File" (change)="onUploadFile(file.files)" id="imageFile" #file />
+											</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
 						<div class="form-group">
-							 
+
 							<label for="article_details">
 								Article
 							</label>
-							<textarea id="article_details" rows="15" style="width:100%;resize:none"></textarea>
+							<textarea id="article_details" rows="15" style="width:100%;resize:none" formControlName="content"></textarea>
 						</div>
-						
-					</form>
+					</div>
 				</div>
-			</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div style="display: flex;align-items: center;justify-content: center;">
+							<input type="submit" class="button expanded" value="Submit Form" [disabled]="!rForm.valid" style="display: flex;align-items: center;justify-content: center;">
+						</div>
+					</div>
+				</div>
+			</form>
 		</div>
 	</div>
 </div>
