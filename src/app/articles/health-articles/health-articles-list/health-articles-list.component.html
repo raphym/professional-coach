@@ -1,0 +1,49 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <br>
+        <br>
+        <div class="col-md-12">
+          <h3 class="text-center">
+            Our Articles
+          </h3>
+        </div>
+      </div>
+      <br>
+      <br>
+      <div class="row">
+        <div class="col-md-12">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>
+                  #
+                </th>
+                <th>
+                  Article Name
+                </th>
+                <th>
+                  Article Date
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let article of healthArticles, let i = index ">
+                <td>
+                  {{i}}
+                </td>
+                <td>
+                  <a routerLink="/article/{{article._id}}">{{article.title}}</a>
+                </td>
+                <td>
+                  01/04/2012
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

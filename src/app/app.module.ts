@@ -20,6 +20,10 @@ import { GuestbookModule } from './Guestbook/guestbook.module';
 import { MailService } from './services/mail/mail.service';
 import { SuccessComponent } from './notif-to-user/success/success.component';
 import { AdminModule } from './admin-space/admin.module';
+import { HealthArticleService } from './services/health-article/health-article-service';
+import { HealthArticlesComponent } from './articles/health-articles/health-articles.component';
+import { HealthArticlesListComponent } from './articles/health-articles/health-articles-list/health-articles-list.component';
+import { HealthArticleItemComponent } from './articles/health-articles/health-article-item/health-article-item.component';
 
 
 @NgModule({
@@ -31,6 +35,9 @@ import { AdminModule } from './admin-space/admin.module';
     ContactMeComponent,
     ErrorComponent,
     SuccessComponent,
+    HealthArticlesComponent,
+    HealthArticlesListComponent,
+    HealthArticleItemComponent,
     
   ],
   imports: [
@@ -43,7 +50,7 @@ import { AdminModule } from './admin-space/admin.module';
     GuestbookModule,
     AdminModule
   ],
-  providers:[AuthService,ErrorService,SuccessService,MailService],
+  providers:[AuthService,ErrorService,SuccessService,MailService,HealthArticleService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
