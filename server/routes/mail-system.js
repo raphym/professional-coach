@@ -3,7 +3,7 @@ var router = express.Router();
 
 var nodemailer = require('nodemailer');
 var smtpTransport = require('nodemailer-smtp-transport');
-var config_constants = require('../../config/constant');
+var emails_config = require('../../config/emails_config');
 
 //save the messages
 router.post('/send', function (req, res, next) {
@@ -11,7 +11,7 @@ router.post('/send', function (req, res, next) {
   var emaildest = req.body.email;
 
   if (emaildest == 'admin') {
-    emaildest = config_constants.EMAIL_ADDRESS;
+    emaildest = emails_config.EMAIL_ADDRESS;
   }
 
   //console.log("mail-system : " + JSON.stringify(req.body) );
@@ -19,8 +19,8 @@ router.post('/send', function (req, res, next) {
     service: 'gmail',
     host: 'smtp.gmail.com',
     auth: {
-      user: config_constants.EMAIL_ADDRESS,
-      pass: config_constants.EMAIL_PSWD
+      user: emails_config.EMAIL_ADDRESS,
+      pass: emails_config.EMAIL_PSWD
     }
   }));
 

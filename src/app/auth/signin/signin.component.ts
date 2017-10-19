@@ -26,7 +26,7 @@ export class SigninComponent{
         }
     
         onSubmit(){
-            const user = new User(this.myForm.value.email, this.myForm.value.password);
+            const user = new User(this.myForm.value.email, this.myForm.value.password,null,null,null);
             this.authService.signin(user).subscribe(
                 data => {
                     localStorage.setItem('token',data.token);

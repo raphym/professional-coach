@@ -5,8 +5,8 @@ var mongooseUniqueValidator = require('mongoose-unique-validator');
 var schema = new Schema({
     myUserId:{type:ObjectId , required:true},        
     title:{type:String , required:true},    
-    Content:{type:String , required:true},
-    Picture:{type:String , required:false},   
+    content:{type:String , required:true},
+    image:{type:String , required:false},   
 });
 
 schema.plugin(mongooseUniqueValidator);

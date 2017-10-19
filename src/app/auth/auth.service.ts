@@ -5,7 +5,7 @@ import { User } from "../models/objects-models/user.model";
 import { Observable } from "rxjs/Observable";
 import { ErrorService } from "../notif-to-user/errors/error.service";
 
-const SIGNUP_ADDRESS = 'http://localhost:3000/user';
+const SIGNUP_ADDRESS = 'http://localhost:3000/user/signup';
 const SIGNIN_ADDRESS = 'http://localhost:3000/user/signin';
 
 
