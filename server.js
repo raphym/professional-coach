@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const path = require('path');
 const http = require('http');
 const app = express();
@@ -21,6 +22,9 @@ const api = require('./server/routes/api');
 // Parsers
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false}));
+
+//cookieParser
+app.use(cookieParser());
 
 // Angular DIST output folder
 app.use(express.static(path.join(__dirname, 'public')));//au lieu de dist c public

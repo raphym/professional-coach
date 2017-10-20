@@ -4,6 +4,9 @@ var router = express.Router();
 //jwt
 var jwt = require('jsonwebtoken');
 
+//jwt sign password
+var jwt_sign_pswd = require('../../config/jwt_sign_pswd');
+
 //model of mongoose
 var HealthArticles = require('../mongoose-models/health-article');
 var User = require('../mongoose-models/user');
@@ -46,8 +49,8 @@ router.get('/getArticle', function (req, res, next) {
 
 
 //Protection
-router.use('/addArticle', function (req, res, next) {
-    jwt.verify(req.query.token, 'secret', function (err, decoded) {
+router.use('/addArticle', function (req, res, next) {    
+    jwt.verify(req.cookies['token'], jwt_sign_pswd.SECRET, function (err, decoded) {
         if (err) {
             return res.status(401).json({
                 title: 'Not authenticated',
@@ -62,7 +65,7 @@ router.use('/addArticle', function (req, res, next) {
 router.post('/addArticle', function (req, res, next) {
 
     //get the decoded jwt
-    var decoded = jwt.decode(req.query.token);
+    var decoded = jwt.decode(req.cookies['token']);
 
     //find the user
     User.findById(decoded.user._id, function (err, user) {

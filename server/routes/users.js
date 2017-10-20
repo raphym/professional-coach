@@ -3,6 +3,9 @@ var router = express.Router();
 //to encrypt password and also compare
 var bcrypt = require('bcryptjs');
 
+//jwt sign password
+var jwt_sign_pswd = require('../../config/jwt_sign_pswd');
+
 //require levelright
 var level_rights = require('../../config/level_rights');
 
@@ -59,13 +62,20 @@ router.post('/signin', function (req, res, next) {
             });
         }
         //here we create the token
-        user_token = {_id:user._id,levelRights:user.levelRights};
-        var token = jwt.sign({user: user_token},'secret',{expiresIn: 7200});
+        user_token = {
+            _id:user._id,
+            levelRights:user.levelRights,
+            firstName:user.firstName,
+            lastName:user.lastName,
+            email:user.email
+        };
+        var token = jwt.sign({user: user_token},jwt_sign_pswd.SECRET,{expiresIn: 7200});
+
+        //insert the token into the cookies
         //send the response
+        res.cookie('token', token);
         res.status(200).json({
             message: 'Successfully logged in',
-            token: token,
-            userId: user._id
         });
 
 

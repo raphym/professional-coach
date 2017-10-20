@@ -22,11 +22,8 @@ export class HealthArticleService {
 
         const body = JSON.stringify(healthArticle);
         const headers = new Headers({ 'Content-Type': 'application/json' });
-        const token = localStorage.getItem('token')
-            ? '?token=' + localStorage.getItem('token')
-            : '';
 
-        return this.http.post(this.ADD_healthArticle_ADDRESS + token, body, { headers: headers })
+        return this.http.post(this.ADD_healthArticle_ADDRESS , body, { headers: headers })
             .map((response: Response) => {
                 const result = response.json();
                 const healthArticle = new HealthArticle(
@@ -94,9 +91,5 @@ export class HealthArticleService {
                 return Observable.throw(error.json())
             });
     }
-
-
-
-
 
 }

@@ -4,6 +4,9 @@ var router = express.Router();
 //jwt
 var jwt = require('jsonwebtoken');
 
+//jwt sign password
+var jwt_sign_pswd = require('../../config/jwt_sign_pswd');
+
 //model of mongoose
 var guestbookMessage = require('../mongoose-models/guestbook-message');
 var User = require('../mongoose-models/user');
@@ -28,9 +31,9 @@ router.get('/', function (req, res, next) {
         });
 });
 
-//
+//Protection
 router.use('/', function (req, res, next) {
-    jwt.verify(req.query.token, 'secret', function (err, decoded) {
+    jwt.verify(req.cookies['token'], jwt_sign_pswd.SECRET, function (err, decoded) {
         if (err) {
             return res.status(401).json({
                 title: 'Not authenticated',
@@ -45,7 +48,7 @@ router.use('/', function (req, res, next) {
 router.post('/', function (req, res, next) {
 
     //get the decoded jwt
-    var decoded = jwt.decode(req.query.token);
+    var decoded = jwt.decode(req.cookies['token']);
 
     //find the user
     User.findById(decoded.user._id, function (err, user) {
@@ -84,7 +87,7 @@ router.post('/', function (req, res, next) {
 router.patch('/:id', function (req, res, next) {
 
     //get the decoded jwt
-    var decoded = jwt.decode(req.query.token);
+    var decoded = jwt.decode(req.cookies['token']);
 
     guestbookMessage.findById(req.params.id, function (err, message) {
         if (err) {
@@ -130,7 +133,7 @@ router.patch('/:id', function (req, res, next) {
 router.delete('/:id', function (req, res, next) {
 
     //get the decoded jwt
-    var decoded = jwt.decode(req.query.token);
+    var decoded = jwt.decode(req.cookies['token']);
 
     guestbookMessage.findById(req.params.id, function (err, message) {
         if (err) {

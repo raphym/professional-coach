@@ -24,6 +24,8 @@
     "@angular/platform-browser": "^4.2.4",
     "@angular/platform-browser-dynamic": "^4.2.4",
     "@angular/router": "^4.2.4",
+    "angular2-cookie": "^1.2.6",
+    "angular2-jwt": "^0.2.3",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.1",
     "bootstrap": "^3.3.7",

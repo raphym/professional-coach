@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule }   from '@angular/forms';
+import { CookieService } from 'angular2-cookie/services/cookies.service';
 
 
 import { AppComponent } from './app.component';
@@ -50,7 +51,14 @@ import { HealthArticleItemComponent } from './articles/health-articles/health-ar
     GuestbookModule,
     AdminModule
   ],
-  providers:[AuthService,ErrorService,SuccessService,MailService,HealthArticleService],
+  providers:[
+    CookieService,
+    AuthService,
+    ErrorService,
+    SuccessService,
+    MailService,
+    HealthArticleService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
