@@ -40,15 +40,19 @@
                   <a routerLink="/signup"
                   style="cursor:pointer;" 
                   class="dropdown-item"
-                  *ngIf="!isLoggedIn()">Register</a>
+                  *ngIf="!isExistUser">Register</a>
                   <a routerLink="/signin" 
                   style="cursor:pointer;"
                   class="dropdown-item" 
-                  *ngIf="!isLoggedIn()">Login</a>
+                  *ngIf="!isExistUser">Login</a>
+                  <a routerLink="/admin-space"
+                  style="cursor:pointer;" 
+                  class="dropdown-item"
+                  *ngIf="isAdmin">Admin Space</a>
                   <a (click)="onLogout()" 
                   class="dropdown-item" 
                   style="cursor:pointer;"
-                  *ngIf="isLoggedIn()">Logout</a>
+                  *ngIf="isExistUser">Logout</a>
                 </div>
               </li>
         </ul>

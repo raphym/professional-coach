@@ -13,14 +13,16 @@ var level_rights = require('../../config/level_rights');
 var jwt = require('jsonwebtoken');
 
 var User = require('../mongoose-models/user');
-//get
+
+
+//Signup
 router.post('/signup', function (req, res, next) {
     var user = new User({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         password: bcrypt.hashSync(req.body.password, 10),
         email: req.body.email,
-        levelRights:level_rights.USER,
+        levelRights: level_rights.USER,
         messages: req.body.messages
     });
 
@@ -63,24 +65,41 @@ router.post('/signin', function (req, res, next) {
         }
         //here we create the token
         user_token = {
-            _id:user._id,
-            levelRights:user.levelRights,
-            firstName:user.firstName,
-            lastName:user.lastName,
-            email:user.email
+            _id: user._id,
+            levelRights: user.levelRights,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email
         };
-        var token = jwt.sign({user: user_token},jwt_sign_pswd.SECRET,{expiresIn: 7200});
+        var token = jwt.sign({ user: user_token }, jwt_sign_pswd.SECRET, { expiresIn: 7200 });
 
         //insert the token into the cookies
         //send the response
         res.cookie('token', token);
         res.status(200).json({
             message: 'Successfully logged in',
+            data:user_token
         });
-
-
     });
 });
+
+//islogin
+router.post('/islogin', function (req, res, next) {
+    jwt.verify(req.cookies['token'], jwt_sign_pswd.SECRET, function (err, decoded) {
+        if (err) {
+            return res.status(401).json({
+                title: 'Not Authenticated',
+                error: err
+            });
+        }
+        res.status(201).json({
+            title: 'Authenticated',
+            message: 'User authorized',
+            decoded:decoded
+        });
+    })
+});
+
 
 
 
