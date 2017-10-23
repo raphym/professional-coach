@@ -6,6 +6,7 @@ import { ContactMeComponent } from "./contact-me/contact-me.component";
 import { AboutComponent } from "./about/about.component";
 import { HealthArticlesComponent } from './articles/health-articles/health-articles.component';
 import { HealthArticleItemComponent } from './articles/health-articles/health-article-item/health-article-item.component';
+import { AuthGuardAdmin } from './auth/auth-guard-admin.service';
 
 const appRoutes: Routes = [
   
@@ -22,7 +23,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes, { preloadingStrategy: PreloadAllModules }),
   ],
   exports: [RouterModule],
-  declarations: []
+  declarations: [],
+  providers:[AuthGuardAdmin]
 })
 
 export class AppRoutingModule { }

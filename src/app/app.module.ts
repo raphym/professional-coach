@@ -26,7 +26,6 @@ import { HealthArticlesComponent } from './articles/health-articles/health-artic
 import { HealthArticlesListComponent } from './articles/health-articles/health-articles-list/health-articles-list.component';
 import { HealthArticleItemComponent } from './articles/health-articles/health-article-item/health-article-item.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,7 +56,7 @@ import { HealthArticleItemComponent } from './articles/health-articles/health-ar
     ErrorService,
     SuccessService,
     MailService,
-    HealthArticleService
+    HealthArticleService,
   ],
   bootstrap: [AppComponent]
 })
