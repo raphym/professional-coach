@@ -5,8 +5,6 @@ const path = require('path');
 const http = require('http');
 const app = express();
 
-
-
 //routes
 var appRoutes = require('./server/routes/appRoutes');
 var guestbookRoutes = require('./server/routes/guestbook');
@@ -15,17 +13,16 @@ var mailService = require('./server/routes/mail-system');
 var healthArticle = require('./server/routes/health-article');
 
 
-
 // API file for interacting with MongoDB
 const api = require('./server/routes/api');
 
 //set views
-app.set('views',path.join(__dirname, 'public'));
-app.set('view engine','hbs');
+app.set('views', path.join(__dirname, 'public'));
+app.set('view engine', 'hbs');
 
 // Parsers
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false}));
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 //cookieParser
 app.use(cookieParser());
