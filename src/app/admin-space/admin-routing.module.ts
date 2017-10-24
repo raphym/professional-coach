@@ -5,9 +5,14 @@ import { AuthGuardAdmin } from "../auth/auth-guard-admin.service";
 
 
 const AUTH_ROUTES: Routes = [
-        
-    {path:'admin-space', component: AdminSpaceComponent, canActivate: [AuthGuardAdmin]},
+     /*   
+    {path:'', component: AdminSpaceComponent, canActivate: [AuthGuardAdmin]},
     {path:'health-article-edit', component: HealthArticleEditComponent}
+*/
+
+    {path: 'admin-space' , component: AdminSpaceComponent , children: [
+        { path: 'health-article-edit' , component: HealthArticleEditComponent},
+    ] },
 
 ];
 

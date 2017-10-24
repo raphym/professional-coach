@@ -1,3 +1,20 @@
-<p>
-  admin-space works!
-</p>
+<div class="row">
+  <div class="my_sidenav" id="fadeshow1">
+    <li routerLinkActive="active">
+      <a routerLink="/health-article-edit">Add Articles</a>
+    </li>
+    <li routerLinkActive="active">
+      <a routerLink="/">Add Articles</a>
+    </li>
+    <li routerLinkActive="active">
+      <a routerLink="/">Add Articles</a>
+    </li>
+    <li routerLinkActive="active">
+      <a routerLink="/">Add Articles</a>
+    </li>
+  </div>
+
+  <div class="col-lg-10 col-md-10 col-sm-9 col-xs-1">
+    <router-outlet></router-outlet>
+  </div>
+</div>
