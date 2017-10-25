@@ -64,6 +64,9 @@ export class HeaderComponent implements OnInit {
                 },
                 error => {
                     this.isExistUser = false;
+                    this.displayName = '';
+                    this.isAdmin = false;
+                    this.authService.logout();
                 }
                 );
         }

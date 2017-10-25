@@ -59,7 +59,6 @@ export class AuthService {
         return this.http.post(ISLOGIN_ADDRESS, body, { headers: headers })
             .map((response: Response) => response.json())
             .catch((error: Response) => {
-                this.errorService.handleError(error.json());
                 return Observable.throw(error.json())
             });
     }
