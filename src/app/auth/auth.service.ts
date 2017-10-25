@@ -16,6 +16,12 @@ const ISLOGIN_ADDRESS = 'http://localhost:3000/user/islogin';
 @Injectable()
 export class AuthService {
     userLogInEvent = new EventEmitter<{}>();
+    private isExistUser = false;
+    private _id = '';
+    private isAdmin = false;
+    private firstName = '';
+    private lastName = '';
+    private email = '';
 
     //JwtHelper
     jwtHelper: JwtHelper = new JwtHelper();
@@ -43,7 +49,18 @@ export class AuthService {
         const headers = new Headers({ 'Content-Type': 'application/json' });
         return this.http.post(SIGNIN_ADDRESS, body, { headers: headers })
             .map((response: Response) => {
-                this.userLogInEvent.emit(response.json().data);
+                var data = response.json().data;
+                if (response.json().message == 'Successfully logged in') {
+                    if (data.levelRights >= 200)
+                        this.isAdmin = true;
+                    this._id = response.json()._id;
+                    this.isExistUser = true;
+                    this.firstName = data.firstName;
+                    this.lastName = data.lastName;
+                    this.email = data.email;
+                    this.userLogInEvent.emit(data);
+                    response.json()
+                }
                 response.json()
             })
             .catch((error: Response) => {
@@ -66,29 +83,17 @@ export class AuthService {
     //logout
     logout() {
         this.cookieService.remove('token');
+        this.isExistUser = false;
+        this._id = '';
+        this.isAdmin = false;
+        this.firstName = '';
+        this.lastName = '';
+        this.email = '';
     }
 
 
     //get the user_id connected
     getUserId() {
-        if (!this.isLoggedIn())
-            return 'expired';
-
-        var token = this.cookieService.get('token');
-        //var expirationDate = this.jwtHelper.getTokenExpirationDate(token);
-        var decoded = this.jwtHelper.decodeToken(token);
-        var isExpired = this.jwtHelper.isTokenExpired(token);
-
-        if (decoded) {
-
-            var user = decoded.user;
-            if (user) {
-                var userId = user._id;
-                if (userId) {
-                    return userId;
-                }
-            }
-            return 'error';
-        }
+        return this._id;
     }
 }

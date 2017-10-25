@@ -47,9 +47,6 @@ export class GuestbookMessageComponent implements OnInit{
 
     belongsToUsers(){
         var userId = this.authService.getUserId();
-        if(userId == 'expired' || userId == 'error')
-            return false;
-
         if(userId == this.guestbookMessage.userId)
             return true;
         else

@@ -44,9 +44,15 @@ export class HeaderComponent implements OnInit {
                 data => {
                     if (data.title == null) {
                         this.isExistUser = false;
+                        this.displayName = '';
+                        this.isAdmin = false;
+                        this.authService.logout();
                     }
                     else if (data.title == 'Not Authenticated') {
                         this.isExistUser = false;
+                        this.displayName = '';
+                        this.isAdmin = false;
+                        this.authService.logout();
                     }
                     else if (data.title == 'Authenticated') {
                         this.isExistUser = true;
