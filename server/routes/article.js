@@ -8,14 +8,14 @@ var jwt = require('jsonwebtoken');
 var jwt_sign_pswd = require('../../config/jwt_sign_pswd');
 
 //model of mongoose
-var HealthArticles = require('../mongoose-models/health-article');
+var Articles = require('../mongoose-models/article');
 var User = require('../mongoose-models/user');
 
 
 
 //get the articles
 router.get('/getArticles', function (req, res, next) {
-    HealthArticles.find()
+    Articles.find()
         .exec(function (err, articles) {
             if (err) {
                 return res.status(500).json({
@@ -32,7 +32,7 @@ router.get('/getArticles', function (req, res, next) {
 
 //get the articles
 router.get('/getArticle', function (req, res, next) {
-    HealthArticles.findOne({ _id: req.query.id })
+    Articles.findOne({ _id: req.query.id })
         .exec(function (err, articles) {
             if (err) {
                 return res.status(500).json({
@@ -49,7 +49,7 @@ router.get('/getArticle', function (req, res, next) {
 
 
 //Protection
-router.use('/addArticle', function (req, res, next) {    
+router.use('/addArticle', function (req, res, next) {
     jwt.verify(req.cookies['token'], jwt_sign_pswd.SECRET, function (err, decoded) {
         if (err) {
             return res.status(401).json({
@@ -75,13 +75,13 @@ router.post('/addArticle', function (req, res, next) {
                 error: err
             });
         }
+
         //create new message and adding the user to the message
-        var article = new HealthArticles({
+        var article = new Articles({
             title: req.body.title,
             image: req.body.image,
             content: req.body.content,
         });
-
 
         article.save(function (err, result) {
             if (err) {
@@ -91,6 +91,7 @@ router.post('/addArticle', function (req, res, next) {
                 });
             }
         });
+
     });
 });
 

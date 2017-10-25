@@ -1,4 +1,4 @@
-export class HealthArticle {
+export class Article {
     _id: string;
     title: string;
     image: string;

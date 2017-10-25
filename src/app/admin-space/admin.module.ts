@@ -3,22 +3,27 @@ import { NgModule } from "@angular/core";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
 import { AdminRoutingModule } from "./admin-routing.module";
-import { HealthArticleEditComponent } from './health-article-edit/health-article-edit.component';
+import {ArticleEditComponent } from './articles/article-edit/article-edit.component';
 import { AdminSpaceComponent } from './admin-space.component';
+import { ArticleAdminComponent } from './articles/article-admin/article-admin.component';
+import { ArticlesViewAdminComponent } from "./articles/articles-view-admin/articles-view-admin.component";
 
 @NgModule({
     declarations:[
         
-    HealthArticleEditComponent,
+    ArticleEditComponent,
         
-    AdminSpaceComponent
+    AdminSpaceComponent,
+        
+    ArticleAdminComponent,
+    ArticlesViewAdminComponent,  
 ],
     imports:
     [
         CommonModule,
         ReactiveFormsModule,
         AdminRoutingModule,
-        FormsModule,
+        FormsModule,     
     ]
 
 })

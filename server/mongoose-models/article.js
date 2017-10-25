@@ -9,4 +9,4 @@ var schema = new Schema({
 });
 
 schema.plugin(mongooseUniqueValidator);
-module.exports = mongoose.model('health_article', schema);
+module.exports = mongoose.model('article', schema);

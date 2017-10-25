@@ -21,10 +21,7 @@ import { GuestbookModule } from './Guestbook/guestbook.module';
 import { MailService } from './services/mail/mail.service';
 import { SuccessComponent } from './notif-to-user/success/success.component';
 import { AdminModule } from './admin-space/admin.module';
-import { HealthArticleService } from './services/health-article/health-article-service';
-import { HealthArticlesComponent } from './articles/health-articles/health-articles.component';
-import { HealthArticlesListComponent } from './articles/health-articles/health-articles-list/health-articles-list.component';
-import { HealthArticleItemComponent } from './articles/health-articles/health-article-item/health-article-item.component';
+import { ArticleModule } from './articles/article.module';
 
 @NgModule({
   declarations: [
@@ -34,11 +31,7 @@ import { HealthArticleItemComponent } from './articles/health-articles/health-ar
     AboutComponent,
     ContactMeComponent,
     ErrorComponent,
-    SuccessComponent,
-    HealthArticlesComponent,
-    HealthArticlesListComponent,
-    HealthArticleItemComponent,
-    
+    SuccessComponent,    
   ],
   imports: [
     BrowserModule,
@@ -48,7 +41,8 @@ import { HealthArticleItemComponent } from './articles/health-articles/health-ar
     AuthModule,
     TrainingModule,
     GuestbookModule,
-    AdminModule
+    AdminModule,
+    ArticleModule
   ],
   providers:[
     CookieService,
@@ -56,8 +50,8 @@ import { HealthArticleItemComponent } from './articles/health-articles/health-ar
     ErrorService,
     SuccessService,
     MailService,
-    HealthArticleService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: []
 })
 export class AppModule { }

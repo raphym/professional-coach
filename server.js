@@ -10,7 +10,7 @@ var appRoutes = require('./server/routes/appRoutes');
 var guestbookRoutes = require('./server/routes/guestbook');
 var userRoutes = require('./server/routes/users');
 var mailService = require('./server/routes/mail-system');
-var healthArticle = require('./server/routes/health-article');
+var article = require('./server/routes/article');
 
 
 // API file for interacting with MongoDB
@@ -45,7 +45,7 @@ app.use('/api', api);
 app.use('/guestbook', guestbookRoutes);
 app.use('/user', userRoutes);
 app.use('/sendmail', mailService);
-app.use('/healthArticle', healthArticle);
+app.use('/article', article);
 
 app.use('/', appRoutes);
 

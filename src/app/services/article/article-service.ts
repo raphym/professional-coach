@@ -2,37 +2,37 @@ import { Http, Response, Headers, URLSearchParams } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 import { Injectable } from "@angular/core";
-import { HealthArticle } from '../../models/objects-models/health-article';
+import { Article } from '../../models/objects-models/article';
 
 @Injectable()
-export class HealthArticleService {
+export class ArticleService {
 
-    ADD_healthArticle_ADDRESS = 'http://localhost:3000/healthArticle/addArticle';
-    GET_healthArticles_ADDRESS = 'http://localhost:3000/healthArticle/getArticles';
-    GET_healthArticle_ADDRESS = 'http://localhost:3000/healthArticle/getArticle';
+    ADD_Article_ADDRESS = 'http://localhost:3000/article/addArticle';
+    GET_Articles_ADDRESS = 'http://localhost:3000/article/getArticles';
+    GET_Article_ADDRESS = 'http://localhost:3000/article/getArticle';
 
 
-    healthArticles: HealthArticle[];
+    articles: Article[];
 
     constructor(private http: Http) { }
 
 
 
-    addArticle(healthArticle: HealthArticle) {
+    addArticle(article: Article) {
 
-        const body = JSON.stringify(healthArticle);
+        const body = JSON.stringify(article);
         const headers = new Headers({ 'Content-Type': 'application/json' });
 
-        return this.http.post(this.ADD_healthArticle_ADDRESS , body, { headers: headers })
+        return this.http.post(this.ADD_Article_ADDRESS, body, { headers: headers })
             .map((response: Response) => {
                 const result = response.json();
-                const healthArticle = new HealthArticle(
+                const article = new Article(
                     result.obj._id,
                     result.obj.title,
                     result.obj.image,
                     result.obj.content);
-                this.healthArticles.push(healthArticle);
-                return healthArticle;
+                this.articles.push(article);
+                return article;
             })
             .catch((error: Response) => {
 
@@ -50,19 +50,19 @@ export class HealthArticleService {
 
 
     getArticles() {
-        return this.http.get(this.GET_healthArticles_ADDRESS)
+        return this.http.get(this.GET_Articles_ADDRESS)
             .map((response: Response) => {
                 const articles = response.json().obj;
-                let transformedHealthArticles: HealthArticle[] = [];
+                let transformedArticles: Article[] = [];
                 for (let article of articles) {
-                    transformedHealthArticles.push(new HealthArticle(
+                    transformedArticles.push(new Article(
                         article._id,
                         article.title,
                         article.image,
                         article.content));
                 }
-                this.healthArticles = transformedHealthArticles;
-                return transformedHealthArticles;
+                this.articles = transformedArticles;
+                return transformedArticles;
             })
             .catch((error: Response) => {
                 //this.errorService.handleError(error.json());
@@ -74,17 +74,17 @@ export class HealthArticleService {
 
         let params: URLSearchParams = new URLSearchParams();
         params.set('id', id);
-        return this.http.get(this.GET_healthArticle_ADDRESS, { search: params })
+        return this.http.get(this.GET_Article_ADDRESS, { search: params })
             .map((response: Response) => {
                 const article = response.json().obj;
 
-                let transformedHealthArticle: HealthArticle;
-                transformedHealthArticle = new HealthArticle(
+                let transformedArticle: Article;
+                transformedArticle = new Article(
                     article._id,
                     article.title,
                     article.image,
                     article.content);
-                return transformedHealthArticle;
+                return transformedArticle;
             })
             .catch((error: Response) => {
                 //this.errorService.handleError(error.json());

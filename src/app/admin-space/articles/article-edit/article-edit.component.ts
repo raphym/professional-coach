@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { HealthArticleService } from '../../services/health-article/health-article-service';
-import { HealthArticle } from '../../models/objects-models/health-article';
-import { SuccessService } from '../../notif-to-user/success/success.service';
-import { ErrorService } from '../../notif-to-user/errors/error.service';
+import { ArticleService } from '../../../services/article/article-service';
+import { Article } from '../../../models/objects-models/article';
+import { SuccessService } from '../../../notif-to-user/success/success.service';
+import { ErrorService } from '../../../notif-to-user/errors/error.service';
 
 @Component({
-  selector: 'app-health-article-edit',
-  templateUrl: './health-article-edit.component.html',
-  styleUrls: ['./health-article-edit.component.css']
+  selector: 'app-article-edit',
+  templateUrl: './article-edit.component.html',
+  styleUrls: ['./article-edit.component.css']
 })
-export class HealthArticleEditComponent implements OnInit {
+export class ArticleEditComponent implements OnInit {
 
   rForm: FormGroup;
   loaded: boolean;
@@ -22,7 +22,7 @@ export class HealthArticleEditComponent implements OnInit {
 
 
   constructor(private fb: FormBuilder,
-    private healthArticleService: HealthArticleService,
+    private articleService: ArticleService,
     private successService: SuccessService,
     private errorService: ErrorService) {
     this.loaded = false;
@@ -38,7 +38,7 @@ export class HealthArticleEditComponent implements OnInit {
     this.imageBase64 = this.imageBase64Temp;
 
     //create
-    const article = new HealthArticle('null', this.title, this.imageBase64, this.content);
+    const article = new Article('null', this.title, this.imageBase64, this.content);
     //reset form
     this.rForm.reset();
     this.loaded = false;
@@ -46,7 +46,7 @@ export class HealthArticleEditComponent implements OnInit {
     this.title = '';
     this.content = '';
     //send request
-    this.healthArticleService.addArticle(article)
+    this.articleService.addArticle(article)
       .subscribe(
       data => {
         this.successService.handleSuccess(data.json());
