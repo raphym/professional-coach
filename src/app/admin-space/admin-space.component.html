@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="my_sidenav" id="fadeshow1">
+  <div class="my_sidenav_normalScreen" id="normalScreen">
     <li routerLinkActive="active">
       <a routerLink="/health-article-edit">Add Articles</a>
     </li>
@@ -12,6 +12,20 @@
     <li routerLinkActive="active">
       <a routerLink="/">Add Articles</a>
     </li>
+  </div>
+
+  <div class="my_sidenav_smallScreen" id="smallScreen">
+    <br>
+    <div class="select">
+      <select name="slct" id="slct" (change)="onChange($event.target.value)">
+        <option>Choose a page</option>
+        <option value="health-article-edit">Articles</option>
+        <option value="">Users</option>
+      </select>
+    </div>
+    <br>
+    <hr>
+
   </div>
 
   <div class="col-lg-10 col-md-10 col-sm-9 col-xs-1">

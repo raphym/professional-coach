@@ -7,6 +7,7 @@ import { AboutComponent } from "./about/about.component";
 import { HealthArticlesComponent } from './articles/health-articles/health-articles.component';
 import { HealthArticleItemComponent } from './articles/health-articles/health-article-item/health-article-item.component';
 import { AuthGuardAdmin } from './auth/auth-guard-admin.service';
+import { AdminSpaceComponent } from './admin-space/admin-space.component';
 
 const appRoutes: Routes = [
   
@@ -14,7 +15,9 @@ const appRoutes: Routes = [
       {path: 'articles' , component: HealthArticlesComponent},      
       {path: 'article/:id' , component: HealthArticleItemComponent},       
       {path: 'about' , component: AboutComponent},
-      {path: 'contact' , component: ContactMeComponent},      
+      {path: 'contact' , component: ContactMeComponent}, 
+      {path: 'admin-space' , component: AdminSpaceComponent,canActivate:[AuthGuardAdmin]}
+           
   ];
 
 @NgModule({
