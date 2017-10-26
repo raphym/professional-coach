@@ -16,6 +16,8 @@ const ISLOGIN_ADDRESS = 'http://localhost:3000/user/islogin';
 @Injectable()
 export class AuthService {
     userLogInEvent = new EventEmitter<{}>();
+    userLogOutEvent = new EventEmitter<any>();
+
     private isExistUser = false;
     private _id = '';
     private isAdmin = false;
@@ -53,15 +55,26 @@ export class AuthService {
                 if (response.json().message == 'Successfully logged in') {
                     if (data.levelRights >= 200)
                         this.isAdmin = true;
-                    this._id = response.json()._id;
+
+                    this._id = data._id;
                     this.isExistUser = true;
                     this.firstName = data.firstName;
                     this.lastName = data.lastName;
                     this.email = data.email;
                     this.userLogInEvent.emit(data);
-                    response.json()
+                    
+                    return response.json()
                 }
-                response.json()
+                else{
+                    this.isAdmin = false;
+                    this._id = '';
+                    this.isExistUser = false;
+                    this.firstName = '';
+                    this.lastName = '';
+                    this.email = '';
+                    this.userLogOutEvent.emit();
+                    return response.json()
+                }
             })
             .catch((error: Response) => {
                 this.errorService.handleError(error.json());
@@ -74,15 +87,45 @@ export class AuthService {
         const body = '';
         const headers = new Headers({ 'Content-Type': 'application/json' });
         return this.http.post(ISLOGIN_ADDRESS, body, { headers: headers })
-            .map((response: Response) => response.json())
+            .map((response: Response) => {
+                if (response.json().message == 'Authenticated') {
+                    var data = response.json().data;
+
+                    if (data.levelRights >= 200)
+                        this.isAdmin = true;
+                    this._id = data.user._id;
+                    this.isExistUser = true;
+                    this.firstName = data.user.firstName;
+                    this.lastName = data.user.lastName;
+                    this.email = data.user.email;
+                    this.userLogInEvent.emit(data.user);
+                    return response.json()
+
+                }
+                else {
+                    this.isAdmin = false;
+                    this._id = '';
+                    this.isExistUser = false;
+                    this.firstName = '';
+                    this.lastName = '';
+                    this.email = '';
+                    this.userLogOutEvent.emit();
+                    return response.json()
+                }
+            })
             .catch((error: Response) => {
+                this.userLogOutEvent.emit();
                 return Observable.throw(error.json())
             });
     }
 
     //logout
     logout() {
-        this.cookieService.remove('token');
+        try {
+            this.cookieService.remove('token');
+        } catch (e) {
+
+        }
         this.isExistUser = false;
         this._id = '';
         this.isAdmin = false;

@@ -29,6 +29,12 @@ export class HeaderComponent implements OnInit {
                 }
             }
         );
+
+        this.authService.userLogOutEvent.subscribe(
+            (data) => {
+                this.onLogout();
+            }
+        );
         this.isAdmin = false;
         this.isLoggedIn();
     }
@@ -36,43 +42,35 @@ export class HeaderComponent implements OnInit {
     isLoggedIn() {
         var token = this.cookieService.get('token');
         if (token == null || token == '') {
-            this.isExistUser = false;
+            this.onLogout();
         }
         else {
             this.authService.isLoggedIn()
                 .subscribe(
                 data => {
-                    if (data.title == null) {
-                        this.isExistUser = false;
-                        this.displayName = '';
-                        this.isAdmin = false;
-                        this.authService.logout();
+                    if (data.message == null) {
+                        this.onLogout();
                     }
-                    else if (data.title == 'Not Authenticated') {
-                        this.isExistUser = false;
-                        this.displayName = '';
-                        this.isAdmin = false;
-                        this.authService.logout();
+                    else if (data.message == 'Not Authenticated') {
+                        this.onLogout();
                     }
-                    else if (data.title == 'Authenticated') {
+                    else if (data.message == 'Authenticated') {
                         this.isExistUser = true;
-                        var levelRights = data.decoded.user.levelRights;
+                        var the_data = data.data;
+                        var levelRights = the_data.user.levelRights;
                         if (levelRights != null) {
                             if (levelRights >= 200)
                                 this.isAdmin = true;
                         }
 
-                        var firstName = data.decoded.user.firstName;
+                        var firstName = the_data.user.firstName;
                         if (firstName != null) {
                             this.displayName = firstName;
                         }
                     }
                 },
                 error => {
-                    this.isExistUser = false;
-                    this.displayName = '';
-                    this.isAdmin = false;
-                    this.authService.logout();
+                    this.onLogout();
                 }
                 );
         }

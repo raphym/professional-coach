@@ -20,7 +20,8 @@ export class GuestbookMessageInputComponent implements OnInit {
     }
 
     isLoggedIn() {
-        return this.authService.isLoggedIn();
+        if(this.authService.getUserId()!='')
+            return true;
     }
 
     onSubmit(form: NgForm) {

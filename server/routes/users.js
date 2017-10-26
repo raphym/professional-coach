@@ -92,12 +92,11 @@ router.post('/islogin', function (req, res, next) {
                 error: err
             });
         }
-        res.status(201).json({
-            title: 'Authenticated',
-            message: 'User authorized',
-            decoded:decoded
+        res.status(200).json({
+            message: 'Authenticated',
+            data:decoded
         });
-    })
+    });
 });
 
 

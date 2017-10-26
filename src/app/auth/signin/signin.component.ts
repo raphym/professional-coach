@@ -31,7 +31,7 @@ export class SigninComponent{
                 data => {
                     this.router.navigateByUrl('/');
                 },
-                error => console.error(error)
+                error => console.log(error)
             );
     
             this.myForm.reset();

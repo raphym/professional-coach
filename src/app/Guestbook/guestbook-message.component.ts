@@ -5,8 +5,8 @@ import { AuthService } from "../auth/auth.service";
 
 @Component({
     selector: 'app-guestbook-message',
-    templateUrl:'./guestbook-message.component.html',
-    styles:[`
+    templateUrl: './guestbook-message.component.html',
+    styles: [`
     .author{
         display: inline-block;
         font-style: italic;
@@ -21,33 +21,31 @@ import { AuthService } from "../auth/auth.service";
     }
 `]
 })
-export class GuestbookMessageComponent implements OnInit{
+export class GuestbookMessageComponent implements OnInit {
     @Input() guestbookMessage: GuestbookMessage;
 
-    ngOnInit()
-    {
+    ngOnInit() {
         //this.message.content = this.message.content.replace("\n", "<br/>");
     }
 
     constructor(
-        private guestbookMessageService:GuestbookMessageService,
-        private authService:AuthService
-    ){}
-    onEdit(){
+        private guestbookMessageService: GuestbookMessageService,
+        private authService: AuthService
+    ) { }
+    onEdit() {
         this.guestbookMessageService.editMessage(this.guestbookMessage);
     }
 
-    onDelete()
-    {
+    onDelete() {
         this.guestbookMessageService.deleteMessage(this.guestbookMessage)
-        .subscribe(
+            .subscribe(
             result => console.log(result)
-        );
+            );
     }
 
-    belongsToUsers(){
+    belongsToUsers() {
         var userId = this.authService.getUserId();
-        if(userId == this.guestbookMessage.userId)
+        if (userId == this.guestbookMessage.userId)
             return true;
         else
             return false;

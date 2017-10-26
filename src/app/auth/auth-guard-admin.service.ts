@@ -20,17 +20,17 @@ export class AuthGuardAdmin implements CanActivate {
             return this.authService.isLoggedIn()
                 .map(
                 data => {
-                    if (data.title == null) {
+                    if (data.message == null) {
                         return false;
                     }
-                    else if (data.title == 'Not Authenticated') {
+                    else if (data.message == 'Not Authenticated') {
                         return false;
                     }
-                    else if (data.title == 'Authenticated') {
-                        var levelRights = data.decoded.user.levelRights;
+                    else if (data.message == 'Authenticated') {
+                        var the_data = data.data;
+                        var levelRights = the_data.user.levelRights;
                         if (levelRights != null) {
                             if (levelRights >= 200) {
-                                console.log('Should be OK!!');
                                 return true;
                             }
                         }
