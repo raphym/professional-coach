@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { ArticleService } from '../../../services/article/article-service';
-import { Article } from '../../../models/objects-models/article';
-import { SuccessService } from '../../../notif-to-user/success/success.service';
-import { ErrorService } from '../../../notif-to-user/errors/error.service';
+import { ArticleService } from '../../services/article/article-service';
+import { SuccessService } from '../../notif-to-user/success/success.service';
+import { ErrorService } from '../../notif-to-user/errors/error.service';
+import { Article } from '../../models/objects-models/article';
+
 
 @Component({
   selector: 'app-article-edit',

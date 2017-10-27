@@ -4,18 +4,16 @@ import { CommonModule } from '@angular/common';
 import { HomeComponent } from "./home/home.component";
 import { ContactMeComponent } from "./contact-me/contact-me.component";
 import { AboutComponent } from "./about/about.component";
-import { ArticlesComponent } from './articles/article.component';
-import { ArticleItemComponent } from './articles/article-item/article-item.component';
 import { AuthGuardAdmin } from './auth/auth-guard-admin.service';
 import { AdminSpaceComponent } from './admin-space/admin-space.component';
+import { ArticlesComponent } from './articles/article.component';
 
 const appRoutes: Routes = [
   
       {path: '' , component: HomeComponent},
-      {path: 'articles' , component: ArticlesComponent},      
-      {path: 'article/:id' , component: ArticleItemComponent},       
       {path: 'about' , component: AboutComponent},
-      {path: 'contact' , component: ContactMeComponent}, 
+      {path: 'contact' , component: ContactMeComponent},
+      {path: 'articles' , component: ArticlesComponent},
       {path: 'admin-space' , component: AdminSpaceComponent,canActivate:[AuthGuardAdmin]}
            
   ];
