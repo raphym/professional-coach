@@ -7,7 +7,10 @@ import { Observable } from 'rxjs/Observable';
 import { GuestbookMessage } from "../models/objects-models/guestbook-message.model";
 import { ErrorService } from '../notif-to-user/errors/error.service';
 
-const MESSAGE_ADDRESS = 'http://localhost:3000/guestbook';
+const GET_MESSAGE_ADDRESS = 'http://localhost:3000/guestbook/getMessages';
+const SAVE_MESSAGE_ADDRESS = 'http://localhost:3000/guestbook/protect/saveMessage';
+const EDIT_MESSAGE_ADDRESS = 'http://localhost:3000/guestbook/protect/editMessage';
+const DELETE_MESSAGE_ADDRESS = 'http://localhost:3000/guestbook/protect/deleteMessage';
 
 
 @Injectable()
@@ -22,7 +25,7 @@ export class GuestbookMessageService {
         const body = JSON.stringify(message);
         const headers = new Headers({ 'Content-Type': 'application/json' });
         
-        return this.http.post(MESSAGE_ADDRESS , body, { headers: headers })
+        return this.http.post(SAVE_MESSAGE_ADDRESS , body, { headers: headers })
             .map((response: Response) => {
                 const result = response.json();
                 const guestbookMessage = new GuestbookMessage(
@@ -40,7 +43,7 @@ export class GuestbookMessageService {
     }
 
     getMessage() {
-        return this.http.get(MESSAGE_ADDRESS)
+        return this.http.get(GET_MESSAGE_ADDRESS)
             .map((response: Response) => {
                 const messages = response.json().obj;
                 let transformedMessages: GuestbookMessage[] = [];
@@ -68,7 +71,7 @@ export class GuestbookMessageService {
         const body = JSON.stringify(message);
         const headers = new Headers({ 'Content-Type': 'application/json' });
         
-        return this.http.patch(MESSAGE_ADDRESS + '/' + message.messageId , body, { headers: headers })
+        return this.http.patch(EDIT_MESSAGE_ADDRESS + '/' + message.messageId , body, { headers: headers })
             .map((response: Response) => response.json())
             .catch((error: Response) => {
                 this.errorService.handleError(error.json());
@@ -80,7 +83,7 @@ export class GuestbookMessageService {
         //remove from the frond-end (imediately)
         this.guestbookMessages.splice(this.guestbookMessages.indexOf(message), 1);
         //remove from the backend
-        return this.http.delete(MESSAGE_ADDRESS + '/' + message.messageId)
+        return this.http.delete(DELETE_MESSAGE_ADDRESS + '/' + message.messageId)
             .map((response: Response) => response.json())
             .catch((error: Response) => {
                 this.errorService.handleError(error.json());

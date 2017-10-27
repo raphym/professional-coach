@@ -14,7 +14,7 @@ var User = require('../mongoose-models/user');
 
 
 //get the messages
-router.get('/', function (req, res, next) {
+router.get('/getMessages', function (req, res, next) {
     guestbookMessage.find()
         .populate('user','firstName')
         .exec(function (err, messages) {
@@ -32,7 +32,7 @@ router.get('/', function (req, res, next) {
 });
 
 //Protection
-router.use('/', function (req, res, next) {
+router.use('/protect', function (req, res, next) {
     jwt.verify(req.cookies['token'], jwt_sign_pswd.SECRET, function (err, decoded) {
         if (err) {
             return res.status(401).json({
@@ -45,7 +45,7 @@ router.use('/', function (req, res, next) {
 });
 
 //save the messages
-router.post('/', function (req, res, next) {
+router.post('/protect/saveMessage', function (req, res, next) {
 
     //get the decoded jwt
     var decoded = jwt.decode(req.cookies['token']);
@@ -84,8 +84,10 @@ router.post('/', function (req, res, next) {
 });
 
 //update messages
-router.patch('/:id', function (req, res, next) {
+router.patch('/protect/editMessage/:id', function (req, res, next) {
 
+    console.log('update message');
+    console.log(req.param.id);
     //get the decoded jwt
     var decoded = jwt.decode(req.cookies['token']);
 
@@ -130,7 +132,7 @@ router.patch('/:id', function (req, res, next) {
     });
 });
 
-router.delete('/:id', function (req, res, next) {
+router.delete('/protect/deleteMessage/:id', function (req, res, next) {
 
     //get the decoded jwt
     var decoded = jwt.decode(req.cookies['token']);

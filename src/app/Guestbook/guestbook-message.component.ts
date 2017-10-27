@@ -39,7 +39,6 @@ export class GuestbookMessageComponent implements OnInit {
     onDelete() {
         this.guestbookMessageService.deleteMessage(this.guestbookMessage)
             .subscribe(
-            result => console.log(result)
             );
     }
 

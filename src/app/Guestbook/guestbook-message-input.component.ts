@@ -30,17 +30,14 @@ export class GuestbookMessageInputComponent implements OnInit {
             this.guestbookMessage.content = form.value.content;
             this.guestbookMessageService.updateMessage(this.guestbookMessage)
                 .subscribe(
-                result => console.log(result)
                 );
             this.guestbookMessage = null;
-
 
         } else {
             //create
             const msg = new GuestbookMessage(form.value.content, '');
             this.guestbookMessageService.addMessage(msg)
                 .subscribe(
-                data => console.log(data),
             );
         }
 
