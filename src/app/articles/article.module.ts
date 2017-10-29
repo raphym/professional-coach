@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 
 
 
-import { ArticleService } from '../services/article/article-service';
+import { ArticleService } from './article-service';
 import { ArticlesComponent } from './article.component';
 import { ArticlesListComponent } from './articles-list/articles-list.component';
 import { ArticleItemComponent } from './article-item/article-item.component';

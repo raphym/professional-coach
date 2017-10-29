@@ -51,7 +51,7 @@ router.post('/send', function (req, res, next) {
       console.log(error);
       return res.status(500).json({
         title: 'Mail error',
-        error: { message: 'An error occurred while sending mail' }
+        message: 'An error occurred while sending mail'
       });
     } else {
       return res.status(200).json({

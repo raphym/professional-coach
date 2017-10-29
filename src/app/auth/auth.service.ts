@@ -15,10 +15,11 @@ const ISLOGIN_ADDRESS = 'http://localhost:3000/user/islogin';
 
 @Injectable()
 export class AuthService {
+
     userLogInEvent = new EventEmitter<{}>();
     userLogOutEvent = new EventEmitter<any>();
 
-    private isExistUser = false;
+    private isConnect = false;
     private _id = '';
     private isAdmin = false;
     private firstName = '';
@@ -53,30 +54,33 @@ export class AuthService {
             .map((response: Response) => {
                 var data = response.json().data;
                 if (response.json().message == 'Successfully logged in') {
+
+                    if (data.levelRights == null) {
+                        this.logout();
+                        this.userLogOutEvent.emit();
+                    }
+
                     if (data.levelRights >= 200)
                         this.isAdmin = true;
 
                     this._id = data._id;
-                    this.isExistUser = true;
+                    this.isConnect = true;
                     this.firstName = data.firstName;
                     this.lastName = data.lastName;
                     this.email = data.email;
                     this.userLogInEvent.emit(data);
-                    
+
                     return response.json()
                 }
-                else{
-                    this.isAdmin = false;
-                    this._id = '';
-                    this.isExistUser = false;
-                    this.firstName = '';
-                    this.lastName = '';
-                    this.email = '';
+                else {
+                    this.logout();
                     this.userLogOutEvent.emit();
                     return response.json()
                 }
             })
             .catch((error: Response) => {
+                this.logout();
+                this.userLogOutEvent.emit();
                 this.errorService.handleError(error.json());
                 return Observable.throw(error.json())
             });
@@ -91,10 +95,15 @@ export class AuthService {
                 if (response.json().message == 'Authenticated') {
                     var data = response.json().data;
 
-                    if (data.levelRights >= 200)
+                    if (data == null || data.user == null) {
+                        this.logout();
+                        this.userLogOutEvent.emit();
+                    }
+
+                    if (data.user.levelRights >= 200)
                         this.isAdmin = true;
                     this._id = data.user._id;
-                    this.isExistUser = true;
+                    this.isConnect = true;
                     this.firstName = data.user.firstName;
                     this.lastName = data.user.lastName;
                     this.email = data.user.email;
@@ -103,17 +112,13 @@ export class AuthService {
 
                 }
                 else {
-                    this.isAdmin = false;
-                    this._id = '';
-                    this.isExistUser = false;
-                    this.firstName = '';
-                    this.lastName = '';
-                    this.email = '';
+                    this.logout();
                     this.userLogOutEvent.emit();
                     return response.json()
                 }
             })
             .catch((error: Response) => {
+                this.logout();
                 this.userLogOutEvent.emit();
                 return Observable.throw(error.json())
             });
@@ -126,7 +131,7 @@ export class AuthService {
         } catch (e) {
 
         }
-        this.isExistUser = false;
+        this.isConnect = false;
         this._id = '';
         this.isAdmin = false;
         this.firstName = '';
@@ -135,8 +140,31 @@ export class AuthService {
     }
 
 
+    //return true if connect
+    isItConnect() {
+        return this.isConnect;
+    }
+
+    //return true if Admin
+    isItAdmin() {
+        return this.isAdmin;
+    }
     //get the user_id connected
     getUserId() {
         return this._id;
+    }
+
+    // get the firstName of the connected
+    getFirstName() {
+        return this.firstName;
+    }
+    // get the lastName of the connected
+    getLastName() {
+        return this.lastName;
+    }
+
+    //get the Email of the connected
+    getEmail() {
+        return this.email;
     }
 }

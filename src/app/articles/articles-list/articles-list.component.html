@@ -39,8 +39,11 @@
                 <td>
                   01/04/2012
                 </td>
-                <td>
-                  <a routerLink="/edit-article">Edit</a>
+                <td *ngIf="isItAdmin()">
+                  <a routerLink="/edit-article/{{article._id}}">Edit</a>
+                </td>
+                <td *ngIf="isItAdmin()">
+                  <a (click)="onDelete(article._id)" style="cursor:pointer;">Delete</a>
                 </td>
               </tr>
             </tbody>

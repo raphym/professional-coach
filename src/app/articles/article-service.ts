@@ -2,19 +2,31 @@ import { Http, Response, Headers, URLSearchParams } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 import { Injectable } from "@angular/core";
-import { Article } from '../../models/objects-models/article';
+import { Article } from '../models/objects-models/article';
 
 @Injectable()
 export class ArticleService {
 
     ADD_Article_ADDRESS = 'http://localhost:3000/article/addArticle';
+    UPDATE_Article_ADDRESS = 'http://localhost:3000/article/updateArticle';
     GET_Articles_ADDRESS = 'http://localhost:3000/article/getArticles';
     GET_Article_ADDRESS = 'http://localhost:3000/article/getArticle';
+    DELETE_Article_ADDRESS = 'http://localhost:3000/article/deleteArticle';
+
+
 
 
     articles: Article[];
 
-    constructor(private http: Http) { }
+    constructor(private http: Http) {
+        this.getArticles()
+            .subscribe(
+            (articles: Article[]) => {
+                this.articles = articles;
+            },
+            error => console.error(error)
+            );
+    }
 
 
 
@@ -32,7 +44,7 @@ export class ArticleService {
                     result.obj.image,
                     result.obj.content);
                 this.articles.push(article);
-                return article;
+                return response.json().my_response;
             })
             .catch((error: Response) => {
 
@@ -45,6 +57,39 @@ export class ArticleService {
                 }
                 else
                     return Observable.throw(error.json())
+            });
+    }
+
+    updateArticle(article: Article) {
+
+        const body = JSON.stringify(article);
+        const headers = new Headers({ 'Content-Type': 'application/json' });
+
+        return this.http.post(this.UPDATE_Article_ADDRESS, body, { headers: headers })
+            .map((response: Response) => {
+                const result = response.json();
+                const article = new Article(
+                    result.obj._id,
+                    result.obj.title,
+                    result.obj.image,
+                    result.obj.content);
+                this.articles.push(article);
+                return response.json().my_response;
+            })
+            .catch((error: Response) => {
+
+                if (error.status == 413) {
+                    var personalError = {
+                        title: 'Error occurred (Status Code : ' + error.status + ')',
+                        error: { message: error.statusText },
+                    }
+                    return Observable.throw(personalError)
+                }
+                else {
+                    console.log(error);
+                    return Observable.throw(error);
+                }
+
             });
     }
 
@@ -77,7 +122,6 @@ export class ArticleService {
         return this.http.get(this.GET_Article_ADDRESS, { search: params })
             .map((response: Response) => {
                 const article = response.json().obj;
-
                 let transformedArticle: Article;
                 transformedArticle = new Article(
                     article._id,
@@ -92,4 +136,17 @@ export class ArticleService {
             });
     }
 
+    deleteArticle(id) {
+        const body = JSON.stringify({ _id: id });
+        const headers = new Headers({ 'Content-Type': 'application/json' });
+
+        return this.http.post(this.DELETE_Article_ADDRESS, body, { headers: headers })
+            .map((response: Response) => {
+                return response.json().my_response;
+            })
+            .catch((error: Response) => {
+                console.log(error);
+                return Observable.throw(error);
+            });
+    }
 }

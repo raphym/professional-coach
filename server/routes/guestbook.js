@@ -16,12 +16,12 @@ var User = require('../mongoose-models/user');
 //get the messages
 router.get('/getMessages', function (req, res, next) {
     guestbookMessage.find()
-        .populate('user','firstName')
+        .populate('user', 'firstName')
         .exec(function (err, messages) {
             if (err) {
                 return res.status(500).json({
                     title: 'An error occured',
-                    error: err
+                    message: err
                 });
             }
             res.status(200).json({
@@ -37,7 +37,7 @@ router.use('/protect', function (req, res, next) {
         if (err) {
             return res.status(401).json({
                 title: 'Not authenticated',
-                error: {message:'You are not authenticated'}
+                message: 'You are not authenticated'
             });
         }
         next();
@@ -55,7 +55,7 @@ router.post('/protect/saveMessage', function (req, res, next) {
         if (err) {
             return res.status(500).json({
                 title: 'An error occured',
-                error: err
+                message: err
             });
         }
         //create new message and adding the user to the message
@@ -69,7 +69,7 @@ router.post('/protect/saveMessage', function (req, res, next) {
             if (err) {
                 return res.status(500).json({
                     title: 'An error occured',
-                    error: err
+                    message: err
                 });
             }
             //push the message into the user array messages
@@ -95,22 +95,21 @@ router.patch('/protect/editMessage/:id', function (req, res, next) {
         if (err) {
             return res.status(500).json({
                 title: 'An error occured',
-                error: err
+                message: err
             });
         }
         if (!message) {
             return res.status(500).json({
                 title: 'No Message Found!',
-                error: { message: 'Message not found' }
+                message: 'Message not found'
             });
         }
 
         //check if the user is the owner of the message
-        if(message.user != decoded.user._id)
-        {
+        if (message.user != decoded.user._id) {
             return res.status(401).json({
                 title: 'Not Authenticated',
-                error: { message: 'The owner of this message is not authenticated' }
+                message: 'The owner of this message is not authenticated'
             });
         }
 
@@ -121,7 +120,7 @@ router.patch('/protect/editMessage/:id', function (req, res, next) {
             if (err) {
                 return res.status(500).json({
                     title: 'An error occured',
-                    error: err
+                    message: err
                 });
             }
             res.status(200).json({
@@ -141,22 +140,21 @@ router.delete('/protect/deleteMessage/:id', function (req, res, next) {
         if (err) {
             return res.status(500).json({
                 title: 'An error occured',
-                error: err
+                message: err
             });
         }
         if (!message) {
             return res.status(500).json({
                 title: 'No Message Found!',
-                error: { message: 'Message not found' }
+                message: 'Message not found'
             });
         }
 
         //check if the user is the owner of the message
-        if(message.user != decoded.user._id)
-        {
+        if (message.user != decoded.user._id) {
             return res.status(401).json({
                 title: 'Not Authenticated',
-                error: { message: 'The owner of this message is not authenticated' }
+                message: 'The owner of this message is not authenticated'
             });
         }
 
@@ -166,7 +164,7 @@ router.delete('/protect/deleteMessage/:id', function (req, res, next) {
             if (err) {
                 return res.status(500).json({
                     title: 'An error occured',
-                    error: err
+                    message: err
                 });
             }
             res.status(200).json({

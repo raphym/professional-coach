@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ArticleService } from '../../services/article/article-service';
+import { ArticleService } from '../article-service';
 import { Article } from '../../models/objects-models/article';
 import { ActivatedRoute, Params } from "@angular/router";//Router (if redirect)
 

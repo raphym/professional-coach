@@ -34,10 +34,10 @@
           My Space
         </a>
         <div style="cursor:pointer;" class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a routerLink="/signup" style="cursor:pointer;" class="dropdown-item" *ngIf="!isExistUser">Register</a>
-          <a routerLink="/signin" style="cursor:pointer;" class="dropdown-item" *ngIf="!isExistUser">Login</a>
+          <a routerLink="/signup" style="cursor:pointer;" class="dropdown-item" *ngIf="!isConnect">Register</a>
+          <a routerLink="/signin" style="cursor:pointer;" class="dropdown-item" *ngIf="!isConnect">Login</a>
           <a routerLink="/admin-space" style="cursor:pointer;" class="dropdown-item" *ngIf="isAdmin">Admin Space</a>
-          <a (click)="onLogout()" class="dropdown-item" style="cursor:pointer;" *ngIf="isExistUser">Logout</a>
+          <a (click)="onLogout()" class="dropdown-item" style="cursor:pointer;" *ngIf="isConnect">Logout</a>
         </div>
       </li>
     </ul>

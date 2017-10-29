@@ -31,7 +31,7 @@ router.post('/signup', function (req, res, next) {
         if (err) {
             return res.status(500).json({
                 title: 'An error occured',
-                error: err
+                message: err
             });
         }
         res.status(201).json({
@@ -47,20 +47,20 @@ router.post('/signin', function (req, res, next) {
         if (err) {//if error request
             return res.status(500).json({
                 title: 'An error occured',
-                error: err
+                message: err
             });
         }
         if (!user) {//if error email
             return res.status(401).json({
                 title: 'Login failed',
-                error: { message: 'Invalid login credentials' }
+                message: 'Invalid login credentials'
             });
         }
         //compare the encrypted password with the has of the passwords entered in the signin
         if (!bcrypt.compareSync(req.body.password, user.password)) {//if error password
             return res.status(401).json({
                 title: 'Login failed',
-                error: { message: 'Invalid login credentials' }
+                message: 'Invalid login credentials'
             });
         }
         //here we create the token
@@ -78,7 +78,7 @@ router.post('/signin', function (req, res, next) {
         res.cookie('token', token);
         res.status(200).json({
             message: 'Successfully logged in',
-            data:user_token
+            data: user_token
         });
     });
 });
@@ -89,12 +89,12 @@ router.post('/islogin', function (req, res, next) {
         if (err) {
             return res.status(401).json({
                 title: 'Not Authenticated',
-                error: err
+                message: err
             });
         }
         res.status(200).json({
             message: 'Authenticated',
-            data:decoded
+            data: decoded
         });
     });
 });

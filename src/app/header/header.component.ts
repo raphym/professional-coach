@@ -10,19 +10,21 @@ import { AuthService } from "../auth/auth.service";
 )
 export class HeaderComponent implements OnInit {
     private displayName;
-    private isExistUser;
+    private isConnect;
     private isAdmin;
     constructor(
         private authService: AuthService,
-        private cookieService: CookieService) { }
+        private cookieService: CookieService) {
+
+    }
 
     ngOnInit() {
         this.displayName = "";
-        this.isExistUser = false;
+        this.isConnect = false;
         this.isAdmin = false;
         this.authService.userLogInEvent.subscribe(
             (data) => {
-                this.isExistUser = true;
+                this.isConnect = true;
                 this.displayName = data.firstName;
                 if (data.levelRights >= 200) {
                     this.isAdmin = true;
@@ -32,13 +34,16 @@ export class HeaderComponent implements OnInit {
 
         this.authService.userLogOutEvent.subscribe(
             (data) => {
-                this.onLogout();
+                this.isConnect = false;
+                this.displayName = '';
+                this.isAdmin = false;
             }
         );
-        this.isAdmin = false;
+        //call the function IsLoggedIn 
         this.isLoggedIn();
     }
 
+    //function which call the authService to check if connected
     isLoggedIn() {
         var token = this.cookieService.get('token');
         if (token == null || token == '') {
@@ -55,7 +60,7 @@ export class HeaderComponent implements OnInit {
                         this.onLogout();
                     }
                     else if (data.message == 'Authenticated') {
-                        this.isExistUser = true;
+                        this.isConnect = true;
                         var the_data = data.data;
                         var levelRights = the_data.user.levelRights;
                         if (levelRights != null) {
@@ -77,7 +82,7 @@ export class HeaderComponent implements OnInit {
     }
 
     onLogout() {
-        this.isExistUser = false;
+        this.isConnect = false;
         this.displayName = '';
         this.isAdmin = false;
         this.authService.logout();

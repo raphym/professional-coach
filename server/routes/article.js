@@ -20,7 +20,7 @@ router.get('/getArticles', function (req, res, next) {
             if (err) {
                 return res.status(500).json({
                     title: 'An error occured',
-                    error: err
+                    message: err
                 });
             }
             res.status(200).json({
@@ -37,7 +37,7 @@ router.get('/getArticle', function (req, res, next) {
             if (err) {
                 return res.status(500).json({
                     title: 'An error occured',
-                    error: err
+                    message: err
                 });
             }
             res.status(200).json({
@@ -49,12 +49,18 @@ router.get('/getArticle', function (req, res, next) {
 
 
 //Protection
-router.use('/addArticle', function (req, res, next) {
+router.use('/', function (req, res, next) {
     jwt.verify(req.cookies['token'], jwt_sign_pswd.SECRET, function (err, decoded) {
         if (err) {
             return res.status(401).json({
                 title: 'Not authenticated',
-                error: { message: 'You are not authenticated' }
+                message: 'You are not authenticated'
+            });
+        }
+        if (decoded.user == null || decoded.user.levelRights == null || decoded.user.levelRights < 200) {
+            return res.status(401).json({
+                title: 'Forbidden',
+                message: 'You are not an administrator'
             });
         }
         next();
@@ -64,129 +70,100 @@ router.use('/addArticle', function (req, res, next) {
 //save the articles
 router.post('/addArticle', function (req, res, next) {
 
-    //get the decoded jwt
-    var decoded = jwt.decode(req.cookies['token']);
+    //create the new article
+    var article = new Articles({
+        title: req.body.title,
+        image: req.body.image,
+        content: req.body.content,
+    });
 
-    //find the user
-    User.findById(decoded.user._id, function (err, user) {
+    article.save(function (err, result) {
         if (err) {
             return res.status(500).json({
                 title: 'An error occured',
-                error: err
+                message: err
+            });
+        }
+        res.status(200).json({
+            my_response: { title: 'Success', message: 'Your article has been added' },
+            obj: result
+        });
+    });
+
+});
+
+
+//update article
+router.post('/updateArticle', function (req, res, next) {
+
+    Articles.findById(req.body._id, function (err, article) {
+        if (err) {
+            return res.status(500).json({
+                title: 'An error occured',
+                message: err
+            });
+        }
+        if (!article) {
+            return res.status(500).json({
+                title: 'No Article Found!',
+                message: 'Article not found'
             });
         }
 
-        //create new message and adding the user to the message
-        var article = new Articles({
-            title: req.body.title,
-            image: req.body.image,
-            content: req.body.content,
-        });
-
+        //edit the article with the new content
+        article.title = req.body.title;
+        article.content = req.body.content;
+        article.image = req.body.image;
+        //save the article
         article.save(function (err, result) {
             if (err) {
                 return res.status(500).json({
                     title: 'An error occured',
-                    error: err
-                });
-            }
-        });
-
-    });
-});
-
-/*
-//update messages
-router.patch('/:id', function (req, res, next) {
-
-    //get the decoded jwt
-    var decoded = jwt.decode(req.query.token);
-
-    guestbookMessage.findById(req.params.id, function (err, message) {
-        if (err) {
-            return res.status(500).json({
-                title: 'An error occured',
-                error: err
-            });
-        }
-        if (!message) {
-            return res.status(500).json({
-                title: 'No Message Found!',
-                error: { message: 'Message not found' }
-            });
-        }
-
-        //check if the user is the owner of the message
-        if(message.user != decoded.user._id)
-        {
-            return res.status(401).json({
-                title: 'Not Authenticated',
-                error: { message: 'The owner of this message is not authenticated' }
-            });
-        }
-
-        //edit the message with the new content
-        message.content = req.body.content;
-        //save the message
-        message.save(function (err, result) {
-            if (err) {
-                return res.status(500).json({
-                    title: 'An error occured',
-                    error: err
+                    message: err
                 });
             }
             res.status(200).json({
-                message: 'Updated message',
+                my_response: { title: 'Success', message: 'Your article has been updated' },
                 obj: result
             });
         });
     });
 });
 
-router.delete('/:id', function (req, res, next) {
 
-    //get the decoded jwt
-    var decoded = jwt.decode(req.query.token);
 
-    guestbookMessage.findById(req.params.id, function (err, message) {
+router.post('/deleteArticle', function (req, res, next) {
+
+
+    Articles.findById(req.body._id, function (err, article) {
         if (err) {
             return res.status(500).json({
                 title: 'An error occured',
-                error: err
+                message: err
             });
         }
-        if (!message) {
+        if (!article) {
             return res.status(500).json({
-                title: 'No Message Found!',
-                error: { message: 'Message not found' }
+                title: 'No Article Found!',
+                message: 'Article not found'
             });
         }
 
-        //check if the user is the owner of the message
-        if(message.user != decoded.user._id)
-        {
-            return res.status(401).json({
-                title: 'Not Authenticated',
-                error: { message: 'The owner of this message is not authenticated' }
-            });
-        }
-
-
-        //delete the message
-        message.remove(function (err, result) {
+        //delete the article
+        article.remove(function (err, result) {
             if (err) {
                 return res.status(500).json({
                     title: 'An error occured',
-                    error: err
+                    message: err
                 });
             }
             res.status(200).json({
-                message: 'Deleted message',
+                my_response: { title: 'Success', message: 'Your article has been deleted' },
                 obj: result
             });
         });
     });
 });
 
-*/
+
 module.exports = router;

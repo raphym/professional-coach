@@ -20,8 +20,7 @@ export class GuestbookMessageInputComponent implements OnInit {
     }
 
     isLoggedIn() {
-        if(this.authService.getUserId()!='')
-            return true;
+        return this.authService.isItConnect();
     }
 
     onSubmit(form: NgForm) {
@@ -38,7 +37,7 @@ export class GuestbookMessageInputComponent implements OnInit {
             const msg = new GuestbookMessage(form.value.content, '');
             this.guestbookMessageService.addMessage(msg)
                 .subscribe(
-            );
+                );
         }
 
         form.resetForm();
