@@ -5,7 +5,7 @@ import { User } from "../models/objects-models/user.model";
 import { Observable } from "rxjs/Observable";
 import { CookieService } from 'angular2-cookie/core';
 import { ErrorService } from "../notif-to-user/errors/error.service";
-import { JwtHelper } from "angular2-jwt";
+import { Router } from "@angular/router";
 
 const SIGNUP_ADDRESS = 'http://localhost:3000/user/signup';
 const SIGNIN_ADDRESS = 'http://localhost:3000/user/signin';
@@ -26,12 +26,10 @@ export class AuthService {
     private lastName = '';
     private email = '';
 
-    //JwtHelper
-    jwtHelper: JwtHelper = new JwtHelper();
-
     constructor(private http: Http,
         private errorService: ErrorService,
         private cookieService: CookieService,
+        private router: Router
     ) { }
 
     //signup
@@ -137,6 +135,7 @@ export class AuthService {
         this.firstName = '';
         this.lastName = '';
         this.email = '';
+        this.router.navigateByUrl('/');
     }
 
 

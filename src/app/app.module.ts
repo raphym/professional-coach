@@ -10,7 +10,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { HeaderComponent } from './header/header.component';
 import { AboutComponent } from './about/about.component';
 import { ContactMeComponent } from './contact-me/contact-me.component';
-import { HttpModule } from "@angular/http";
+import { HttpModule, Http, RequestOptions } from "@angular/http";
 import { ErrorService } from './notif-to-user/errors/error.service';
 import { SuccessService } from './notif-to-user/success/success.service';
 import { AuthService } from './auth/auth.service';
@@ -22,6 +22,12 @@ import { MailService } from './services/mail/mail.service';
 import { SuccessComponent } from './notif-to-user/success/success.component';
 import { AdminModule } from './admin-space/admin.module';
 import { ArticleModule } from './articles/article.module';
+import { AuthHttp, AuthConfig } from 'angular2-jwt';
+
+//export funct of angular2-jwt
+export function authHttpServiceFactory(http: Http, options: RequestOptions) {
+  return new AuthHttp(new AuthConfig(), http, options);
+}
 
 @NgModule({
   declarations: [
@@ -50,6 +56,11 @@ import { ArticleModule } from './articles/article.module';
     ErrorService,
     SuccessService,
     MailService,
+    {
+      provide: AuthHttp,
+      useFactory: authHttpServiceFactory,
+      deps: [Http, RequestOptions]
+    }
   ],
   bootstrap: [AppComponent],
   exports: []

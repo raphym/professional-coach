@@ -6,6 +6,8 @@ import { Observable } from 'rxjs/Observable';
 
 import { ErrorService } from '../notif-to-user/errors/error.service';
 import { SuccessService } from '../notif-to-user/success/success.service';
+import { CookieService } from 'angular2-cookie/services/cookies.service';
+import { JwtHelper } from "angular2-jwt";
 
 
 @Component({
@@ -18,10 +20,28 @@ export class ContactMeComponent implements OnInit {
     @ViewChild('f') form: NgForm;
     private envoyer = false;
     private sent = false;
+    private connected = false;
+    private jwtHelper = new JwtHelper();
+    private name = '';
+    private email = '';
 
-    public constructor(private mailService: MailService, private successService: SuccessService, private errorService: ErrorService) { }
-
+    public constructor(
+        private mailService: MailService,
+        private successService: SuccessService,
+        private errorService: ErrorService,
+        private cookieService: CookieService) {
+    }
     ngOnInit() {
+
+        var token = this.cookieService.get('token');
+        if (token != null && token != '') {
+
+            this.connected = true;
+            var decoded_token = this.jwtHelper.decodeToken(token);
+            var user = decoded_token.user;
+            this.name = user.firstName + ' ' + user.lastName;
+            this.email = user.email;
+        }
     }
 
     onSubmit(form: NgForm) {
@@ -49,19 +69,17 @@ export class ContactMeComponent implements OnInit {
         var reponsehtml = '<!DOCTYPE html><html><body>Your message has been sent, we will reply to you shortly<br>Thank you <br> Gab Coach</body></html>';
         this.mailService.sendMail(value.email, 'Gab Coach Contact', reponsehtml, 'html')
             .subscribe(
-                data => {},
-                error => {}
+            data => { },
+            error => { }
             );
-        this.form.reset();
+        if (this.connected)
+            this.form.value.description = '';
+        else
+            this.form.reset();
     }
 
-    markDone()
-    {
-        this.sent=true;
-        this.envoyer=false;
+    markDone() {
+        this.sent = true;
+        this.envoyer = false;
     }
-
-
 }
-
-

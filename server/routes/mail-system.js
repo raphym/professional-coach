@@ -14,16 +14,22 @@ router.post('/send', function (req, res, next) {
     emaildest = emails_config.EMAIL_ADDRESS;
   }
 
-  //console.log("mail-system : " + JSON.stringify(req.body) );
-  var transporter = nodemailer.createTransport(smtpTransport({
-    service: 'gmail',
+  //Transporter with OAuth2
+  let transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
     auth: {
+      type: 'OAuth2',
       user: emails_config.EMAIL_ADDRESS,
-      pass: emails_config.EMAIL_PSWD
+      clientId: emails_config.clientId,
+      clientSecret: emails_config.clientSecret,
+      refreshToken: emails_config.refreshToken,
+      expires: 1484314697598
     }
-  }));
+  });
 
+  //mail options
   var mailOptions;
   if (req.body.text_option == "text") {
     mailOptions = {
@@ -41,8 +47,6 @@ router.post('/send', function (req, res, next) {
       html: req.body.message
     };
   }
-
-
 
 
   //send the mail
