@@ -26,7 +26,7 @@ export class SigninComponent{
         }
     
         onSubmit(){
-            const user = new User(this.myForm.value.email, this.myForm.value.password,null,null,null);
+            const user = new User(this.myForm.value.email, this.myForm.value.password,null,null,null,null,null,null);
             this.authService.signin(user).subscribe(
                 data => {
                     this.router.navigateByUrl('/');

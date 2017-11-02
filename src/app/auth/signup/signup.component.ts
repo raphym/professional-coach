@@ -30,10 +30,13 @@ export class SignupComponent implements OnInit {
             this.myForm.value.password,
             200,
             this.myForm.value.firstName,
-            this.myForm.value.lastName);
+            this.myForm.value.lastName,
+            null,
+            null,
+            null);
         this.authService.signup(user).subscribe(
-            data => console.log(data),
-            error => console.error(error)
+            // data => console.log(data),
+            // error => console.error(error)
         );
 
         this.myForm.reset();

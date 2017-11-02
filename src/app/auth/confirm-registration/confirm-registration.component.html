@@ -1,0 +1,31 @@
+<div class="container-fluid">
+  <h1 style="text-align:center;">Confirm your Account</h1>
+  <br>
+  <br>
+  <p>
+    {{message}}
+  </p>
+  <div class="container-fluid" *ngIf="userFound">
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12">
+        <div>
+          <strong>Hi {{user?.firstName}} {{user?.lastName}}</strong> ,
+          <br> Please confirm your account by entering your secret code received in the mail
+          <br><br>
+        </div>
+        <div class="row" *ngIf="!validate">
+          <div class="col-md-2">
+            <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+              <div class="form-group">
+                <label for="secretCode">Your secret code:</label>
+                <input secretCode type="text" name="secretCode" required ngModel class="form-control" />
+              </div>
+              <button type="submit" [disabled]="!f.valid" class="btn btn-success">Send</button>
+            </form>
+          </div>
+        </div>
+        <p *ngIf="validate">Your account has been validated you can now login</p>
+      </div>
+    </div>
+  </div>
+</div>

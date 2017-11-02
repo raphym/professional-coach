@@ -47,17 +47,17 @@ export class HeaderComponent implements OnInit {
     isLoggedIn() {
         var token = this.cookieService.get('token');
         if (token == null || token == '') {
-            this.onLogout();
+            this.onLogout(false);
         }
         else {
             this.authService.isLoggedIn()
                 .subscribe(
                 data => {
                     if (data.message == null) {
-                        this.onLogout();
+                        this.onLogout(false);
                     }
                     else if (data.message == 'Not Authenticated') {
-                        this.onLogout();
+                        this.onLogout(false);
                     }
                     else if (data.message == 'Authenticated') {
                         this.isConnect = true;
@@ -75,16 +75,16 @@ export class HeaderComponent implements OnInit {
                     }
                 },
                 error => {
-                    this.onLogout();
+                    this.onLogout(false);
                 }
                 );
         }
     }
 
-    onLogout() {
+    onLogout(redirect:boolean) {
         this.isConnect = false;
         this.displayName = '';
         this.isAdmin = false;
-        this.authService.logout();
+        this.authService.logout(redirect);
     }
 }

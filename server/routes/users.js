@@ -23,6 +23,9 @@ router.post('/signup', function (req, res, next) {
         password: bcrypt.hashSync(req.body.password, 10),
         email: req.body.email,
         levelRights: level_rights.USER,
+        randomSecretCode: req.body.randomSecretCode,
+        randomHash: req.body.randomHash,
+        registered: false,
         messages: req.body.messages
     });
 
@@ -35,9 +38,77 @@ router.post('/signup', function (req, res, next) {
             });
         }
         res.status(201).json({
-            message: 'User created',
-            obj: result
+            title: 'User created',
+            message: result
         });
+    });
+});
+
+//Confirm Registration init
+router.post('/confirmRegInit', function (req, res, next) {
+    var randomHash = req.body.randomHash;
+    User.findOne({ randomHash: randomHash }, function (err, user) {
+        if (err) {//if error request
+            return res.status(500).json({
+                title: 'An error occured',
+                message: err
+            });
+        }
+        if (!user) {//if error email
+            return res.status(401).json({
+                title: 'User Not Found',
+                message: 'The user does not exist'
+            });
+        }
+        var my_response = { title: 'Success', user: user };
+        res.status(200).json(my_response);
+    });
+});
+
+//Confirm Registration validation
+router.post('/confirmRegValidation', function (req, res, next) {
+    var randomHash = req.body.randomHash;
+    var randomSecretCode = req.body.secretCode;
+    User.findOne({ randomHash: randomHash }, function (err, user) {
+        if (err) {//if error request
+            return res.status(500).json({
+                title: 'An error occured',
+                message: err
+            });
+        }
+        if (!user) {//if error email
+            return res.status(401).json({
+                title: 'User Not Found',
+                message: 'The user does not exist'
+            });
+        }
+
+        if (user.randomSecretCode == randomSecretCode) {
+            //assign the registered: true,
+            //erase the randomHash
+            //erase the randomSecretCode
+            User.update({ registered: false, randomHash: user.randomHash, randomSecretCode: user.randomSecretCode }, {
+                registered: true,
+                randomHash: -1,
+                randomSecretCode: -1
+            }, function (err, numberAffected, rawResponse) {
+
+                if (err == null) {
+                    var my_response = { title: 'Success', message: 'User validate' };
+                    res.status(200).json(my_response);
+                }
+                else if (err != null) {
+                    var my_response = { title: 'Error', message: 'Error during the update of the User Data' };
+                    res.status(500).json(my_response);
+                }
+            })
+        }
+        else {
+            return res.status(401).json({
+                title: 'No Validate',
+                message: 'User Not Validate'
+            });
+        }
     });
 });
 
@@ -61,6 +132,13 @@ router.post('/signin', function (req, res, next) {
             return res.status(401).json({
                 title: 'Login failed',
                 message: 'Invalid login credentials'
+            });
+        }
+        //check if the User is registered
+        if (!user.registered) {
+            return res.status(401).json({
+                title: 'Status Not Registered',
+                message: 'Please confirm your account before loggin'
             });
         }
         //here we create the token

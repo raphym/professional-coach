@@ -34,7 +34,7 @@
           <a routerLink="/signup" style="cursor:pointer;" class="dropdown-item" *ngIf="!isConnect">Register</a>
           <a routerLink="/signin" style="cursor:pointer;" class="dropdown-item" *ngIf="!isConnect">Login</a>
           <a routerLink="/admin-space" style="cursor:pointer;" class="dropdown-item" *ngIf="isAdmin">Admin Space</a>
-          <a (click)="onLogout()" class="dropdown-item" style="cursor:pointer;" *ngIf="isConnect">Logout</a>
+          <a (click)="onLogout(true)" class="dropdown-item" style="cursor:pointer;" *ngIf="isConnect">Logout</a>
         </div>
       </li>
     </ul>

@@ -2,9 +2,11 @@ import { NgModule } from "@angular/core";
 import { LogoutComponent } from "./logout.component";
 import { SignupComponent } from "./signup/signup.component";
 import { SigninComponent } from "./signin/signin.component";
-import { ReactiveFormsModule } from "@angular/forms";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from "@angular/common";
 import { authRouting } from "./auth.routing";
+import { ConfirmRegistrationComponent } from './confirm-registration/confirm-registration.component';
 
 
 
@@ -13,11 +15,14 @@ import { authRouting } from "./auth.routing";
         LogoutComponent,
         SignupComponent,
         SigninComponent,
+        ConfirmRegistrationComponent,
     ],
     imports:[
         CommonModule,
         ReactiveFormsModule,
-        authRouting
+        authRouting,
+        FormsModule,
+        BrowserModule        
     ],providers: [
       ]
 
