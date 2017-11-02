@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 
 
@@ -23,6 +23,8 @@ import { SuccessComponent } from './notif-to-user/success/success.component';
 import { AdminModule } from './admin-space/admin.module';
 import { ArticleModule } from './articles/article.module';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
+import { LoaderComponent } from './loader/loader.component';
+import { LoaderService } from './loader/loader.service';
 
 //export funct of angular2-jwt
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -37,7 +39,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     AboutComponent,
     ContactMeComponent,
     ErrorComponent,
-    SuccessComponent,    
+    SuccessComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,12 +53,13 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     AdminModule,
     ArticleModule
   ],
-  providers:[
+  providers: [
     CookieService,
     AuthService,
     ErrorService,
     SuccessService,
     MailService,
+    LoaderService,
     {
       provide: AuthHttp,
       useFactory: authHttpServiceFactory,
