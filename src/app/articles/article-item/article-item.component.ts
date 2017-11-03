@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ArticleService } from '../article-service';
 import { Article } from '../../models/objects-models/article';
 import { ActivatedRoute, Params } from "@angular/router";//Router (if redirect)
+import { LoaderService } from '../../loader/loader.service';
 
 
 @Component({
@@ -16,10 +17,12 @@ export class ArticleItemComponent implements OnInit {
   private id;
 
   constructor(private articleService: ArticleService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private loaderService: LoaderService) { }
 
   ngOnInit() {
-
+    //enable the loader
+    this.loaderService.enableLoader();
     this.route.params
       .subscribe(
       (params: Params) => {
@@ -28,11 +31,16 @@ export class ArticleItemComponent implements OnInit {
         this.articleService.getTheArticle(this.id)
           .subscribe(
           (article: Article) => {
+            //disable the loader
+            this.loaderService.disableLoader();
             this.article = article;
           },
-          error => console.error(error)
+          error => {
+            //disable the loader
+            this.loaderService.disableLoader();
+            console.error(error)
+          }
           );
-
       });
   }
 

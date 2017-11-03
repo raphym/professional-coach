@@ -13,13 +13,13 @@ import { GuestbookMessageListComponent } from "./guestbook-message-list.componen
 
 
 @NgModule({
-    declarations:[
+    declarations: [
         GuestbookMessagesComponent,
         GuestbookMessageComponent,
         GuestbookMessageInputComponent,
         GuestbookMessageListComponent
     ],
-    imports:[
+    imports: [
         CommonModule,
         FormsModule,
         GuestbookRoutingModule
@@ -27,6 +27,6 @@ import { GuestbookMessageListComponent } from "./guestbook-message-list.componen
     providers: [GuestbookMessageService]
 
 })
-export class GuestbookModule{
+export class GuestbookModule {
 
 }

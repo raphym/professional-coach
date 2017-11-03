@@ -5,6 +5,7 @@ import { AuthService } from '../../auth/auth.service';
 import { SuccessService } from '../../notif-to-user/success/success.service';
 import { ErrorService } from '../../notif-to-user/errors/error.service';
 import { Router } from '@angular/router';
+import { LoaderService } from '../../loader/loader.service';
 
 @Component({
   selector: 'app-articles-list',
@@ -19,7 +20,8 @@ export class ArticlesListComponent implements OnInit {
     private authService: AuthService,
     private successService: SuccessService,
     private errorService: ErrorService,
-    private router: Router
+    private router: Router,
+    private loaderService: LoaderService
   ) {
   }
 
@@ -27,15 +29,22 @@ export class ArticlesListComponent implements OnInit {
     this.init();
   }
 
-  init()
-  {
+  init() {
+    //enable the loader
+    this.loaderService.enableLoader();
     this.articleService.getArticles()
-    .subscribe(
-    (articles: Article[]) => {
-      this.articles = articles;
-    },
-    error => console.error(error)
-    );
+      .subscribe(
+      (articles: Article[]) => {
+        //disable the loader
+        this.loaderService.disableLoader();
+        this.articles = articles;
+      },
+      error => {
+        //disable the loader
+        this.loaderService.disableLoader();
+        //console.error(error)
+      }
+      );
   }
 
   isItAdmin() {
@@ -43,13 +52,19 @@ export class ArticlesListComponent implements OnInit {
   }
 
   onDelete(id) {
+    //enable the loader
+    this.loaderService.enableLoader();
     this.articleService.deleteArticle(id)
       .subscribe(
       (data) => {
+        //disable the loader
+        this.loaderService.disableLoader();
         this.init();
         this.successService.handleSuccess(data);
       },
       error => {
+        //disable the loader
+        this.loaderService.disableLoader();
         this.errorService.handleError(error.json());
       }
       );

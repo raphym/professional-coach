@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from "@angular/core";
 import { GuestbookMessage } from "../models/objects-models/guestbook-message.model";
 import { GuestbookMessageService } from "./guestbook-message.service";
 import { AuthService } from "../auth/auth.service";
+import { LoaderService } from "../loader/loader.service";
 
 @Component({
     selector: 'app-guestbook-message',
@@ -25,20 +26,30 @@ export class GuestbookMessageComponent implements OnInit {
     @Input() guestbookMessage: GuestbookMessage;
 
     ngOnInit() {
-        //this.message.content = this.message.content.replace("\n", "<br/>");
     }
 
     constructor(
         private guestbookMessageService: GuestbookMessageService,
-        private authService: AuthService
+        private authService: AuthService,
+        private loaderService: LoaderService
     ) { }
     onEdit() {
         this.guestbookMessageService.editMessage(this.guestbookMessage);
     }
 
     onDelete() {
+        //enable the loader
+        this.loaderService.enableLoader();
         this.guestbookMessageService.deleteMessage(this.guestbookMessage)
             .subscribe(
+            data => {
+                //disable the loader
+                this.loaderService.disableLoader();
+            },
+            error => {
+                //disable the loader
+                this.loaderService.disableLoader();
+            }
             );
     }
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { AuthService } from "../auth.service";
 import { User } from "../../models/objects-models/user.model";
+import { LoaderService } from "../../loader/loader.service";
 
 @Component({
     selector: 'app-signup',
@@ -10,7 +11,8 @@ import { User } from "../../models/objects-models/user.model";
 export class SignupComponent implements OnInit {
     myForm: FormGroup;
 
-    constructor(private authService: AuthService) { }
+    constructor(private authService: AuthService,
+        private loaderService: LoaderService) { }
 
     ngOnInit() {
         this.myForm = new FormGroup({
@@ -34,9 +36,19 @@ export class SignupComponent implements OnInit {
             null,
             null,
             null);
+        //enable the loader
+        this.loaderService.enableLoader();
         this.authService.signup(user).subscribe(
-            // data => console.log(data),
-            // error => console.error(error)
+            data => {
+                //disable the loader
+                this.loaderService.disableLoader();
+                //console.log(data)
+            },
+            error => {
+                //disable the loader
+                this.loaderService.disableLoader();
+                //console.error(error)
+            }
         );
 
         this.myForm.reset();

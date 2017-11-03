@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../auth.service';
-import { ActivatedRoute, Params } from "@angular/router";
+import { ActivatedRoute, Params, Router } from "@angular/router";
 import { NgForm } from '@angular/forms';
+import { LoaderService } from '../../loader/loader.service';
+import { SuccessService } from '../../notif-to-user/success/success.service';
 
 
 @Component({
@@ -11,15 +13,18 @@ import { NgForm } from '@angular/forms';
 })
 export class ConfirmRegistrationComponent implements OnInit {
 
-  @ViewChild('f') form: NgForm;  
+  @ViewChild('f') form: NgForm;
   private randomHash;
   private message = '';
   private userFound = false;
   private user = null;
-  private validate =false;
+  private validate = false;
 
   constructor(private authService: AuthService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private router: Router,
+    private loaderService: LoaderService,
+    private successService: SuccessService) { }
 
   ngOnInit() {
 
@@ -27,14 +32,19 @@ export class ConfirmRegistrationComponent implements OnInit {
       .subscribe(
       (params: Params) => {
         this.randomHash = params['randomHash'];
-
+        //enable the loader
+        this.loaderService.enableLoader();
         this.authService.confirmRegInit(this.randomHash).subscribe(
           data => {
+            //disable the loader
+            this.loaderService.disableLoader();
             this.userFound = true;
             this.user = data.user;
           },
           error => {
-            console.log(error);
+            //disable the loader
+            this.loaderService.disableLoader();
+            //console.log(error);
             this.message = error.message;
           }
         );
@@ -47,19 +57,28 @@ export class ConfirmRegistrationComponent implements OnInit {
     const value = form.value;
     const secretCode = value.secretCode;
     this.form.reset();
-    this.authService.confirmRegValid(this.randomHash,secretCode)
-    .subscribe(
-      data =>{
-        console.log(data);
-        if(data.title=="Success")
-        {
-          this.validate=true;
+    //enable the loader
+    this.loaderService.enableLoader();
+    this.authService.confirmRegValid(this.randomHash, secretCode)
+      .subscribe(
+      data => {
+        //disable the loader
+        this.loaderService.disableLoader();
+        //console.log(data);
+        if (data.title == "Success") {
+          this.successService.handleSuccess({ title: 'Success', message: 'Your account has been validated, you can now login' })
+          this.router.navigateByUrl('/');
         }
       },
-      error=>{
-        console.log(error);
+      error => {
+        //disable the loader
+        this.loaderService.disableLoader();
+        if (error.title == 'No Validate') {
+          this.message = 'Failed: The User Not Validate'
+        }
+        //console.log(error);
       }
-    );
+      );
   }
 
 }

@@ -5,6 +5,7 @@ import { SuccessService } from '../../notif-to-user/success/success.service';
 import { ErrorService } from '../../notif-to-user/errors/error.service';
 import { Article } from '../../models/objects-models/article';
 import { ActivatedRoute, Params } from '@angular/router';
+import { LoaderService } from '../../loader/loader.service';
 
 
 @Component({
@@ -31,6 +32,7 @@ export class ArticleEditComponent implements OnInit {
     private successService: SuccessService,
     private errorService: ErrorService,
     private route: ActivatedRoute,
+    private loaderService: LoaderService
   ) {
 
     this.loaded = false;
@@ -42,21 +44,28 @@ export class ArticleEditComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.route.params
       .subscribe(
       (params: Params) => {
         this.id = params['id'];
 
         if (this.id != null) {
+          //enable the loader
+          this.loaderService.enableLoader();
           this.articleService.getTheArticle(this.id)
             .subscribe(
             (article: Article) => {
               this.article = article;
               this.editMode = params['id'] != null;
               this.initForm();
+              //disable the loader
+              this.loaderService.disableLoader();
             },
-            error => console.error(error)
+            error => {
+              //disable the loader
+              this.loaderService.disableLoader();
+              console.error(error)
+            }
             );
         }
 
@@ -90,12 +99,18 @@ export class ArticleEditComponent implements OnInit {
     //new article
     if (!this.editMode) {
       const article = new Article('null', this.title, this.imageBase64, this.content);
+      //enable the loader
+      this.loaderService.enableLoader();
       this.articleService.addArticle(article)
         .subscribe(
         data => {
+          //disable the loader
+          this.loaderService.disableLoader();
           this.successService.handleSuccess(data);
         },
         error => {
+          //disable the loader
+          this.loaderService.disableLoader();
           this.errorService.handleError(error);
         }
         );
@@ -103,12 +118,18 @@ export class ArticleEditComponent implements OnInit {
     //edit existing article
     else {
       const article = new Article(this.id, this.title, this.imageBase64, this.content);
+      //enable the loader
+      this.loaderService.enableLoader();
       this.articleService.updateArticle(article)
         .subscribe(
         data => {
+          //disable the loader
+          this.loaderService.disableLoader();
           this.successService.handleSuccess(data);
         },
         error => {
+          //disable the loader
+          this.loaderService.disableLoader();
           this.errorService.handleError(error);
         }
         );
