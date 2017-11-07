@@ -15,6 +15,8 @@ export class SignupComponent implements OnInit {
         private loaderService: LoaderService) { }
 
     ngOnInit() {
+        //bind the passwordValidator
+        this.passwordValidator = this.passwordValidator.bind(this);
         this.myForm = new FormGroup({
             firstName: new FormControl(null, Validators.required),
             lastName: new FormControl(null, Validators.required),
@@ -22,7 +24,8 @@ export class SignupComponent implements OnInit {
                 Validators.required,
                 Validators.pattern("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
             ]),
-            password: new FormControl(null, Validators.required)
+            password: new FormControl(null, [Validators.required, Validators.minLength(6)]),
+            confirmPassword: new FormControl(null, this.passwordValidator)
         });
     }
 
@@ -53,5 +56,18 @@ export class SignupComponent implements OnInit {
 
         this.myForm.reset();
     }
+
+    //password validator
+    private passwordValidator(control: FormControl) {
+        if (this.myForm === undefined)
+            return null;
+        else {
+            if (control.value === this.myForm.controls.password.value)
+                return null;
+            else
+                return { isEqual: false };
+        }
+    }
+
 
 }
