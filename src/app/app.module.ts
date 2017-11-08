@@ -25,6 +25,7 @@ import { ArticleModule } from './articles/article.module';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
 import { LoaderComponent } from './loader/loader.component';
 import { LoaderService } from './loader/loader.service';
+import { FooterComponent } from './footer/footer.component';
 
 //export funct of angular2-jwt
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -41,6 +42,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     ErrorComponent,
     SuccessComponent,
     LoaderComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

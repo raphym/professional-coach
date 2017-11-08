@@ -1,0 +1,10 @@
+.my_main_app{
+min-height: 100%;
+height: auto !important;
+height:100%;
+margin: 0 auto -40px;
+}
+
+.push{
+    height: 40px; /* .push must be the same height as .footer */
+  }

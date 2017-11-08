@@ -1,0 +1,14 @@
+
+  .footer {
+
+  background-color: #efefef;
+  text-align: center;
+  cursor:pointer;
+  font-size:14px;
+  height: 40px; /* .push must be the same height as .footer */
+  color: white;
+  display: flex;
+  justify-content: center; /* align horizontal */
+  align-items: center; /* align vertical */
+  background-color: #343a40!important  
+}
