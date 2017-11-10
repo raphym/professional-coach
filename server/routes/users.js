@@ -32,10 +32,23 @@ router.post('/signup', function (req, res, next) {
     //save the user
     user.save(function (err, result) {
         if (err) {
-            return res.status(500).json({
-                title: 'An error occured',
-                message: err
-            });
+            console.log('-------------------------------');
+            console.log('User Save Error:');
+            console.log(err);
+            console.log('-------------------------------');
+
+            if (err.message.includes(' Error, expected `email` to be unique.')) {
+                return res.status(500).json({
+                    title: 'An error occured',
+                    message: 'A user with the same email address is already registered'
+                });
+            }
+            else {
+                return res.status(500).json({
+                    title: 'An error occured',
+                    message: 'Please contact the administrator'
+                });
+            }
         }
         res.status(201).json({
             title: 'User created',
@@ -85,23 +98,23 @@ router.post('/confirmRegValidation', function (req, res, next) {
 
         if (user.randomSecretCode == randomSecretCode) {
             //assign the registered: true,
+            user.registered = true;
             //erase the randomHash
+            user.randomHash = -1;
             //erase the randomSecretCode
-            User.update({ registered: false, randomHash: user.randomHash, randomSecretCode: user.randomSecretCode }, {
-                registered: true,
-                randomHash: -1,
-                randomSecretCode: -1
-            }, function (err, numberAffected, rawResponse) {
-
-                if (err == null) {
+            user.randomSecretCode = -1;
+            //update the user
+            user.save(function (err, user) {
+                if (user) {
                     var my_response = { title: 'Success', message: 'User validate' };
                     res.status(200).json(my_response);
                 }
-                else if (err != null) {
+                if (err) {
                     var my_response = { title: 'Error', message: 'Error during the update of the User Data' };
                     res.status(500).json(my_response);
                 }
-            })
+            });
+
         }
         else {
             return res.status(401).json({

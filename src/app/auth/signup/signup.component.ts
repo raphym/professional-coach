@@ -41,7 +41,7 @@ export class SignupComponent implements OnInit {
             null);
         //enable the loader
         this.loaderService.enableLoader();
-        this.authService.signup(user).subscribe(
+        this.authService.signup(user).then(
             data => {
                 //disable the loader
                 this.loaderService.disableLoader();

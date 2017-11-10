@@ -56,10 +56,19 @@ export class AuthService {
 
         const body = JSON.stringify(user);
         const headers = new Headers({ 'Content-Type': 'application/json' });
-        //go to signup the new user
-        return this.http.post(SIGNUP_ADDRESS, body, { headers: headers })
-            .map((response: Response) => {
-                if (response.json().title == 'User created') {
+
+
+        return new Promise((resolve, reject) => {
+
+            //go to signup the new user
+            this.http.post(SIGNUP_ADDRESS, body, { headers: headers })
+                .toPromise()
+                .then(
+
+
+                (res) => {
+                    //success to create the user , now send the confirm mail
+
                     var mail_content = this.createRegMail(user.firstName,
                         user.lastName,
                         randomSecretCode,
@@ -71,67 +80,31 @@ export class AuthService {
                         .subscribe(
 
                         data => {
-
-                            data = data.json();
                             //if success sending return a success message to the user
-                            if (data.title == 'Mail Success') {
-                                var my_response = {
-                                    title: 'Validate your account',
-                                    message: 'Confirm your account by confirming the email'
-                                };
-                                this.successService.handleSuccess(my_response);
-                            }
+                            var my_response = {
+                                title: 'Validate your account',
+                                message: 'Confirm your account by confirming the email'
+                            };
+                            this.successService.handleSuccess(my_response);
+                            resolve(data);
                         },
                         error => {
+                            //error to send the mail
                             this.errorService.handleError(error);
+                            resolve(error);
                         }
                         );
-                    return response.json()
+                },
+
+                error => {
+                    //error to create the user
+                    this.errorService.handleError(error.json());
+                    reject(error);
                 }
-            })
-            .catch((error: Response) => {
-                console.log('autre probleme');
-                if (error.json()) {
-                    if (error.json().message) {
-                        //error
-                        var mss_error = error.json().message.message;
-                        if (mss_error) {
-                            //error : account already exist
-                            if (mss_error.indexOf('expected `email` to be unique') !== -1) {
-                                var my_response = {
-                                    title: 'Registration error',
-                                    message: 'This account already exists, please choose an another email address'
-                                };
-                                this.errorService.handleError(my_response);
-                                return Observable.throw(error.json())
-                            }
-                            //error : exist a message error but unknown error
-                            else {
-                                var my_response2 = {
-                                    title: 'Registration error',
-                                    message: mss_error
-                                };
-                                this.errorService.handleError(my_response2);
-                                return Observable.throw(error.json())
-                            }
-                        }
-                        //error : an another error has occured
-                        else {
-                            var my_response3 = {
-                                title: 'Registration error',
-                                message: error.json().message
-                            };
-                            this.errorService.handleError(my_response3);
-                            return Observable.throw(error.json())
-                        }
-                    }
-                    //error: General error
-                    else {
-                        this.errorService.handleError(error.json());
-                        return Observable.throw(error.json())
-                    }
-                }
-            });
+                );
+        });
+
+
     }
 
     //confirmation registration init
@@ -145,17 +118,7 @@ export class AuthService {
                 }
             })
             .catch((error: Response) => {
-
-                if (error.json().title == 'An error occured') {
                     return Observable.throw(error.json());
-                }
-                else if (error.json().title == 'User Not Found') {
-                    return Observable.throw(error.json());
-                }
-                else {
-
-                    return Observable.throw(error.json());
-                }
             });
     }
 
@@ -170,20 +133,7 @@ export class AuthService {
                 }
             })
             .catch((error: Response) => {
-
-                if (error.json().title == 'An error occured') {
                     return Observable.throw(error.json());
-                }
-                else if (error.json().title == 'User Not Found') {
-                    return Observable.throw(error.json());
-                }
-                else if (error.json().title == 'No Validate') {
-                    return Observable.throw(error.json());
-                }
-                else {
-
-                    return Observable.throw(error.json());
-                }
             });
     }
 
