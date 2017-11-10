@@ -26,6 +26,8 @@ import { AuthHttp, AuthConfig } from 'angular2-jwt';
 import { LoaderComponent } from './loader/loader.component';
 import { LoaderService } from './loader/loader.service';
 import { FooterComponent } from './footer/footer.component';
+import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
+
 
 //export funct of angular2-jwt
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -53,7 +55,15 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     TrainingModule,
     GuestbookModule,
     AdminModule,
-    ArticleModule
+    ArticleModule,
+    LoadingModule.forRoot({
+      animationType: ANIMATION_TYPES.threeBounce,
+      backdropBackgroundColour: 'rgba(0,0,0,0.1)', 
+      backdropBorderRadius: '4px',
+      primaryColour: '#ffffff', 
+      secondaryColour: '#ffffff', 
+      tertiaryColour: '#ffffff'
+  })
   ],
   providers: [
     CookieService,
