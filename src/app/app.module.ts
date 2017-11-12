@@ -1,6 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 
 
@@ -10,7 +8,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { HeaderComponent } from './shared/components/header/header.component';
 import { AboutComponent } from './about/about.component';
 import { ContactMeComponent } from './contact-me/contact-me.component';
-import { HttpModule, Http, RequestOptions } from "@angular/http";
+import { Http, RequestOptions } from "@angular/http";
 import { ErrorService } from './shared/components/notif-to-user/errors/error.service';
 import { SuccessService } from './shared/components/notif-to-user/success/success.service';
 import { AuthService } from './auth/auth.service';
@@ -27,6 +25,7 @@ import { LoaderComponent } from './shared/components/loader/loader.component';
 import { LoaderService } from './shared/components/loader/loader.service';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
+import { SharedModule } from './shared/module/shared.module';
 
 
 //export funct of angular2-jwt
@@ -47,10 +46,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     FooterComponent,
   ],
   imports: [
-    BrowserModule,
+    SharedModule,
     AppRoutingModule,
-    FormsModule,
-    HttpModule,
     AuthModule,
     TrainingModule,
     GuestbookModule,
@@ -58,12 +55,12 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     ArticleModule,
     LoadingModule.forRoot({
       animationType: ANIMATION_TYPES.threeBounce,
-      backdropBackgroundColour: 'rgba(0,0,0,0.1)', 
+      backdropBackgroundColour: 'rgba(0,0,0,0.1)',
       backdropBorderRadius: '4px',
-      primaryColour: '#ffffff', 
-      secondaryColour: '#ffffff', 
+      primaryColour: '#ffffff',
+      secondaryColour: '#ffffff',
       tertiaryColour: '#ffffff'
-  })
+    })
   ],
   providers: [
     CookieService,
