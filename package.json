@@ -39,6 +39,7 @@
     "mongodb": "^2.2.31",
     "mongoose": "^4.11.11",
     "mongoose-unique-validator": "^1.0.6",
+    "ng2-translate": "^5.0.0",
     "ngx-loading": "^1.0.8",
     "node-browser-modules": "^0.1.0",
     "nodemailer": "^4.1.3",

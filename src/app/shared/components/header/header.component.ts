@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Response } from "@angular/http";
 import { CookieService } from 'angular2-cookie/core';
 import { AuthService } from "../../../auth/auth.service";
+import { TranslateService } from 'ng2-translate';
 
 @Component({
     selector: 'app-header',
@@ -14,8 +15,18 @@ export class HeaderComponent implements OnInit {
     private isAdmin;
     constructor(
         private authService: AuthService,
-        private cookieService: CookieService) {
+        private cookieService: CookieService,
+        private translate: TranslateService) {
+        // this language will be used as a fallback when a translation isn't found in the current language
+        translate.setDefaultLang('en');
 
+        // the lang to use, if the lang isn't available, it will use the current loader to get them
+        translate.use('en');
+    }
+
+    //change langage
+    changeLangage(langage) {
+        this.translate.use(langage);
     }
 
     ngOnInit() {
@@ -81,7 +92,7 @@ export class HeaderComponent implements OnInit {
         }
     }
 
-    onLogout(redirect:boolean) {
+    onLogout(redirect: boolean) {
         this.isConnect = false;
         this.displayName = '';
         this.isAdmin = false;
