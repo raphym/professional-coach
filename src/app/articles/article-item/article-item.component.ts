@@ -34,6 +34,7 @@ export class ArticleItemComponent implements OnInit {
             //disable the loader
             this.loaderService.disableLoader();
             this.article = article;
+            document.getElementById('theContent').innerHTML=article.content;            
           },
           error => {
             //disable the loader

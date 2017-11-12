@@ -13,7 +13,7 @@ import { ArticleEditComponent } from './article-edit/article-edit.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ArticleRoutingModule } from './article-routing.module';
 
-
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
 @NgModule({
   declarations: [
@@ -30,7 +30,9 @@ import { ArticleRoutingModule } from './article-routing.module';
     RouterModule,
     ReactiveFormsModule,
     FormsModule,    
-    ArticleRoutingModule 
+    ArticleRoutingModule,
+    FroalaEditorModule.forRoot(),
+    FroalaViewModule.forRoot()
 
 
   ],
