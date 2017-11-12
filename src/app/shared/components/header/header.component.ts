@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Response } from "@angular/http";
 import { CookieService } from 'angular2-cookie/core';
-import { AuthService } from "../auth/auth.service";
+import { AuthService } from "../../../auth/auth.service";
 
 @Component({
     selector: 'app-header',

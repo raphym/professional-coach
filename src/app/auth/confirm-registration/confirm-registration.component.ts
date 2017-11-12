@@ -2,8 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { ActivatedRoute, Params, Router } from "@angular/router";
 import { NgForm } from '@angular/forms';
-import { LoaderService } from '../../loader/loader.service';
-import { SuccessService } from '../../notif-to-user/success/success.service';
+import { LoaderService } from '../../shared/components/loader/loader.service';
+import { SuccessService } from '../../shared/components/notif-to-user/success/success.service';
 
 
 @Component({

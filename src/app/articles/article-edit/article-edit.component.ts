@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { ArticleService } from '../article-service';
-import { SuccessService } from '../../notif-to-user/success/success.service';
-import { ErrorService } from '../../notif-to-user/errors/error.service';
-import { Article } from '../../models/objects-models/article';
+import { SuccessService } from '../../shared/components/notif-to-user/success/success.service';
+import { ErrorService } from '../../shared/components/notif-to-user/errors/error.service';
+import { Article } from '../../shared/models/objects-models/article';
 import { ActivatedRoute, Params } from '@angular/router';
-import { LoaderService } from '../../loader/loader.service';
+import { LoaderService } from '../../shared/components/loader/loader.service';
 
 
 @Component({

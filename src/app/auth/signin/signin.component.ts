@@ -1,9 +1,9 @@
 import { Component } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
-import { User } from "../../models/objects-models/user.model";
+import { User } from "../../shared/models/objects-models/user.model";
 import { AuthService } from "../auth.service";
 import { Router } from "@angular/router";
-import { LoaderService } from "../../loader/loader.service";
+import { LoaderService } from "../../shared/components/loader/loader.service";
 
 @Component({
     selector: 'app-signin',

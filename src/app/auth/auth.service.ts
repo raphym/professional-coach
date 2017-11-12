@@ -1,13 +1,13 @@
 import { Injectable, EventEmitter } from "@angular/core";
 import { Http, Headers, Response } from "@angular/http";
 import 'rxjs/Rx';
-import { User } from "../models/objects-models/user.model";
+import { User } from "../shared/models/objects-models/user.model";
 import { Observable } from "rxjs/Observable";
 import { CookieService } from 'angular2-cookie/core';
-import { ErrorService } from "../notif-to-user/errors/error.service";
+import { ErrorService } from "../shared/components/notif-to-user/errors/error.service";
 import { Router } from "@angular/router";
-import { SuccessService } from "../notif-to-user/success/success.service";
-import { MailService } from "../services/mail/mail.service";
+import { SuccessService } from "../shared/components/notif-to-user/success/success.service";
+import { MailService } from "../shared/services/mail/mail.service";
 
 const SIGNUP_ADDRESS = 'http://localhost:3000/user/signup';
 const SIGNIN_ADDRESS = 'http://localhost:3000/user/signin';

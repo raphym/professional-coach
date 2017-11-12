@@ -1,6 +1,6 @@
 import { Http, Response, Headers } from '@angular/http';
-import { ErrorService } from '../../notif-to-user/errors/error.service';
-import { SuccessService } from '../../notif-to-user/success/success.service';
+import { ErrorService } from '../../components/notif-to-user/errors/error.service'
+import { SuccessService } from '../../components/notif-to-user/success/success.service';
 import { Observable } from 'rxjs/Observable';
 import { Injectable } from "@angular/core";
 

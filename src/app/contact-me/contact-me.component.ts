@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { MailService } from '../services/mail/mail.service';
+import { MailService } from '../shared/services/mail/mail.service';
 import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-import { ErrorService } from '../notif-to-user/errors/error.service';
-import { SuccessService } from '../notif-to-user/success/success.service';
+import { ErrorService } from '../shared/components/notif-to-user/errors/error.service';
+import { SuccessService } from '../shared/components/notif-to-user/success/success.service';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { JwtHelper } from "angular2-jwt";
 

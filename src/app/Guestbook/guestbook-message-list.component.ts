@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { GuestbookMessage } from "../models/objects-models/guestbook-message.model";
+import { GuestbookMessage } from "../shared/models/objects-models/guestbook-message.model";
 import { GuestbookMessageService } from "./guestbook-message.service";
-import { LoaderService } from "../loader/loader.service";
+import { LoaderService } from "../shared/components/loader/loader.service";
 
 @Component({
     selector: 'app-guestbook-message-list',

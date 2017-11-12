@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { AuthService } from "../auth.service";
-import { User } from "../../models/objects-models/user.model";
-import { LoaderService } from "../../loader/loader.service";
+import { User } from "../../shared/models/objects-models/user.model";
+import { LoaderService } from "../../shared/components/loader/loader.service";
 
 @Component({
     selector: 'app-signup',

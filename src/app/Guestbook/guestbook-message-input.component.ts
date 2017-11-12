@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { GuestbookMessageService } from "./guestbook-message.service";
-import { GuestbookMessage } from "../models/objects-models/guestbook-message.model";
+import { GuestbookMessage } from "../shared/models/objects-models/guestbook-message.model";
 import { NgForm } from "@angular/forms";
 import { AuthService } from "../auth/auth.service";
-import { LoaderService } from "../loader/loader.service";
+import { LoaderService } from "../shared/components/loader/loader.service";
 
 @Component({
     selector: 'app-guestbook-message-input',

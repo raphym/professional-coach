@@ -4,8 +4,8 @@ import 'rxjs/Rx';
 import { Observable } from 'rxjs/Observable';
 
 
-import { GuestbookMessage } from "../models/objects-models/guestbook-message.model";
-import { ErrorService } from '../notif-to-user/errors/error.service';
+import { GuestbookMessage } from "../shared/models/objects-models/guestbook-message.model";
+import { ErrorService } from '../shared/components/notif-to-user/errors/error.service';
 
 const GET_MESSAGE_ADDRESS = 'http://localhost:3000/guestbook/getMessages';
 const SAVE_MESSAGE_ADDRESS = 'http://localhost:3000/guestbook/protect/saveMessage';

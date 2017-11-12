@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ArticleService } from '../article-service';
-import { Article } from '../../models/objects-models/article';
+import { Article } from '../../shared/models/objects-models/article';
 import { ActivatedRoute, Params } from "@angular/router";//Router (if redirect)
-import { LoaderService } from '../../loader/loader.service';
+import { LoaderService } from '../../shared/components/loader/loader.service';
 
 
 @Component({

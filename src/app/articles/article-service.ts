@@ -2,7 +2,7 @@ import { Http, Response, Headers, URLSearchParams } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 import { Injectable } from "@angular/core";
-import { Article } from '../models/objects-models/article';
+import { Article } from '../shared/models/objects-models/article';
 
 @Injectable()
 export class ArticleService {
