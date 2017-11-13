@@ -5,7 +5,7 @@
         <a routerLink="/article-admin">Articles</a>
       </li>
       <li routerLinkActive="active" class="theLinkss">
-        <a routerLink="/">Users</a>
+        <a routerLink="/user-management">Users</a>
       </li>
     </div>
 
@@ -15,7 +15,7 @@
         <select name="slct" id="slct" (change)="onChange($event.target.value)">
           <option>Choose a page</option>
           <option value="article-admin">Articles</option>
-          <option value="">Users</option>
+          <option value="user-management">Users</option>
         </select>
       </div>
       <br>
