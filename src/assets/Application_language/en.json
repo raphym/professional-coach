@@ -1,7 +1,20 @@
 {
-    "Coach": "Coach",
-	"Articles": "Articles",
-	"About us": "About us",
-	"Contact": "Contact us",
-	"Guest Book": "Guest Book"	
+    "HOME_PAGE": "Home page",
+	"ARTICLES": "Articles",
+	"ABOUT_US": "About us",
+	"CONTACT_US": "Contact us",
+	"GUEST_BOOK": "Guest Book",
+	"MY_SPACE": "Personal space",
+	"REGISTER":"Register",
+	"LOGIN":"Login",
+	"LOGOUT":"Logout",
+	"LANGUAGE":"Language",
+	
+	"ANY_QUERY_POP_US_A_MESSAGE":"Any Queries? Pop us a message",
+	"WHERE_ARE_US":"Where are us ?",
+
+	"OUR_ARTICLES":"Our articles",
+
+	"ADMINISTRATION_SPACE": "Administration Space",
+	"ARTICLES_MANAGEMENT":"Articles managements"
 }

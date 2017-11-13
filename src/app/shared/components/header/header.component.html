@@ -44,42 +44,52 @@
   </button>
   <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
     <ul class="nav navbar-nav" align="center">
-      <a class="navbar-brand" routerLink="/" translate [translateParams]>Coach</a>
-
-      <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" routerLink="/articles" translate [translateParams]>Articles</a>
+      <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <a class="nav-link" routerLink="/" translate>HOME_PAGE</a>
       </li>
 
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" routerLink="/about" translate [translateParams]>About us</a>
+        <a class="nav-link" routerLink="/articles" translate>ARTICLES</a>
       </li>
 
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" routerLink="/contact" translate [translateParams]>Contact</a>
+        <a class="nav-link" routerLink="/about" translate>ABOUT_US</a>
       </li>
 
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" routerLink="/guestbook" translate [translateParams]>Guest Book</a>
+        <a class="nav-link" routerLink="/contact" translate>CONTACT_US</a>
       </li>
 
-      <select (change)="changeLangage($event.target.value)" style="height:26px;margin-top:8px;">
-        <option value="en">English</option>
-        <option value="he">Hebrew</option>
-        <option value="fr">French</option>
-      </select>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/guestbook" translate>GUEST_BOOK</a>
+      </li>
     </ul>
 
     <ul class="nav navbar-nav">
       <li class="nav-item dropdown">
         <a style="cursor:pointer;" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-          aria-expanded="false">
-          My Space
+          aria-expanded="false" translate>
+          MY_SPACE
         </a>
         <div style="cursor:pointer;" class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a routerLink="/signup" style="cursor:pointer;" class="dropdown-item" *ngIf="!isConnect">Register</a>
-          <a routerLink="/signin" style="cursor:pointer;" class="dropdown-item" *ngIf="!isConnect">Login</a>
-          <a routerLink="/admin-space" style="cursor:pointer;" class="dropdown-item" *ngIf="isAdmin">Admin Space</a>
-          <a (click)="onLogout(true)" class="dropdown-item" style="cursor:pointer;" *ngIf="isConnect">Logout</a>
+          <a routerLink="/signup" style="cursor:pointer;" class="dropdown-item" *ngIf="!isConnect" translate>REGISTER</a>
+          <a routerLink="/signin" style="cursor:pointer;" class="dropdown-item" *ngIf="!isConnect" translate>LOGIN</a>
+          <a routerLink="/admin-space" style="cursor:pointer;" class="dropdown-item" *ngIf="isAdmin" translate>ADMINISTRATION_SPACE</a>
+          <a (click)="onLogout(true)" class="dropdown-item" style="cursor:pointer;" *ngIf="isConnect" translate>LOGOUT</a>
+        </div>
+      </li>
+    </ul>
+
+    <ul class="nav navbar-nav">
+      <li class="nav-item dropdown">
+        <a style="cursor:pointer;" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false" translate>
+          LANGUAGE
+        </a>
+        <div style="cursor:pointer;" class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a (click)="changeLangage('en')" style="cursor:pointer;" class="dropdown-item">English</a>
+          <a (click)="changeLangage('he')" style="cursor:pointer;" class="dropdown-item">עברית</a>
+          <a (click)="changeLangage('fr')" style="cursor:pointer;" class="dropdown-item">Francais</a>
         </div>
       </li>
     </ul>

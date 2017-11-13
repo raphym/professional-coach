@@ -1,7 +1,20 @@
 {
-    "Coach": "Entraineur",
-	"Articles": "Articles",
-	"About us": "A propos de nous",
-	"Contact": "Contact nous",
-	"Guest Book": "Livre d'or"
+    "HOME_PAGE": "Page d'accueil",
+	"ARTICLES": "Articles",
+	"ABOUT_US": "A propos de nous",
+	"CONTACT_US": "Contact nous",
+	"GUEST_BOOK": "Livre d'or",
+	"MY_SPACE": "Espace personnel",
+	"REGISTER":"S'inscrire",
+	"LOGIN":"Se connecter",
+	"LOGOUT":"Se deconnecter",
+	"LANGUAGE":"Langage",
+
+	"ANY_QUERY_POP_US_A_MESSAGE":"Des questions ? Envoyez nous un message",
+	"WHERE_ARE_US":"Où sommes nous ?",
+
+	"OUR_ARTICLES":"Nos articles",
+
+	"ADMINISTRATION_SPACE": "Espace d'administration",
+	"ARTICLES_MANAGEMENT":"Gestion des articles"
 }

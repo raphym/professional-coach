@@ -4,7 +4,7 @@ import { Component } from "@angular/core";
     selector:'app-messages',
     template:`
         <div class="container-fluid">
-            <h1 style="text-align:center;">Guest Book</h1>
+            <h1 style="text-align:center;" translate>GUEST_BOOK</h1>
             <br><br>
             <div class="row">
                 <div class="col-md-12">

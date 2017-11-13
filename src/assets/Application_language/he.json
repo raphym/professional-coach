@@ -1,7 +1,20 @@
 {
-    "Coach": "מאמן",
-	"Articles": "כתבות",
-	"About us": "עלי",
-	"Contact": "צוור קשר",
-	"Guest Book": "ספר"
+    "HOME_PAGE": "דף הבית",
+	"ARTICLES": "כתבות",
+	"ABOUT_US": "עלינו",
+	"CONTACT_US": "צור קשר",
+	"GUEST_BOOK": "ספר",
+	"MY_SPACE": "מרחב אישי",
+	"REGISTER":"הירשם",
+	"LOGIN":"התחבר",
+	"LOGOUT":"התנתק",
+	"LANGUAGE":"שפה",
+	
+	"ANY_QUERY_POP_US_A_MESSAGE":"שאלות? שלח לנו הודעה",
+	"WHERE_ARE_US":"? איפה אנחנו",
+	
+	"OUR_ARTICLES":"המאמרים שלנו",
+
+	"ADMINISTRATION_SPACE": "מרחב ניהול",
+	"ARTICLES_MANAGEMENT":"ניהול מאמרים"
 }

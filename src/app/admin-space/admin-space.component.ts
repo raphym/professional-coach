@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
+import { TranslateService } from 'ng2-translate';
 
 @Component({
   selector: 'app-admin-space',
@@ -8,7 +9,8 @@ import { Router } from "@angular/router";
 })
 export class AdminSpaceComponent implements OnInit {
 
-  constructor(private router:Router) { }
+  constructor(private router:Router,
+    private translate: TranslateService) { }
 
   ngOnInit() {
   }
