@@ -26,6 +26,7 @@
     "@angular/router": "^4.2.4",
     "angular-froala-wysiwyg": "^2.7.1",
     "angular2-cookie": "^1.2.6",
+    "angular2-draggable": "^1.0.7",
     "angular2-jwt": "^0.2.3",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.1",

@@ -5,6 +5,7 @@ import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
 import { HttpModule, Http } from "@angular/http";
 import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate';
+import { AngularDraggableModule } from 'angular2-draggable';
 
 //for the translation
 export function createTranslateLoader(http: Http) {
@@ -23,7 +24,8 @@ export function createTranslateLoader(http: Http) {
             provide: TranslateLoader,
             useFactory: (createTranslateLoader),
             deps: [Http]
-        })
+        }),
+        AngularDraggableModule
     ],
     exports: [
         ReactiveFormsModule,
@@ -32,7 +34,8 @@ export function createTranslateLoader(http: Http) {
         BrowserModule,
         RouterModule,
         HttpModule,
-        TranslateModule
+        TranslateModule,
+        AngularDraggableModule
     ]
 })
 export class SharedModule { }

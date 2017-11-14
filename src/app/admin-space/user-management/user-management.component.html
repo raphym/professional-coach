@@ -1,3 +1,87 @@
-<p>
-  user-management works!
-</p>
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Email</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Type User</th>
+      <th scope="col">Status User</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users, let i = index " (click)="clickOnUser(user)" style="cursor: pointer;">
+      <th scope="row">{{i}}</th>
+      <td>{{user.email}}</td>
+      <td>{{user.firstName}}</td>
+      <td>{{user.lastName}}</td>
+      <td *ngIf="user.levelRights==100">Normal User</td>
+      <td *ngIf="user.levelRights==200">Admin User</td>
+      <td *ngIf="user.levelRights==300">Super Admin User</td>
+      <td *ngIf="user.registered">Registered</td>
+      <td *ngIf="!user.registered">Not Registered</td>
+    </tr>
+  </tbody>
+</table>
+
+<div ngDraggable class="modal" tabindex="-1" role="dialog" [ngStyle]="{display: display}">
+  <div class="modal-dialog" role="document" style="overflow-y: scroll; max-height:85%;  margin-top: 50px; margin-bottom:50px;">
+    <div class="modal-content">
+      <form [formGroup]="myForm" (ngSubmit)=editSave()>
+
+        <div class="modal-header">
+          <h4 class="modal-title">User Edit</h4>
+        </div>
+        <div class="modal-body" style="overflow-y:auto;">
+          <div class="form-group">
+            <label for="email">Mail</label>
+            <input type="email" id="email" class="form-control" formControlName="email">
+          </div>
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" class="form-control" formControlName="firstName">
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" class="form-control" formControlName="lastName">
+          </div>
+          <label for="selectLevelRights">Level Rights
+            <select class="custom-select" id="selectLevelRights" (change)="selectLevelRights($event.target.value)">
+              <option [selected]="myForm.controls.levelRights.value==100" value="100">Normal</option>
+              <option [selected]="myForm.controls.levelRights.value==200" value="200">Admin</option>
+              <option [selected]="myForm.controls.levelRights.value==300" value="300">Super Admin</option>
+            </select>
+          </label>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="text" id="phone" class="form-control" formControlName="phone">
+          </div>
+          <div class="form-group">
+            <label for="street">Street</label>
+            <input type="text" id="street" class="form-control" formControlName="street">
+          </div>
+          <div class="form-group">
+            <label for="streetNumber">Street Number</label>
+            <input type="text" id="streetNumber" class="form-control" formControlName="streetNumber">
+          </div>
+          <div class="form-group">
+            <label for="city">City</label>
+            <input type="text" id="city" class="form-control" formControlName="city">
+          </div>
+          <div class="form-group">
+            <label for="country">Country</label>
+            <input type="text" id="country" class="form-control" formControlName="country">
+          </div>
+          <button class="btn btn-primary" type="submit" [disabled]="!myForm.valid">Submit</button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" (click)="editCancel()">Cancel</button>
+          <button type="submit" class="btn btn-default">Save</button>
+        </div>
+      </form>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
