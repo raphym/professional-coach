@@ -8,13 +8,15 @@ const app = express();
 //routes
 var appRoutes = require('./server/routes/appRoutes');
 var guestbookRoutes = require('./server/routes/guestbook');
-var userRoutes = require('./server/routes/users');
+var usersAuthRoutes = require('./server/routes/users-auth');
+var usersManagementRoutes = require('./server/routes/users-management');
+
 var mailService = require('./server/routes/mail-system');
 var article = require('./server/routes/article');
 
 
 // API file for interacting with MongoDB
-const api = require('./server/routes/api');
+const database = require('./server/routes/database');
 
 //set views
 app.set('views', path.join(__dirname, 'public'));
@@ -37,13 +39,16 @@ app.use(function (req, res, next) {
     next();
 });
 
-// API location
-app.use('/api', api);
+//Database location
+app.use('/database', database);
 
 
 //configure the root of the app
 app.use('/guestbook', guestbookRoutes);
-app.use('/user', userRoutes);
+app.use('/users-auth', usersAuthRoutes);
+app.use('/users-management', usersManagementRoutes);
+
+
 app.use('/sendmail', mailService);
 app.use('/article', article);
 

@@ -9,13 +9,13 @@ import { Router } from "@angular/router";
 import { SuccessService } from "../shared/components/notif-to-user/success/success.service";
 import { MailService } from "../shared/services/mail/mail.service";
 
-const SIGNUP_ADDRESS = 'http://localhost:3000/user/signup';
-const SIGNIN_ADDRESS = 'http://localhost:3000/user/signin';
-const ISLOGIN_ADDRESS = 'http://localhost:3000/user/islogin';
+const SIGNUP_ADDRESS = 'http://localhost:3000/users-auth/signup';
+const SIGNIN_ADDRESS = 'http://localhost:3000/users-auth/signin';
+const ISLOGIN_ADDRESS = 'http://localhost:3000/users-auth/islogin';
 
 const SUPPORT_LINK_ADDRESS = "http://localhost:3000/contact";
-const CONFIRMATION_REG_INIT_ADDRESS = "http://localhost:3000/user/confirmRegInit";
-const CONFIRMATION_REG_VALID_ADDRESS = "http://localhost:3000/user/confirmRegValidation";
+const CONFIRMATION_REG_INIT_ADDRESS = "http://localhost:3000/users-auth/confirmRegInit";
+const CONFIRMATION_REG_VALID_ADDRESS = "http://localhost:3000/users-auth/confirmRegValidation";
 
 
 @Injectable()

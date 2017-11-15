@@ -4,7 +4,7 @@ import 'rxjs/Rx';
 import { Observable } from "rxjs/Observable";
 import { CookieService } from 'angular2-cookie/core';
 
-const GET_USERS_ADDRESS = "http://localhost:3000/user/getUsers";
+const GET_USERS_ADDRESS = "http://localhost:3000/users-management/getUsers";
 
 @Injectable()
 export class UserManagementService {
