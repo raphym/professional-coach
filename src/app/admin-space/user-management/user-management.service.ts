@@ -5,6 +5,8 @@ import { Observable } from "rxjs/Observable";
 import { CookieService } from 'angular2-cookie/core';
 
 const GET_USERS_ADDRESS = "http://localhost:3000/users-management/getUsers";
+const EDIT_USER_ADDRESS = "http://localhost:3000/users-management/editUser";
+
 
 @Injectable()
 export class UserManagementService {
@@ -14,8 +16,6 @@ export class UserManagementService {
 
     }
     getUsers() {
-        var token = this.cookieService.get('token');
-        const body = JSON.stringify(token);
         const headers = new Headers({ 'Content-Type': 'application/json' });
         return this.http.get(GET_USERS_ADDRESS, { headers: headers })
             .map((response: Response) => {
@@ -24,6 +24,18 @@ export class UserManagementService {
             .catch((error: Response) => {
                 return Observable.throw(error.json());
             });
+    }
 
+    //edit a user
+    editUser(fields) {
+        const body = JSON.stringify(fields);
+        const headers = new Headers({ 'Content-Type': 'application/json' });
+        return this.http.post(EDIT_USER_ADDRESS, body, { headers: headers })
+            .map((response: Response) => {
+                return response.json();
+            })
+            .catch((error: Response) => {
+                return Observable.throw(error.json());
+            });
     }
 }

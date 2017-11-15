@@ -31,6 +31,7 @@ export class SignupComponent implements OnInit {
 
     onSubmit() {
         const user = new User(
+            null,
             this.myForm.value.email,
             this.myForm.value.password,
             200,

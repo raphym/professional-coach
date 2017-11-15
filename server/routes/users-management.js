@@ -14,38 +14,103 @@ var jwt = require('jsonwebtoken');
 
 var User = require('../mongoose-models/user');
 
+var ConfirmEmailClass = require('../classes/confirmEmail');
 
-//get the list of all users
-router.get('/getUsers', function (req, res, next) {
+
+//Protection
+router.use('/', function (req, res, next) {
     jwt.verify(req.cookies['token'], jwt_sign_pswd.SECRET, function (err, decoded) {
         if (err) {
             return res.status(401).json({
-                title: 'Not Authenticated',
-                message: err
+                title: 'Not authenticated',
+                message: 'You are not authenticated'
             });
         }
-
-        if (decoded.user.levelRights < 200)
-            res.status(401).json({
-                title: 'Not Authenticated',
+        if (decoded.user.levelRights < 200) {
+            return res.status(401).json({
+                title: 'No Authorized',
                 message: 'You are not an Admin'
             });
+        }
+        next();
+    });
+});
 
-        User.find(function (error, users) {
-            if (error) {
-                res.status(500).json({
-                    title: 'Error',
-                    message: 'An error has occured'
-                });
+//get the list of all users
+router.get('/getUsers', function (req, res, next) {
+    User.find(function (error, users) {
+        if (error) {
+            res.status(500).json({
+                title: 'Error',
+                message: 'An error has occured'
+            });
+        }
+        else {
+            res.status(200).json({
+                title: 'Admin Authenticated',
+                message: 'Get the Users',
+                users: users
+            });
+        }
+    });
+});
+
+//edit a user
+router.post('/editUser', function (req, res, next) {
+    User.findOne({ _id: req.body.id }, function (error, user) {
+        if (error) {
+            return res.status(500).json({
+                title: 'Error',
+                message: 'An error has occured'
+            });
+        }
+        else if (!user) {
+            return res.status(500).json({
+                title: 'Not found',
+                message: 'cannot edit user',
+            });
+        }
+        else {
+            var labels = req.body.labels;
+            var values = req.body.values;
+
+            var update = {};
+            for (var i = 0; i < labels.length; i++) {
+
+                if (labels[i] == 'email') {
+                    var confirmEmailClass = new ConfirmEmailClass();
+
+                    var randomSecretCode = confirmEmailClass.makeRandomString(6);
+                    var randomHash = confirmEmailClass.makeRandomString(20);
+                    var regEmail = confirmEmailClass.createRegMail(user.firstName, user.lastName, randomSecretCode);
+                    // labels.push(randomSecretCode);
+                    // labels.push(randomHash);
+                    // labels.push('registered');
+                    // values.push(randomSecretCode);
+                    // values.push(randomHash);
+                    // values.push(false);
+                }
+                update[labels[i]] = values[i];
             }
-            else {
-                res.status(200).json({
-                    title: 'Admin Authenticated',
-                    message: 'Get the Users',
-                    users: users
-                });
-            }
-        });
+
+            user.update(
+                { $set: update },
+                function (err, success) {
+                    if (err) {
+                        return res.status(500).json({
+                            title: 'Update Problem',
+                            message: 'A problem has occured'
+                        });
+                    }
+                    if (success) {
+                        return res.status(200).json({
+                            title: 'Success',
+                            message: 'The user has been updated'
+                        });
+                    }
+                }
+            );
+        }
     });
 });
 

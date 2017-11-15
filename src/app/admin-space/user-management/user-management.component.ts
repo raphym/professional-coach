@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UserManagementService } from './user-management.service';
 import { User } from '../../shared/models/objects-models/user.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ErrorService } from '../../shared/components/notif-to-user/errors/error.service';
+import { SuccessService } from '../../shared/components/notif-to-user/success/success.service';
 
 @Component({
   selector: 'app-user-management',
@@ -10,11 +12,15 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class UserManagementComponent implements OnInit {
 
-  constructor(private userManagementService: UserManagementService) { }
+  constructor(
+    private userManagementService: UserManagementService,
+    private errorService: ErrorService,
+    private successService: SuccessService) { }
 
   private users: User[] = new Array;
   private display = 'none';
   private myForm: FormGroup;
+  private editUser: User = null;
 
   ngOnInit() {
     this.userManagementService.getUsers().subscribe(
@@ -23,6 +29,7 @@ export class UserManagementComponent implements OnInit {
 
         for (var i = 0; i < users.length; i++) {
           var user = new User(
+            users[i]._id,
             users[i].email,
             users[i].password,
             users[i].levelRights,
@@ -60,6 +67,7 @@ export class UserManagementComponent implements OnInit {
   }
 
   clickOnUser(user) {
+    this.editUser = user;
     this.myForm = new FormGroup({
       email: new FormControl(user.email, [
         Validators.required,
@@ -78,7 +86,33 @@ export class UserManagementComponent implements OnInit {
   }
 
   editSave() {
-    console.log(this.myForm);
+    console.log('edit user');
+    console.log(this.editUser);
+
+    var fieldsLabelUpdated = new Array;
+    var fieldsValueUpdated = new Array;
+
+    Object.keys(this.myForm.controls).forEach(key => {
+      if (this.myForm.get(key).value != this.editUser[key]) {
+        fieldsLabelUpdated.push(key);
+        fieldsValueUpdated.push(this.myForm.get(key).value);
+      }
+    });
+    //there are fields to update
+    if (fieldsLabelUpdated.length > 0 && fieldsLabelUpdated.length == fieldsValueUpdated.length) {
+      const fields = { id: this.editUser.id, labels: fieldsLabelUpdated, values: fieldsValueUpdated };
+      this.userManagementService.editUser(fields)
+        .subscribe(
+        data => {
+          console.log(data);
+          this.successService.handleSuccess(data);
+        },
+        error => {
+          console.log(error);
+          this.errorService.handleError(error);
+        }
+        );
+    }
     this.display = 'none';
   }
 
@@ -86,11 +120,8 @@ export class UserManagementComponent implements OnInit {
     this.display = 'none';
   }
 
-  selectLevelRights(levelRights)
-  {
+  selectLevelRights(levelRights) {
     this.myForm.controls.levelRights.setValue(levelRights);
   }
-
-
 
 }
