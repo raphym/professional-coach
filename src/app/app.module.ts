@@ -27,7 +27,7 @@ import { FooterComponent } from './shared/components/footer/footer.component';
 import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
 import { SharedModule } from './shared/module/shared.module';
 
-
+import {UsefulService} from './shared/services/utility/useful.service'
 //export funct of angular2-jwt
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig(), http, options);
@@ -73,7 +73,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
       provide: AuthHttp,
       useFactory: authHttpServiceFactory,
       deps: [Http, RequestOptions]
-    }
+    },
+    UsefulService
   ],
   bootstrap: [AppComponent],
   exports: []

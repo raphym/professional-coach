@@ -4,6 +4,7 @@ import { User } from '../../shared/models/objects-models/user.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ErrorService } from '../../shared/components/notif-to-user/errors/error.service';
 import { SuccessService } from '../../shared/components/notif-to-user/success/success.service';
+import { LoaderService } from '../../shared/components/loader/loader.service';
 
 @Component({
   selector: 'app-user-management',
@@ -15,7 +16,8 @@ export class UserManagementComponent implements OnInit {
   constructor(
     private userManagementService: UserManagementService,
     private errorService: ErrorService,
-    private successService: SuccessService) { }
+    private successService: SuccessService,
+    private loaderService: LoaderService) { }
 
   private users: User[] = new Array;
   private display = 'none';
@@ -23,6 +25,9 @@ export class UserManagementComponent implements OnInit {
   private editUser: User = null;
 
   ngOnInit() {
+
+    //enable the loader
+    this.loaderService.enableLoader();
     this.userManagementService.getUsers().subscribe(
       data => {
         var users = data.users;
@@ -47,8 +52,15 @@ export class UserManagementComponent implements OnInit {
           );
           this.users.push(user);
         }
+        //disable the loader      
+        this.loaderService.disableLoader();
       },
-      error => console.log(error)
+      error => {
+        console.log(error);
+        //disable the loader      
+        this.loaderService.disableLoader();
+      }
+
     );
     this.myForm = new FormGroup({
       email: new FormControl(null, [
@@ -86,32 +98,46 @@ export class UserManagementComponent implements OnInit {
   }
 
   editSave() {
-    console.log('edit user');
-    console.log(this.editUser);
+    //enable the loader
+    this.loaderService.enableLoader();
 
+    var emailChanged = false;
     var fieldsLabelUpdated = new Array;
     var fieldsValueUpdated = new Array;
 
     Object.keys(this.myForm.controls).forEach(key => {
       if (this.myForm.get(key).value != this.editUser[key]) {
+        if (key == 'email')
+          emailChanged = true;
         fieldsLabelUpdated.push(key);
         fieldsValueUpdated.push(this.myForm.get(key).value);
       }
     });
     //there are fields to update
     if (fieldsLabelUpdated.length > 0 && fieldsLabelUpdated.length == fieldsValueUpdated.length) {
+      var firstName = this.myForm.controls.firstName.value;
+      var lastName = this.myForm.controls.lastName.value;
+      var email = this.myForm.controls.email.value;
+
       const fields = { id: this.editUser.id, labels: fieldsLabelUpdated, values: fieldsValueUpdated };
-      this.userManagementService.editUser(fields)
-        .subscribe(
+      this.userManagementService.editUser(fields, emailChanged, email, firstName, lastName)
+        .then(
         data => {
-          console.log(data);
+          //disable the loader      
+          this.loaderService.disableLoader();
           this.successService.handleSuccess(data);
         },
         error => {
           console.log(error);
+          //disable the loader      
+          this.loaderService.disableLoader();
           this.errorService.handleError(error);
         }
         );
+    }
+    else {
+      //disable the loader      
+      this.loaderService.disableLoader();
     }
     this.display = 'none';
   }

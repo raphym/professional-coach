@@ -14,9 +14,6 @@ var jwt = require('jsonwebtoken');
 
 var User = require('../mongoose-models/user');
 
-var ConfirmEmailClass = require('../classes/confirmEmail');
-
-
 //Protection
 router.use('/', function (req, res, next) {
     jwt.verify(req.cookies['token'], jwt_sign_pswd.SECRET, function (err, decoded) {
@@ -73,34 +70,30 @@ router.post('/editUser', function (req, res, next) {
         else {
             var labels = req.body.labels;
             var values = req.body.values;
-
             var update = {};
+            //update the fields
             for (var i = 0; i < labels.length; i++) {
-
-                if (labels[i] == 'email') {
-                    var confirmEmailClass = new ConfirmEmailClass();
-
-                    var randomSecretCode = confirmEmailClass.makeRandomString(6);
-                    var randomHash = confirmEmailClass.makeRandomString(20);
-                    var regEmail = confirmEmailClass.createRegMail(user.firstName, user.lastName, randomSecretCode);
-                    // labels.push(randomSecretCode);
-                    // labels.push(randomHash);
-                    // labels.push('registered');
-                    // values.push(randomSecretCode);
-                    // values.push(randomHash);
-                    // values.push(false);
-                }
                 update[labels[i]] = values[i];
             }
 
+            //execute the update
             user.update(
                 { $set: update },
                 function (err, success) {
                     if (err) {
-                        return res.status(500).json({
-                            title: 'Update Problem',
-                            message: 'A problem has occured'
-                        });
+                        if (err.message.includes('E11000 duplicate key error collection:')) {
+                            return res.status(500).json({
+                                title: 'An error occured',
+                                message: 'A user with the same email address is already registered'
+                            });
+                        }
+
+                        else {
+                            return res.status(500).json({
+                                title: 'Update Problem',
+                                message: 'A problem has occured'
+                            });
+                        }
                     }
                     if (success) {
                         return res.status(200).json({
