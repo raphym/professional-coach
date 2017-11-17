@@ -19,13 +19,18 @@ export class UserManagementComponent implements OnInit {
     private successService: SuccessService,
     private loaderService: LoaderService) { }
 
-  private users: User[] = new Array;
+  private users: User[];
   private display = 'none';
   private myForm: FormGroup;
   private editUser: User = null;
 
   ngOnInit() {
+    this.init();
+  }
 
+  init() {
+    //reset the users array
+    this.users = new Array;
     //enable the loader
     this.loaderService.enableLoader();
     this.userManagementService.getUsers().subscribe(
@@ -88,11 +93,11 @@ export class UserManagementComponent implements OnInit {
       levelRights: new FormControl(user.levelRights, Validators.required),
       firstName: new FormControl(user.firstName, Validators.required),
       lastName: new FormControl(user.lastName, Validators.required),
-      phone: new FormControl(user.phone, Validators.required),
-      street: new FormControl(user.street, Validators.required),
-      streetNumber: new FormControl(user.streetNumber, Validators.required),
-      city: new FormControl(user.city, Validators.required),
-      country: new FormControl(user.country, Validators.required)
+      phone: new FormControl(user.phone, null),
+      street: new FormControl(user.street, null),
+      streetNumber: new FormControl(user.streetNumber, null),
+      city: new FormControl(user.city, null),
+      country: new FormControl(user.country, null)
     });
     this.display = 'block';
   }
@@ -126,6 +131,7 @@ export class UserManagementComponent implements OnInit {
           //disable the loader      
           this.loaderService.disableLoader();
           this.successService.handleSuccess(data);
+          this.init();
         },
         error => {
           console.log(error);
