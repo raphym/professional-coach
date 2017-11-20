@@ -44,16 +44,6 @@ export class AuthService {
     //signup
     signup(user: User) {
 
-        var randomSecretCode = this.makeRandomString(6);
-        var randomHash = this.makeRandomString(20);
-
-        this.CONFIRMATION_REG_LINK_URL += '/';
-        this.CONFIRMATION_REG_LINK_URL += randomHash;
-
-
-        user.randomSecretCode = randomSecretCode;
-        user.randomHash = randomHash;
-
         const body = JSON.stringify(user);
         const headers = new Headers({ 'Content-Type': 'application/json' });
 
@@ -65,9 +55,14 @@ export class AuthService {
                 .toPromise()
                 .then(
 
-
                 (res) => {
                     //success to create the user , now send the confirm mail
+                    var user = res.json().user;
+                    var randomHash = user.randomHash;
+                    var randomSecretCode = user.randomSecretCode;
+                    
+                    this.CONFIRMATION_REG_LINK_URL += '/';
+                    this.CONFIRMATION_REG_LINK_URL += randomHash;
 
                     var mail_content = this.createRegMail(user.firstName,
                         user.lastName,
@@ -103,8 +98,6 @@ export class AuthService {
                 }
                 );
         });
-
-
     }
 
     //confirmation registration init

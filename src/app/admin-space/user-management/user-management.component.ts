@@ -124,7 +124,7 @@ export class UserManagementComponent implements OnInit {
       var lastName = this.myForm.controls.lastName.value;
       var email = this.myForm.controls.email.value;
 
-      const fields = { id: this.editUser.id, labels: fieldsLabelUpdated, values: fieldsValueUpdated };
+      const fields = { id: this.editUser.id, labels: fieldsLabelUpdated, values: fieldsValueUpdated, changeEmail: false };
       this.userManagementService.editUser(fields, emailChanged, email, firstName, lastName)
         .then(
         data => {

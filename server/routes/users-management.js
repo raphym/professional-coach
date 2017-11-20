@@ -14,10 +14,16 @@ var jwt = require('jsonwebtoken');
 
 var User = require('../mongoose-models/user');
 
+//UsefulFunctions is the backend
+var UsefulFunctions = require('../classes/useful_functions');
+
+
 //Protection
 router.use('/', function (req, res, next) {
     jwt.verify(req.cookies['token'], jwt_sign_pswd.SECRET, function (err, decoded) {
         if (err) {
+            console.log('error');
+            console.log(err);
             return res.status(401).json({
                 title: 'Not authenticated',
                 message: 'You are not authenticated'
@@ -37,6 +43,8 @@ router.use('/', function (req, res, next) {
 router.get('/getUsers', function (req, res, next) {
     User.find(function (error, users) {
         if (error) {
+            console.log('error');
+            console.log(error);
             res.status(500).json({
                 title: 'Error',
                 message: 'An error has occured'
@@ -52,10 +60,38 @@ router.get('/getUsers', function (req, res, next) {
     });
 });
 
+//check email if exist
+router.post('/checkEmail', function (req, res, next) {
+    User.findOne({ email: req.body.email }, function (error, user) {
+        if (error) {
+            console.log('error');
+            console.log(error);
+            return res.status(500).json({
+                title: 'Error',
+                message: 'An error has occured'
+            });
+        }
+        else if (user) {
+            return res.status(500).json({
+                title: 'Email used',
+                message: 'Email is already used by a another user',
+            });
+        }
+        else if (!user) {
+            return res.status(200).json({
+                title: 'Email is ok',
+                message: 'We can use this email',
+            });
+        }
+    });
+});
+
 //edit a user
 router.post('/editUser', function (req, res, next) {
     User.findOne({ _id: req.body.id }, function (error, user) {
         if (error) {
+            console.log('error');
+            console.log(error);
             return res.status(500).json({
                 title: 'Error',
                 message: 'An error has occured'
@@ -70,6 +106,23 @@ router.post('/editUser', function (req, res, next) {
         else {
             var labels = req.body.labels;
             var values = req.body.values;
+
+            //if the mail is changed so update the randomSecretCode,
+            //randomHash , and the registered status
+            if (req.body.changeEmail) {
+                var usefulFunctions = new UsefulFunctions();
+                var randomSecretCode = usefulFunctions.makeRandomString(6);
+                var randomHash = usefulFunctions.makeRandomString(20);
+
+                labels.push('randomSecretCode');
+                labels.push('randomHash');
+                labels.push('registered');
+                values.push(randomSecretCode);
+                values.push(randomHash);
+                values.push(false);
+            }
+
+            //prepare to update the fields
             var update = {};
             //update the fields
             for (var i = 0; i < labels.length; i++) {
@@ -81,6 +134,8 @@ router.post('/editUser', function (req, res, next) {
                 { $set: update },
                 function (err, success) {
                     if (err) {
+                        console.log('error');
+                        console.log(err);
                         if (err.message.includes('E11000 duplicate key error collection:')) {
                             return res.status(500).json({
                                 title: 'An error occured',
@@ -98,7 +153,8 @@ router.post('/editUser', function (req, res, next) {
                     if (success) {
                         return res.status(200).json({
                             title: 'Success',
-                            message: 'The user has been updated'
+                            message: 'The user has been updated',
+                            keys: { randomSecretCode: randomSecretCode, randomHash: randomHash }
                         });
                     }
                 }

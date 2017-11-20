@@ -1,4 +1,4 @@
-module.exports = class ConfirmEmailClass {
+module.exports = class UsefulFunctions {
     constructor() {
     }
 

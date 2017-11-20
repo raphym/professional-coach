@@ -14,17 +14,24 @@ var jwt = require('jsonwebtoken');
 
 var User = require('../mongoose-models/user');
 
+//UsefulFunctions is the backend
+var UsefulFunctions = require('../classes/useful_functions');
 
 //Signup
 router.post('/signup', function (req, res, next) {
+    //create the random randomSecretCode and randomHash
+    var usefulFunctions = new UsefulFunctions();
+    var randomSecretCode = usefulFunctions.makeRandomString(6);
+    var randomHash = usefulFunctions.makeRandomString(20);
+
     var user = new User({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         password: bcrypt.hashSync(req.body.password, 10),
         email: req.body.email,
         levelRights: level_rights.USER,
-        randomSecretCode: req.body.randomSecretCode,
-        randomHash: req.body.randomHash,
+        randomSecretCode: randomSecretCode,
+        randomHash: randomHash,
         registered: false,
         messages: req.body.messages
     });
@@ -50,9 +57,10 @@ router.post('/signup', function (req, res, next) {
                 });
             }
         }
+
         res.status(201).json({
             title: 'User created',
-            message: result
+            user: result
         });
     });
 });
