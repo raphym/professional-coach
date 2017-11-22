@@ -12,6 +12,25 @@ import { LoaderService } from '../../shared/components/loader/loader.service';
   styleUrls: ['./user-management.component.css']
 })
 export class UserManagementComponent implements OnInit {
+  private users: User[];
+  private display = 'none';
+  private myForm: FormGroup;
+  private editUser: User = null;
+
+
+  private optionsShowUsers=[2,4,6,8,10,12,14,16,18,20]; //Options for name of users show per page
+  private usersPerPage: number = this.optionsShowUsers[0];
+  private numbers = [];
+  private currentButton = 0;
+  private firstTimeLoaded = true;
+  private currentPage = 0;
+
+  private start = 0;
+  private numbersOfNums = 4;
+  private end = this.start + this.numbersOfNums;
+  private buttonBackAvailable = false;
+  private buttonNextAvailable = false;
+
 
   constructor(
     private userManagementService: UserManagementService,
@@ -19,22 +38,120 @@ export class UserManagementComponent implements OnInit {
     private successService: SuccessService,
     private loaderService: LoaderService) { }
 
-  private users: User[];
-  private display = 'none';
-  private myForm: FormGroup;
-  private editUser: User = null;
-
   ngOnInit() {
-    this.init();
+    this.init(false, 0);
   }
 
-  init() {
+  init(refresh, val) {
+    //if refresh after edit user
+    if (refresh) {
+      this.currentPage = val;
+      this.firstTimeLoaded = true;
+    }
+    else
+      this.currentPage = 1;
+
     //reset the users array
     this.users = new Array;
     //enable the loader
     this.loaderService.enableLoader();
-    this.userManagementService.getUsers().subscribe(
+
+    this.userManagementService.getUsersCount().subscribe(
       data => {
+        //disable the loader
+        this.loaderService.disableLoader();
+        this.numbers = Array(Math.ceil(data.val / this.usersPerPage)).fill(0).map((x, i) => i + 1);
+        if(this.numbers.length>this.numbersOfNums)
+          this.buttonNextAvailable=true;
+        this.pageClick(this.currentPage);
+        this.firstTimeLoaded = false;
+      },
+      error => {
+        console.log(error);
+        //disable the loader
+        this.loaderService.disableLoader();
+      }
+    );
+
+    this.myForm = new FormGroup({
+      email: new FormControl(null, [
+        Validators.required,
+        Validators.pattern("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
+      ]),
+      levelRights: new FormControl(null, Validators.required),
+      firstName: new FormControl(null, Validators.required),
+      lastName: new FormControl(null, Validators.required),
+      phone: new FormControl(null, Validators.required),
+      street: new FormControl(null, Validators.required),
+      streetNumber: new FormControl(null, Validators.required),
+      city: new FormControl(null, Validators.required),
+      country: new FormControl(null, Validators.required)
+    });
+  }
+
+  selectOptionsShowUsers(event)
+  {
+    this.usersPerPage=parseInt(event.target.value);
+    this.init(true,1);
+  }
+  back() {
+    this.buttonNextAvailable=true;
+    if (this.start - this.numbersOfNums < 0) {
+      if (this.start == 1) {
+        this.start = 0;
+        this.end = this.start + this.numbersOfNums;
+        this.buttonBackAvailable = false;
+        return;
+      }
+      else
+        return;
+
+    }
+    else {
+      this.start -= this.numbersOfNums
+      this.end = this.start + this.numbersOfNums;
+      return;
+
+    }
+
+  }
+  next() {
+    if (this.end >= this.numbers.length) {
+      return;
+    }
+    this.buttonBackAvailable = true;
+    
+    if (this.end + this.numbersOfNums >= this.numbers.length) {
+      this.start = this.numbers.length - this.numbersOfNums;
+      this.end = this.numbers.length;
+      this.buttonNextAvailable = false;
+      return;
+    }
+    else {
+      this.start += this.numbersOfNums;
+      this.end = this.start + this.numbersOfNums;
+      return;
+    }
+
+
+  }
+  pageClick(i) {
+    if (!this.firstTimeLoaded && this.currentButton == i)
+      return;
+
+    //enable the loader
+    this.loaderService.enableLoader();
+    this.currentButton = i;
+    this.currentPage = i;
+
+    var details = {
+      usersPerPage: this.usersPerPage,
+      pageClicked: i - 1
+    }
+    this.userManagementService.getPartOfUsers(details).subscribe(
+      data => {
+        //reset the users array
+        this.users = new Array;
         var users = data.users;
 
         for (var i = 0; i < users.length; i++) {
@@ -57,30 +174,16 @@ export class UserManagementComponent implements OnInit {
           );
           this.users.push(user);
         }
-        //disable the loader      
+
+        //disable the loader
         this.loaderService.disableLoader();
       },
       error => {
         console.log(error);
-        //disable the loader      
+        //disable the loader
         this.loaderService.disableLoader();
       }
-
     );
-    this.myForm = new FormGroup({
-      email: new FormControl(null, [
-        Validators.required,
-        Validators.pattern("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
-      ]),
-      levelRights: new FormControl(null, Validators.required),
-      firstName: new FormControl(null, Validators.required),
-      lastName: new FormControl(null, Validators.required),
-      phone: new FormControl(null, Validators.required),
-      street: new FormControl(null, Validators.required),
-      streetNumber: new FormControl(null, Validators.required),
-      city: new FormControl(null, Validators.required),
-      country: new FormControl(null, Validators.required)
-    });
   }
 
   clickOnUser(user) {
@@ -131,7 +234,7 @@ export class UserManagementComponent implements OnInit {
           //disable the loader      
           this.loaderService.disableLoader();
           this.successService.handleSuccess(data);
-          this.init();
+          this.init(true, this.currentPage);
         },
         error => {
           console.log(error);

@@ -23,6 +23,30 @@ export class UserManagementService {
         private mailService: MailService) {
 
     }
+
+    getUsersCount() {
+        return this.http.get('http://localhost:3000/users-management/getUsersCount')
+            .map((response: Response) => {
+                return response.json();
+            })
+            .catch((error: Response) => {
+                return Observable.throw(error.json());
+            });
+
+    }
+    getPartOfUsers(wantedData) {
+        const headers = new Headers({ 'Content-Type': 'application/json' });
+
+        const body = JSON.stringify(wantedData);
+        return this.http.post('http://localhost:3000/users-management/getPartOfUsers', body, { headers: headers })
+            .map((response: Response) => {
+                return response.json();
+            })
+            .catch((error: Response) => {
+                return Observable.throw(error.json());
+            });
+    }
+
     getUsers() {
         const headers = new Headers({ 'Content-Type': 'application/json' });
         return this.http.get(GET_USERS_ADDRESS, { headers: headers })

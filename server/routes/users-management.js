@@ -39,6 +39,45 @@ router.use('/', function (req, res, next) {
     });
 });
 
+//get numbers of users
+router.get('/getUsersCount', function (req, response, next) {
+
+    User.count(function (error, numOfUsers) {
+        if (error) {
+            console.log('error');
+            console.log(error);
+            res.status(500).json({
+                title: 'Error',
+                message: 'An error has occured'
+            });
+        }
+        return response.status(201).json({
+            message: 'Get count',
+            val: numOfUsers
+        });
+    });
+});
+
+router.post('/getPartOfUsers', function (req, response, next) {
+    var userRequest = req.body.usersPerPage;
+    var userSkip = req.body.pageClicked;
+    User.find({}).skip(userRequest * userSkip).limit(userRequest).exec(function (error, users) {
+        if (error) {
+            console.log('error');
+            console.log(error);
+            res.status(500).json({
+                title: 'Error',
+                message: 'An error has occured'
+            });
+        }
+        return response.status(200).json({
+            message: 'Get Users',
+            users: users
+        });
+    });
+})
+
+
 //get the list of all users
 router.get('/getUsers', function (req, res, next) {
     User.find(function (error, users) {
