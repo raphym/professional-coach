@@ -1,0 +1,36 @@
+<div style="text-align: center">
+  {{buttonsPage?.length}} page(s) found
+</div>
+<label for="rowPerPage">Rows to show per page:</label>
+<select id="rowPerPage" name="rowPerPage" (change)="selectOptionsShow($event)">
+  <option *ngFor="let opt of optionsShow">{{opt}} </option>
+</select>
+<br>
+<br>
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col" *ngFor="let columName of columsName">{{columName}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let rowValues of rowsValues, let i = index " (click)="rowCLicked(rowValues)" style="cursor: pointer;">
+      <td *ngFor="let colValue of rowValues">{{colValue}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- the numbers of the pages -->
+<table align="center">
+  <tr>
+    <td>
+      <i class="fa fa-arrow-left" aria-hidden="true" *ngIf="buttonBackAvailable" (click)="back()" style="cursor: pointer;"></i>
+    </td>
+    <td *ngFor="let buttonPage of buttonsPage | slice:start:end">
+      <button type="button" (click)="pageClick(buttonPage)" style="cursor:pointer;" class="btn btn-dark">{{buttonPage}}</button>
+    </td>
+    <td>
+      <i class="fa fa-arrow-right" aria-hidden="true" *ngIf="buttonNextAvailable" (click)="next()" style="cursor: pointer;"></i>
+    </td>
+  </tr>
+</table>

@@ -6,6 +6,8 @@ import { RouterModule } from "@angular/router";
 import { HttpModule, Http } from "@angular/http";
 import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate';
 import { AngularDraggableModule } from 'angular2-draggable';
+import { TableComponent } from "../components/table/table.component";
+import { TableService } from "../components/table/table.service";
 
 //for the translation
 export function createTranslateLoader(http: Http) {
@@ -13,6 +15,9 @@ export function createTranslateLoader(http: Http) {
 }
 
 @NgModule({
+    declarations: [
+        TableComponent
+    ],
     imports: [
         ReactiveFormsModule,
         FormsModule,
@@ -28,6 +33,7 @@ export function createTranslateLoader(http: Http) {
         AngularDraggableModule
     ],
     exports: [
+        TableComponent,
         ReactiveFormsModule,
         FormsModule,
         CommonModule,
@@ -36,6 +42,9 @@ export function createTranslateLoader(http: Http) {
         HttpModule,
         TranslateModule,
         AngularDraggableModule
+    ],
+    providers: [
+        TableService
     ]
 })
 export class SharedModule { }

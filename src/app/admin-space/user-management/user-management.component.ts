@@ -5,6 +5,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ErrorService } from '../../shared/components/notif-to-user/errors/error.service';
 import { SuccessService } from '../../shared/components/notif-to-user/success/success.service';
 import { LoaderService } from '../../shared/components/loader/loader.service';
+import { TableService } from '../../shared/components/table/table.service';
 
 @Component({
   selector: 'app-user-management',
@@ -12,45 +13,83 @@ import { LoaderService } from '../../shared/components/loader/loader.service';
   styleUrls: ['./user-management.component.css']
 })
 export class UserManagementComponent implements OnInit {
+  //the users
   private users: User[];
+  //display of the div edit user
   private display = 'none';
+  //form for the div edit user
   private myForm: FormGroup;
+  //the current edit user
   private editUser: User = null;
 
-
-  private optionsShowUsers=[2,4,6,8,10,12,14,16,18,20]; //Options for name of users show per page
-  private usersPerPage: number = this.optionsShowUsers[0];
-  private numbers = [];
-  private currentButton = 0;
-  private firstTimeLoaded = true;
-  private currentPage = 0;
-
-  private start = 0;
-  private numbersOfNums = 4;
-  private end = this.start + this.numbersOfNums;
-  private buttonBackAvailable = false;
-  private buttonNextAvailable = false;
-
+  //for the table
+  private config;
+  private pageToDisplay = 0;
 
   constructor(
     private userManagementService: UserManagementService,
     private errorService: ErrorService,
     private successService: SuccessService,
-    private loaderService: LoaderService) { }
+    private loaderService: LoaderService,
+    private tableService: TableService) { }
 
   ngOnInit() {
-    this.init(false, 0);
+    this.init();
+
+    //Emitter to dected if a row of a table is clicked
+    this.tableService.rowClickedEmitter.subscribe(
+      rowValues => {
+        var userEmail = rowValues[0];
+        this.clickOnUser(userEmail);
+      }
+    );
+
+    //Emitter to detect if in the table component the user change the config
+    this.tableService.rowsConfigEmitter.subscribe(
+      config => {
+        this.config = config;
+        this.pageToDisplay = 0;
+        this.init();
+      }
+    );
+
+    //Emitter to display the page clicked
+    this.tableService.loadPageEmitter.subscribe(
+      pageClicked => {
+        this.pageToDisplay = pageClicked;
+        this.init();
+      }
+    );
   }
 
-  init(refresh, val) {
-    //if refresh after edit user
-    if (refresh) {
-      this.currentPage = val;
-      this.firstTimeLoaded = true;
-    }
-    else
-      this.currentPage = 1;
+  //go to display the table
+  displayTable(users) {
+    var columsName = new Array('Email', 'First Name', 'Last Name', 'Type User', 'Status User');
+    var rowsValues = new Array();
+    for (var i = 0; i < users.length; i++) {
+      //ternary condition to check if the user is registered
+      var status = (users[i].registered) ? 'Registered' : 'Not Registered';
+      //check the level rights of the user
+      var role = 'Normal';
+      if (users[i].levelRights == 200)
+        role = 'Admin';
+      if (users[i].levelRights == 300)
+        role = 'Super Admin';
 
+      //push the value into the rows values array
+      rowsValues.push(new Array(
+        users[i].email,
+        users[i].firstName,
+        users[i].lastName,
+        users[i].levelRights,
+        users[i].registered));
+    }
+    //Event emitter to display the table in the table component
+    this.tableService.diplayDataEmitter.emit({ columsName, rowsValues });
+  }
+
+  //init to count how many users there are and apply the getUsers function
+  init() {
     //reset the users array
     this.users = new Array;
     //enable the loader
@@ -60,11 +99,7 @@ export class UserManagementComponent implements OnInit {
       data => {
         //disable the loader
         this.loaderService.disableLoader();
-        this.numbers = Array(Math.ceil(data.val / this.usersPerPage)).fill(0).map((x, i) => i + 1);
-        if(this.numbers.length>this.numbersOfNums)
-          this.buttonNextAvailable=true;
-        this.pageClick(this.currentPage);
-        this.firstTimeLoaded = false;
+        this.getUsers(data.count);
       },
       error => {
         console.log(error);
@@ -72,7 +107,7 @@ export class UserManagementComponent implements OnInit {
         this.loaderService.disableLoader();
       }
     );
-
+    //init the form
     this.myForm = new FormGroup({
       email: new FormControl(null, [
         Validators.required,
@@ -89,94 +124,22 @@ export class UserManagementComponent implements OnInit {
     });
   }
 
-  selectOptionsShowUsers(event)
-  {
-    this.usersPerPage=parseInt(event.target.value);
-    this.init(true,1);
-  }
-  back() {
-    this.buttonNextAvailable=true;
-    if (this.start - this.numbersOfNums < 0) {
-      if (this.start == 1) {
-        this.start = 0;
-        this.end = this.start + this.numbersOfNums;
-        this.buttonBackAvailable = false;
-        return;
-      }
-      else
-        return;
-
+  //go to get the users from the server
+  getUsers(count) {
+    var details = {
+      usersPerPage: this.config.rowsPerPage,
+      pageClicked: this.pageToDisplay
     }
-    else {
-      this.start -= this.numbersOfNums
-      this.end = this.start + this.numbersOfNums;
-      return;
-
-    }
-
-  }
-  next() {
-    if (this.end >= this.numbers.length) {
-      return;
-    }
-    this.buttonBackAvailable = true;
-    
-    if (this.end + this.numbersOfNums >= this.numbers.length) {
-      this.start = this.numbers.length - this.numbersOfNums;
-      this.end = this.numbers.length;
-      this.buttonNextAvailable = false;
-      return;
-    }
-    else {
-      this.start += this.numbersOfNums;
-      this.end = this.start + this.numbersOfNums;
-      return;
-    }
-
-
-  }
-  pageClick(i) {
-    if (!this.firstTimeLoaded && this.currentButton == i)
-      return;
 
     //enable the loader
     this.loaderService.enableLoader();
-    this.currentButton = i;
-    this.currentPage = i;
-
-    var details = {
-      usersPerPage: this.usersPerPage,
-      pageClicked: i - 1
-    }
     this.userManagementService.getPartOfUsers(details).subscribe(
       data => {
-        //reset the users array
-        this.users = new Array;
-        var users = data.users;
-
-        for (var i = 0; i < users.length; i++) {
-          var user = new User(
-            users[i]._id,
-            users[i].email,
-            users[i].password,
-            users[i].levelRights,
-            users[i].firstName,
-            users[i].lastName,
-            users[i].randomSecretCode,
-            users[i].randomHash,
-            users[i].registered,
-            users[i].phone,
-            users[i].street,
-            users[i].streetNumber,
-            users[i].city,
-            users[i].country,
-            users[i].picture,
-          );
-          this.users.push(user);
-        }
-
         //disable the loader
         this.loaderService.disableLoader();
+        this.users = data.users;
+        this.tableService.buttonsPageEmitter.emit(Array(Math.ceil(count / details.usersPerPage)).fill(0).map((x, i) => i + 1));
+        this.displayTable(data.users);
       },
       error => {
         console.log(error);
@@ -184,10 +147,21 @@ export class UserManagementComponent implements OnInit {
         this.loaderService.disableLoader();
       }
     );
+
   }
 
-  clickOnUser(user) {
+
+  //when click on an user
+  clickOnUser(userEmail) {
+    var user = null;
+    for (var i = 0; i < this.users.length; i++) {
+      if (this.users[i].email == userEmail) {
+        user = this.users[i];
+        break;
+      }
+    }
     this.editUser = user;
+    //init the form
     this.myForm = new FormGroup({
       email: new FormControl(user.email, [
         Validators.required,
@@ -205,6 +179,7 @@ export class UserManagementComponent implements OnInit {
     this.display = 'block';
   }
 
+  //when edit an user
   editSave() {
     //enable the loader
     this.loaderService.enableLoader();
@@ -227,14 +202,14 @@ export class UserManagementComponent implements OnInit {
       var lastName = this.myForm.controls.lastName.value;
       var email = this.myForm.controls.email.value;
 
-      const fields = { id: this.editUser.id, labels: fieldsLabelUpdated, values: fieldsValueUpdated, changeEmail: false };
+      const fields = { id: this.editUser._id, labels: fieldsLabelUpdated, values: fieldsValueUpdated, changeEmail: false };
       this.userManagementService.editUser(fields, emailChanged, email, firstName, lastName)
         .then(
         data => {
           //disable the loader      
           this.loaderService.disableLoader();
           this.successService.handleSuccess(data);
-          this.init(true, this.currentPage);
+          this.init();
         },
         error => {
           console.log(error);
@@ -251,12 +226,13 @@ export class UserManagementComponent implements OnInit {
     this.display = 'none';
   }
 
+  //when click on Cancel
   editCancel() {
     this.display = 'none';
   }
 
+  //Select for the level rights
   selectLevelRights(levelRights) {
     this.myForm.controls.levelRights.setValue(levelRights);
   }
-
 }

@@ -1,52 +1,5 @@
-<div style="text-align: center">
-    There is {{numbers?.length}} pages found
-</div>
-<div style="text-align: center">
-    Number of users to show per page:
-</div>
-<select style="text-align:center;position:absolute;right:50%;left:50%;" (change)="selectOptionsShowUsers($event)">
-    <option *ngFor="let opt of optionsShowUsers">{{opt}} </option>
-</select>
-<br><br>
-<!-- Table of users -->
-<table class="table table-dark">
-  <thead>
-    <tr>
-      <th scope="col">Email</th>
-      <th scope="col">First Name</th>
-      <th scope="col">Last Name</th>
-      <th scope="col">Type User</th>
-      <th scope="col">Status User</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let user of users, let i = index " (click)="clickOnUser(user)" style="cursor: pointer;">
-      <td>{{user.email}}</td>
-      <td>{{user.firstName}}</td>
-      <td>{{user.lastName}}</td>
-      <td *ngIf="user.levelRights==100">Normal User</td>
-      <td *ngIf="user.levelRights==200">Admin User</td>
-      <td *ngIf="user.levelRights==300">Super Admin User</td>
-      <td *ngIf="user.registered">Registered</td>
-      <td *ngIf="!user.registered">Not Registered</td>
-    </tr>
-  </tbody>
-</table>
-
-<!-- the numbers of the pages -->
-<table align="center">
-  <tr>
-    <td>
-      <i class="fa fa-arrow-left" aria-hidden="true" *ngIf="buttonBackAvailable" (click)="back()" style="cursor: pointer;"></i>
-    </td>
-    <td *ngFor="let num of numbers | slice:start:end">
-      <button type="button" (click)="pageClick(num)" style="cursor:pointer;" class="btn btn-dark">{{num}}</button>
-    </td>
-    <td>
-      <i class="fa fa-arrow-right" aria-hidden="true" *ngIf="buttonNextAvailable" (click)="next()" style="cursor: pointer;"></i>
-    </td>
-  </tr>
-</table>
+<!-- The Table of the users -->
+<app-table></app-table>
 
 <!-- Windows to edit a user -->
 <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{display: display}">

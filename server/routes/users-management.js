@@ -53,7 +53,7 @@ router.get('/getUsersCount', function (req, response, next) {
         }
         return response.status(201).json({
             message: 'Get count',
-            val: numOfUsers
+            count: numOfUsers
         });
     });
 });
