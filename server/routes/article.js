@@ -12,6 +12,44 @@ var Articles = require('../mongoose-models/article');
 var User = require('../mongoose-models/user');
 
 
+//get numbers of articles
+router.get('/getArticlesCount', function (req, response, next) {
+
+    Articles.count(function (error, numOfArticles) {
+        if (error) {
+            console.log('error');
+            console.log(error);
+            res.status(500).json({
+                title: 'Error',
+                message: 'An error has occured'
+            });
+        }
+        return response.status(201).json({
+            message: 'Get count',
+            count: numOfArticles
+        });
+    });
+});
+
+//get a Part Of Articles
+router.post('/getPartOfArticles', function (req, response, next) {
+    var articleRequest = req.body.articlesPerPage;
+    var articlesSkip = req.body.pageClicked;
+    Articles.find({}).skip(articleRequest * articlesSkip).limit(articleRequest).exec(function (error, articles) {
+        if (error) {
+            console.log('error');
+            console.log(error);
+            res.status(500).json({
+                title: 'Error',
+                message: 'An error has occured'
+            });
+        }
+        return response.status(200).json({
+            message: 'Get Articles',
+            articles: articles
+        });
+    });
+})
 
 //get the articles
 router.get('/getArticles', function (req, res, next) {

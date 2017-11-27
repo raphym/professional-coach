@@ -7,15 +7,19 @@
 </select>
 <br>
 <br>
-<table class="table table-dark">
+<table [class]="configClass">
   <thead>
     <tr>
-      <th scope="col" *ngFor="let columName of columsName">{{columName}}</th>
+      <th scope="col" *ngFor="let columName of columsName;let i=index;">
+        <span *ngIf="i!=0">{{columName}}</span>
+      </th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let rowValues of rowsValues, let i = index " (click)="rowCLicked(rowValues)" style="cursor: pointer;">
-      <td *ngFor="let colValue of rowValues">{{colValue}}</td>
+    <tr *ngFor="let rowValues of rowsValues, let i = index;" (click)="rowCLicked(rowValues)" style="cursor: pointer;">
+      <td *ngFor="let colValue of rowValues, let j = index;">
+        <span *ngIf="j!=0">{{colValue}}</span>
+      </td>
     </tr>
   </tbody>
 </table>

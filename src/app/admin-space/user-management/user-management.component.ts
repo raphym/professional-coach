@@ -6,13 +6,14 @@ import { ErrorService } from '../../shared/components/notif-to-user/errors/error
 import { SuccessService } from '../../shared/components/notif-to-user/success/success.service';
 import { LoaderService } from '../../shared/components/loader/loader.service';
 import { TableService } from '../../shared/components/table/table.service';
+import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({
   selector: 'app-user-management',
   templateUrl: './user-management.component.html',
   styleUrls: ['./user-management.component.css']
 })
-export class UserManagementComponent implements OnInit {
+export class UserManagementComponent implements OnInit, OnDestroy {
   //the users
   private users: User[];
   //display of the div edit user
@@ -26,26 +27,24 @@ export class UserManagementComponent implements OnInit {
   private config;
   private pageToDisplay = 0;
 
+  //the subscriptions to the emitters
+  private subscriptionRowClicked;
+  private subscriptionRowsConfig;
+  private subscriptionLoadPage;
+
   constructor(
     private userManagementService: UserManagementService,
     private errorService: ErrorService,
     private successService: SuccessService,
     private loaderService: LoaderService,
-    private tableService: TableService) { }
+    private tableService: TableService) {
+
+  }
 
   ngOnInit() {
-    this.init();
-
-    //Emitter to dected if a row of a table is clicked
-    this.tableService.rowClickedEmitter.subscribe(
-      rowValues => {
-        var userEmail = rowValues[0];
-        this.clickOnUser(userEmail);
-      }
-    );
 
     //Emitter to detect if in the table component the user change the config
-    this.tableService.rowsConfigEmitter.subscribe(
+    this.subscriptionRowsConfig = this.tableService.rowsConfigEmitter.subscribe(
       config => {
         this.config = config;
         this.pageToDisplay = 0;
@@ -54,17 +53,35 @@ export class UserManagementComponent implements OnInit {
     );
 
     //Emitter to display the page clicked
-    this.tableService.loadPageEmitter.subscribe(
+    this.subscriptionLoadPage = this.tableService.loadPageEmitter.subscribe(
       pageClicked => {
         this.pageToDisplay = pageClicked;
         this.init();
       }
     );
+
+    //Emitter to dected if a row of a table is clicked
+    this.subscriptionRowClicked = this.tableService.rowClickedEmitter.subscribe(
+      rowValues => {
+        var userEmail = rowValues[1];
+        this.clickOnUser(userEmail);
+      }
+    );
+  }
+
+  ngOnDestroy() {
+
+    //unsubscribe to the emitters
+    this.subscriptionRowClicked.unsubscribe();
+    this.subscriptionRowsConfig.unsubscribe();
+    this.subscriptionLoadPage.unsubscribe();
+
   }
 
   //go to display the table
   displayTable(users) {
-    var columsName = new Array('Email', 'First Name', 'Last Name', 'Type User', 'Status User');
+
+    var columsName = new Array('ID', 'Email', 'First Name', 'Last Name', 'Type User', 'Status User');
     var rowsValues = new Array();
     for (var i = 0; i < users.length; i++) {
       //ternary condition to check if the user is registered
@@ -78,11 +95,12 @@ export class UserManagementComponent implements OnInit {
 
       //push the value into the rows values array
       rowsValues.push(new Array(
+        users[i]._id,
         users[i].email,
         users[i].firstName,
         users[i].lastName,
-        users[i].levelRights,
-        users[i].registered));
+        role,
+        status));
     }
     //Event emitter to display the table in the table component
     this.tableService.diplayDataEmitter.emit({ columsName, rowsValues });
@@ -90,6 +108,7 @@ export class UserManagementComponent implements OnInit {
 
   //init to count how many users there are and apply the getUsers function
   init() {
+
     //reset the users array
     this.users = new Array;
     //enable the loader
@@ -97,6 +116,9 @@ export class UserManagementComponent implements OnInit {
 
     this.userManagementService.getUsersCount().subscribe(
       data => {
+        var configClass = 'table table-dark';
+        //Emitter to config the class table
+        this.tableService.configClassEmitter.emit(configClass);
         //disable the loader
         this.loaderService.disableLoader();
         this.getUsers(data.count);
@@ -126,6 +148,7 @@ export class UserManagementComponent implements OnInit {
 
   //go to get the users from the server
   getUsers(count) {
+
     var details = {
       usersPerPage: this.config.rowsPerPage,
       pageClicked: this.pageToDisplay
@@ -149,6 +172,7 @@ export class UserManagementComponent implements OnInit {
     );
 
   }
+
 
 
   //when click on an user

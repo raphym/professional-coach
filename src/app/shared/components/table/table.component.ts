@@ -35,7 +35,15 @@ export class TableComponent implements OnInit {
   //the values of the table
   private rowsValues = new Array();
 
+  private configClass = 'abc';
+
   ngOnInit() {
+    this.tableService.configClassEmitter.subscribe(
+      configClass => {
+        this.configClass = configClass;
+      }
+    );
+
     //Emitter to send the config display of the page
     this.tableService.rowsConfigEmitter.emit({ rowsPerPage: this.rowsPerPage, numbersOfButtons: this.numbersOfButtons });
     //Emitter to get the buttons array
@@ -59,6 +67,8 @@ export class TableComponent implements OnInit {
     //Emitter to get the data values for the table
     this.tableService.diplayDataEmitter.subscribe(
       data => {
+        this.columsName = null;
+        this.rowsValues = null;
         this.columsName = data.columsName;
         this.rowsValues = data.rowsValues;
       }

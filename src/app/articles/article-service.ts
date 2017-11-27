@@ -13,19 +13,34 @@ export class ArticleService {
     GET_Article_ADDRESS = 'http://localhost:3000/article/getArticle';
     DELETE_Article_ADDRESS = 'http://localhost:3000/article/deleteArticle';
 
-
-
-
     articles: Article[];
 
     constructor(private http: Http) {
-        this.getArticles()
-            .subscribe(
-            (articles: Article[]) => {
-                this.articles = articles;
-            },
-            error => console.error(error)
-            );
+
+    }
+
+    //get articles count
+    getArticlesCount() {
+        return this.http.get('http://localhost:3000/article/getArticlesCount')
+            .map((response: Response) => {
+                return response.json();
+            })
+            .catch((error: Response) => {
+                return Observable.throw(error.json());
+            });
+
+    }
+    getPartOfArticles(wantedData) {
+        const headers = new Headers({ 'Content-Type': 'application/json' });
+
+        const body = JSON.stringify(wantedData);
+        return this.http.post('http://localhost:3000/article/getPartOfArticles', body, { headers: headers })
+            .map((response: Response) => {
+                return response.json();
+            })
+            .catch((error: Response) => {
+                return Observable.throw(error.json());
+            });
     }
 
 
@@ -43,7 +58,7 @@ export class ArticleService {
                     result.obj.title,
                     result.obj.image,
                     result.obj.content);
-                this.articles.push(article);
+                //this.articles.push(article);
                 return response.json().my_response;
             })
             .catch((error: Response) => {
@@ -55,8 +70,11 @@ export class ArticleService {
                     }
                     return Observable.throw(personalError)
                 }
-                else
+                else {
+                    console.log(error);
                     return Observable.throw(error.json())
+
+                }
             });
     }
 

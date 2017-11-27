@@ -3,6 +3,8 @@ import { Injectable, EventEmitter, Output, Input } from "@angular/core";
 
 @Injectable()
 export class TableService {
+    //EventEmitter for a config class
+    @Input() configClassEmitter: EventEmitter<any> = new EventEmitter();
     //EventEmitter to display the data in the table
     @Input() diplayDataEmitter: EventEmitter<any> = new EventEmitter();
     //EventEmitter to detect if a row of the table is clicked
