@@ -3,7 +3,7 @@ import { Component } from "@angular/core";
 @Component({
     selector:'app-messages',
     template:`
-        <div class="container-fluid">
+        <div class="container-fluid" style="min-height: 800px;">
             <h1 style="text-align:center;" translate>GUEST_BOOK</h1>
             <br><br>
             <div class="row">

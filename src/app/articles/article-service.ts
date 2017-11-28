@@ -91,7 +91,7 @@ export class ArticleService {
                     result.obj.title,
                     result.obj.image,
                     result.obj.content);
-                this.articles.push(article);
+                // this.articles.push(article);
                 return response.json().my_response;
             })
             .catch((error: Response) => {

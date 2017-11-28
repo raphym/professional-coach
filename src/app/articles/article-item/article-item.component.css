@@ -1,0 +1,15 @@
+.center {
+    margin: auto;
+    width: 50%;
+    text-align: center;
+    padding: 15px;
+}
+
+.content{
+    margin-top: 100px;
+    margin-bottom: 20px;
+    padding: 20px;
+    min-height: 800px;
+    width: 100%;
+    border: solid 2px;
+}
