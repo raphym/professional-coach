@@ -71,6 +71,7 @@ export class ArticlesListComponent implements OnInit, OnDestroy {
     //unsubscribe to the emitters
     this.subscriptionRowsConfig.unsubscribe();
     this.subscriptionLoadPage.unsubscribe();
+    this.subscriptionRowClicked.unsubscribe();
   }
 
   init() {
