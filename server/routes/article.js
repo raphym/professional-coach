@@ -113,6 +113,7 @@ router.post('/addArticle', function (req, res, next) {
         title: req.body.title,
         image: req.body.image,
         content: req.body.content,
+        intro: req.body.intro,
     });
 
     article.save(function (err, result) {
@@ -152,19 +153,21 @@ router.post('/updateArticle', function (req, res, next) {
         article.title = req.body.title;
         article.content = req.body.content;
         article.image = req.body.image;
-        //save the article
-        article.save(function (err, result) {
-            if (err) {
-                return res.status(500).json({
-                    title: 'An error occured',
-                    message: err
+        article.intro = req.body.intro,
+
+            //save the article
+            article.save(function (err, result) {
+                if (err) {
+                    return res.status(500).json({
+                        title: 'An error occured',
+                        message: err
+                    });
+                }
+                res.status(200).json({
+                    my_response: { title: 'Success', message: 'Your article has been updated' },
+                    obj: result
                 });
-            }
-            res.status(200).json({
-                my_response: { title: 'Success', message: 'Your article has been updated' },
-                obj: result
             });
-        });
     });
 });
 

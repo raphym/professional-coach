@@ -6,8 +6,18 @@
           <h3 class="text-center" translate>
             OUR_ARTICLES
           </h3>
-          <!-- The Table of the articles -->
-          <app-table></app-table>
+          <!-- The Table of the articles
+          <app-table></app-table> -->
+
+          <div *ngFor="let article of articles">
+            <br>
+            <app-preview-article
+            title="{{article?.title}}"
+            image="{{article?.image}}"
+            id="{{article?._id}}"
+            intro="{{article?.intro}}"
+            ></app-preview-article>
+          </div>
         </div>
       </div>
     </div>

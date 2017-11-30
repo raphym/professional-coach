@@ -25,6 +25,7 @@ export class ArticleEditComponent implements OnInit {
   private imageBase64: string;
   private imageBase64Temp: string;
   private content: string
+  private intro: string;
 
 
   constructor(private fb: FormBuilder,
@@ -39,7 +40,8 @@ export class ArticleEditComponent implements OnInit {
     this.editMode = false;
     this.rForm = fb.group({
       'title': [null, Validators.required],
-      'content': [null, Validators.required]
+      'content': [null, Validators.required],
+      'intro': [null, Validators.required]
     });
   }
 
@@ -76,18 +78,21 @@ export class ArticleEditComponent implements OnInit {
   private initForm() {
     let title = '';
     let content = '';
+    let intro = '';
 
     //if edit an article
     if (this.editMode) {
       title = this.article.title;
       content = this.article.content;
+      intro = this.article.intro;
       if (this.article.image != null)
         this.imageBase64Temp = this.article.image;
       this.loaded = true;
     }
     this.rForm = this.fb.group({
       'title': [title, Validators.required],
-      'content': [content, Validators.required]
+      'content': [content, Validators.required],
+      'intro': [intro, Validators.required]
     });
   }
 
@@ -95,10 +100,11 @@ export class ArticleEditComponent implements OnInit {
     this.title = post.title;
     this.content = post.content;
     this.imageBase64 = this.imageBase64Temp;
+    this.intro = post.intro;
 
     //new article
     if (!this.editMode) {
-      const article = new Article('null', this.title, this.imageBase64, this.content);
+      const article = new Article('null', this.title, this.imageBase64, this.content, this.intro);
       //enable the loader
       this.loaderService.enableLoader();
       this.articleService.addArticle(article)
@@ -117,7 +123,7 @@ export class ArticleEditComponent implements OnInit {
     }
     //edit existing article
     else {
-      const article = new Article(this.id, this.title, this.imageBase64, this.content);
+      const article = new Article(this.id, this.title, this.imageBase64, this.content, this.intro);
       //enable the loader
       this.loaderService.enableLoader();
       this.articleService.updateArticle(article)
@@ -141,6 +147,7 @@ export class ArticleEditComponent implements OnInit {
     this.imageBase64Temp = '';
     this.title = '';
     this.content = '';
+    this.intro = '';
   }
 
   onUploadFile(files) {

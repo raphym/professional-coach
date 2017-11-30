@@ -10,6 +10,7 @@ import { ArticleRoutingModule } from './article-routing.module';
 
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { SharedModule } from '../shared/module/shared.module';
+import { PreviewArticleComponent } from './preview-article/preview-article.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { SharedModule } from '../shared/module/shared.module';
     ArticlesListComponent,
     ArticleItemComponent,
     ArticleEditComponent,
+    PreviewArticleComponent,
   ],
   imports: [
     SharedModule,

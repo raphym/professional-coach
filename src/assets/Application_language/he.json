@@ -16,5 +16,9 @@
 	"OUR_ARTICLES":"המאמרים שלנו",
 
 	"ADMINISTRATION_SPACE": "מרחב ניהול",
-	"ARTICLES_MANAGEMENT":"ניהול מאמרים"
+	"ARTICLES_MANAGEMENT":"ניהול מאמרים",
+	
+	"TITLE":"כותרת",
+	"INTRODUCTION":"מבוא",
+	"ARTICLE":"מאמר"
 }

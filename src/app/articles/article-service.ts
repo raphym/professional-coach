@@ -57,7 +57,8 @@ export class ArticleService {
                     result.obj._id,
                     result.obj.title,
                     result.obj.image,
-                    result.obj.content);
+                    result.obj.content,
+                    result.obj.intro);
                 //this.articles.push(article);
                 return response.json().my_response;
             })
@@ -90,7 +91,8 @@ export class ArticleService {
                     result.obj._id,
                     result.obj.title,
                     result.obj.image,
-                    result.obj.content);
+                    result.obj.content,
+                    result.obj.intro);
                 // this.articles.push(article);
                 return response.json().my_response;
             })
@@ -122,7 +124,8 @@ export class ArticleService {
                         article._id,
                         article.title,
                         article.image,
-                        article.content));
+                        article.content,
+                        article.intro));
                 }
                 this.articles = transformedArticles;
                 return transformedArticles;
@@ -145,7 +148,8 @@ export class ArticleService {
                     article._id,
                     article.title,
                     article.image,
-                    article.content);
+                    article.content,
+                    article.intro);
                 return transformedArticle;
             })
             .catch((error: Response) => {

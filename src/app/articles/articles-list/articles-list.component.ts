@@ -15,6 +15,8 @@ import { TableService } from '../../shared/components/table/table.service';
 })
 export class ArticlesListComponent implements OnInit, OnDestroy {
 
+  private size;
+
   //for the table
   private config;
   private pageToDisplay = 0;
@@ -37,6 +39,14 @@ export class ArticlesListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+
+    this.articleService.getArticles()
+      .subscribe(
+      articles => {
+        this.articles = articles;
+        this.size = articles.length;
+      }
+      );
 
     //Emitter to detect if in the table component the user change the config
     this.subscriptionRowsConfig = this.tableService.rowsConfigEmitter.subscribe(

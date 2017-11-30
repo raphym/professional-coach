@@ -16,5 +16,8 @@
 	"OUR_ARTICLES":"Nos articles",
 
 	"ADMINISTRATION_SPACE": "Espace d'administration",
-	"ARTICLES_MANAGEMENT":"Gestion des articles"
+	"ARTICLES_MANAGEMENT":"Gestion des articles",
+	"TITLE":"Titre",
+	"INTRODUCTION":"Introduction",
+	"ARTICLE":"Article"
 }
