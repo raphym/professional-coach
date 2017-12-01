@@ -13,6 +13,7 @@ export class HeaderComponent implements OnInit {
     private displayName;
     private isConnect;
     private isAdmin;
+    private langDirection = 'ltr';
     constructor(
         private authService: AuthService,
         private cookieService: CookieService,
@@ -21,12 +22,18 @@ export class HeaderComponent implements OnInit {
         translate.setDefaultLang('en');
 
         // the lang to use, if the lang isn't available, it will use the current loader to get them
-        translate.use('en');
+        //translate.use('he');//can use also this
+        this.changeLangage('he');
     }
-    
+
     //change langage
     changeLangage(langage) {
         this.translate.use(langage);
+        if (langage == 'he')
+            this.langDirection = 'rtl';
+        else
+            this.langDirection = 'ltr';
+
     }
 
     ngOnInit() {

@@ -37,7 +37,7 @@
   </a>
 </div>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" [style.direction]="langDirection">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
     aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -63,30 +63,26 @@
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link" routerLink="/guestbook" translate>GUEST_BOOK</a>
       </li>
-    </ul>
 
-    <ul class="nav navbar-nav">
       <li class="nav-item dropdown">
-        <a style="cursor:pointer;" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-          aria-expanded="false" translate>
+        <a style="cursor:pointer;" class="nav-link" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+          translate>
           MY_SPACE
         </a>
-        <div style="cursor:pointer;" class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="cursor:pointer;text-align: center;">
           <a routerLink="/signup" style="cursor:pointer;" class="dropdown-item" *ngIf="!isConnect" translate>REGISTER</a>
           <a routerLink="/signin" style="cursor:pointer;" class="dropdown-item" *ngIf="!isConnect" translate>LOGIN</a>
           <a routerLink="/admin-space" style="cursor:pointer;" class="dropdown-item" *ngIf="isAdmin" translate>ADMINISTRATION_SPACE</a>
           <a (click)="onLogout(true)" class="dropdown-item" style="cursor:pointer;" *ngIf="isConnect" translate>LOGOUT</a>
         </div>
       </li>
-    </ul>
 
-    <ul class="nav navbar-nav">
       <li class="nav-item dropdown">
-        <a style="cursor:pointer;" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-          aria-expanded="false" translate>
+        <a style="cursor:pointer;" class="nav-link" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+          translate>
           LANGUAGE
         </a>
-        <div style="cursor:pointer;" class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+        <div style="cursor:pointer;text-align: center;" class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           <a (click)="changeLangage('en')" style="cursor:pointer;" class="dropdown-item">English</a>
           <a (click)="changeLangage('he')" style="cursor:pointer;" class="dropdown-item">עברית</a>
           <a (click)="changeLangage('fr')" style="cursor:pointer;" class="dropdown-item">Francais</a>
