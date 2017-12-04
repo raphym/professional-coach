@@ -33,9 +33,9 @@ router.get('/getArticlesCount', function (req, response, next) {
 
 //get a Part Of Articles
 router.post('/getPartOfArticles', function (req, response, next) {
-    var articleRequest = req.body.articlesPerPage;
-    var articlesSkip = req.body.pageClicked;
-    Articles.find({}).skip(articleRequest * articlesSkip).limit(articleRequest).exec(function (error, articles) {
+    var numsLoadedArticles = req.body.numsLoadedArticles;
+    var numsArticlesPerPage = req.body.numsArticlesPerPage;
+    Articles.find({}).skip(numsLoadedArticles).limit(numsArticlesPerPage).exec(function (error, articles) {
         if (error) {
             console.log('error');
             console.log(error);

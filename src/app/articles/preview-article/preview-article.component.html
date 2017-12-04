@@ -1,19 +1,24 @@
-<div class="container" (click)="onClick()" style="cursor: pointer;">
-  <div class="row preview_page">
-    <div class="col-md-12 box">
-      <div class="row box_inside">
-        <div class="col-md-6 box_intro">
-          <h3 class="text-center">
-            {{title}}
-          </h3>
-          <div class="text_intro">
-            {{intro}}
-          </div>
+<div class="row preview_page">
+  <div class="col-md-12 box">
+    <div class="row box_inside" (click)="onClick()" style="cursor: pointer;">
+      <div class="col-md-1 col-sm-1">
+      </div>
+      <div class="col-md-4 col-sm-4 box_intro">
+        <h3 class="text-center">
+          {{title}}
+        </h3>
+        <div class="text_intro">
+          {{intro}}
         </div>
-        <div class="col-md-6 box_img">
-          <img class="img" alt="Bootstrap Image Preview" [src]="image" />
-        </div>
+      </div>
+      <div class="col-md-1 col-sm-1">
+      </div>
+      <div class="col-md-5 col-sm-5 box_img">
+        <img class="img" alt="Bootstrap Image Preview" [src]="image" />
+      </div>
+      <div class="col-md-1 col-sm-1">
       </div>
     </div>
   </div>
+  <br>
 </div>

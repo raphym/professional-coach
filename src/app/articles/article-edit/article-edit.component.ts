@@ -41,7 +41,7 @@ export class ArticleEditComponent implements OnInit {
     this.rForm = fb.group({
       'title': [null, Validators.required],
       'content': [null, Validators.required],
-      'intro': [null, Validators.required]
+      'intro': [null, Validators.compose([Validators.required, Validators.maxLength(150)])]
     });
   }
 
@@ -92,7 +92,7 @@ export class ArticleEditComponent implements OnInit {
     this.rForm = this.fb.group({
       'title': [title, Validators.required],
       'content': [content, Validators.required],
-      'intro': [intro, Validators.required]
+      'intro': [intro, Validators.compose([Validators.required, Validators.maxLength(150)])]
     });
   }
 
