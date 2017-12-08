@@ -9,9 +9,18 @@
 	"LOGIN":"התחבר",
 	"LOGOUT":"התנתק",
 	"LANGUAGE":"שפה",
+
+	"PLEASE_WRITE_IN_ENGLISH":"נא לכתוב באנגלית",
 	
+	"NAME":"שם",
+	"EMAIL":"אמייל",
+	"DESCRIPTION":"תיאור",
+	
+	
+	"SEND":"שלח",
+
 	"ANY_QUERY_POP_US_A_MESSAGE":"שאלות? שלח לנו הודעה",
-	"WHERE_ARE_US":"? איפה אנחנו",
+	"WHERE_ARE_US":"איפה אנחנו",
 	
 	"OUR_ARTICLES":"המאמרים שלנו",
 
@@ -20,5 +29,7 @@
 	
 	"TITLE":"כותרת",
 	"INTRODUCTION":"מבוא",
-	"ARTICLE":"מאמר"
+	"ARTICLE":"מאמר",
+	"SEARCH:":"חיפוש:",
+	"SEARCH_BUTTON":"חפש"
 }

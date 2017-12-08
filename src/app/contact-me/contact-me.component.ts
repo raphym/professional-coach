@@ -8,6 +8,7 @@ import { ErrorService } from '../shared/components/notif-to-user/errors/error.se
 import { SuccessService } from '../shared/components/notif-to-user/success/success.service';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { JwtHelper } from "angular2-jwt";
+import { UsefulService } from '../shared/services/utility/useful.service';
 
 
 @Component({
@@ -24,14 +25,26 @@ export class ContactMeComponent implements OnInit {
     private jwtHelper = new JwtHelper();
     private name = '';
     private email = '';
+    private langDirection;
+    private langTextAlign;
 
     public constructor(
         private mailService: MailService,
         private successService: SuccessService,
         private errorService: ErrorService,
-        private cookieService: CookieService) {
+        private cookieService: CookieService,
+        private usefulService: UsefulService) {
     }
     ngOnInit() {
+        //subscribe to the langage
+        this.usefulService.langTransmitter.subscribe(
+            config_langage => {
+                this.langDirection = config_langage.direction;
+                this.langTextAlign = config_langage.textAlign;
+            }
+        );
+        //set langage
+        this.usefulService.initLangage();
 
         var token = this.cookieService.get('token');
         if (token != null && token != '') {

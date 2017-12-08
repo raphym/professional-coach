@@ -9,9 +9,18 @@
 	"LOGIN":"Se connecter",
 	"LOGOUT":"Se deconnecter",
 	"LANGUAGE":"Langage",
+	
+	"PLEASE_WRITE_IN_ENGLISH":"Veuillez écrire en anglais",
+
+	"NAME":"Nom",
+	"EMAIL":"Email",
+	"DESCRIPTION":"Description",
+	
+	"SEND":"Envoyer",
+
 
 	"ANY_QUERY_POP_US_A_MESSAGE":"Des questions ? Envoyez nous un message",
-	"WHERE_ARE_US":"Où sommes nous ?",
+	"WHERE_ARE_US":"Où sommes nous",
 
 	"OUR_ARTICLES":"Nos articles",
 
@@ -19,5 +28,7 @@
 	"ARTICLES_MANAGEMENT":"Gestion des articles",
 	"TITLE":"Titre",
 	"INTRODUCTION":"Introduction",
-	"ARTICLE":"Article"
+	"ARTICLE":"Article",
+	"SEARCH:":"Chercher:",
+	"SEARCH_BUTTON":"Cherche"
 }

@@ -6,7 +6,8 @@ var schema = new Schema({
     title: { type: String, required: true },
     image: { type: String, required: false },
     content: { type: String, required: true },
-    intro: { type: String, required: true }
+    intro: { type: String, required: true },
+    date: { type: Date, required: true }
 });
 
 schema.plugin(mongooseUniqueValidator);

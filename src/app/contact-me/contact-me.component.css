@@ -22,7 +22,34 @@
     100% { transform: rotate(360deg); }
   }
 
-.yu{
-  position:relative;
-  text-align:center;
+
+@media only screen and (max-width: 767px) 
+{
+  .outsidegoogle {
+    height: 0;
+    overflow: hidden;
+    margin-top: 20px;
+    padding-bottom: 60%; /* aspect ratio */
+    position: relative;
   }
+
+  .googlemap {
+    border: 0;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    border:5px;border-style:solid;border-color:#A9A9A9;    
+  }
+}
+
+@media only screen and (min-width: 767px) 
+{
+  .outsidegoogle{
+    margin-top: 80px;
+  }
+  .googlemap {
+    border:5px;border-style:solid;border-color:#A9A9A9;    
+  }
+}

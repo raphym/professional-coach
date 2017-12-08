@@ -3,6 +3,7 @@ import { Response } from "@angular/http";
 import { CookieService } from 'angular2-cookie/core';
 import { AuthService } from "../../../auth/auth.service";
 import { TranslateService } from 'ng2-translate';
+import { UsefulService } from '../../services/utility/useful.service';
 
 @Component({
     selector: 'app-header',
@@ -13,22 +14,19 @@ export class HeaderComponent implements OnInit {
     private displayName;
     private isConnect;
     private isAdmin;
-    private langDirection = 'ltr';
+    private langDirection;
+    private langTextAlign;
+
     constructor(
         private authService: AuthService,
         private cookieService: CookieService,
-        private translate: TranslateService) {
-        // this language will be used as a fallback when a translation isn't found in the current language
-        translate.setDefaultLang('en');
-
-        // the lang to use, if the lang isn't available, it will use the current loader to get them
-        //translate.use('he');//can use also this
-        this.changeLangage('he');
+        private translate: TranslateService,
+        private usefulService: UsefulService) {
     }
 
     //change langage
     changeLangage(langage) {
-        this.translate.use(langage);
+        this.usefulService.setLangage(langage);
         if (langage == 'he')
             this.langDirection = 'rtl';
         else
@@ -40,6 +38,18 @@ export class HeaderComponent implements OnInit {
         this.displayName = "";
         this.isConnect = false;
         this.isAdmin = false;
+
+        //subscribe to the langage
+        this.usefulService.langTransmitter.subscribe(
+            config_langage => {
+                this.langDirection = config_langage.direction;
+                this.langTextAlign = config_langage.textAlign;
+            }
+        );
+        //set langage
+        this.usefulService.initLangage();
+
+        //User Login Event
         this.authService.userLogInEvent.subscribe(
             (data) => {
                 this.isConnect = true;
@@ -50,6 +60,7 @@ export class HeaderComponent implements OnInit {
             }
         );
 
+        //User Logout Event
         this.authService.userLogOutEvent.subscribe(
             (data) => {
                 this.isConnect = false;

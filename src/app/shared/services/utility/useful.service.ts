@@ -1,8 +1,16 @@
-import { Injectable } from "@angular/core";
+import { Injectable, Input, EventEmitter, Output } from "@angular/core";
+import { TranslateService } from 'ng2-translate';
+
 
 @Injectable()
 export class UsefulService {
-    constructor() { }
+    @Output() langTransmitter: EventEmitter<any> = new EventEmitter();
+    private loaded = false;
+    private currentLangage;
+    constructor(private translateService: TranslateService) {
+        // this language will be used as a fallback when a translation isn't found in the current language
+        translateService.setDefaultLang('en');
+    }
 
     //create a registration template mail
     createRegMail(firstName: String, lastName: String, secretCode: string, link: string, supportLink: string) {
@@ -24,6 +32,35 @@ export class UsefulService {
         for (var i = 1; i < nums; i++)
             text += possible.charAt(Math.floor(Math.random() * possible.length));
         return text;
+    }
+
+    //init the langage of the app
+    initLangage() {
+        if (!this.loaded) {
+            this.setLangage('he');
+        }
+        else {
+            this.setLangage(this.currentLangage);
+        }
+
+    }
+
+    //set the langage of the app
+    setLangage(langage) {
+        this.translateService.use(langage);
+        this.currentLangage = langage;
+        this.loaded=true;
+        var config = { direction: 'ltr', textAlign: 'left' };
+        if (langage == 'he') {
+            config.direction = 'rtl';
+            config.textAlign = 'right';
+        }
+        this.langTransmitter.emit(config);
+    }
+
+    //get the langage of the app
+    getLangage() {
+        return this.translateService.currentLang;
     }
 
 }

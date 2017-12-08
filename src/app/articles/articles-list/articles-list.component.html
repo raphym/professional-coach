@@ -1,82 +1,30 @@
-<div style="min-height: 800px;" class="container-fluid">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="row">
-        <div class="col-md-12">
-          <h3 class="text-center" translate>
-            OUR_ARTICLES
-          </h3>
-          <!-- The Table of the articles
-          <app-table></app-table> -->
-
-          <div *ngFor="let article of articles">
-            <br>
-            <app-preview-article
-            title="{{article?.title}}"
-            image="{{article?.image}}"
-            id="{{article?._id}}"
-            intro="{{article?.intro}}"
-            ></app-preview-article>
-          </div>
+<div class="container">
+  <div style="min-height: 800px;" class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <h3 class="text-center" translate>
+          OUR_ARTICLES
+        </h3>
+      </div>
+    </div>
+    <div class="row" style="direction: rtl; text-align:right;">
+      <div class="col-md-1" translate>
+        SEARCH:
+      </div>
+      <div class="col-md-7">
+        <input type="text" class="search" />
+        <button class="btn btn-primary" (click)="search()" translate>SEARCH_BUTTON</button>
+      </div>
+      <div class="col-md-4">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div *ngFor="let article of articles">
+          <br>
+          <app-preview-article title="{{article?.title}}" image="{{article?.image}}" id="{{article?._id}}" intro="{{article?.intro}}"></app-preview-article>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-<!-- <div class="container-fluid">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="row">
-        <br>
-        <br>
-        <div class="col-md-12">
-          <br>
-          <h3 class="text-center" translate>
-            OUR_ARTICLES            
-          </h3>
-        </div>
-      </div>
-      <br>
-      <br>
-      <div class="row">
-        <div class="col-md-12">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>
-                  #
-                </th>
-                <th>
-                  Article Name
-                </th>
-                <th>
-                  Article Date
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let article of articles, let i = index ">
-                <td>
-                  {{i}}
-                </td>
-                <td>
-                  <a routerLink="/view-article/{{article._id}}">{{article.title}}</a>
-                </td>
-                <td>
-                  01/04/2012
-                </td>
-                <td *ngIf="isItAdmin()">
-                  <a routerLink="/edit-article/{{article._id}}">Edit</a>
-                </td>
-                <td *ngIf="isItAdmin()">
-                  <a (click)="onDelete(article._id)" style="cursor:pointer;">Delete</a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->

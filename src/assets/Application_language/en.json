@@ -10,8 +10,17 @@
 	"LOGOUT":"Logout",
 	"LANGUAGE":"Language",
 	
+	"PLEASE_WRITE_IN_ENGLISH":"Please write in english",
+	
+	"NAME":"Name",
+	"EMAIL":"Email",
+	"DESCRIPTION":"Description",
+
+	
+	"SEND":"Send",
+	
 	"ANY_QUERY_POP_US_A_MESSAGE":"Any Queries? Pop us a message",
-	"WHERE_ARE_US":"Where are us ?",
+	"WHERE_ARE_US":"Where are us",
 
 	"OUR_ARTICLES":"Our articles",
 
@@ -20,5 +29,7 @@
 	
 	"TITLE":"Title",
 	"INTRODUCTION":"Introduction",
-	"ARTICLE":"Article"
+	"ARTICLE":"Article",
+	"SEARCH:":"Search:",
+	"SEARCH_BUTTON":"Search"
 }

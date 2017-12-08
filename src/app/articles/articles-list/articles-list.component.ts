@@ -27,7 +27,7 @@ export class ArticlesListComponent implements OnInit {
     private successService: SuccessService,
     private errorService: ErrorService,
     private loaderService: LoaderService,
-    private scrollEvent: NgZone
+    private lc: NgZone
   ) {
     //event on scroll
     window.onscroll = () => {
@@ -42,7 +42,7 @@ export class ArticlesListComponent implements OnInit {
       if (windowBottom >= docHeight) {
         status = 'bottom reached';
       }
-      scrollEvent.run(() => {
+      lc.run(() => {
         this.statusText = status;
         if (status == 'bottom reached')
           this.loadMore();
@@ -59,12 +59,24 @@ export class ArticlesListComponent implements OnInit {
       data => {
         this.numsOfArticles = data.count;
         this.articles = new Array();
-        this.loadMore();
+        if (this.numsOfArticles > 0)
+          this.loadMore();
+        else
+          //disable the loader
+          this.loaderService.disableLoader();
+
       },
       error => {
         console.log(error);
       }
       );
+  }
+
+  //on destroy , remove the onScroll event
+  ngOnDestroy() {
+    window.onscroll = () => { };
+    //window.removeEventListener('onscroll',this.onScrollEvent,true)
+
   }
 
   //load more articles
@@ -106,5 +118,9 @@ export class ArticlesListComponent implements OnInit {
       }
       );
 
+  }
+
+  search() {
+    console.log('search');
   }
 }

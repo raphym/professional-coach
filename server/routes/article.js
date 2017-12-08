@@ -35,7 +35,7 @@ router.get('/getArticlesCount', function (req, response, next) {
 router.post('/getPartOfArticles', function (req, response, next) {
     var numsLoadedArticles = req.body.numsLoadedArticles;
     var numsArticlesPerPage = req.body.numsArticlesPerPage;
-    Articles.find({}).skip(numsLoadedArticles).limit(numsArticlesPerPage).exec(function (error, articles) {
+    Articles.find({}).sort({ date: -1 }).skip(numsLoadedArticles).limit(numsArticlesPerPage).exec(function (error, articles) {
         if (error) {
             console.log('error');
             console.log(error);
@@ -114,6 +114,7 @@ router.post('/addArticle', function (req, res, next) {
         image: req.body.image,
         content: req.body.content,
         intro: req.body.intro,
+        date: new Date()
     });
 
     article.save(function (err, result) {
