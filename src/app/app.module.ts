@@ -26,8 +26,8 @@ import { LoaderService } from './shared/components/loader/loader.service';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
 import { SharedModule } from './shared/module/shared.module';
-
-import {UsefulService} from './shared/services/utility/useful.service'
+import {UsefulService} from './shared/services/utility/useful.service';
+import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
 //export funct of angular2-jwt
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig(), http, options);
@@ -44,6 +44,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     SuccessComponent,
     LoaderComponent,
     FooterComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     SharedModule,
