@@ -62,11 +62,25 @@ export class ContactMeComponent implements OnInit {
         const value = form.value;
         this.envoyer = true;
 
-        var mail_content = "You receive a mail from " + value.name + " " + value.email + " : \r\n\r\n";
+        //english mail
+        //var mail_content = "You receive a mail from " + value.name + " " + value.email + " : \r\n\r\n";
+
+        //hebrew mail
+        var mail_content = "קבלת הודעה";
+        mail_content += "\r\n";
+        mail_content += "\r\n";
+        mail_content += "שם:  ";
+        mail_content += value.name;
+        mail_content += "\r\n";
+        mail_content += "Email: ";
+        mail_content += value.email;
+        mail_content += "\r\n";
+        mail_content += "\r\n";
         mail_content += value.description;
+        mail_content += "\r\n";
 
         //send the mail to the admin
-        this.mailService.sendMail('admin', 'Gab Coach Contact', mail_content, 'text')
+        this.mailService.sendMail('admin', 'G-Fit', mail_content, 'text')
             .subscribe(
 
             data => {
@@ -79,8 +93,11 @@ export class ContactMeComponent implements OnInit {
             }
             );
         //send mail back to the user
-        var reponsehtml = '<!DOCTYPE html><html><body>Your message has been sent, we will reply to you shortly<br>Thank you <br> Gab Coach</body></html>';
-        this.mailService.sendMail(value.email, 'Gab Coach Contact', reponsehtml, 'html')
+        //english
+        //var reponsehtml = '<!DOCTYPE html><html><body>Your message has been sent, we will reply to you shortly<br>Thank you <br> Gab Coach</body></html>';
+        //hebrew
+        var reponsehtml = '<!DOCTYPE html><html><body style="text-align: right;direction: rtl;color: blue;align: right;">ההודעה שלך נשלחה, אנו נענה לך בהקדם<br>תודה<br>G-Fit</body></html>';
+        this.mailService.sendMail(value.email, 'G-Fit', reponsehtml, 'html')
             .subscribe(
             data => { },
             error => { }

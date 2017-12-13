@@ -7,20 +7,19 @@
       <ng-template [ngIf]="!envoyer">
         <form #f="ngForm" (ngSubmit)="onSubmit(f)">
           <h3 translate>ANY_QUERY_POP_US_A_MESSAGE</h3>
-          <small translate>PLEASE_WRITE_IN_ENGLISH</small>
           <div class="form-group">
             <label for="name" translate>NAME</label>
-            <input type="text" id="name" name="name" [(ngModel)]="name" required [readonly]="connected" class="form-control" style="text-align: left;">
+            <input type="text" id="name" name="name" [(ngModel)]="name" required [readonly]="connected" class="form-control" style="text-align: right;">
           </div>
           <div class="form-group">
             <label for="email" translate>EMAIL</label>
             <input email type="email" id="email" name="email" [(ngModel)]="email" required [readonly]="connected" class="form-control"
-              style="text-align: left;">
+              style="text-align: left;direction: ltr;">
           </div>
           <div class="form-group">
             <label for="description" translate>DESCRIPTION</label>
             <textarea type="text" id="description" name="description" style="resize:none;" class="form-control" ngModel required rows="6"
-              style="text-align: left;">
+              style="text-align: right;">
                   </textarea>
           </div>
 

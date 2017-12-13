@@ -8,6 +8,7 @@ import { ErrorService } from "../shared/components/notif-to-user/errors/error.se
 import { Router } from "@angular/router";
 import { SuccessService } from "../shared/components/notif-to-user/success/success.service";
 import { MailService } from "../shared/services/mail/mail.service";
+import { UsefulService } from "../shared/services/utility/useful.service";
 
 const SIGNUP_ADDRESS = 'http://localhost:3000/users-auth/signup';
 const SIGNIN_ADDRESS = 'http://localhost:3000/users-auth/signin';
@@ -38,7 +39,8 @@ export class AuthService {
         private successService: SuccessService,
         private cookieService: CookieService,
         private mailService: MailService,
-        private router: Router
+        private router: Router,
+        private usefulService: UsefulService
     ) { }
 
     //signup
@@ -60,11 +62,11 @@ export class AuthService {
                     var user = res.json().user;
                     var randomHash = user.randomHash;
                     var randomSecretCode = user.randomSecretCode;
-                    
+
                     this.CONFIRMATION_REG_LINK_URL += '/';
                     this.CONFIRMATION_REG_LINK_URL += randomHash;
 
-                    var mail_content = this.createRegMail(user.firstName,
+                    var mail_content = this.usefulService.createRegMail(user.firstName,
                         user.lastName,
                         randomSecretCode,
                         this.CONFIRMATION_REG_LINK_URL,
@@ -111,7 +113,7 @@ export class AuthService {
                 }
             })
             .catch((error: Response) => {
-                    return Observable.throw(error.json());
+                return Observable.throw(error.json());
             });
     }
 
@@ -126,7 +128,7 @@ export class AuthService {
                 }
             })
             .catch((error: Response) => {
-                    return Observable.throw(error.json());
+                return Observable.throw(error.json());
             });
     }
 
@@ -254,25 +256,4 @@ export class AuthService {
         return this.email;
     }
 
-    //create a registration template mail
-    createRegMail(firstName: String, lastName: String, secretCode: string, link: string, supportLink: string) {
-        var mail_content = `
-        <h1 style="color: #5e9ca0;">Hi , ` + firstName + ' ' + lastName + ` </h1>
-        <p><span style="color: #0000ff;">Please confirm your registration by following the instructions:<br />1) Copy the secret code<br />2) Click on the link<br />3) Past the secret code into the confirm page</span></p>
-        <p style="text-align: center;"><span style="text-decoration: underline;">Secret Code:</span><strong>  `+ secretCode + `</strong></p>
-        <p style="text-align: center;"><span style="text-decoration: underline;">Link:</span><strong>  <a href="`+ link + `" target="_blank" rel="noopener">Confirm</a></strong></p>
-        <p><br /><span style="color: #ff0000;">If you have a problem please&nbsp;<a href="`+ supportLink + `" target="_blank" rel="noopener">contact us</a></span></p>
-        <p>Coach</p>
-        `;
-        return mail_content;
-    }
-
-    //create a random string
-    makeRandomString(nums: number) {
-        var text = "";
-        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        for (var i = 1; i < nums; i++)
-            text += possible.charAt(Math.floor(Math.random() * possible.length));
-        return text;
-    }
 }
