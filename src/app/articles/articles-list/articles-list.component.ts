@@ -34,8 +34,10 @@ export class ArticlesListComponent implements OnInit {
   private showSearchName = false;
   //boolean show the search according to the dates
   private showSearchDates = false;
-  //
+  //search_by
   private search_by;
+  //boolean show options
+  private showOption:boolean = false;
 
 
   //array of articles
@@ -146,6 +148,13 @@ export class ArticlesListComponent implements OnInit {
 
   }
 
+  //show the diplay option
+  onShowOptions()
+  {
+    this.showOption = !this.showOption;
+  }
+
+  //when click on button search
   onSearch(form: NgForm) {
     const value = form.value;
     this.search = value.search;
@@ -154,6 +163,7 @@ export class ArticlesListComponent implements OnInit {
     this.ngOnInit();
   }
 
+  //when choose the options to use to display the articles
   onChangeOptions(value) {
     if (value == 'חפש לפי כותרת' || value == 'חפש לפי תאריך וגם לפי כותרת') {
       this.showSearchName = true;
