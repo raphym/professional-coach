@@ -7,22 +7,67 @@
         </h3>
       </div>
     </div>
-    <div class="row" style="direction: rtl; text-align:right;">
-      <div class="col-md-1" translate>
-        SEARCH:
+    <br>
+    <hr>
+    <div translate class="text-center">OPTIONS</div>
+
+    <select (change)="onChangeOptions($event.target.value)" style="direction: rtl; text-align:right;float:right;">
+      <option *ngFor="let o of selectedSearchOptions" [ngValue]="o">{{o}}</option>
+    </select>
+
+    <form #f="ngForm" (ngSubmit)="onSearch(f)" style="padding-top: 50px;">
+      <div *ngIf="showSearchName" class="row" style="direction: rtl; text-align:right;">
+        <div class="col-md-1" translate style="margin-top:5px;">
+          SEARCH:
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <input search type="text" name="search" required ngModel class="form-control" />
+          </div>
+        </div>
+        <div class="col-md-8">
+        </div>
       </div>
-      <div class="col-md-7">
-        <input type="text" class="search" />
-        <button class="btn btn-primary" (click)="search()" translate>SEARCH_BUTTON</button>
+      <div *ngIf="showSearchDates">
+        <div class="row" style="direction: rtl; text-align:right;">
+          <div class="col-md-1" translate style="margin-top:5px;">
+            FROM_DATE
+          </div>
+          <div class="col-md-3">
+            <dp-date-picker ngModel name="fromDate" [config]="datePickerConfig"></dp-date-picker>
+          </div>
+          <div class="col-md-8">
+          </div>
+        </div>
+        <br>
+        <div class="row" style="direction: rtl; text-align:right;">
+          <div class="col-md-1" translate style="margin-top:5px;">
+            TO_DATE
+          </div>
+          <div class="col-md-3">
+            <dp-date-picker ngModel name="toDate" [config]="datePickerConfig"></dp-date-picker>
+          </div>
+          <div class="col-md-8">
+          </div>
+        </div>
       </div>
-      <div class="col-md-4">
+      <div class="row" style="direction: rtl; text-align:right;">
+        <div class="col-md-1">
+          <button type="submit" class="btn btn-success">
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div class="col-md-11">
+        </div>
       </div>
-    </div>
+    </form>
+    <hr>
     <div class="row">
       <div class="col-md-12">
         <div *ngFor="let article of articles">
           <br>
-          <app-preview-article title="{{article?.title}}" image="{{article?.image}}" id="{{article?._id}}" intro="{{article?.intro}}"></app-preview-article>
+          <app-preview-article title="{{article?.title}}" image="{{article?.image}}" id="{{article?._id}}" intro="{{article?.intro}}"
+            date="{{article?.date}}"></app-preview-article>
         </div>
       </div>
     </div>

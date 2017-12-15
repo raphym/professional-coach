@@ -8,6 +8,7 @@ import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-tra
 import { AngularDraggableModule } from 'angular2-draggable';
 import { TableComponent } from "../components/table/table.component";
 import { TableService } from "../components/table/table.service";
+import {DpDatePickerModule} from 'ng2-date-picker';
 
 //for the translation
 export function createTranslateLoader(http: Http) {
@@ -30,7 +31,8 @@ export function createTranslateLoader(http: Http) {
             useFactory: (createTranslateLoader),
             deps: [Http]
         }),
-        AngularDraggableModule
+        AngularDraggableModule,
+        DpDatePickerModule
     ],
     exports: [
         TableComponent,
@@ -41,7 +43,8 @@ export function createTranslateLoader(http: Http) {
         RouterModule,
         HttpModule,
         TranslateModule,
-        AngularDraggableModule
+        AngularDraggableModule,
+        DpDatePickerModule
     ],
     providers: [
         TableService

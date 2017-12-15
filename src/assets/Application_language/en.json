@@ -31,5 +31,9 @@
 	"INTRODUCTION":"Introduction",
 	"ARTICLE":"Article",
 	"SEARCH:":"Search:",
-	"SEARCH_BUTTON":"Search"
+	"SEARCH_BUTTON":"Search",
+	"OPTIONS":"Options",
+	"FROM_DATE":"From the date",
+	"TO_DATE":"To the date"
+
 }

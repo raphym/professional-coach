@@ -31,5 +31,9 @@
 	"INTRODUCTION":"מבוא",
 	"ARTICLE":"מאמר",
 	"SEARCH:":"חיפוש:",
-	"SEARCH_BUTTON":"חפש"
+	"SEARCH_BUTTON":"חפש",
+	"OPTIONS":"הגדרות",
+	"FROM_DATE":"מהתאריך",
+	"TO_DATE":"לתאריך"
+
 }

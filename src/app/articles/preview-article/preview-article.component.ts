@@ -12,6 +12,8 @@ export class PreviewArticleComponent implements OnInit {
   @Input() private image;
   @Input() private id;
   @Input() private intro;
+  @Input() private date;
+
   constructor(private router: Router) { }
 
   onClick() {

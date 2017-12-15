@@ -30,5 +30,8 @@
 	"INTRODUCTION":"Introduction",
 	"ARTICLE":"Article",
 	"SEARCH:":"Chercher:",
-	"SEARCH_BUTTON":"Cherche"
+	"SEARCH_BUTTON":"Cherche",
+	"OPTIONS":"Options",
+	"FROM_DATE":"De la date",
+	"TO_DATE":"A la date"
 }

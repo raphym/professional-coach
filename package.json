@@ -42,6 +42,7 @@
     "mongodb": "^2.2.33",
     "mongoose": "^4.13.6",
     "mongoose-unique-validator": "^1.0.6",
+    "ng2-date-picker": "^2.6.2",
     "ng2-translate": "^5.0.0",
     "ngx-loading": "^1.0.9",
     "node-browser-modules": "^0.1.0",
