@@ -1,6 +1,14 @@
-.search
+.hbDir
 {
-    /* width: 30%;
-    display:inline-block;
-    margin: 0 auto;  */
+    direction: rtl; 
+    text-align:right;
+}
+
+.floatR{
+    float: right;
+}
+
+.articlecss
+{
+    margin-bottom: 40px;
 }

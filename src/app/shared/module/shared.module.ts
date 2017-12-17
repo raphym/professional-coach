@@ -9,6 +9,7 @@ import { AngularDraggableModule } from 'angular2-draggable';
 import { TableComponent } from "../components/table/table.component";
 import { TableService } from "../components/table/table.service";
 import {DpDatePickerModule} from 'ng2-date-picker';
+import { SafePipe } from "../pipe/SafePipe";
 
 //for the translation
 export function createTranslateLoader(http: Http) {
@@ -17,7 +18,8 @@ export function createTranslateLoader(http: Http) {
 
 @NgModule({
     declarations: [
-        TableComponent
+        TableComponent,
+        SafePipe
     ],
     imports: [
         ReactiveFormsModule,
@@ -44,7 +46,8 @@ export function createTranslateLoader(http: Http) {
         HttpModule,
         TranslateModule,
         AngularDraggableModule,
-        DpDatePickerModule
+        DpDatePickerModule,
+        SafePipe
     ],
     providers: [
         TableService
