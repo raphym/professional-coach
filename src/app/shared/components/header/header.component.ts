@@ -7,7 +7,9 @@ import { UsefulService } from '../../services/utility/useful.service';
 
 @Component({
     selector: 'app-header',
-    templateUrl: './header.component.html'
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.css']
+
 }
 )
 export class HeaderComponent implements OnInit {
@@ -16,6 +18,8 @@ export class HeaderComponent implements OnInit {
     private isAdmin;
     private langDirection;
     private langTextAlign;
+    private floatDirection;
+    private margLeft = "-40";
 
     constructor(
         private authService: AuthService,
@@ -24,14 +28,30 @@ export class HeaderComponent implements OnInit {
         private usefulService: UsefulService) {
     }
 
+    //open the slide menu
+    openSlideMenu() {
+        document.getElementById('side-menu').style.width = '250px';
+    }
+    //close the slide menu
+    closeSlideMenu() {
+        document.getElementById('side-menu').style.width = '0';
+    }
+
     //change langage
     changeLangage(langage) {
         this.usefulService.setLangage(langage);
-        if (langage == 'he')
-            this.langDirection = 'rtl';
-        else
-            this.langDirection = 'ltr';
+        if (langage == 'he') {
 
+            this.floatDirection = 'right';
+            this.langDirection = 'rtl';
+            this.margLeft = "-40";
+        }
+
+        else {
+            this.floatDirection = 'left';
+            this.langDirection = 'ltr';
+            this.margLeft = "0";
+        }
     }
 
     ngOnInit() {
@@ -44,6 +64,7 @@ export class HeaderComponent implements OnInit {
             config_langage => {
                 this.langDirection = config_langage.direction;
                 this.langTextAlign = config_langage.textAlign;
+                this.floatDirection = config_langage.floatDirection;
             }
         );
         //set langage

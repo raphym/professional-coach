@@ -68,10 +68,11 @@ export class UsefulService {
         this.translateService.use(langage);
         this.currentLangage = langage;
         this.loaded = true;
-        var config = { direction: 'ltr', textAlign: 'left' };
+        var config = { direction: 'ltr', textAlign: 'left', floatDirection: 'left' };
         if (langage == 'he') {
             config.direction = 'rtl';
             config.textAlign = 'right';
+            config.floatDirection = 'right';
         }
         this.langTransmitter.emit(config);
     }
