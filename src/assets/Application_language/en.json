@@ -34,6 +34,21 @@
 	"SEARCH_BUTTON":"Search",
 	"OPTIONS":"Options",
 	"FROM_DATE":"From the date",
-	"TO_DATE":"To the date"
+	"TO_DATE":"To the date",
+	
+	"SIGNUP_PAGE":"Register to the world of Fitness",
+	"FIRST_NAME":"First name",
+	"LAST_NAME":"Last name",
+	"PASSWORD":"Password",
+	"CONFIRM_PASSWORD":"Confirm your password",
+	"SIGNUP":"Signup",
+	"FIRST_NAME_IS_REQUIRED":"First Name is required",
+	"LAST_NAME_IS_REQUIRED":"Last Name is required",
+	"EMAIL_IS_REQUIRED_WITH_THE_CORRECT_FORMAT":"Email is required with the correct format",
+	"PASSWORD_IS_REQUIRED":"Password is required",
+	"MINIMUM_LENGTH_OF_SIXT_CHARACTERS_IS_REQUIRED":"Minimum length of 6 characters is required",
+	"PASSWORD_MISMATCH":"Password mismatch",
+	
+	"SIGNIN_PAGE":"Enter to the world of Fitness"
 
 }

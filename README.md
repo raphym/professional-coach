@@ -9,5 +9,5 @@ Presentor: Raphael Mazouz<br><br>
 
 This is a Freelance project that I decided to do during my free time.
 The technology used is NodeJs for the server side, and Angular2/4 for the client side.
-This project will be a platform for a professional coach, with articles management, user management and other upcoming features.
+This project will be a platform for a professional coach, with articles management, users management and others upcoming features.
 

@@ -34,6 +34,21 @@
 	"SEARCH_BUTTON":"חפש",
 	"OPTIONS":"הגדרות",
 	"FROM_DATE":"מהתאריך",
-	"TO_DATE":"לתאריך"
-
+	"TO_DATE":"לתאריך",
+	
+	"SIGNUP_PAGE":"הצטרף לעולם של פיטנס",
+	"FIRST_NAME":"שם פרטי",
+	"LAST_NAME":"שם משפחה",
+	"PASSWORD":"סיסמה",
+	"CONFIRM_PASSWORD":"אמת סיסמתך",
+	"SIGNUP":"הירשם",
+	"FIRST_NAME_IS_REQUIRED":"נדרש שם פרטי",
+	"LAST_NAME_IS_REQUIRED":"שם משפחה נדרש",
+	"EMAIL_IS_REQUIRED_WITH_THE_CORRECT_FORMAT":"דוא\"ל נדרש עם הפורמט הנכון",
+	"PASSWORD_IS_REQUIRED":"דרושה סיסמא",
+	"MINIMUM_LENGTH_OF_SIXT_CHARACTERS_IS_REQUIRED":"אורך מינימלי של 6 תווים נדרש",
+	"PASSWORD_MISMATCH":"סיסמה לא תואמת",
+	
+	"SIGNIN_PAGE":"כנס לעולם של פיטנס"
+	
 }

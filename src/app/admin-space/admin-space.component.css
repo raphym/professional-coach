@@ -10,22 +10,20 @@
 .my_sidenav_normalScreen{
     
         font-family: "Lato", sans-serif;
-        height:545px;
+        height:800px;
         width: 100px!important;
         border-right:solid;
         border-top: none;
         width:auto;
         float: left;
         margin: 0;
-        padding-top: 20px;
     
         z-index: 1;
         top: 0;
         left: 0;
         background-color:#343a40!important;
         overflow-x: hidden;
-        padding-top: 50px;
-    
+        margin-top: -25px;    
     }
     
     .my_sidenav_normalScreen li > a {

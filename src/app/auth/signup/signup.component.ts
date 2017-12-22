@@ -3,18 +3,33 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { AuthService } from "../auth.service";
 import { User } from "../../shared/models/objects-models/user.model";
 import { LoaderService } from "../../shared/components/loader/loader.service";
+import { UsefulService } from "../../shared/services/utility/useful.service";
 
 @Component({
     selector: 'app-signup',
-    templateUrl: './signup.component.html'
+    templateUrl: './signup.component.html',
+    styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-    myForm: FormGroup;
+    private myForm: FormGroup;
+    private langDirection;
+    private langTextAlign;
 
     constructor(private authService: AuthService,
-        private loaderService: LoaderService) { }
+        private loaderService: LoaderService,
+        private usefulService: UsefulService) { }
 
     ngOnInit() {
+        //subscribe to the langage
+        this.usefulService.langTransmitter.subscribe(
+            config_langage => {
+                this.langDirection = config_langage.direction;
+                this.langTextAlign = config_langage.textAlign;
+            }
+        );
+        //set langage
+        this.usefulService.initLangage();
+
         //bind the passwordValidator
         this.passwordValidator = this.passwordValidator.bind(this);
         this.myForm = new FormGroup({

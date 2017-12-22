@@ -1,41 +1,60 @@
-<div class="col-md-8 col-md-offset-2" style="margin: auto; padding:20px;">
-    <form [formGroup]="myForm" (ngSubmit)=onSubmit()>
-        <div class="form-group">
-            <label for="firstName">First Name</label>
-            <input type="text" id="firstName" class="form-control" formControlName="firstName">
-            <small [hidden]="myForm.controls.firstName.valid || myForm.controls.firstName.pristine" class="text-danger">
-                First Name is required
-            </small>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="title">
+                        <h1 translate>SIGNUP_PAGE</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="row signupCl">
+                <div class="col-md-8">
+                    <img class="img" src="./assets/Images/Signup/sport1.png" />
+                </div>
+                <div class="col-md-4">
+                    <form class="formCl" [formGroup]="myForm" (ngSubmit)=onSubmit() [style.text-align]="langTextAlign" [style.direction]="langDirection">
+                        <div class="form-group">
+                            <label for="firstName" translate>FIRST_NAME</label>
+                            <input type="text" id="firstName" class="form-control" formControlName="firstName">
+                            <small translate [hidden]="myForm.controls.firstName.valid || myForm.controls.firstName.pristine" class="text-danger">
+                                FIRST_NAME_IS_REQUIRED
+                            </small>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName" translate>LAST_NAME</label>
+                            <input type="text" id="lastName" class="form-control" formControlName="lastName">
+                            <small translate [hidden]="myForm.controls.lastName.valid || myForm.controls.lastName.pristine" class="text-danger">
+                                LAST_NAME_IS_REQUIRED
+                            </small>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" translate>EMAIL</label>
+                            <input type="email" id="email" class="form-control forcedirection" formControlName="email">
+                            <small translate [hidden]="myForm.controls.email.valid || myForm.controls.email.pristine" class="text-danger">
+                                EMAIL_IS_REQUIRED_WITH_THE_CORRECT_FORMAT
+                            </small>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" translate>PASSWORD</label>
+                            <input type="password" id="password" class="form-control forcedirection" formControlName="password">
+                            <small translate [hidden]="myForm.controls.password.valid || myForm.controls.password.pristine" class="text-danger">
+                                PASSWORD_IS_REQUIRED
+                                <br> MINIMUM_LENGTH_OF_SIXT_CHARACTERS_IS_REQUIRED
+                            </small>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword" translate>CONFIRM_PASSWORD</label>
+                            <input type="password" id="confirmPassword" class="form-control forcedirection" formControlName="confirmPassword">
+                            <small translate [hidden]="myForm.controls.confirmPassword.valid || myForm.controls.confirmPassword.pristine" class="text-danger">
+                                PASSWORD_MISMATCH
+                            </small>
+                        </div>
+                        <button class="btn btn-primary" type="submit" [disabled]="!myForm.valid" translate>SIGNUP</button>
+                    </form>
+                </div>
+            </div>
+
         </div>
-        <div class="form-group">
-            <label for="lastName">Last Name</label>
-            <input type="text" id="lastName" class="form-control" formControlName="lastName">
-            <small [hidden]="myForm.controls.lastName.valid || myForm.controls.lastName.pristine" class="text-danger">
-                Last Name is required
-            </small>
-        </div>
-        <div class="form-group">
-            <label for="email">Mail</label>
-            <input type="email" id="email" class="form-control" formControlName="email">
-            <small [hidden]="myForm.controls.email.valid || myForm.controls.email.pristine" class="text-danger">
-                Email is required with the correct format
-            </small>
-        </div>
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" class="form-control" formControlName="password">
-            <small [hidden]="myForm.controls.password.valid || myForm.controls.password.pristine" class="text-danger">
-                Password is required
-                <br> Minimum length of 6 characters is required
-            </small>
-        </div>
-        <div class="form-group">
-            <label for="confirmPassword">Confirm Password</label>
-            <input type="password" id="confirmPassword" class="form-control" formControlName="confirmPassword">
-            <small [hidden]="myForm.controls.confirmPassword.valid || myForm.controls.confirmPassword.pristine" class="text-danger">
-                Password mismatch
-            </small>
-        </div>
-        <button class="btn btn-primary" type="submit" [disabled]="!myForm.valid">Submit</button>
-    </form>
+    </div>
 </div>

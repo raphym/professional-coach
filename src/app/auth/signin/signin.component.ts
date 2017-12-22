@@ -4,20 +4,36 @@ import { User } from "../../shared/models/objects-models/user.model";
 import { AuthService } from "../auth.service";
 import { Router } from "@angular/router";
 import { LoaderService } from "../../shared/components/loader/loader.service";
+import { UsefulService } from "../../shared/services/utility/useful.service";
 
 @Component({
     selector: 'app-signin',
-    templateUrl: './signin.component.html'
+    templateUrl: './signin.component.html',
+    styleUrls: ['./signin.component.css']
+
 })
 export class SigninComponent {
-    myForm: FormGroup;
+    private myForm: FormGroup;
+    private langDirection;
+    private langTextAlign;
 
     constructor(private authService: AuthService,
         private router: Router,
-        private loaderService: LoaderService) { }
+        private loaderService: LoaderService,
+        private usefulService: UsefulService) { }
 
 
     ngOnInit() {
+                //subscribe to the langage
+                this.usefulService.langTransmitter.subscribe(
+                    config_langage => {
+                        this.langDirection = config_langage.direction;
+                        this.langTextAlign = config_langage.textAlign;
+                    }
+                );
+                //set langage
+                this.usefulService.initLangage();
+
         this.myForm = new FormGroup({
             email: new FormControl(null, [
                 Validators.required,

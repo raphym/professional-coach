@@ -6,3 +6,21 @@
     height: 250px;
     overflow-y: auto;
 }
+
+
+/* remove table user if the screenis very very small*/ 
+@media(max-width:532px){
+    .user-table{
+      display: none;
+    }
+    .user-table-message{
+        display: block;
+    }
+  }
+
+  @media(min-width:532px){
+    .user-table-message{
+        display: none;
+    }
+  }
+

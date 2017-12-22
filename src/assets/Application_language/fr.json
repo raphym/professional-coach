@@ -33,5 +33,21 @@
 	"SEARCH_BUTTON":"Cherche",
 	"OPTIONS":"Options",
 	"FROM_DATE":"De la date",
-	"TO_DATE":"A la date"
+	"TO_DATE":"A la date",
+	
+	"SIGNUP_PAGE":"Inscrivez vous dans le monde de la fitness",
+	"FIRST_NAME":"Prénom",
+	"LAST_NAME":"Nom de famille",
+	"PASSWORD":"Mot de passe",
+	"CONFIRM_PASSWORD":"Confirmez votre mot de passe",
+	"SIGNUP":"S'inscrire",
+	"FIRST_NAME_IS_REQUIRED":"Le prénom est requis",
+	"LAST_NAME_IS_REQUIRED":"Le nom de famille est requis",
+	"EMAIL_IS_REQUIRED_WITH_THE_CORRECT_FORMAT":"L' Email est requis avec le bon format",
+	"PASSWORD_IS_REQUIRED":"Mot de passe requis",
+	"MINIMUM_LENGTH_OF_SIXT_CHARACTERS_IS_REQUIRED":"Une longueur minimale de 6 caractères est requise",
+	"PASSWORD_MISMATCH":"Non concordance des mots de passe",
+	
+	"SIGNIN_PAGE":"Entrez dans le monde de la fitness"
+
 }
