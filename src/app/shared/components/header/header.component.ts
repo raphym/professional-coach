@@ -31,10 +31,25 @@ export class HeaderComponent implements OnInit {
     //open the slide menu
     openSlideMenu() {
         document.getElementById('side-menu').style.width = '250px';
+        //remove clicked dropdown content side
+        var dropdown_content_side1 = document.getElementById('d_done1');
+        var dropdown_content_side2 = document.getElementById('d_done2');
+        try {
+            dropdown_content_side1.classList.remove('dropdown_content_side_clicked');
+            dropdown_content_side2.classList.remove('dropdown_content_side_clicked');
+
+        } catch (e) {
+
+        }
     }
     //close the slide menu
     closeSlideMenu() {
         document.getElementById('side-menu').style.width = '0';
+        //add clicked dropdown content side
+        var dropdown_content_side1 = document.getElementById('d_done1');
+        var dropdown_content_side2 = document.getElementById('d_done2');
+        dropdown_content_side1.classList.add('dropdown_content_side_clicked');
+        dropdown_content_side2.classList.add('dropdown_content_side_clicked');
     }
 
     //change langage

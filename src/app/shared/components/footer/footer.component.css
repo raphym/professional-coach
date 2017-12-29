@@ -10,5 +10,6 @@
   display: flex;
   justify-content: center; /* align horizontal */
   align-items: center; /* align vertical */
-  background-color: #343a40!important  
+  /* background-color: #343a40!important   */
+  background: black;
 }
