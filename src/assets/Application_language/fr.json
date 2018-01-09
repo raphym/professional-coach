@@ -36,11 +36,13 @@
 	"TO_DATE":"A la date",
 	
 	"SIGNUP_PAGE":"Inscrivez vous dans le monde de la fitness",
+	"USER_NAME":"Nom d'utilisateur",
 	"FIRST_NAME":"Prénom",
 	"LAST_NAME":"Nom de famille",
 	"PASSWORD":"Mot de passe",
 	"CONFIRM_PASSWORD":"Confirmez votre mot de passe",
 	"SIGNUP":"S'inscrire",
+	"USER_NAME_IS_REQUIRED":"Le nom d'utilisateur est requis",
 	"FIRST_NAME_IS_REQUIRED":"Le prénom est requis",
 	"LAST_NAME_IS_REQUIRED":"Le nom de famille est requis",
 	"EMAIL_IS_REQUIRED_WITH_THE_CORRECT_FORMAT":"L' Email est requis avec le bon format",

@@ -25,18 +25,19 @@
             </small>
           </div>
           <div class="form-group">
+            <label for="userName">userName</label>
+            <input type="text" id="userName" class="form-control" formControlName="userName">
+            <small [hidden]="myForm.controls.userName.valid || myForm.controls.userName.pristine" class="text-danger">
+              User Name is required
+            </small>
+          </div>
+          <div class="form-group">
             <label for="firstName">First Name</label>
             <input type="text" id="firstName" class="form-control" formControlName="firstName">
-            <small [hidden]="myForm.controls.firstName.valid || myForm.controls.firstName.pristine" class="text-danger">
-              First Name is required
-            </small>
           </div>
           <div class="form-group">
             <label for="lastName">Last Name</label>
             <input type="text" id="lastName" class="form-control" formControlName="lastName">
-            <small [hidden]="myForm.controls.lastName.valid || myForm.controls.lastName.pristine" class="text-danger">
-              Last Name is required
-            </small>
           </div>
           <label for="selectLevelRights">Level Rights
             <br>

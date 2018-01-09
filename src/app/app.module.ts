@@ -26,8 +26,10 @@ import { LoaderService } from './shared/components/loader/loader.service';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
 import { SharedModule } from './shared/module/shared.module';
-import {UsefulService} from './shared/services/utility/useful.service';
+import { UsefulService } from './shared/services/utility/useful.service';
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
+import { FacebookModule } from 'ngx-facebook';
+
 //export funct of angular2-jwt
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig(), http, options);
@@ -48,7 +50,6 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   ],
   imports: [
     SharedModule,
-    AppRoutingModule,
     AuthModule,
     TrainingModule,
     GuestbookModule,
@@ -61,7 +62,9 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
       primaryColour: '#ffffff',
       secondaryColour: '#ffffff',
       tertiaryColour: '#ffffff'
-    })
+    }),
+    FacebookModule.forRoot(),
+    AppRoutingModule
   ],
   providers: [
     CookieService,

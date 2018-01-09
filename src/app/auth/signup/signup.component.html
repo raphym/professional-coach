@@ -8,6 +8,18 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div style="padding-top: 60px;" class="col-lg-8 col-md-7 col-sm-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading text-center">Sign up with</div>
+                        <div class="panel-body" align="center">
+                            <a class="btn btn-social btn-facebook" (click)="fbLogin()">
+                                <span class="fa fa-facebook"></span> Facebook
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="row signupCl">
                 <div class="col-md-8">
                     <img class="img" src="./assets/Images/Signup/sport1.png" />
@@ -15,17 +27,10 @@
                 <div class="col-md-4">
                     <form class="formCl" [formGroup]="myForm" (ngSubmit)=onSubmit() [style.text-align]="langTextAlign" [style.direction]="langDirection">
                         <div class="form-group">
-                            <label for="firstName" translate>FIRST_NAME</label>
-                            <input type="text" id="firstName" class="form-control" formControlName="firstName">
-                            <small translate [hidden]="myForm.controls.firstName.valid || myForm.controls.firstName.pristine" class="text-danger">
-                                FIRST_NAME_IS_REQUIRED
-                            </small>
-                        </div>
-                        <div class="form-group">
-                            <label for="lastName" translate>LAST_NAME</label>
-                            <input type="text" id="lastName" class="form-control" formControlName="lastName">
-                            <small translate [hidden]="myForm.controls.lastName.valid || myForm.controls.lastName.pristine" class="text-danger">
-                                LAST_NAME_IS_REQUIRED
+                            <label for="userName" translate>USER_NAME</label>
+                            <input type="text" id="userName" class="form-control" formControlName="userName">
+                            <small translate [hidden]="myForm.controls.userName.valid || myForm.controls.userName.pristine" class="text-danger">
+                                USER_NAME_IS_REQUIRED
                             </small>
                         </div>
                         <div class="form-group">
@@ -54,7 +59,6 @@
                     </form>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

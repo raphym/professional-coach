@@ -17,6 +17,7 @@ const ISLOGIN_ADDRESS = 'http://localhost:3000/users-auth/islogin';
 const SUPPORT_LINK_ADDRESS = "http://localhost:3000/contact";
 const CONFIRMATION_REG_INIT_ADDRESS = "http://localhost:3000/users-auth/confirmRegInit";
 const CONFIRMATION_REG_VALID_ADDRESS = "http://localhost:3000/users-auth/confirmRegValidation";
+import { FacebookService, InitParams, LoginResponse } from 'ngx-facebook';
 
 
 @Injectable()
@@ -28,6 +29,7 @@ export class AuthService {
     private isConnect = false;
     private _id = '';
     private isAdmin = false;
+    private userName = '';
     private firstName = '';
     private lastName = '';
     private email = '';
@@ -40,8 +42,76 @@ export class AuthService {
         private cookieService: CookieService,
         private mailService: MailService,
         private router: Router,
-        private usefulService: UsefulService
-    ) { }
+        private usefulService: UsefulService,
+        private fb: FacebookService
+    ) {
+
+        let initParams: InitParams = {
+            appId: '135809447088863',
+            xfbml: true,
+            version: 'v2.8'
+        };
+
+        fb.init(initParams);
+    }
+
+
+
+    fbLogin() {
+        return new Promise((resolve, reject) => {
+            /* {scope:'email'}*/
+            this.fb.login()
+                .then((result: LoginResponse) => {
+                    console.log('auth.service fblogin');
+                    console.log(result);
+                    return this.http.post(`http://localhost:3000/users-auth/auth/facebook`, { access_token: result.authResponse.accessToken })
+                        .toPromise()
+                        .then(response => {
+
+                            var data = response.json().data;
+                            var my_error = { title: "Error", message: "An error has occured" };
+                            if (response.json().message == 'Successfully logged in') {
+
+                                if (data.levelRights == null) {
+                                    this.logout(true);
+                                    this.userLogOutEvent.emit();
+                                    reject(my_error);
+                                }
+
+                                if (data.levelRights >= 200)
+                                    this.isAdmin = true;
+
+                                this._id = data._id;
+                                this.isConnect = true;
+                                this.userName = data.userName;
+                                this.email = data.email;
+                                this.userLogInEvent.emit(data);
+
+                                resolve(response.json());
+                            }
+                            else {
+                                this.logout(true);
+                                this.userLogOutEvent.emit();
+                                reject(my_error);
+                            }
+
+                        })
+                        .catch((error) => {
+                            console.log('error fb login server side');
+                            this.logout(false);
+                            this.userLogOutEvent.emit();
+                            reject(error.json());
+                        });
+                })
+                .catch((error: any) => {
+                    console.log('error fb login client side');
+                    console.error(error);
+                    this.logout(false);
+                    this.userLogOutEvent.emit();
+                    reject(error.json());
+                });
+        });
+    }
 
     //signup
     signup(user: User) {
@@ -66,8 +136,7 @@ export class AuthService {
                     this.CONFIRMATION_REG_LINK_URL += '/';
                     this.CONFIRMATION_REG_LINK_URL += randomHash;
 
-                    var mail_content = this.usefulService.createRegMail(user.firstName,
-                        user.lastName,
+                    var mail_content = this.usefulService.createRegMail(user.userName,
                         randomSecretCode,
                         this.CONFIRMATION_REG_LINK_URL,
                         SUPPORT_LINK_ADDRESS);
@@ -151,8 +220,7 @@ export class AuthService {
 
                     this._id = data._id;
                     this.isConnect = true;
-                    this.firstName = data.firstName;
-                    this.lastName = data.lastName;
+                    this.userName = data.userName;
                     this.email = data.email;
                     this.userLogInEvent.emit(data);
 
@@ -190,8 +258,7 @@ export class AuthService {
                         this.isAdmin = true;
                     this._id = data.user._id;
                     this.isConnect = true;
-                    this.firstName = data.user.firstName;
-                    this.lastName = data.user.lastName;
+                    this.userName = data.user.userName;
                     this.email = data.user.email;
                     this.userLogInEvent.emit(data.user);
                     return response.json()
@@ -220,6 +287,7 @@ export class AuthService {
         this.isConnect = false;
         this._id = '';
         this.isAdmin = false;
+        this.userName = '';
         this.firstName = '';
         this.lastName = '';
         this.email = '';
@@ -254,6 +322,11 @@ export class AuthService {
     //get the Email of the connected
     getEmail() {
         return this.email;
+    }
+
+    //get username
+    getUserName() {
+        return this.userName;
     }
 
 }

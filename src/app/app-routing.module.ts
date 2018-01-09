@@ -15,9 +15,7 @@ const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'about', component: AboutComponent },
   { path: 'contact', component: ContactMeComponent },
-  { path: 'articles', component: ArticlesComponent },
-  { path: 'admin-space', component: AdminSpaceComponent, canActivate: [AuthGuardAdmin] },
-  // { path: '**', component: PageNotFoundComponent }
+  { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({

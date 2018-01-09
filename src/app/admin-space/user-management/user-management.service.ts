@@ -59,7 +59,7 @@ export class UserManagementService {
     }
 
     //edit a user
-    editUser(fields, emailChanged, email, firstName, lastName) {
+    editUser(fields, emailChanged, email, userName,firstName,lastName) {
         const headers = new Headers({ 'Content-Type': 'application/json' });
         //check if the user change his email
         //because if yes , we have to update his registered status.
@@ -88,8 +88,7 @@ export class UserManagementService {
                                 this.CONFIRMATION_REG_LINK_URL += randomHash;
 
                                 //content of the mail
-                                var mail_content = this.usefulService.createRegMail(firstName,
-                                    lastName,
+                                var mail_content = this.usefulService.createRegMail(userName,
                                     randomSecretCode,
                                     this.CONFIRMATION_REG_LINK_URL,
                                     SUPPORT_LINK_ADDRESS);

@@ -89,7 +89,7 @@ export class HeaderComponent implements OnInit {
         this.authService.userLogInEvent.subscribe(
             (data) => {
                 this.isConnect = true;
-                this.displayName = data.firstName;
+                this.displayName = data.userName;
                 if (data.levelRights >= 200) {
                     this.isAdmin = true;
                 }
@@ -133,9 +133,9 @@ export class HeaderComponent implements OnInit {
                                 this.isAdmin = true;
                         }
 
-                        var firstName = the_data.user.firstName;
-                        if (firstName != null) {
-                            this.displayName = firstName;
+                        var userName = the_data.user.userName;
+                        if (userName != null) {
+                            this.displayName = userName;
                         }
                     }
                 },

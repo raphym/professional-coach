@@ -7,10 +7,12 @@ import { UserManagementComponent } from "./user-management/user-management.compo
 
 const AUTH_ROUTES: Routes = [
 
-    {path: '' , component: AdminSpaceComponent ,canActivate:[AuthGuardAdmin], children: [
-        {path:'article-admin' , component:ArticleAdminComponent},
-		{path:'user-management' , component:UserManagementComponent},
-    ] },
+    {
+        path: 'admin', component: AdminSpaceComponent, canActivate: [AuthGuardAdmin], children: [
+            { path: 'article', component: ArticleAdminComponent },
+            { path: 'user-management', component: UserManagementComponent },
+        ]
+    },
 
 ];
 

@@ -28,9 +28,9 @@ export class UsefulService {
 
     //create a registration template mail
     //Hebrew
-    createRegMail(firstName: String, lastName: String, secretCode: string, link: string, supportLink: string) {
+    createRegMail(userName: String, secretCode: string, link: string, supportLink: string) {
         var mail_content = `
-    <h1 style="color: #5e9ca0;text-align:right;">שלום , ` + firstName + ' ' + lastName + ` </h1>
+    <h1 style="color: #5e9ca0;text-align:right;">שלום , ` + userName + ` </h1>
     <p style="color: #0000ff;text-align:right;">:אשר את ההרשמה שלך על פי ההנחיות הבאות
     <br/>א) העתק את הקוד הסודי<br/>
     ב) לחץ על הקישור<br/>

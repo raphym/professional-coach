@@ -4,18 +4,17 @@ import { GuestbookMessagesComponent } from "./guestbook-messages.component";
 
 
 const APP_ROUTES: Routes = [
-    {path: 'guestbook' , component: GuestbookMessagesComponent},
+    { path: 'guestbook', component: GuestbookMessagesComponent },
 ];
 
 @NgModule({
-    imports:[
+    imports: [
         RouterModule.forChild(APP_ROUTES)
     ],
     exports: [
         RouterModule
     ]
 })
-export class GuestbookRoutingModule
-{
+export class GuestbookRoutingModule {
 
 }

@@ -70,7 +70,7 @@
         <div class="dropdown-content">
           <a routerLink="/signup" *ngIf="!isConnect" translate>REGISTER</a>
           <a routerLink="/signin" *ngIf="!isConnect" translate>LOGIN</a>
-          <a routerLink="/admin-space" *ngIf="isAdmin" translate>ADMINISTRATION_SPACE</a>
+          <a routerLink="/admin" *ngIf="isAdmin" translate>ADMINISTRATION_SPACE</a>
           <a (click)="onLogout(true)" *ngIf="isConnect" translate>LOGOUT</a>
         </div>
       </div>
@@ -114,7 +114,7 @@
       <div class="dropdown-content_side" id="d_done1">
         <a routerLink="/signup" *ngIf="!isConnect" (click)="closeSlideMenu()" translate>REGISTER</a>
         <a routerLink="/signin" *ngIf="!isConnect" (click)="closeSlideMenu()" translate>LOGIN</a>
-        <a routerLink="/admin-space" *ngIf="isAdmin" (click)="closeSlideMenu()" translate>ADMINISTRATION_SPACE</a>
+        <a routerLink="/admin" *ngIf="isAdmin" (click)="closeSlideMenu()" translate>ADMINISTRATION_SPACE</a>
         <a (click)="onLogout(true)" *ngIf="isConnect" (click)="closeSlideMenu()" translate>LOGOUT</a>
       </div>
     </div>

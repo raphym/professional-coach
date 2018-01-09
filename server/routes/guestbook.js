@@ -16,7 +16,7 @@ var User = require('../mongoose-models/user');
 //get the messages
 router.get('/getMessages', function (req, res, next) {
     guestbookMessage.find()
-        .populate('user', 'firstName')
+        .populate('user', 'userName')
         .exec(function (err, messages) {
             if (err) {
                 return res.status(500).json({

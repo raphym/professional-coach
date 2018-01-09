@@ -81,7 +81,7 @@ export class UserManagementComponent implements OnInit, OnDestroy {
   //go to display the table
   displayTable(users) {
 
-    var columsName = new Array('ID', 'Email', 'First Name', 'Last Name', 'Type User', 'Status User');
+    var columsName = new Array('ID', 'Email', 'User Name', 'First Name', 'Last Name', 'Type User', 'Status User');
     var rowsValues = new Array();
     for (var i = 0; i < users.length; i++) {
       //ternary condition to check if the user is registered
@@ -97,6 +97,7 @@ export class UserManagementComponent implements OnInit, OnDestroy {
       rowsValues.push(new Array(
         users[i]._id,
         users[i].email,
+        users[i].userName,
         users[i].firstName,
         users[i].lastName,
         role,
@@ -136,13 +137,14 @@ export class UserManagementComponent implements OnInit, OnDestroy {
         Validators.pattern("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
       ]),
       levelRights: new FormControl(null, Validators.required),
-      firstName: new FormControl(null, Validators.required),
-      lastName: new FormControl(null, Validators.required),
-      phone: new FormControl(null, Validators.required),
-      street: new FormControl(null, Validators.required),
-      streetNumber: new FormControl(null, Validators.required),
-      city: new FormControl(null, Validators.required),
-      country: new FormControl(null, Validators.required)
+      userName: new FormControl(null, Validators.required),
+      firstName: new FormControl(null),
+      lastName: new FormControl(null),
+      phone: new FormControl(null),
+      street: new FormControl(null),
+      streetNumber: new FormControl(null),
+      city: new FormControl(null),
+      country: new FormControl(null)
     });
   }
 
@@ -192,8 +194,9 @@ export class UserManagementComponent implements OnInit, OnDestroy {
         Validators.pattern("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
       ]),
       levelRights: new FormControl(user.levelRights, Validators.required),
-      firstName: new FormControl(user.firstName, Validators.required),
-      lastName: new FormControl(user.lastName, Validators.required),
+      userName: new FormControl(user.userName, Validators.required),
+      firstName: new FormControl(user.firstName),
+      lastName: new FormControl(user.lastName),
       phone: new FormControl(user.phone, null),
       street: new FormControl(user.street, null),
       streetNumber: new FormControl(user.streetNumber, null),
@@ -222,12 +225,13 @@ export class UserManagementComponent implements OnInit, OnDestroy {
     });
     //there are fields to update
     if (fieldsLabelUpdated.length > 0 && fieldsLabelUpdated.length == fieldsValueUpdated.length) {
+      var userName = this.myForm.controls.userName.value;
       var firstName = this.myForm.controls.firstName.value;
       var lastName = this.myForm.controls.lastName.value;
       var email = this.myForm.controls.email.value;
 
       const fields = { id: this.editUser._id, labels: fieldsLabelUpdated, values: fieldsValueUpdated, changeEmail: false };
-      this.userManagementService.editUser(fields, emailChanged, email, firstName, lastName)
+      this.userManagementService.editUser(fields, emailChanged, email, userName, firstName, lastName)
         .then(
         data => {
           //disable the loader      

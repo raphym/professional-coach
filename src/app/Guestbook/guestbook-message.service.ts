@@ -30,7 +30,7 @@ export class GuestbookMessageService {
                 const result = response.json();
                 const guestbookMessage = new GuestbookMessage(
                     result.obj.content,
-                    result.obj.user.firstName,
+                    result.obj.user.userName,
                     result.obj._id,
                     result.obj.user._id);
                 this.guestbookMessages.push(message);
@@ -50,7 +50,7 @@ export class GuestbookMessageService {
                 for (let message of messages) {
                     transformedMessages.push(new GuestbookMessage(
                         message.content,
-                        message.user.firstName,
+                        message.user.userName,
                         message._id,
                         message.user._id));
                 }

@@ -5,6 +5,8 @@ import { AuthService } from "../auth.service";
 import { Router } from "@angular/router";
 import { LoaderService } from "../../shared/components/loader/loader.service";
 import { UsefulService } from "../../shared/services/utility/useful.service";
+import { ErrorService } from "../../shared/components/notif-to-user/errors/error.service";
+import { SuccessService } from "../../shared/components/notif-to-user/success/success.service";
 
 @Component({
     selector: 'app-signin',
@@ -20,19 +22,21 @@ export class SigninComponent {
     constructor(private authService: AuthService,
         private router: Router,
         private loaderService: LoaderService,
-        private usefulService: UsefulService) { }
+        private usefulService: UsefulService,
+        private errorService: ErrorService,
+        private successService: SuccessService) { }
 
 
     ngOnInit() {
-                //subscribe to the langage
-                this.usefulService.langTransmitter.subscribe(
-                    config_langage => {
-                        this.langDirection = config_langage.direction;
-                        this.langTextAlign = config_langage.textAlign;
-                    }
-                );
-                //set langage
-                this.usefulService.initLangage();
+        //subscribe to the langage
+        this.usefulService.langTransmitter.subscribe(
+            config_langage => {
+                this.langDirection = config_langage.direction;
+                this.langTextAlign = config_langage.textAlign;
+            }
+        );
+        //set langage
+        this.usefulService.initLangage();
 
         this.myForm = new FormGroup({
             email: new FormControl(null, [
@@ -44,7 +48,7 @@ export class SigninComponent {
     }
 
     onSubmit() {
-        const user = new User(null,this.myForm.value.email, this.myForm.value.password, null, null, null, null, null, null);
+        const user = new User(null, this.myForm.value.userName, this.myForm.value.email, this.myForm.value.password, null, null, null, null, null, null);
         //enable the loader
         this.loaderService.enableLoader();
         this.authService.signin(user).subscribe(
@@ -61,6 +65,27 @@ export class SigninComponent {
         );
 
         this.myForm.reset();
+    }
+
+    fbLogin() {
+        this.authService.fbLogin().then(data => {
+            //if success sending return a success message to the user
+            var my_response = {
+                title: 'Success',
+                message: 'You are successfully login'
+            };
+            //this.successService.handleSuccess(my_response);
+            this.router.navigateByUrl('/');
+        },
+            error => {
+                console.log(error);
+                if (error.title != undefined)
+                    this.errorService.handleError(error);
+                else {
+                    var my_error = { title: 'Error', message: "An error has occured" };
+                    this.errorService.handleError(my_error);
+                }
+            });
     }
 
 }
