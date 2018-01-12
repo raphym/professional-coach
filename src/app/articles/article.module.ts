@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 
 import { ArticleService } from './article-service';
-import { ArticlesComponent } from './article.component';
-import { ArticlesListComponent } from './articles-list/articles-list.component';
 import { ArticleItemComponent } from './article-item/article-item.component';
 import { ArticleEditComponent } from './article-edit/article-edit.component';
 import { ArticleRoutingModule } from './article-routing.module';
@@ -14,11 +12,8 @@ import { PreviewArticleComponent } from './preview-article/preview-article.compo
 
 @NgModule({
   declarations: [
-    ArticlesComponent,
-    ArticlesListComponent,
     ArticleItemComponent,
     ArticleEditComponent,
-    PreviewArticleComponent,
   ],
   imports: [
     SharedModule,

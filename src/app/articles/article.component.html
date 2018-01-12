@@ -1,1 +1,23 @@
-<app-articles-list></app-articles-list>
+<div class="container">
+    <div class="row">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-5">
+            <img class="imgLast" [src]="lastArticle?.image">
+        </div>
+        <div class="col-md-5">
+            <div class="m_title">{{lastArticle?.title}}</div>
+            <br>
+            <div class="m_intro">{{lastArticle?.intro}}</div>
+            <br>
+            <div class="m_date">{{lastArticle?.date | date}}</div>
+        </div>
+        <div class="col-md-1">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <app-articles-list></app-articles-list>
+        </div>
+    </div>
+</div>

@@ -13,32 +13,42 @@
             <img src="../../assets/Images/homePage/video-play.png">
         </div>
     </div>
+
     <div class="push">
     </div>
 
-    <div class="container-fluid">
+    <div class="container-fluid advertisement" [style.direction]="langDirection" [style.text-align]="langTextAlign">
         <div class="row">
-            <div class="col-md-3 tinyCarre">
-                Fitness makes your dreams reality
+            <div class="col-md-3 tinyCarre" translate>
+                GFIT_MAKE
             </div>
             <div class="col-md-9">
                 <div class="row">
                     <div class="col-md-6 tinyCarre">
-                        <img src="../../assets/Images/homePage/1.png"> Analysis Your Goal
+                        <img src="../../assets/Images/homePage/1.png">
+                        <span translate>ANALISIS_GOAL</span>
                     </div>
                     <div class="col-md-6 tinyCarre">
-                        <img src="../../assets/Images/homePage/2.png"> Work Hard on it
+                        <img src="../../assets/Images/homePage/2.png">
+                        <span translate>WORK_HARD</span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6 tinyCarre">
-                        <img src="../../assets/Images/homePage/3.png"> Improve Performance
+                        <img src="../../assets/Images/homePage/3.png">
+                        <span translate>IMPROVE_PERF</span>
                     </div>
                     <div class="col-md-6 tinyCarre">
-                        <img src="../../assets/Images/homePage/4.png"> Achieve Destiny
+                        <img src="../../assets/Images/homePage/4.png">
+                        <span translate>ACHIEVE_DEST</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <div>
+        <app-articles></app-articles>
+    </div>
+
 </div>

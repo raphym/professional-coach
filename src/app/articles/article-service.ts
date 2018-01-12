@@ -11,6 +11,7 @@ export class ArticleService {
     UPDATE_Article_ADDRESS = 'http://localhost:3000/article/updateArticle';
     GET_Articles_ADDRESS = 'http://localhost:3000/article/getArticles';
     GET_Article_ADDRESS = 'http://localhost:3000/article/getArticle';
+    GET_LAST_Article_ADDRESS = 'http://localhost:3000/article/getNewLastArticle';
     DELETE_Article_ADDRESS = 'http://localhost:3000/article/deleteArticle';
 
     articles: Article[];
@@ -58,7 +59,8 @@ export class ArticleService {
                     result.obj.title,
                     result.obj.image,
                     result.obj.content,
-                    result.obj.intro);
+                    result.obj.intro,
+                    result.obj.date);
                 //this.articles.push(article);
                 return response.json().my_response;
             })
@@ -92,7 +94,8 @@ export class ArticleService {
                     result.obj.title,
                     result.obj.image,
                     result.obj.content,
-                    result.obj.intro);
+                    result.obj.intro,
+                    result.obj.date);
                 // this.articles.push(article);
                 return response.json().my_response;
             })
@@ -125,7 +128,8 @@ export class ArticleService {
                         article.title,
                         article.image,
                         article.content,
-                        article.intro));
+                        article.intro,
+                        article.date));
                 }
                 this.articles = transformedArticles;
                 return transformedArticles;
@@ -149,7 +153,8 @@ export class ArticleService {
                     article.title,
                     article.image,
                     article.content,
-                    article.intro);
+                    article.intro,
+                    article.date);
                 return transformedArticle;
             })
             .catch((error: Response) => {
@@ -169,6 +174,16 @@ export class ArticleService {
             .catch((error: Response) => {
                 console.log(error);
                 return Observable.throw(error);
+            });
+    }
+
+    getLastNewArticle() {
+        return this.http.get(this.GET_LAST_Article_ADDRESS)
+            .map((response: Response) => {
+                return response.json().article;
+            })
+            .catch((error: Response) => {
+                return Observable.throw(error.json())
             });
     }
 }

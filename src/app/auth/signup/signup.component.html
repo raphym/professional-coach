@@ -8,18 +8,6 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div style="padding-top: 60px;" class="col-lg-8 col-md-7 col-sm-6">
-                    <div class="panel panel-default">
-                        <div class="panel-heading text-center">Sign up with</div>
-                        <div class="panel-body" align="center">
-                            <a class="btn btn-social btn-facebook" (click)="fbLogin()">
-                                <span class="fa fa-facebook"></span> Facebook
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="row signupCl">
                 <div class="col-md-8">
                     <img class="img" src="./assets/Images/Signup/sport1.png" />
@@ -57,6 +45,12 @@
                         </div>
                         <button class="btn btn-primary" type="submit" [disabled]="!myForm.valid" translate>SIGNUP</button>
                     </form>
+                    <div translate [style.text-align]="langTextAlign">
+                        <br> REGISTER_WITH
+                        <br>
+                    </div>
+                    <button type="button" (click)="fbLogin()" class="btn btn-facebook my_but">
+                        <i class="fa fa-facebook"></i> Facebook</button>
                 </div>
             </div>
         </div>

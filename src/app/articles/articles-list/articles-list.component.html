@@ -1,15 +1,4 @@
-<div class="container">
-  <div style="min-height: 800px;">
-    <div class="row">
-      <div class="col-md-12">
-        <h3 class="text-center" style="padding-top:50px;" translate>
-          OUR_ARTICLES
-        </h3>
-      </div>
-    </div>
-    <br>
-
-    <div class="row hbDir">
+<!-- <div class="row hbDir">
       <div class="col-md-2">
         <i (click)="onShowOptions()" class="fa fa-caret-square-o-down hbDir" aria-hidden="true" translate> OPTIONS </i>
       </div>
@@ -72,15 +61,14 @@
         </form>
         <hr>
       </div>
-    </div>
-    <div class="row articlecss">
-      <div class="col-md-12">
-        <div *ngFor="let article of articles">
-          <br>
-          <app-preview-article title="{{article?.title}}" image="{{article?.image}}" id="{{article?._id}}" intro="{{article?.intro}}"
-            date="{{article?.date}}"></app-preview-article>
-        </div>
-      </div>
+    </div> -->
+
+<div class="col-md-12">
+  <div *ngFor="let article of articles,let i = index">
+    <div *ngIf="i != '0'">
+      <br>
+      <app-preview-article title="{{article?.title}}" image="{{article?.image}}" id="{{article?._id}}" intro="{{article?.intro}}"
+        date="{{article?.date}}"></app-preview-article>
     </div>
   </div>
 </div>

@@ -19,7 +19,6 @@ import { GuestbookModule } from './Guestbook/guestbook.module';
 import { MailService } from './shared/services/mail/mail.service';
 import { SuccessComponent } from './shared/components/notif-to-user/success/success.component';
 import { AdminModule } from './admin-space/admin.module';
-import { ArticleModule } from './articles/article.module';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
 import { LoaderComponent } from './shared/components/loader/loader.component';
 import { LoaderService } from './shared/components/loader/loader.service';
@@ -29,6 +28,12 @@ import { SharedModule } from './shared/module/shared.module';
 import { UsefulService } from './shared/services/utility/useful.service';
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
 import { FacebookModule } from 'ngx-facebook';
+import { ArticlesComponent } from './articles/article.component';
+import { ArticleItemComponent } from './articles/article-item/article-item.component';
+import { ArticlesListComponent } from './articles/articles-list/articles-list.component';
+import { PreviewArticleComponent } from './articles/preview-article/preview-article.component';
+import { ArticleService } from './articles/article-service';
+import { ArticleModule } from './articles/article.module';
 
 //export funct of angular2-jwt
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -47,6 +52,9 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     LoaderComponent,
     FooterComponent,
     PageNotFoundComponent,
+    ArticlesComponent,
+    ArticlesListComponent,
+    PreviewArticleComponent,
   ],
   imports: [
     SharedModule,
@@ -54,7 +62,6 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     TrainingModule,
     GuestbookModule,
     AdminModule,
-    ArticleModule,
     LoadingModule.forRoot({
       animationType: ANIMATION_TYPES.threeBounce,
       backdropBackgroundColour: 'rgba(0,0,0,0.1)',
@@ -64,7 +71,10 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
       tertiaryColour: '#ffffff'
     }),
     FacebookModule.forRoot(),
-    AppRoutingModule
+    SharedModule,
+    ArticleModule,
+    AppRoutingModule,
+
   ],
   providers: [
     CookieService,
@@ -78,7 +88,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
       useFactory: authHttpServiceFactory,
       deps: [Http, RequestOptions]
     },
-    UsefulService
+    UsefulService,
+    ArticleService,
   ],
   bootstrap: [AppComponent],
   exports: []

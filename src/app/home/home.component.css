@@ -1,14 +1,27 @@
 .homePage{
-background: rgba(15, 15, 15, 1);
+ /* background: rgba(15, 15, 15, 1); */
+ background: white;
 }
 
 .pullFromHeader{
-    margin-top: -24px;
+    margin-top: -24px;/*-24*/
 }
 
 .push{
     margin-top: 50px;
 }
+
+.imgTiny{
+    width: 100%;
+    display: none;
+}
+
+.advertisement{
+     background: rgba(15, 15, 15, 1);
+     margin-top: -50px;
+     margin-bottom: 30px;
+}
+
 
 /*VERY VERY SMALL SCREEN*/
 /* x < 380px */
@@ -18,15 +31,12 @@ background: rgba(15, 15, 15, 1);
         height: 540px;
         width: 100%;
         background-color: black;
-        padding-top: 70px;   
         
-        padding-left: 8%;
+        padding-top: 60px;   
+        
+        padding-left: 18%;
         margin-right: 20%;
     
-        /* background-image: url('../../assets/Images/homePage/hero-img5.jpg');
-        background-size:cover;
-        background-repeat: no-repeat;
-        background-position-x: 80%; */
     }
 
     .quotation{
@@ -41,6 +51,8 @@ background: rgba(15, 15, 15, 1);
     .imgTiny{
         width: 100%;
         height: 100%;
+        padding-top: 10%;
+        padding-right: 20%;
         display: block;
     }
 
@@ -49,12 +61,15 @@ background: rgba(15, 15, 15, 1);
     }
 
     .tinyCarre{
-        height: 70px;
+        height: 60px;
         width: 100%;
         color: white;
         font-family: Open Sans, sans-serif;
         font-size: 15px;
         line-height:18px;
+    }
+    .advertisement{
+        padding-right: 28%;
     }
 }
 
@@ -88,9 +103,50 @@ background: rgba(15, 15, 15, 1);
         width: 150px;
     }
 
-    .imgTiny{
+    .butPlay{
+        padding-top: 4%;
+    }
+
+    .tinyCarre{
+        height: 60px;
         width: 100%;
-        display: none;
+        color: white;
+        font-family: Open Sans, sans-serif;
+        font-size: 18px;
+        line-height:23px;
+    }
+    .advertisement{
+        padding-right: 28%;
+    }
+}
+
+/*  619px < x < 767px */
+
+@media only screen and (max-width: 767px) and (min-width: 619px)
+{
+    
+    .carre{
+        height: 540px;
+        width: 100%;
+        background-color: black;
+        padding-top: 100px;   
+        
+        padding-left: 8%;
+        margin-right: 20%;
+    
+        background-image: url('../../assets/Images/homePage/hero-img5.jpg');
+        background-size:cover;
+        background-repeat: no-repeat;
+        background-position-x: 80%;
+    }
+
+    .quotation{
+        color: white;
+        font-family: Open Sans, sans-serif;
+        font-size: 30px;
+        line-height:40px;
+        font-weight:600;
+        width: 240px;
     }
 
     .butPlay{
@@ -98,20 +154,24 @@ background: rgba(15, 15, 15, 1);
     }
 
     .tinyCarre{
-        height: 80px;
+        height: 100px;
         width: 100%;
         color: white;
         font-family: Open Sans, sans-serif;
         font-size: 18px;
-        line-height:23px;
+        line-height:22px;
     }
+    .advertisement{
+        padding-right: 28%;
+    }
+
 }
 
 
 /*VERY SMALL SCREEN*/
 /*  619px < x < 900px */
 
-@media only screen and (max-width: 900px) and (min-width: 619px)
+@media only screen and (max-width: 900px) and (min-width: 767px)
 {
 
     .carre{
@@ -138,11 +198,6 @@ background: rgba(15, 15, 15, 1);
         width: 240px;
     }
 
-    .imgTiny{
-        width: 100%;
-        display: none;
-    }
-
     .butPlay{
         padding-top: 4%;
     }
@@ -155,7 +210,13 @@ background: rgba(15, 15, 15, 1);
         font-size: 18px;
         line-height:22px;
     }
+    .advertisement{
+        padding-left: 30px;
+        padding-right: 30px;
+    }
 }
+
+
     
 
 /*SMALL SCREEN*/
@@ -188,11 +249,6 @@ background: rgba(15, 15, 15, 1);
         width: 400px;
     }
 
-    .imgTiny{
-        width: 100%;
-        display: none;
-    }
-
     .butPlay{
         padding-top: 4%;
     }
@@ -204,6 +260,10 @@ background: rgba(15, 15, 15, 1);
         font-family: Open Sans, sans-serif;
         font-size: 22px;
         line-height:29px;
+    }
+    .advertisement{
+        padding-left: 60px;
+        padding-right: 60px;
     }
 }
 
@@ -222,7 +282,8 @@ background: rgba(15, 15, 15, 1);
         padding-left: 8%;
     
         background-image: url('../../assets/Images/homePage/hero-img5.jpg');
-        background-size:cover;
+        background-size: contain;
+        background-position-x: 130%;
         background-repeat: no-repeat;
     }
 
@@ -233,11 +294,6 @@ background: rgba(15, 15, 15, 1);
         line-height:58px;
         font-weight:600;
         width: 400px;
-    }
-
-    .imgTiny{
-        width: 100%;
-        display: none;
     }
 
     .butPlay{
@@ -251,6 +307,10 @@ background: rgba(15, 15, 15, 1);
         font-family: Open Sans, sans-serif;
         font-size: 28px;
         line-height:34px;
+    }
+    .advertisement{
+        padding-left: 80px;
+        padding-right: 80px;
     }
 }
 

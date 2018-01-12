@@ -55,12 +55,13 @@ export class SigninComponent {
             data => {
                 //disable the loader
                 this.loaderService.disableLoader();
-                this.router.navigateByUrl('/');
+                if (data.message == 'Successfully logged in') {
+                    this.router.navigateByUrl('/');
+                }
             },
             error => {
                 //disable the loader
                 this.loaderService.disableLoader();
-                //console.log(error)  
             }
         );
 

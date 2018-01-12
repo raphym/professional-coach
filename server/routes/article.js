@@ -163,6 +163,24 @@ router.get('/getArticle', function (req, res, next) {
         });
 });
 
+//get the new last article
+router.get('/getNewLastArticle', function (req, res, next) {
+    Articles.findOne({}).sort({ date: -1 }).exec(function (error, article) {
+        if (error) {
+            console.log('error');
+            console.log(error);
+            res.status(500).json({
+                title: 'Error',
+                message: 'An error has occured'
+            });
+        }
+        return res.status(200).json({
+            message: 'Get Article',
+            article: article
+        });
+    });
+});
+
 
 //Protection
 router.use('/', function (req, res, next) {
@@ -251,7 +269,7 @@ router.post('/updateArticle', function (req, res, next) {
 });
 
 
-
+//delete an article
 router.post('/deleteArticle', function (req, res, next) {
 
 

@@ -104,7 +104,7 @@ export class ArticleEditComponent implements OnInit {
 
     //new article
     if (!this.editMode) {
-      const article = new Article('null', this.title, this.imageBase64, this.content, this.intro);
+      const article = new Article('null', this.title, this.imageBase64, this.content, this.intro, null);
       //enable the loader
       this.loaderService.enableLoader();
       this.articleService.addArticle(article)
@@ -123,7 +123,7 @@ export class ArticleEditComponent implements OnInit {
     }
     //edit existing article
     else {
-      const article = new Article(this.id, this.title, this.imageBase64, this.content, this.intro);
+      const article = new Article(this.id, this.title, this.imageBase64, this.content, this.intro, null);
       //enable the loader
       this.loaderService.enableLoader();
       this.articleService.updateArticle(article)

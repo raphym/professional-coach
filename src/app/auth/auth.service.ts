@@ -56,7 +56,7 @@ export class AuthService {
     }
 
 
-
+    //login with facebook
     fbLogin() {
         return new Promise((resolve, reject) => {
             /* {scope:'email'}*/
@@ -227,13 +227,13 @@ export class AuthService {
                     return response.json()
                 }
                 else {
-                    this.logout(true);
+                    this.logout(false);
                     this.userLogOutEvent.emit();
                     return response.json()
                 }
             })
             .catch((error: Response) => {
-                this.logout(true);
+                this.logout(false);
                 this.userLogOutEvent.emit();
                 this.errorService.handleError(error.json());
                 return Observable.throw(error.json())

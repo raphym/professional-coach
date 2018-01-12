@@ -9,6 +9,15 @@
 	"LOGIN":"התחבר",
 	"LOGOUT":"התנתק",
 	"LANGUAGE":"שפה",
+	
+	"CONNECT_WITH":"התחבר עם",
+	"REGISTER_WITH":"הרשם עם",
+	"GFIT_MAKE":"G-Fit הופך את החלומות שלך למציאות",
+	"ANALISIS_GOAL":"ניתוח המטרה שלך",
+	"WORK_HARD":"עובד קשה על זה",
+	"IMPROVE_PERF":"שיפור ביצועים",
+	"ACHIEVE_DEST":"להגיע לגורל",
+
 
 	"PLEASE_WRITE_IN_ENGLISH":"נא לכתוב באנגלית",
 	

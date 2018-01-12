@@ -10,6 +10,14 @@
 	"LOGOUT":"Se deconnecter",
 	"LANGUAGE":"Langage",
 	
+	"CONNECT_WITH":"Se connecter avec",
+	"REGISTER_WITH":"S'inscrire avec",
+	"GFIT_MAKE":"G-Fit fait de vos rêves une réalité",
+	"ANALISIS_GOAL":"Analyse de votre objectif",
+	"WORK_HARD":"Travailler dur dessus",
+	"IMPROVE_PERF":"Améliorer les performances",
+	"ACHIEVE_DEST":"Atteindre le but",
+
 	"PLEASE_WRITE_IN_ENGLISH":"Veuillez écrire en anglais",
 
 	"NAME":"Nom",

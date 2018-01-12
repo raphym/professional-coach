@@ -1,26 +1,14 @@
-<div class="row preview_page">
-  <div class="col-md-12 box">
-    <div class="row box_inside" (click)="onClick()" style="cursor: pointer;">
-      <div class="col-md-1 col-sm-1">
-      </div>
-      <div class="col-md-4 col-sm-4 box_intro">
-        <h3 class="text-center">
-          {{title}}
-        </h3>
-        <div class="text_intro">
-          {{intro}}
-          <br>
-          {{date | date}}
-        </div>
-      </div>
-      <div class="col-md-1 col-sm-1">
-      </div>
-      <div class="col-md-5 col-sm-5 box_img">
-        <img class="img" alt="Bootstrap Image Preview" [src]="image" />
-      </div>
-      <div class="col-md-1 col-sm-1">
-      </div>
-    </div>
+<div class="row">
+  <div class="col-md-2 col-sm-1">
   </div>
-  <br>
+  <div class="col-md-3 col-sm-4">
+    <img class="m_img" [src]="image">
+  </div>
+  <div class="col-md-4 col-sm-6">
+    <div class="m_title">{{title}}</div>
+    <br>
+    <div class="m_date">{{date | date}}</div>
+  </div>
+  <div class="col-md-3 col-sm-1">
+  </div>
 </div>

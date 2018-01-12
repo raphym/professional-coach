@@ -23,6 +23,11 @@
     direction:ltr!important;
 }
 
+.my_but{
+    margin:auto;
+    display:block;
+    margin-top:16px;
+}
 
 @media(max-width:767px){
     .formCl{
