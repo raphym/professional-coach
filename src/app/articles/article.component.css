@@ -1,22 +1,107 @@
+.part1{
+    height: auto;
+    width: 100%;
+    cursor: pointer;
+}
+
+.m_image{
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+}
+
 .m_title{
     text-align: center;
-    color: blue;
+    color: yellow;
+    font-size: 20px;
 }
 
-.imgLast{
-    width: 100%;
-    height: 350px;
-}
-
-.part1{
-    padding-top: 50px;
-    padding-bottom: 50px;
-}
 
 .m_intro{
     text-align: right;
+    font-size: 20px;
 }
 
 .m_date{
-    text-align: center
+    text-align: center;
+    font-size: 20px;
+}
+
+
+/* col x-large XL*/
+@media only screen and (min-width: 1200px)
+{
+    .m_title{
+        text-align: center;
+        color: blue;
+    }
+}
+
+/* col large LG */
+@media only screen and (min-width: 992px) and (max-width: 1199px) 
+{
+    .m_title{
+        text-align: center;
+        color: red;
+    }
+}
+/* col medium MD */
+@media only screen and (min-width: 768px) and (max-width: 991px) 
+{
+    .m_title{
+        text-align: center;
+        color: black;
+        font-size: 17px;
+    }
+    
+    .m_intro{
+        text-align: right;
+        font-size: 17px;
+    }
+    
+    .m_date{
+        text-align: center;
+        font-size: 17px;
+    }
+}
+
+/* col small SM */
+@media only screen and (min-width: 576px) and (max-width: 767px) 
+{
+    .m_title{
+        text-align: center;
+        color: bisque;
+        font-size: 14px;
+    }
+
+    .m_intro{
+        text-align: right;
+        font-size: 14px;
+    }
+    
+    .m_date{
+        text-align: center;
+        font-size: 14px;
+    }
+}
+
+/* col x-small col-*/
+@media only screen and (max-width: 575px)
+{
+    .m_title{
+        text-align: center;
+        color: white;
+        font-size: 12px;
+
+    }
+
+    .m_intro{
+        text-align: right;
+        font-size: 12px;
+    }
+    
+    .m_date{
+        text-align: center;
+        font-size: 12px;
+    }
 }

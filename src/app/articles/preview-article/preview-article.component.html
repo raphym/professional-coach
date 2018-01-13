@@ -1,14 +1,16 @@
-<div class="row">
-  <div class="col-md-2 col-sm-1">
+<div class="row prev_article" (click)="onClick()">
+  <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1">
   </div>
-  <div class="col-md-3 col-sm-4">
-    <img class="m_img" [src]="image">
+  <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5">
+    <img class="m_image" [src]="image">
   </div>
-  <div class="col-md-4 col-sm-6">
+  <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5">
     <div class="m_title">{{title}}</div>
+    <br>
+    <div class="m_intro">{{intro}}</div>
     <br>
     <div class="m_date">{{date | date}}</div>
   </div>
-  <div class="col-md-3 col-sm-1">
+  <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1">
   </div>
 </div>
