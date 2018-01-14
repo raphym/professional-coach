@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter } from '@angular/core';
 import { UsefulService } from '../shared/services/utility/useful.service';
+import { ArticleService } from '../articles/article-service';
 
 @Component({
   selector: 'app-home',
@@ -10,8 +11,8 @@ export class HomeComponent implements OnInit {
 
   private langDirection;
   private langTextAlign;
-
-  constructor(private usefulService: UsefulService) { }
+  constructor(private usefulService: UsefulService,
+    private articleService: ArticleService) { }
 
   ngOnInit() {
     //subscribe to the langage
@@ -23,6 +24,11 @@ export class HomeComponent implements OnInit {
     );
     //set langage
     this.usefulService.initLangage();
+  }
+
+  //load more articles
+  loadMoreArticles() {
+    this.articleService.loadMoreArticlesEmitter.emit();
   }
 
 }

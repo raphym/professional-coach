@@ -1,7 +1,7 @@
 import { Http, Response, Headers, URLSearchParams } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
-import { Injectable } from "@angular/core";
+import { Injectable, Input, EventEmitter } from "@angular/core";
 import { Article } from '../shared/models/objects-models/article';
 
 @Injectable()
@@ -15,6 +15,9 @@ export class ArticleService {
     DELETE_Article_ADDRESS = 'http://localhost:3000/article/deleteArticle';
 
     articles: Article[];
+    //EventEmitter to load more articles
+   @Input() loadMoreArticlesEmitter: EventEmitter<any> = new EventEmitter();
+
 
     constructor(private http: Http) {
 

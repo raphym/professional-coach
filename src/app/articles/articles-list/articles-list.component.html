@@ -1,6 +1,9 @@
-<!-- <div class="row hbDir">
+<div class="row" *ngIf="showButtonOption">
+  <div class="col-md-12">
+    <div class="row hbDir">
       <div class="col-md-2">
-        <i (click)="onShowOptions()" class="fa fa-caret-square-o-down hbDir" aria-hidden="true" translate> OPTIONS </i>
+        <i (click)="onShowOptions()" style="cursor: pointer;" class="fa fa-caret-square-o-down hbDir" aria-hidden="true" translate>
+          OPTIONS </i>
       </div>
       <div class="col-md-10">
       </div>
@@ -61,14 +64,21 @@
         </form>
         <hr>
       </div>
-    </div> -->
-
-<div class="col-md-12">
-  <div *ngFor="let article of articles,let i = index">
-    <div *ngIf="i != '0'">
-      <br>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <br>
+    <div *ngFor="let article of articles,let i = index">
       <app-preview-article title="{{article?.title}}" image="{{article?.image}}" id="{{article?._id}}" intro="{{article?.intro}}"
         date="{{article?.date}}"></app-preview-article>
+      <br>
     </div>
+  </div>
+</div>
+<div class="row" *ngIf="loading" style="padding-top:20px;">
+  <div class="col-md-12" style="text-align: center">
+    <div class="loader"></div>
   </div>
 </div>

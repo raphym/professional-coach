@@ -1,10 +1,11 @@
-import { Component, OnInit, NgZone, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, NgZone } from '@angular/core';
 import { Article } from '../../shared/models/objects-models/article';
 import { ArticleService } from '../article-service';
 import { SuccessService } from '../../shared/components/notif-to-user/success/success.service';
 import { ErrorService } from '../../shared/components/notif-to-user/errors/error.service';
-import { LoaderService } from '../../shared/components/loader/loader.service';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { EventEmitter } from '@angular/core/src/event_emitter';
 
 @Component({
   selector: 'app-articles-list',
@@ -21,6 +22,10 @@ export class ArticlesListComponent implements OnInit {
   private numsArticlesPerPage: number = 2;
   private numsOfArticles: number = 0;
   private loadingMutex: boolean = false;
+  private loading: boolean = false;
+  private eventLoadMoreArticles: EventEmitter<any>;
+  private current_url: string;
+  private articles_url = '/articles';
 
   //the word to search
   private search: string;
@@ -37,7 +42,9 @@ export class ArticlesListComponent implements OnInit {
   //search_by
   private search_by;
   //boolean show options
-  private showOption:boolean = false;
+  private showOption: boolean = false;
+  //boolean show the button option
+  private showButtonOption: boolean = false;
 
 
   //array of articles
@@ -46,38 +53,57 @@ export class ArticlesListComponent implements OnInit {
     private articleService: ArticleService,
     private successService: SuccessService,
     private errorService: ErrorService,
-    private loaderService: LoaderService,
+    private router: Router,
     private lc: NgZone
   ) {
-    //event on scroll
-    window.onscroll = () => {
-      let status = "not reached";
-      let windowHeight = "innerHeight" in window ? window.innerHeight
-        : document.documentElement.offsetHeight;
-      let body = document.body, html = document.documentElement;
-      let docHeight = Math.max(body.scrollHeight,
-        body.offsetHeight, html.clientHeight,
-        html.scrollHeight, html.offsetHeight);
-      let windowBottom = windowHeight + window.pageYOffset;
-      if (windowBottom >= docHeight) {
-        status = 'bottom reached';
-      }
-      lc.run(() => {
-        this.statusText = status;
-        if (status == 'bottom reached')
-          this.loadMore();
-      });
-    };
+    //Active this automatic load scroll only is we
+    //are in the page articles
+    if (this.router.url == this.articles_url) {
+      window.onscroll = () => {
+        let status = "not reached";
+        let windowHeight = "innerHeight" in window ? window.innerHeight
+          : document.documentElement.offsetHeight;
+        let body = document.body, html = document.documentElement;
+        let docHeight = Math.max(body.scrollHeight,
+          body.offsetHeight, html.clientHeight,
+          html.scrollHeight, html.offsetHeight);
+        let windowBottom = windowHeight + window.pageYOffset;
+        if (windowBottom >= docHeight) {
+          status = 'bottom reached';
+        }
+        lc.run(() => {
+          this.statusText = status;
+          console.log(this.statusText);
+          if (status == 'bottom reached') {
+            this.loadMore();
+            console.log('load');
+          }
+        });
+      };
+    }
   }
 
   //on init get the count of articles and start to load them
   ngOnInit() {
+    this.current_url = this.router.url;
+    if (this.current_url == this.articles_url) {
+      this.showButtonOption = true;
+    }
+
+    //subscribe to the event load more articles from home page
+    if (this.current_url != this.articles_url) {
+      this.eventLoadMoreArticles = this.articleService.loadMoreArticlesEmitter.subscribe(
+        data => {
+          this.loadMore();
+        }
+      );
+    }
     //reset value
     this.numsLoadedArticles = 0;
     this.numsOfArticles = 0;
     this.loadingMutex = false;
     //enable the loader
-    this.loaderService.enableLoader();
+    this.loading = true;
     this.articleService.getArticlesCount()
       .subscribe(
       data => {
@@ -87,8 +113,7 @@ export class ArticlesListComponent implements OnInit {
           this.loadMore();
         else
           //disable the loader
-          this.loaderService.disableLoader();
-
+          this.loading = false;
       },
       error => {
         console.log(error);
@@ -96,11 +121,18 @@ export class ArticlesListComponent implements OnInit {
       );
   }
 
-  //on destroy , remove the onScroll event
   ngOnDestroy() {
-    window.onscroll = () => { };
-    //window.removeEventListener('onscroll',this.onScrollEvent,true)
+    //remove the onScroll event
+    if (this.current_url == this.articles_url) {
+      window.onscroll = () => { };
+    }
 
+    //unsubscribe from the event load more
+    if (this.current_url != this.articles_url) {
+      console.log('here');
+      if (this.eventLoadMoreArticles != undefined)
+        this.eventLoadMoreArticles.unsubscribe();
+    }
   }
 
   //load more articles
@@ -116,7 +148,7 @@ export class ArticlesListComponent implements OnInit {
       return;
 
     //enable the loader
-    this.loaderService.enableLoader();
+    this.loading = true;
 
     var details = {
       numsArticlesPerPage: this.numsArticlesPerPage,
@@ -136,21 +168,20 @@ export class ArticlesListComponent implements OnInit {
         }
         this.loadingMutex = false;
         //disable the loader
-        this.loaderService.disableLoader();
+        this.loading = false;
       },
       error => {
         console.log(error);
         this.loadingMutex = false;
         //disable the loader
-        this.loaderService.disableLoader();
+        this.loading = false;
       }
       );
 
   }
 
   //show the diplay option
-  onShowOptions()
-  {
+  onShowOptions() {
     this.showOption = !this.showOption;
   }
 

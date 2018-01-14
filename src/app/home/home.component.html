@@ -47,8 +47,23 @@
         </div>
     </div>
 
-    <div>
-        <app-articles></app-articles>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <app-articles-list></app-articles-list>
+            </div>
+            <br>
+        </div>
+        <div class="row" [style.direction]="langDirection" [style.text-align]="langTextAlign">
+            <br>
+            <br>
+            <div class="col-md-12" style="text-align:center;">
+                <i (click)="loadMoreArticles()" style="cursor:pointer;" class="fa fa-get-pocket" aria-hidden="true">
+                    <span translate>LOAD_MORE_ARTICLES</span>
+                </i>
+            </div>
+            <br>
+            <br>
+        </div>
     </div>
-
 </div>
