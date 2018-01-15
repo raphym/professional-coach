@@ -4,6 +4,7 @@ import { CookieService } from 'angular2-cookie/core';
 import { AuthService } from "../../../auth/auth.service";
 import { TranslateService } from 'ng2-translate';
 import { UsefulService } from '../../services/utility/useful.service';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
     selector: 'app-header',
@@ -25,7 +26,18 @@ export class HeaderComponent implements OnInit {
         private authService: AuthService,
         private cookieService: CookieService,
         private translate: TranslateService,
-        private usefulService: UsefulService) {
+        private usefulService: UsefulService,
+        private router: Router) {
+    }
+
+
+    //function to navigate to the anchor link contact-us
+    contact_us_link() {
+        this.router.navigate(['/'], { fragment: 'contact-us' });
+    }
+    //function to navigate to the anchor link about-us
+    about_us_link() {
+        this.router.navigate(['/'], { fragment: 'about-us' });
     }
 
     //open the slide menu
@@ -104,6 +116,22 @@ export class HeaderComponent implements OnInit {
                 this.isAdmin = false;
             }
         );
+
+
+        //workaround  to force the reload on the same page
+        //with router.navigate
+        this.router.routeReuseStrategy.shouldReuseRoute = function () {
+            return false;
+        };
+        this.router.events.subscribe((evt) => {
+            if (evt instanceof NavigationEnd) {
+                if (this.router.navigated) {
+                    this.router.navigated = false;
+                    window.scrollTo(0, 0);
+                }
+            }
+        });
+
         //call the function IsLoggedIn 
         this.isLoggedIn();
     }

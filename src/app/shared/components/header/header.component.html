@@ -49,19 +49,15 @@
     </li>
 
     <li routerLinkActive="active">
-      <a routerLink="/articles" [style.float]="floatDirection" translate>ARTICLES</a>
+      <a (click)="about_us_link()" [style.float]="floatDirection" translate>ABOUT_US</a>
     </li>
 
     <li routerLinkActive="active">
-      <a routerLink="/about" [style.float]="floatDirection" translate>ABOUT_US</a>
+      <a style="cursor:pointer;" (click)="contact_us_link()" [style.float]="floatDirection" translate>CONTACT_US</a>
     </li>
 
     <li routerLinkActive="active">
-      <a routerLink="/contact" [style.float]="floatDirection" translate>CONTACT_US</a>
-    </li>
-
-    <li routerLinkActive="active">
-      <a routerLink="/guestbook" [style.float]="floatDirection" translate>GUEST_BOOK</a>
+      <a style="cursor:pointer;" routerLink="/guestbook" [style.float]="floatDirection" translate>GUEST_BOOK</a>
     </li>
 
     <li>

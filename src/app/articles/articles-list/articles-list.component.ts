@@ -129,7 +129,6 @@ export class ArticlesListComponent implements OnInit {
 
     //unsubscribe from the event load more
     if (this.current_url != this.articles_url) {
-      console.log('here');
       if (this.eventLoadMoreArticles != undefined)
         this.eventLoadMoreArticles.unsubscribe();
     }

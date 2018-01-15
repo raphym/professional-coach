@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, EventEmitter } from '@angular/core';
 import { UsefulService } from '../shared/services/utility/useful.service';
 import { ArticleService } from '../articles/article-service';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -11,8 +13,10 @@ export class HomeComponent implements OnInit {
 
   private langDirection;
   private langTextAlign;
+  private scrollExecuted: boolean = false;
   constructor(private usefulService: UsefulService,
-    private articleService: ArticleService) { }
+    private articleService: ArticleService,
+    private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     //subscribe to the langage
@@ -24,6 +28,27 @@ export class HomeComponent implements OnInit {
     );
     //set langage
     this.usefulService.initLangage();
+  }
+
+  ngAfterViewChecked() {
+
+    if (!this.scrollExecuted) {
+      let routeFragmentSubscription: Subscription;
+
+      // Automatic scroll
+      routeFragmentSubscription =
+        this.activatedRoute.fragment
+          .subscribe(fragment => {
+            if (fragment) {
+              let element = document.getElementById(fragment);
+              if (element) {
+                element.scrollIntoView();
+                this.scrollExecuted = true;
+              }
+            }
+          });
+    }
+
   }
 
   //load more articles
