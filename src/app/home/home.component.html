@@ -1,6 +1,5 @@
 <div style="min-height: 800px;" class="homePage">
-    <div class="pullFromHeader">
-    </div>
+
     <div class="carre">
         <h2 class="title">TURN FAT INTO FIT!</h2>
         <div class="quotation">
@@ -17,6 +16,7 @@
     <div class="push">
     </div>
 
+    <!-- advertisement -->
     <div class="container-fluid advertisement" [style.direction]="langDirection" [style.text-align]="langTextAlign">
         <div class="row">
             <div class="col-md-3 tinyCarre" translate>
@@ -47,10 +47,13 @@
         </div>
     </div>
 
+    <!-- articles -->
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <app-articles-list></app-articles-list>
+                <div class="articles_liste">
+                    <app-articles-list></app-articles-list>
+                </div>
             </div>
             <br>
         </div>
@@ -67,18 +70,23 @@
         </div>
     </div>
 
-    <div id="contact-us" class="container">
+    <!-- contact us -->
+    <div class="container">
         <div class="row">
             <div class="col-md-12">
+                <div class="anchor" id="contact-us"></div>
                 <app-contact-me></app-contact-me>
             </div>
         </div>
     </div>
-    <div id="about-us" class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <app-about></app-about>
-                </div>
+
+    <!-- about us -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="anchor" id="about-us"></div>
+                <app-about></app-about>
             </div>
         </div>
+    </div>
 </div>

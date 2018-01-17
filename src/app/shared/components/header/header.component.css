@@ -6,42 +6,21 @@ body{
   display: none!important;
 }
 
-  /* push down the button to open the side nav*/
-  .pushDownButSide{
+.push_end_header{
+  height: 232px;
+}
+
+/* overide bootstrap */
+.dropdown-item{
+  text-align: center;
+}
+
+  /* button to open the side nav*/
+  .butSide{
     margin: 15px;
+    cursor: pointer;
   }
 
-  /* the navbar*/
-  .navbare{
-    /* background-color:#343a40; */
-    background: rgba(15, 15, 15, 1);
-    height:63px;
-  }
-  
-  /* Link of the navbar*/
-  .navbare a{
-    
-    float: left;
-    display:block;
-    color:#f2f2f2;
-    text-align:center;
-    padding:20px 16px;
-    text-decoration:none;
-    font-size:17px;
-  }
-  
-  /* ul of the navbar*/
-  .navbare ul{
-    margin:0 0 0 0;
-    list-style:none;
-  }
-  
-  /* event hover on the link of the navbar*/
-  .navbare a:hover{
-    background-color:#ddd;
-    color:#000;
-  }
-  
   /* Slide navbar*/
   .side-nav{
     height:100%;
@@ -92,13 +71,22 @@ body{
   
   /* screen size*/
   /* origin was 568px*/
+  /*small screen*/
   @media(max-width:895px){
     .navbare-nav{display:none}
+
+    .but_side-nav_navbare{
+      background: #343a40;
+      height:56px;
+    }
   }
   
+  /*big screen*/
   @media(min-width:895px){
     .but{display:none}
     .side-nav{display:none}
+    .but_side-nav_navbare{display:none}
+
   }
   
 /* dropdown*/

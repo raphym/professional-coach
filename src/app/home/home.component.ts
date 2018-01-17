@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
 
   private langDirection;
   private langTextAlign;
+  //for the anchor in the page
   private scrollExecuted: boolean = false;
   constructor(private usefulService: UsefulService,
     private articleService: ArticleService,
@@ -32,10 +33,11 @@ export class HomeComponent implements OnInit {
 
   ngAfterViewChecked() {
 
+    //to navigate to the anchor in the page
     if (!this.scrollExecuted) {
       let routeFragmentSubscription: Subscription;
 
-      // Automatic scroll
+      // Automatic scroll to the anchor in the page
       routeFragmentSubscription =
         this.activatedRoute.fragment
           .subscribe(fragment => {
