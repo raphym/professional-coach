@@ -17,6 +17,9 @@
 								TITLE
 							</label>
 							<input type="text" class="form-control" id="title" formControlName="title" style="text-align:center;direction: rtl;" />
+							<small [hidden]="rForm.controls.title.valid || rForm.controls.title.pristine" class="text-danger">
+								Write your text in 50 characters maximum
+							</small>
 						</div>
 					</div>
 					<div class="col-md-3">
@@ -53,22 +56,22 @@
 							<textarea rows="4" style="text-align: right;direction: rtl;resize:none;" id="article_intro" name="intro" class="form-control"
 							 formControlName="intro">                
 						  </textarea>
-						  <small [hidden]="rForm.controls.intro.valid || rForm.controls.intro.pristine" class="text-danger">
-							Write your text in 150 characters maximum
-						</small>
+							<small [hidden]="rForm.controls.intro.valid || rForm.controls.intro.pristine" class="text-danger">
+								Write your text in 150 characters maximum
+							</small>
 						</div>
 					</div>
 					<div class="col-md-4">
 					</div>
 				</div>
-				<div class="row">
+				<div class="row" style="min-height: 350px;">
 					<div class="col-md-12">
 						<div class="form-group">
 
 							<label for="article_details" class="center_label" translate>
 								ARTICLE
 							</label>
-							<textarea [froalaEditor] id="article_details" rows="15" style="width:100%;resize:none;direction: rtl;" formControlName="content"></textarea>
+							<textarea [froalaEditor] id="article_details" style="width:100%;resize:none;" formControlName="content"></textarea>
 						</div>
 					</div>
 				</div>

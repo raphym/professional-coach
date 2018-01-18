@@ -1,4 +1,4 @@
-<div class="container" style="min-height: 800px;">
+<div class="container" class="m_article">
   <div class="row">
     <div class="col-md-12">
       <div *ngIf="isItAdmin() && showEdit" class="row">
@@ -21,18 +21,19 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-12">
-          <!-- image is width 50% of the div -->
-          <img class="img" [src]="article?.image" />
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+          <img class="m_image" [src]="article?.image" />
+        </div>
+        <div class="col-md-4">
         </div>
       </div>
       <div class="row">
         <div class="col-md-1">
         </div>
         <div class="col-md-10">
-          <!-- <div [innerHTML]="article?.content"></div> -->
           <div class="content" id="theContent"></div>
-          <!-- with document.getElementById('theContent').innerHTML=article.content;-->
         </div>
         <div class="col-md-1">
         </div>

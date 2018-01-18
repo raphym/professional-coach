@@ -1,0 +1,119 @@
+.about{
+    height: auto;
+    width: 100%;
+    padding-top: 30px;
+}
+
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575px) { 
+    .m_image{
+        width: 60%;
+        max-height: 200px;
+        display:block;
+        margin-left:auto;
+        margin-right:auto;
+    }
+    .m_text{
+        width: 60%;
+        display:block;
+        margin-left:auto;
+        margin-right:auto;
+    }
+    .push{
+        height: 8px;
+    }
+    .m_title{
+        text-align: center;
+        color: blue;
+        font-size: 18px;
+    }
+    .m_intro{
+        text-align: center;
+        font-size: 14px;
+    }
+    
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767px) { 
+    .m_image{
+        width: 100%;
+        max-height: 150px;
+    }
+    .push{
+        height: 5px;
+    }
+    .m_title{
+        text-align: center;
+        color: blue;
+        font-size: 16px;
+    }
+    .m_intro{
+        text-align: center;
+        font-size: 10px;
+    }
+    
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991px) { 
+    .m_image{
+        width: 100%;
+        max-height: 200px;
+    }
+    .push{
+        height: 20px;
+    }
+    .m_title{
+        text-align: center;
+        color: blue;
+        font-size: 18px;
+    }
+    .m_intro{
+        text-align: center;
+        font-size: 14px;
+    }
+    
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199px) { 
+    .m_image{
+        width: 100%;
+        max-height: 300px;
+    }
+    .push{
+        height: 25px;
+    }
+    .m_title{
+        text-align: center;
+        color: blue;
+        font-size: 20px;
+    }
+    .m_intro{
+        text-align: center;
+        font-size: 20px;
+    }
+    
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) { 
+    .m_image{
+        width: 100%;
+        max-height: 300px;
+    }
+    .push{
+        height: 25px;
+    }
+    .m_title{
+        text-align: center;
+        color: blue;
+        font-size: 20px;
+    }
+    .m_intro{
+        text-align: center;
+        font-size: 20px;
+    }
+    
+}

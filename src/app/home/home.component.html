@@ -4,89 +4,40 @@
         <h2 class="title">TURN FAT INTO FIT!</h2>
         <div class="quotation">
             Fitness is not a destination it is a way of life.
-            <div>
-                <img class="imgTiny" src="../../assets/Images/homePage/hero-img5.jpg" />
-            </div>
         </div>
         <div class="butPlay">
             <img src="../../assets/Images/homePage/video-play.png">
         </div>
     </div>
 
-    <div class="push">
-    </div>
-
-    <!-- advertisement -->
-    <div class="container-fluid advertisement" [style.direction]="langDirection" [style.text-align]="langTextAlign">
-        <div class="row">
-            <div class="col-md-3 tinyCarre" translate>
-                GFIT_MAKE
-            </div>
-            <div class="col-md-9">
-                <div class="row">
-                    <div class="col-md-6 tinyCarre">
-                        <img src="../../assets/Images/homePage/1.png">
-                        <span translate>ANALISIS_GOAL</span>
-                    </div>
-                    <div class="col-md-6 tinyCarre">
-                        <img src="../../assets/Images/homePage/2.png">
-                        <span translate>WORK_HARD</span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 tinyCarre">
-                        <img src="../../assets/Images/homePage/3.png">
-                        <span translate>IMPROVE_PERF</span>
-                    </div>
-                    <div class="col-md-6 tinyCarre">
-                        <img src="../../assets/Images/homePage/4.png">
-                        <span translate>ACHIEVE_DEST</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    <div class="betweenSection"></div>
     <!-- articles -->
     <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="articles_liste">
-                    <app-articles-list></app-articles-list>
+        <div class="articles_section">
+            <app-articles-list></app-articles-list>
+            <div [style.direction]="langDirection" [style.text-align]="langTextAlign">
+                <br>
+                <div style="text-align:center;">
+                    <i (click)="loadMoreArticles()" style="cursor:pointer;" class="fa fa-get-pocket" aria-hidden="true">
+                        <span translate>LOAD_MORE_ARTICLES</span>
+                    </i>
                 </div>
             </div>
-            <br>
-        </div>
-        <div class="row" [style.direction]="langDirection" [style.text-align]="langTextAlign">
-            <br>
-            <br>
-            <div class="col-md-12" style="text-align:center;">
-                <i (click)="loadMoreArticles()" style="cursor:pointer;" class="fa fa-get-pocket" aria-hidden="true">
-                    <span translate>LOAD_MORE_ARTICLES</span>
-                </i>
-            </div>
-            <br>
-            <br>
         </div>
     </div>
 
-    <!-- contact us -->
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="anchor" id="contact-us"></div>
-                <app-contact-me></app-contact-me>
-            </div>
-        </div>
-    </div>
-
+    <div class="betweenSection"></div>
     <!-- about us -->
     <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="anchor" id="about-us"></div>
-                <app-about></app-about>
-            </div>
-        </div>
+        <div class="anchor" id="about-us"></div>
+        <app-about></app-about>
     </div>
+
+    <div class="betweenSection"></div>
+    <!-- contact us -->
+    <div class="container">
+        <div class="anchor" id="contact-us"></div>
+        <app-contact-me></app-contact-me>
+    </div>
+
 </div>

@@ -52,8 +52,10 @@ export class ContactMeComponent implements OnInit {
             this.connected = true;
             var decoded_token = this.jwtHelper.decodeToken(token);
             var user = decoded_token.user;
-            this.name = user.firstName + ' ' + user.lastName;
-            this.email = user.email;
+            if (user.userName != undefined)
+                this.name = user.userName;
+            if (user.email != undefined)
+                this.email = user.email;
         }
     }
 

@@ -1,88 +1,78 @@
-<div class="row">
-  <div class="col-md-12">
-    <h3 style="text-align: center;">
-      <span translate>OUR_ARTICLES</span>
-    </h3>
-  </div>
-</div>
-<div class="row" *ngIf="showButtonOption">
-  <div class="col-md-12">
-    <div class="row hbDir">
-      <div class="col-md-2">
-        <i (click)="onShowOptions()" style="cursor: pointer;" class="fa fa-caret-square-o-down hbDir" aria-hidden="true" translate>
-          OPTIONS </i>
-      </div>
-      <div class="col-md-10">
-      </div>
+<h3 style="text-align: center;">
+  <span translate>OUR_ARTICLES</span>
+</h3>
+<div *ngIf="showButtonOption">
+  <div class="row hbDir">
+    <div class="col-md-2">
+      <i (click)="onShowOptions()" style="cursor: pointer;" class="fa fa-caret-square-o-down hbDir" aria-hidden="true" translate>
+        OPTIONS </i>
     </div>
+    <div class="col-md-10">
+    </div>
+  </div>
 
-    <div class="row" *ngIf="showOption">
-      <div class="col-md-12">
-        <hr>
-        <select (change)="onChangeOptions($event.target.value)" class="hbDir floatR">
-          <option *ngFor="let o of selectedSearchOptions" [ngValue]="o">{{o}}</option>
-        </select>
+  <div class="row" *ngIf="showOption">
+    <div class="col-md-12">
+      <hr>
+      <select (change)="onChangeOptions($event.target.value)" class="hbDir floatR">
+        <option *ngFor="let o of selectedSearchOptions" [ngValue]="o">{{o}}</option>
+      </select>
 
-        <form #f="ngForm" (ngSubmit)="onSearch(f)" style="padding-top: 50px;">
-          <div *ngIf="showSearchName" class="row hbDir">
+      <form #f="ngForm" (ngSubmit)="onSearch(f)" style="padding-top: 50px;">
+        <div *ngIf="showSearchName" class="row hbDir">
+          <div class="col-md-1" translate style="margin-top:5px;">
+            SEARCH:
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <input search type="text" name="search" required ngModel class="form-control" />
+            </div>
+          </div>
+          <div class="col-md-8">
+          </div>
+        </div>
+        <div *ngIf="showSearchDates">
+          <div class="row hbDir">
             <div class="col-md-1" translate style="margin-top:5px;">
-              SEARCH:
+              FROM_DATE
             </div>
             <div class="col-md-3">
-              <div class="form-group">
-                <input search type="text" name="search" required ngModel class="form-control" />
-              </div>
+              <dp-date-picker ngModel name="fromDate" [config]="datePickerConfig"></dp-date-picker>
             </div>
             <div class="col-md-8">
             </div>
           </div>
-          <div *ngIf="showSearchDates">
-            <div class="row hbDir">
-              <div class="col-md-1" translate style="margin-top:5px;">
-                FROM_DATE
-              </div>
-              <div class="col-md-3">
-                <dp-date-picker ngModel name="fromDate" [config]="datePickerConfig"></dp-date-picker>
-              </div>
-              <div class="col-md-8">
-              </div>
-            </div>
-            <br>
-            <div class="row hbDir">
-              <div class="col-md-1" translate style="margin-top:5px;">
-                TO_DATE
-              </div>
-              <div class="col-md-3">
-                <dp-date-picker ngModel name="toDate" [config]="datePickerConfig"></dp-date-picker>
-              </div>
-              <div class="col-md-8">
-              </div>
-            </div>
-          </div>
+          <br>
           <div class="row hbDir">
-            <div class="col-md-1">
-              <button type="submit" class="btn btn-success">
-                <i class="fa fa-search" aria-hidden="true"></i>
-              </button>
+            <div class="col-md-1" translate style="margin-top:5px;">
+              TO_DATE
             </div>
-            <div class="col-md-11">
+            <div class="col-md-3">
+              <dp-date-picker ngModel name="toDate" [config]="datePickerConfig"></dp-date-picker>
+            </div>
+            <div class="col-md-8">
             </div>
           </div>
-        </form>
-        <hr>
-      </div>
+        </div>
+        <div class="row hbDir">
+          <div class="col-md-1">
+            <button type="submit" class="btn btn-success">
+              <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div class="col-md-11">
+          </div>
+        </div>
+      </form>
+      <hr>
     </div>
   </div>
 </div>
-<div class="row">
-  <div class="col-md-12">
-    <br>
-    <div *ngFor="let article of articles,let i = index">
-      <app-preview-article title="{{article?.title}}" image="{{article?.image}}" id="{{article?._id}}" intro="{{article?.intro}}"
-        date="{{article?.date}}"></app-preview-article>
-      <br>
-    </div>
-  </div>
+<br>
+<div *ngFor="let article of articles,let i = index">
+  <app-preview-article title="{{article?.title}}" image="{{article?.image}}" id="{{article?._id}}" intro="{{article?.intro}}"
+    date="{{article?.date}}"></app-preview-article>
+  <br>
 </div>
 <div class="row" *ngIf="loading" style="padding-top:20px;">
   <div class="col-md-12" style="text-align: center">
