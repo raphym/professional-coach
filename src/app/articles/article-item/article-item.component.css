@@ -14,7 +14,11 @@
     border: groove 	#696969 10px
 }
 
-
+.my_but{
+    margin:auto;
+    display:block;
+    margin-top:16px;
+}
 
 .m_article{
     height: auto;

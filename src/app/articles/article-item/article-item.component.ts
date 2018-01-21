@@ -18,7 +18,10 @@ export class ArticleItemComponent implements OnInit {
 
   private article: Article;
   private id;
-  private showEdit=false;
+  private showImage: boolean = false;
+  private showEdit: boolean = false;
+  private display: string = 'none';
+  private url: string = 'http://localhost:3000/';
 
   constructor(private articleService: ArticleService,
     private route: ActivatedRoute,
@@ -42,7 +45,13 @@ export class ArticleItemComponent implements OnInit {
             //disable the loader
             this.loaderService.disableLoader();
             this.article = article;
-            document.getElementById('theContent').innerHTML = article.content;
+            //if there is an image so show it
+            if (this.article.image != undefined && this.article.image != null && this.article.image != '')
+              this.showImage = true;
+            document.getElementById('theContent').innerHTML = this.article.content;
+            this.url += this.router.url;
+            //show the article
+            this.display = 'block';
           },
           error => {
             //disable the loader
@@ -59,8 +68,8 @@ export class ArticleItemComponent implements OnInit {
   }
 
   //to show the edit options
-  onShowEdit(){
-    this.showEdit= !this.showEdit;
+  onShowEdit() {
+    this.showEdit = !this.showEdit;
   }
   //when click on edit Article
   onEdit() {
@@ -87,6 +96,16 @@ export class ArticleItemComponent implements OnInit {
         this.errorService.handleError(error.json());
       }
       );
+  }
+
+  //share article 
+  shareArticle() {
+    this.articleService.shareArticle(this.url, this.article.title, this.article.intro).then(
+      function (response) {
+      }
+    ).catch(function (error) {
+      console.log(error);
+    })
   }
 
 }

@@ -1,4 +1,4 @@
-<div class="container" class="m_article">
+<div class="container" class="m_article" [style.display]="display">
   <div class="row">
     <div class="col-md-12">
       <div *ngIf="isItAdmin() && showEdit" class="row">
@@ -24,7 +24,19 @@
         <div class="col-md-4">
         </div>
         <div class="col-md-4">
-          <img class="m_image" [src]="article?.image" />
+          <img *ngIf="showImage" class="m_image" [src]="article?.image" />
+        </div>
+        <div class="col-md-4">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+          <button type="button" (click)="shareArticle()" class="btn btn-facebook my_but">
+            <i class="fa fa-facebook"></i>
+            <span translate>SHARE</span>
+          </button>
         </div>
         <div class="col-md-4">
         </div>

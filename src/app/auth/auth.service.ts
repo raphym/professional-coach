@@ -60,7 +60,7 @@ export class AuthService {
     fbLogin() {
         return new Promise((resolve, reject) => {
             /* {scope:'email'}*/
-            this.fb.login()
+            this.fb.login({ scope: 'email' })
                 .then((result: LoginResponse) => {
                     console.log('auth.service fblogin');
                     console.log(result);

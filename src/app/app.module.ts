@@ -27,7 +27,6 @@ import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
 import { SharedModule } from './shared/module/shared.module';
 import { UsefulService } from './shared/services/utility/useful.service';
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
-import { FacebookModule } from 'ngx-facebook';
 import { ArticlesComponent } from './articles/article.component';
 import { ArticleItemComponent } from './articles/article-item/article-item.component';
 import { ArticlesListComponent } from './articles/articles-list/articles-list.component';
@@ -70,7 +69,6 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
       secondaryColour: '#ffffff',
       tertiaryColour: '#ffffff'
     }),
-    FacebookModule.forRoot(),
     SharedModule,
     ArticleModule,
     AppRoutingModule,

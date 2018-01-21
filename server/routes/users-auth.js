@@ -59,6 +59,8 @@ router.route('/auth/facebook')
         //get the email from facebook
         var email = req.user.emails[0].value;
         if (email == null || email == undefined || email == '') {
+            console.log('user get from fb:');
+            console.log(req.user);
             return res.status(500).json({
                 title: 'An error occured',
                 message: 'Your facebook email is not confirmed'
@@ -67,6 +69,8 @@ router.route('/auth/facebook')
         //get the display name from facebook
         var displayName = req.user.displayName;
         if (displayName == null || displayName == undefined || displayName == '') {
+            console.log('user get from fb:');
+            console.log(req.user);
             return res.status(500).json({
                 title: 'An error occured',
                 message: 'Your facebook name is not existing'

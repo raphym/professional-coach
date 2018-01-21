@@ -3,6 +3,7 @@ import { Http, Response, Headers, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Injectable, Input, EventEmitter } from "@angular/core";
 import { Article } from '../shared/models/objects-models/article';
+import { UIParams, UIResponse, FacebookService, InitParams, LoginResponse } from 'ngx-facebook';
 
 @Injectable()
 export class ArticleService {
@@ -16,11 +17,19 @@ export class ArticleService {
 
     articles: Article[];
     //EventEmitter to load more articles
-   @Input() loadMoreArticlesEmitter: EventEmitter<any> = new EventEmitter();
+    @Input() loadMoreArticlesEmitter: EventEmitter<any> = new EventEmitter();
 
 
-    constructor(private http: Http) {
+    constructor(private http: Http,
+        private fb: FacebookService
+    ) {
+        let initParams: InitParams = {
+            appId: '135809447088863',
+            xfbml: true,
+            version: 'v2.8'
+        };
 
+        fb.init(initParams);
     }
 
     //get articles count
@@ -188,5 +197,44 @@ export class ArticleService {
             .catch((error: Response) => {
                 return Observable.throw(error.json())
             });
+    }
+
+    //share article on facebook
+    shareArticle(url: string, title: string, intro: string) {
+        return new Promise((resolve, reject) => {
+            //with method share
+            // let params: UIParams = {
+            //     method: 'share',
+            //     href: '',     // The same than link in feed method
+            //     picture: 'https://www.g-fit.co.il/assets/Images/slide3.jpg',  
+            //     caption: 'caption',  
+            //     description: 'desc',
+            // };
+            let params: UIParams = {
+                method: 'share',/* share_open_graph */
+                action_type: 'og.shares',
+                action_properties: JSON.stringify({
+                    object: {
+                        'og:url': url,
+                        'og:title': title,
+                        'og:description': intro,
+                        'og:image': 'https://www.g-fit.co.il/assets/Images/slide3.jpg',
+                        'og:image:width': '50',
+                        'og:image:height': '50',
+                        'og:image:type': 'image/jpeg'
+                    }
+                }),
+                href: 'https://www.g-fit.co.il/'
+            };
+
+            this.fb.ui(params)
+                .then((res: UIResponse) => {
+                    resolve('ok');
+                })
+                .catch((e: any) => {
+                    console.error(e);
+                    reject('no');
+                });
+        });
     }
 }

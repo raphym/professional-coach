@@ -8,8 +8,9 @@ import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-tra
 import { AngularDraggableModule } from 'angular2-draggable';
 import { TableComponent } from "../components/table/table.component";
 import { TableService } from "../components/table/table.service";
-import {DpDatePickerModule} from 'ng2-date-picker';
+import { DpDatePickerModule } from 'ng2-date-picker';
 import { SafePipe } from "../pipe/SafePipe";
+import { FacebookModule } from "ngx-facebook";
 
 //for the translation
 export function createTranslateLoader(http: Http) {
@@ -34,7 +35,8 @@ export function createTranslateLoader(http: Http) {
             deps: [Http]
         }),
         AngularDraggableModule,
-        DpDatePickerModule
+        DpDatePickerModule,
+        FacebookModule.forRoot()
     ],
     exports: [
         TableComponent,
@@ -47,7 +49,8 @@ export function createTranslateLoader(http: Http) {
         TranslateModule,
         AngularDraggableModule,
         DpDatePickerModule,
-        SafePipe
+        SafePipe,
+        FacebookModule
     ],
     providers: [
         TableService
