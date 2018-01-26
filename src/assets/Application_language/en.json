@@ -62,6 +62,16 @@
 	"PASSWORD":"Password",
 	"CONFIRM_PASSWORD":"Confirm your password",
 	"SIGNUP":"Signup",
+	
+	"MY_PROFILE":"my profile",
+	"EDIT":"Edit",
+	"PHONE":"Phone",
+	"STREET":"Street",
+	"STREET_NUM":"Street number",
+	"CITY":"City",
+	"COUNTRY":"Country",
+
+	
 	"USER_NAME_IS_REQUIRED":"User name is required",
 	"FIRST_NAME_IS_REQUIRED":"First Name is required",
 	"LAST_NAME_IS_REQUIRED":"Last Name is required",

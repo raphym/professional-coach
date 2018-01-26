@@ -1,0 +1,86 @@
+<div *ngIf="loaded" class="container-fluid" [style.text-align]="langTextAlign">
+    <div *ngIf="!showEdit">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12">
+                <h2 class="m_title" translate>MY_SPACE</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12">
+                <a routerLink="/userspace">Back</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12">
+                <h4 class="m_title" translate>MY_PROFILE</h4>
+            </div>
+        </div>
+        <div class="m_push"></div>
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <img *ngIf="showImage" class="m_image" [src]="picture?.image" />
+                <img *ngIf="!showImage" class="m_image" src="../../../assets/Images/user-space/profile/profile.ico" />
+            </div>
+        </div>
+        <div class="m_push"></div>
+        <div class="row m_edit">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div>
+                    <span (click)="onEdit()" translate>EDIT</span>
+                    <span (click)="onEdit()" translate>MY_PROFILE</span>
+                    <div>
+                        <img (click)="onEdit()" class="m_image_edit" src="../../../assets/Images/user-space/profile/profile_edit.png" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="m_push"></div>
+        <div class="row">
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3">
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <div>
+                    <span class="m_attributes" translate>USER_NAME</span>
+                    <br>
+                    <br> {{user.userName}}
+                </div>
+                <hr>
+                <div>
+                    <span class="m_attributes" translate>EMAIL</span>
+                    <br>
+                    <br> {{user.email}}
+                </div>
+                <hr>
+                <div>
+                    <span class="m_attributes" translate>PHONE</span>
+                    <br>
+                    <br> {{user.phone}}</div>
+                <hr>
+                <div>
+                    <span class="m_attributes" translate>STREET</span>
+                    <br>
+                    <br> {{user.street}}</div>
+                <hr>
+                <div>
+                    <span class="m_attributes" translate>STREET_NUM</span>
+                    <br>
+                    <br> {{user.streetNumber}}</div>
+                <hr>
+                <div>
+                    <span class="m_attributes" translate>CITY</span>
+                    <br>
+                    <br> {{user.city}}</div>
+                <hr>
+                <div>
+                    <span class="m_attributes" translate>COUNTRY</span>
+                    <br>
+                    <br> {{user.country}}</div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3">
+            </div>
+        </div>
+    </div>
+    <div *ngIf="showEdit">
+        <profile-edit [user]="user" ></profile-edit>
+    </div>
+</div>

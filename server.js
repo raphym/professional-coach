@@ -10,6 +10,7 @@ var appRoutes = require('./server/routes/appRoutes');
 var guestbookRoutes = require('./server/routes/guestbook');
 var usersAuthRoutes = require('./server/routes/users-auth');
 var usersManagementRoutes = require('./server/routes/users-management');
+var userSpaceRoutes = require('./server/routes/user-space');
 
 var mailService = require('./server/routes/mail-system');
 var article = require('./server/routes/article');
@@ -47,6 +48,7 @@ app.use('/database', database);
 app.use('/guestbook', guestbookRoutes);
 app.use('/users-auth', usersAuthRoutes);
 app.use('/users-management', usersManagementRoutes);
+app.use('/user-space', userSpaceRoutes);
 
 
 app.use('/sendmail', mailService);

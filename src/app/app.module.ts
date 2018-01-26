@@ -33,6 +33,7 @@ import { ArticlesListComponent } from './articles/articles-list/articles-list.co
 import { PreviewArticleComponent } from './articles/preview-article/preview-article.component';
 import { ArticleService } from './articles/article-service';
 import { ArticleModule } from './articles/article.module';
+import { UserSpaceModule } from './user-space/userSpace.module';
 
 //export funct of angular2-jwt
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -71,6 +72,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     }),
     SharedModule,
     ArticleModule,
+    UserSpaceModule,
     AppRoutingModule,
 
   ],

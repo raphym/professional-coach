@@ -60,6 +60,15 @@
 	"PASSWORD":"Mot de passe",
 	"CONFIRM_PASSWORD":"Confirmez votre mot de passe",
 	"SIGNUP":"S'inscrire",
+	
+	"MY_PROFILE":"mon profile",
+	"EDIT":"Modifier",
+	"PHONE":"Téléphone",
+	"STREET":"Rue",
+	"STREET_NUM":"Numéro de rue",
+	"CITY":"Ville",
+	"COUNTRY":"Pays",
+	
 	"USER_NAME_IS_REQUIRED":"Le nom d'utilisateur est requis",
 	"FIRST_NAME_IS_REQUIRED":"Le prénom est requis",
 	"LAST_NAME_IS_REQUIRED":"Le nom de famille est requis",

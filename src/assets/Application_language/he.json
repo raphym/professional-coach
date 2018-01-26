@@ -62,6 +62,15 @@
 	"PASSWORD":"סיסמה",
 	"CONFIRM_PASSWORD":"אמת סיסמתך",
 	"SIGNUP":"הירשם",
+	
+	"MY_PROFILE":"הפרופיל שלי",	
+	"EDIT":"ערוך את",
+	"PHONE":"טלפון",
+	"STREET":"רחוב",
+	"STREET_NUM":"מספר רחוב",
+	"CITY":"עיר",
+	"COUNTRY":"מדינה",
+	
 	"USER_NAME_IS_REQUIRED":"נדרש שם משתמש",
 	"FIRST_NAME_IS_REQUIRED":"נדרש שם פרטי",
 	"LAST_NAME_IS_REQUIRED":"שם משפחה נדרש",

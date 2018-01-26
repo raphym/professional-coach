@@ -1,0 +1,36 @@
+.m_title{
+    text-align: center;
+}
+
+.m_attributes{
+    color: blue;
+}
+
+.m_edit{
+    text-align: center;
+}
+
+.m_image{
+    width: 200px;
+    height: 200px;
+    /*align the image*/
+    display:block;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.m_image_edit{
+    width: 20px;
+    height: 20px;
+    display:block;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+m_title_edit{
+    text-align: center;
+}
+
+.m_push{
+    margin-bottom: 50px;
+}
