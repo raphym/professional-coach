@@ -6,29 +6,27 @@ var mongoose = require('mongoose');
 var mail = require("nodemailer").mail;
 var config_database = require('../../config/database');
 
-
-
 const DATABASE_ADDRESS = config_database.api + config_database.user + ':' + config_database.pswd + config_database.server + ':' + config_database.port + '/' + config_database.name;
 mongoose.Promise = global.Promise;
 // Connect to MongoDB
-// mongoose.connect(DATABASE_ADDRESS, { useMongoClient: true }, function(err,data){
-//     if(err)
-//     {
-//         console.log('err : ' + err);
-//     }
-//     else
-//     {
-//         console.log('Connected to Mlab!!!');        
-//     }
-//     });
+mongoose.connect(DATABASE_ADDRESS, { useMongoClient: true }, function(err,data){
+    if(err)
+    {
+        console.log('err : ' + err);
+    }
+    else
+    {
+        console.log('Connected to ', data.name ,' on port: ' ,data.port );   
+    }
+    });
 
 //connect to local database
-try {
-    mongoose.connect('localhost:27017/gab-coach');
-    console.log('Connected to local database!!!');
-} catch (error) {
-    console.log('Error to connect to the local database!!!');
-}
+// try {
+//     mongoose.connect('localhost:27017/gab-coach');
+//     console.log('Connected to local database!!!');
+// } catch (error) {
+//     console.log('Error to connect to the local database!!!');
+// }
 
 // Error handling
 const sendError = (err, res) => {

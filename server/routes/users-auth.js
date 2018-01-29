@@ -17,9 +17,6 @@ var User = require('../mongoose-models/user');
 //UsefulFunctions is the backend
 var UsefulFunctions = require('../classes/useful_functions');
 
-//fb configs credentials
-var fb_config = require('../../config/fb_config');
-
 var cors = require('cors');
 var bodyParser = require('body-parser');
 

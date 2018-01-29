@@ -46,8 +46,10 @@ export class AuthService {
         private fb: FacebookService
     ) {
 
+        //change for prod
+        //135809447088863
         let initParams: InitParams = {
-            appId: '135809447088863',
+            appId: '330446087441402',
             xfbml: true,
             version: 'v2.8'
         };
