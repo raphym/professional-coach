@@ -29,12 +29,6 @@ router.use('/', function (req, res, next) {
                 message: 'You are not authenticated'
             });
         }
-        if (decoded.user.levelRights < 200) {
-            return res.status(401).json({
-                title: 'No Authorized',
-                message: 'You are not an Admin'
-            });
-        }
         next();
     });
 });
@@ -83,5 +77,79 @@ router.get('/getUser', function (req, res, next) {
 });
 
 
+
+//edit the user
+router.post('/editUser', function (req, res, next) {
+
+    jwt.verify(req.cookies['token'], jwt_sign_pswd.SECRET, function (err, decoded) {
+        if (err) {
+            console.log('error');
+            console.log(err);
+            return res.status(401).json({
+                title: 'Not authenticated',
+                message: 'You are not authenticated'
+            });
+        }
+        //check if the user edited is the user currently connected
+        else if (req.body.id != decoded.user._id) {
+            return res.status(401).json({
+                title: 'Not authenticated',
+                message: 'You are not authenticated'
+            });
+        }
+        else {
+            User.findOne({ _id: req.body.id }, function (error, user) {
+                if (error) {
+                    console.log('error');
+                    console.log(error);
+                    return res.status(500).json({
+                        title: 'Error',
+                        message: 'An error has occured'
+                    });
+                }
+                else if (!user) {
+                    return res.status(500).json({
+                        title: 'Not found',
+                        message: 'cannot edit user',
+                    });
+                }
+                else {
+                    var labels = req.body.labels;
+                    var values = req.body.values;
+
+                    //prepare to update the fields
+                    var update = {};
+                    //update the fields
+                    for (var i = 0; i < labels.length; i++) {
+                        update[labels[i]] = values[i];
+                    }
+
+                    //execute the update
+                    user.update(
+                        { $set: update },
+                        function (err, success) {
+                            if (err) {
+                                console.log('error');
+                                console.log(err);
+                                return res.status(500).json({
+                                    title: 'Update Problem',
+                                    message: 'A problem has occured'
+                                });
+                            }
+                            if (success) {
+                                return res.status(200).json({
+                                    title: 'Success',
+                                    message: 'The user has been updated',
+                                });
+                            }
+                        }
+                    );
+                }
+            });
+        }
+
+    });
+
+});
 
 module.exports = router;

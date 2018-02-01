@@ -80,6 +80,7 @@
 	"MINIMUM_LENGTH_OF_SIXT_CHARACTERS_IS_REQUIRED":"Minimum length of 6 characters is required",
 	"PASSWORD_MISMATCH":"Password mismatch",
 	
-	"SIGNIN_PAGE":"Enter to the world of Fitness"
-
+	"SIGNIN_PAGE":"Enter to the world of Fitness",
+	"SAVE":"Save",
+	"CANCEL":"Cancel"
 }

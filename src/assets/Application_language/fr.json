@@ -77,6 +77,8 @@
 	"MINIMUM_LENGTH_OF_SIXT_CHARACTERS_IS_REQUIRED":"Une longueur minimale de 6 caractères est requise",
 	"PASSWORD_MISMATCH":"Non concordance des mots de passe",
 	
-	"SIGNIN_PAGE":"Entrez dans le monde de la fitness"
+	"SIGNIN_PAGE":"Entrez dans le monde de la fitness",
+	"SAVE":"Sauvegarder",
+	"CANCEL":"Annuler"
 
 }

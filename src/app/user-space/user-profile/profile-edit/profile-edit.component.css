@@ -1,0 +1,14 @@
+.m_title{
+    text-align: center;
+}
+.m_push{
+    margin-bottom: 50px;
+}
+.m_image{
+    width: 200px;
+    height: 200px;
+    /*align the image*/
+    display:block;
+    margin-left:auto;
+    margin-right:auto;
+}

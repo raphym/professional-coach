@@ -18,7 +18,7 @@
         <div class="m_push"></div>
         <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <img *ngIf="showImage" class="m_image" [src]="picture?.image" />
+                <img *ngIf="showImage" class="m_image" [src]="user?.picture" />
                 <img *ngIf="!showImage" class="m_image" src="../../../assets/Images/user-space/profile/profile.ico" />
             </div>
         </div>
@@ -81,6 +81,7 @@
         </div>
     </div>
     <div *ngIf="showEdit">
-        <profile-edit [user]="user" ></profile-edit>
+        <profile-edit [user]="user" [langDirection]="langDirection" [langTextAlign]="langTextAlign" (notifyEditFinish)="onFinishEdit($event)"
+            [showEdit]="showEdit"></profile-edit>
     </div>
 </div>

@@ -5,6 +5,7 @@ import { HomeComponent } from "./home/home.component";
 import { AuthGuardAdmin } from './auth/auth-guard-admin.service';
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
 import { GuestbookMessagesComponent } from './Guestbook/guestbook-messages.component';
+import { AuthGuardUserLogged } from './auth/auth-guard-userLogged.service';
 
 const appRoutes: Routes = [
 
@@ -19,7 +20,7 @@ const appRoutes: Routes = [
   ],
   exports: [RouterModule],
   declarations: [],
-  providers: [AuthGuardAdmin]
+  providers: [AuthGuardAdmin, AuthGuardUserLogged]
 })
 
 export class AppRoutingModule { }

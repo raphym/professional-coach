@@ -25,7 +25,6 @@ export class ArticleService {
     ) {
 
         //change for prod
-        //135809447088863
         let initParams: InitParams = {
             appId: '330446087441402',
             xfbml: true,

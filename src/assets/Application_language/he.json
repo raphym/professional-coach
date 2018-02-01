@@ -15,7 +15,7 @@
 		
 	"GABRIEL":"גבריאל מזוז",
 	"SPORT_COACH":"מאמן כושר גופני",
-	"GRADUATE_OF_WINGATE":"מוסמך בוינגייט ",
+	"GRADUATE_OF_WINGATE":"מוסמך בוינגייט",
 	"MANY_YEARS_IN_DOMAIN":"שנים רבות בתחום",
 	"SPECIALIZATION":"התמחות בבריאות של הגוף",
 	"STABILITY_COORDINATION":"יציבות וקואורדינציה",
@@ -79,6 +79,7 @@
 	"MINIMUM_LENGTH_OF_SIXT_CHARACTERS_IS_REQUIRED":"אורך מינימלי של 6 תווים נדרש",
 	"PASSWORD_MISMATCH":"סיסמה לא תואמת",
 	
-	"SIGNIN_PAGE":"כנס לעולם של פיטנס"
-	
+	"SIGNIN_PAGE":"כנס לעולם של פיטנס",
+	"SAVE":"שמור",
+	"CANCEL":"לבטל"
 }
