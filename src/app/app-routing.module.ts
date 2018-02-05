@@ -6,10 +6,13 @@ import { AuthGuardAdmin } from './auth/auth-guard-admin.service';
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
 import { GuestbookMessagesComponent } from './Guestbook/guestbook-messages.component';
 import { AuthGuardUserLogged } from './auth/auth-guard-userLogged.service';
+import { LogoutComponent } from './auth/logout.component';
+import { AuthGuardPreventIfAlreadyConnected } from './auth/auth-guard-prevent-if-already-connected.service';
 
 const appRoutes: Routes = [
 
   { path: '', component: HomeComponent },
+  { path: 'logout', component: LogoutComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 
@@ -20,7 +23,7 @@ const appRoutes: Routes = [
   ],
   exports: [RouterModule],
   declarations: [],
-  providers: [AuthGuardAdmin, AuthGuardUserLogged]
+  providers: [AuthGuardAdmin, AuthGuardUserLogged, AuthGuardPreventIfAlreadyConnected]
 })
 
 export class AppRoutingModule { }

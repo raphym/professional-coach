@@ -30,24 +30,14 @@ export class HeaderComponent implements OnInit {
         private router: Router) {
     }
 
-
-    //function to navigate to the anchor link contact-us
-    contact_us_link() {
-        this.router.navigate(['/'], { fragment: 'contact-us' });
-    }
-    //function to navigate to the anchor link about-us
-    about_us_link() {
-        this.router.navigate(['/'], { fragment: 'about-us' });
-    }
-
     //open the slide menu
     openSlideMenu() {
         document.getElementById('side-menu').style.width = '250px';
         //remove clicked dropdown content side
-        var dropdown_content_side1 = document.getElementById('d_done1');
+        // var dropdown_content_side1 = document.getElementById('d_done1');
         var dropdown_content_side2 = document.getElementById('d_done2');
         try {
-            dropdown_content_side1.classList.remove('dropdown_content_side_clicked');
+            // dropdown_content_side1.classList.remove('dropdown_content_side_clicked');
             dropdown_content_side2.classList.remove('dropdown_content_side_clicked');
 
         } catch (e) {
@@ -58,9 +48,9 @@ export class HeaderComponent implements OnInit {
     closeSlideMenu() {
         document.getElementById('side-menu').style.width = '0';
         //add clicked dropdown content side
-        var dropdown_content_side1 = document.getElementById('d_done1');
+        // var dropdown_content_side1 = document.getElementById('d_done1');
         var dropdown_content_side2 = document.getElementById('d_done2');
-        dropdown_content_side1.classList.add('dropdown_content_side_clicked');
+        // dropdown_content_side1.classList.add('dropdown_content_side_clicked');
         dropdown_content_side2.classList.add('dropdown_content_side_clicked');
     }
 

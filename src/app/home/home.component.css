@@ -2,75 +2,55 @@
     background: white;
    }
    
-   .anchor {
-       display: block;
-       position: relative;
-       top: -50px; 
-       visibility: hidden;
-     }
+.anchor {
+    display: block;
+    position: relative;
+    top: -50px; 
+    visibility: hidden;
+}
       
-   .carre{
-       height: 200px;
-       width: 100%;
-       padding-left: 8%;
-       padding-right:8%;
-       padding-top: 3%;
-       padding-bottom: 5%;
-       background-color: #ff8000;    
-   }
+.m_logo{
+   height: auto;
+    width: 100%;
+    display:block;
+    margin-left:auto;
+    margin-right:auto;
+}
    
-   .title{
-       color :rgba(248, 232, 28, 1);
-       font-size: 20px;
-       line-height:34px;
-       font-weight:600;
-   }
-
-   .betweenSection{
-       height: 50px;
-   }
+.betweenSection{
+    height: 50px;
+}
    
-   /* Extra small devices (portrait phones, less than 576px) */
+/* Extra small devices (portrait phones, less than 576px) */
 @media (max-width: 575px) { 
     .carre{
-        height: 160px;
-        width: 100%;
-        padding-left: 8%;
-        padding-right:8%;
-        padding-top: 3%;
-        padding-bottom: 5%;
-        background-color: #ff8000;    
+        padding-top: 180px;
     }
-
-    .quotation{
-        color: white;
-        font-family: Open Sans, sans-serif;
-        font-size: 15px;
-        line-height:20px;
-        font-weight:200;
+ 
+    ._before_intro{
+        height: 270px;
     }
-
-    .butPlay{
-        padding-top: 6%;
+    .m_intro{
+        font-size: 20px;
+         text-align: center;
     }
-
     .articles_section{
-     min-height: 400px;
+     min-height: 900px;
  }  
 }
 
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) and (max-width: 767px) { 
-    .quotation{
-        color: white;
-        font-family: Open Sans, sans-serif;
-        font-size: 20px;
-        line-height:30px;
-        font-weight:250;
-        width: 400px;
+    .carre{
+        padding-top: 172px;
     }
-    .butPlay{
-        padding-top: 2%;
+ 
+    ._before_intro{
+        height: 270px;
+    }
+    .m_intro{
+        font-size: 25px;
+         text-align: center;
     }
 
     .articles_section{
@@ -80,18 +60,17 @@
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) and (max-width: 991px) { 
-    .quotation{
-        color: white;
-        font-family: Open Sans, sans-serif;
-        font-size: 20px;
-        line-height:35px;
-        font-weight:300;
-        width: 400px;
+    .carre{
+        padding-top: 200px;
     }
-    .butPlay{
-        padding-top: 2%;
+ 
+    ._before_intro{
+        height: 290px;
     }
-
+    .m_intro{
+        font-size: 30px;
+         text-align: center;
+    }
     .articles_section{
      min-height: 600px;
  }    
@@ -99,17 +78,17 @@
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) and (max-width: 1199px) { 
-    .quotation{
-        color: white;
-        font-family: Open Sans, sans-serif;
-        font-size: 20px;
-        line-height:30px;
-        font-weight:350;
-        width: 400px;
-    }
 
-    .butPlay{
-        padding-top: 2%;
+    .carre{
+        padding-top: 190px;
+    }
+ 
+    ._before_intro{
+        height: 275px;
+    }
+    .m_intro{
+        font-size: 35px;
+         text-align: center;
     }
 
     .articles_section{
@@ -119,17 +98,16 @@
 
 /* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) { 
-    .quotation{
-        color: white;
-        font-family: Open Sans, sans-serif;
-        font-size: 20px;
-        line-height:40px;
-        font-weight:400;
-        width: 400px;
+    .carre{
+        padding-top: 175px;
     }
-
-    .butPlay{
-        padding-top: 2%;
+ 
+    ._before_intro{
+        height: 270px;
+    }
+    .m_intro{
+        font-size: 35px;
+         text-align: center;
     }
 
     .articles_section{

@@ -1,40 +1,63 @@
 <div style="min-height: 800px;" class="homePage">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="row carre">
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-0 col-0">
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <img class="m_logo" src="../../assets/Images/homePage/GfitLogo.png">
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-0 col-0">
+                    </div>
+                </div>
 
-    <div class="carre">
-        <h2 class="title">TURN FAT INTO FIT!</h2>
-        <div class="quotation">
-            Fitness is not a destination it is a way of life.
-        </div>
-    </div>
+                <div class="_before_intro">
+                </div>
+                <div class="row">
+                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-0 col-0">
+                    </div>
+                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12 col-12">
+                        <div class="m_intro">
+                            מפתח משפטית לרפובליקה שמו אם, מה וקשקש תיקונים ביוטכנולוגיה עזה, ב באגים זכויות מלא. ארץ היום בהבנה חבריכם דת, עמוד קסאם
+                            של ארץ. תנך מה עזרה פיסיקה. כתב מאמר עיצוב אדריכלות את, בה דפים בשפה הסביבה חפש, דת בקר קולנוע
+                            החופשית.
+                        </div>
+                    </div>
+                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-0 col-0">
+                    </div>
+                </div>
 
-    <div class="betweenSection"></div>
-    <!-- articles -->
-    <div class="container">
-        <div class="articles_section">
-            <app-articles-list></app-articles-list>
-            <div [style.direction]="langDirection" [style.text-align]="langTextAlign">
-                <br>
-                <div style="text-align:center;">
-                    <i (click)="loadMoreArticles()" style="cursor:pointer;" class="fa fa-get-pocket" aria-hidden="true">
-                        <span translate>LOAD_MORE_ARTICLES</span>
-                    </i>
+                <div class="betweenSection"></div>
+                <!-- articles -->
+                <div class="container">
+                    <div class="articles_section">
+                        <app-articles-list></app-articles-list>
+                        <div [style.direction]="langDirection" [style.text-align]="langTextAlign">
+                            <br>
+                            <div style="text-align:center;">
+                                <i (click)="loadMoreArticles()" style="cursor:pointer;" class="fa fa-get-pocket" aria-hidden="true">
+                                    <span translate>LOAD_MORE_ARTICLES</span>
+                                </i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="betweenSection"></div>
+                <!-- about us -->
+                <div class="container">
+                    <div class="anchor" id="about-us"></div>
+                    <app-about></app-about>
+                </div>
+
+                <div class="betweenSection"></div>
+                <!-- contact us -->
+                <div class="container">
+                    <div class="anchor" id="contact-us"></div>
+                    <app-contact-me></app-contact-me>
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="betweenSection"></div>
-    <!-- about us -->
-    <div class="container">
-        <div class="anchor" id="about-us"></div>
-        <app-about></app-about>
-    </div>
-
-    <div class="betweenSection"></div>
-    <!-- contact us -->
-    <div class="container">
-        <div class="anchor" id="contact-us"></div>
-        <app-contact-me></app-contact-me>
-    </div>
-
 </div>

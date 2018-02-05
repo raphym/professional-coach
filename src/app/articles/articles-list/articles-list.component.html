@@ -1,6 +1,3 @@
-<h3 style="text-align: center;">
-  <span translate>OUR_ARTICLES</span>
-</h3>
 <div *ngIf="showButtonOption">
   <div class="row hbDir">
     <div class="col-md-2">
@@ -71,7 +68,7 @@
 <br>
 <div *ngFor="let article of articles,let i = index">
   <app-preview-article title="{{article?.title}}" image="{{article?.image}}" id="{{article?._id}}" intro="{{article?.intro}}"
-    date="{{article?.date}}"></app-preview-article>
+    date="{{article?.date}}" index="{{i}}"></app-preview-article>
   <br>
 </div>
 <div class="row" *ngIf="loading" style="padding-top:20px;">

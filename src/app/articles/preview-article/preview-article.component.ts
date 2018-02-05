@@ -13,6 +13,9 @@ export class PreviewArticleComponent implements OnInit {
   @Input() private id;
   @Input() private intro;
   @Input() private date;
+  @Input() private index;
+
+  private pair:boolean = false;
 
   constructor(private router: Router) { }
 
@@ -22,6 +25,9 @@ export class PreviewArticleComponent implements OnInit {
     this.router.navigateByUrl(path);
   }
   ngOnInit() {
+    // console.log("index: " + this.index);
+    if(this.index % 2==0)
+      this.pair=true;
   }
 
 }

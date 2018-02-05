@@ -6,6 +6,10 @@ body{
   display: none!important;
 }
 
+a.nav-link{
+  color:black;
+}
+
 .push_end_header{
   height: 32px;
 }
@@ -16,9 +20,7 @@ body{
 }
 
 .flags{
-  padding-top: 8px;
-  /* padding-left: 1%;
-  padding-right: 1%; */
+  padding-top: 20px;
   cursor: pointer;
 }
 
@@ -76,25 +78,7 @@ body{
     margin-left:50px;
   }
   
-  /* screen size*/
-  /* origin was 568px*/
-  /*small screen*/
-  @media(max-width:895px){
-    .navbare-nav{display:none}
 
-    .but_side-nav_navbare{
-      background: #343a40;
-      height:56px;
-    }
-  }
-  
-  /*big screen*/
-  @media(min-width:895px){
-    .but{display:none}
-    .side-nav{display:none}
-    .but_side-nav_navbare{display:none}
-
-  }
   
 /* dropdown*/
   .dropdown {
@@ -176,3 +160,45 @@ body{
 .dropdown_side:hover .dropdown-content_side {
   display: block;
 }
+
+
+/* configuration of thw size of the screen */
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575px) { 
+  .navbare-nav{display:none}
+
+  .but_side-nav_navbare{
+    background: white;
+    color: black;
+    height:56px;
+  }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767px) { 
+  .but{display:none}
+  .side-nav{display:none}
+  .but_side-nav_navbare{display:none}
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991px) { 
+  .but{display:none}
+  .side-nav{display:none}
+  .but_side-nav_navbare{display:none}
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199px) { 
+  .but{display:none}
+  .side-nav{display:none}
+  .but_side-nav_navbare{display:none}
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) { 
+  .but{display:none}
+  .side-nav{display:none}
+  .but_side-nav_navbare{display:none}
+}
+

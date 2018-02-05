@@ -1,54 +1,46 @@
 <nav class="fixed-top">
 
   <!-- regular nav bar -->
-  <nav class="navbare-nav navbar navbar-expand navbar-dark bg-dark" [style.direction]="langDirection">
-    <a class="navbar-brand" routerLink="/">G-FIT</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
-      aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown" [style.text-align]="langTextAlign">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a routerLink="/" class="nav-link" translate>HOME_PAGE</a>
-        </li>
-        <li class="nav-item">
-          <a (click)="about_us_link()" style="cursor:pointer;" class="nav-link" translate>ABOUT_US</a>
-        </li>
-
-        <li class="nav-item">
-          <a (click)="contact_us_link()" style="cursor:pointer;" class="nav-link" translate>CONTACT_US</a>
-        </li>
-
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-            translate>
-            MY_SPACE
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a routerLink="/signup" *ngIf="!isConnect" class="dropdown-item" translate>REGISTER</a>
-            <a routerLink="/signin" *ngIf="!isConnect" class="dropdown-item" translate>LOGIN</a>
-            <a routerLink="/admin" *ngIf="isAdmin" class="dropdown-item" translate>ADMINISTRATION_SPACE</a>
-            <a (click)="onLogout(true)" *ngIf="isConnect" class="dropdown-item" translate>LOGOUT</a>
-          </div>
-        </li>
-
-        <li class="flags">
-          <span class="flag-icon flag-icon-il" (click)="changeLangage('he')"></span>
-          <span class="flag-icon flag-icon-us" (click)="changeLangage('en')"></span>
-          <span class="flag-icon flag-icon-fr" (click)="changeLangage('fr')"></span>
-        </li>
-      </ul>
+  <div class="row navbare-nav" style="background-color: white!important; text-align: center;">
+    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
+      <div class="flags">
+        <span class="flag-icon flag-icon-il" (click)="changeLangage('he')"></span>
+        <span class="flag-icon flag-icon-us" (click)="changeLangage('en')"></span>
+        <span class="flag-icon flag-icon-fr" (click)="changeLangage('fr')"></span>
+      </div>
     </div>
-  </nav>
+    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10">
+      <nav class="navbare-nav navbar navbar-expand navbar-white bg-white" [style.direction]="langDirection">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+          aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown" [style.text-align]="langTextAlign">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a routerLink="/" class="nav-link" translate>HOME_PAGE</a>
+            </li>
+
+            <li class="nav-item">
+              <a routerLink="/" class="nav-link" fragment="about-us" translate>ABOUT_US</a>
+            </li>
+
+            <li class="nav-item">
+              <a routerLink="/" fragment="contact-us" class="nav-link" translate>CONTACT_US</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </div>
 
   <!-- button top open the side nav bar -->
   <nav class="but_side-nav_navbare">
     <span class="open-slide but">
       <svg (click)="openSlideMenu()" class="butSide" width="30" height="30">
-        <path d="M0,5 30,5" stroke="#fff" stroke-width="5" />
-        <path d="M0,14 30,14" stroke="#fff" stroke-width="5" />
-        <path d="M0,23 30,23" stroke="#fff" stroke-width="5" />
+        <path d="M0,5 30,5" stroke="#000000" stroke-width="5" />
+        <path d="M0,14 30,14" stroke="#000000" stroke-width="5" />
+        <path d="M0,23 30,23" stroke="#000000" stroke-width="5" />
       </svg>
     </span>
   </nav>
@@ -57,33 +49,21 @@
   <div id="side-menu" class="side-nav">
     <a class="btn-close" style="cursor:pointer;" (click)="closeSlideMenu()">&times;</a>
 
-    <li class="flags" style="text-align: center;" id="d_done2">
-      <span class="flag-icon flag-icon-il" (click)="changeLangage('he')" (click)="closeSlideMenu()"></span>
-      <span class="flag-icon flag-icon-us" (click)="changeLangage('en')" (click)="closeSlideMenu()"></span>
-      <span class="flag-icon flag-icon-fr" (click)="changeLangage('fr')" (click)="closeSlideMenu()"></span>
-    </li>
-
     <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
       <a routerLink="/" translate [style.text-align]="langTextAlign" (click)="closeSlideMenu()">HOME_PAGE</a>
     </li>
 
     <li routerLinkActive="active">
-      <a style="cursor:pointer;" (click)="about_us_link()" translate [style.text-align]="langTextAlign" (click)="closeSlideMenu()">ABOUT_US</a>
+      <a routerLink="/" fragment="about-us" translate [style.text-align]="langTextAlign" (click)="closeSlideMenu()">ABOUT_US</a>
     </li>
     <li routerLinkActive="active">
-      <a style="cursor:pointer;" (click)="contact_us_link()" translate [style.text-align]="langTextAlign" (click)="closeSlideMenu()">CONTACT_US</a>
+      <a routerLink="/" fragment="contact-us" translate [style.text-align]="langTextAlign" (click)="closeSlideMenu()">CONTACT_US</a>
     </li>
 
-    <li class="push_down">
-      <div class="dropdown_side" [style.float]="floatDirection">
-        <a translate>MY_SPACE</a>
-        <div class="dropdown-content_side" id="d_done1">
-          <a routerLink="/signup" *ngIf="!isConnect" (click)="closeSlideMenu()" translate>REGISTER</a>
-          <a routerLink="/signin" *ngIf="!isConnect" (click)="closeSlideMenu()" translate>LOGIN</a>
-          <a routerLink="/admin" *ngIf="isAdmin" (click)="closeSlideMenu()" translate>ADMINISTRATION_SPACE</a>
-          <a (click)="onLogout(true)" *ngIf="isConnect" (click)="closeSlideMenu()" translate>LOGOUT</a>
-        </div>
-      </div>
+    <li class="flags" style="text-align: center;" id="d_done2">
+      <span class="flag-icon flag-icon-il" (click)="changeLangage('he')" (click)="closeSlideMenu()"></span>
+      <span class="flag-icon flag-icon-us" (click)="changeLangage('en')" (click)="closeSlideMenu()"></span>
+      <span class="flag-icon flag-icon-fr" (click)="changeLangage('fr')" (click)="closeSlideMenu()"></span>
     </li>
   </div>
 
