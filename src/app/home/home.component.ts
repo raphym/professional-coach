@@ -4,6 +4,7 @@ import { ArticleService } from '../articles/article-service';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
+const HEADER_SIZE = 56;
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -13,6 +14,7 @@ export class HomeComponent implements OnInit {
 
   private langDirection;
   private langTextAlign;
+  private heightPage = window.innerHeight - HEADER_SIZE; 
   //for the anchor in the page
   private scrollExecuted: boolean = false;
   constructor(private usefulService: UsefulService,
@@ -29,6 +31,10 @@ export class HomeComponent implements OnInit {
     );
     //set langage
     this.usefulService.initLangage();
+  }
+
+  onResize() {
+    this.heightPage = window.innerHeight - HEADER_SIZE; 
   }
 
   ngAfterViewChecked() {

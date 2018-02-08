@@ -1,6 +1,20 @@
 body{
     font-family:"Arial", Serif;    
   }
+/* side of the side nav */
+.sideLeft{
+  left:0;
+}
+.sideRight{
+  right:0;
+}
+/* side of the close button of the side nav */
+.sideLeftButClose{
+  left:22px;
+}
+.sideRightButClose{
+  right:22px;
+}
 
 .dropdown_content_side_clicked{
   display: none!important;
@@ -37,7 +51,8 @@ a.nav-link{
     position:fixed;
     z-index:1;
     top:0;
-    left:0;
+    /* left:0; */
+    /* right: 0; */
     background-color:#111;
     /* opacity:0.9; */
     overflow-x:hidden;
@@ -73,9 +88,7 @@ a.nav-link{
   .side-nav .btn-close{
     position:absolute;
     top:0;
-    right:22px;
     font-size:36px;
-    margin-left:50px;
   }
   
 

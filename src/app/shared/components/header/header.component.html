@@ -35,7 +35,7 @@
   </div>
 
   <!-- button top open the side nav bar -->
-  <nav class="but_side-nav_navbare">
+  <nav class="but_side-nav_navbare" [style.text-align]="langTextAlign">
     <span class="open-slide but">
       <svg (click)="openSlideMenu()" class="butSide" width="30" height="30">
         <path d="M0,5 30,5" stroke="#000000" stroke-width="5" />
@@ -47,7 +47,7 @@
 
   <!-- side nav bar -->
   <div id="side-menu" class="side-nav">
-    <a class="btn-close" style="cursor:pointer;" (click)="closeSlideMenu()">&times;</a>
+    <a class="btn-close" id="btn_close" style="cursor:pointer;" (click)="closeSlideMenu()">&times;</a>
 
     <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
       <a routerLink="/" translate [style.text-align]="langTextAlign" (click)="closeSlideMenu()">HOME_PAGE</a>

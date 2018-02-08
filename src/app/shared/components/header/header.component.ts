@@ -34,23 +34,16 @@ export class HeaderComponent implements OnInit {
     openSlideMenu() {
         document.getElementById('side-menu').style.width = '250px';
         //remove clicked dropdown content side
-        // var dropdown_content_side1 = document.getElementById('d_done1');
         var dropdown_content_side2 = document.getElementById('d_done2');
         try {
-            // dropdown_content_side1.classList.remove('dropdown_content_side_clicked');
             dropdown_content_side2.classList.remove('dropdown_content_side_clicked');
-
-        } catch (e) {
-
-        }
+        } catch (e) { }
     }
     //close the slide menu
     closeSlideMenu() {
         document.getElementById('side-menu').style.width = '0';
         //add clicked dropdown content side
-        // var dropdown_content_side1 = document.getElementById('d_done1');
         var dropdown_content_side2 = document.getElementById('d_done2');
-        // dropdown_content_side1.classList.add('dropdown_content_side_clicked');
         dropdown_content_side2.classList.add('dropdown_content_side_clicked');
     }
 
@@ -62,12 +55,45 @@ export class HeaderComponent implements OnInit {
             this.floatDirection = 'right';
             this.langDirection = 'rtl';
             this.margLeft = "-40";
+            /* side of the side nav */
+            var side_nav = document.getElementById('side-menu');
+            try {
+                side_nav.classList.add('sideRight');
+            } catch (e) { }
+            try {
+                side_nav.classList.remove('sideLeft');
+            } catch (e) { }
+            /* side of the close button of the side nav */
+            var btn_close = document.getElementById('btn_close');
+            try {
+                btn_close.classList.add('sideLeftButClose');
+            } catch (e) { }
+            try {
+                btn_close.classList.remove('sideRightButClose');
+            } catch (e) { }
         }
 
         else {
             this.floatDirection = 'left';
             this.langDirection = 'ltr';
             this.margLeft = "0";
+            /* side of the side nav */
+            var side_nav = document.getElementById('side-menu');
+            try {
+                side_nav.classList.add('sideLeft');
+            } catch (e) { }
+            try {
+                side_nav.classList.add('sideRight');
+            } catch (e) { }
+            /* side of the close button of the side nav */
+
+            var btn_close = document.getElementById('btn_close');
+            try {
+                btn_close.classList.add('sideRightButClose');
+            } catch (e) { }
+            try {
+                btn_close.classList.remove('sideLeftButClose');
+            } catch (e) { }
         }
     }
 
@@ -85,7 +111,7 @@ export class HeaderComponent implements OnInit {
             }
         );
         //set langage
-        this.usefulService.initLangage();
+        this.changeLangage('he');
 
         //User Login Event
         this.authService.userLogInEvent.subscribe(
@@ -107,7 +133,6 @@ export class HeaderComponent implements OnInit {
             }
         );
 
-
         //workaround  to force the reload on the same page
         //with router.navigate
         this.router.routeReuseStrategy.shouldReuseRoute = function () {
@@ -125,7 +150,6 @@ export class HeaderComponent implements OnInit {
         //call the function IsLoggedIn 
         this.isLoggedIn();
     }
-
     //function which call the authService to check if connected
     isLoggedIn() {
         var token = this.cookieService.get('token');
