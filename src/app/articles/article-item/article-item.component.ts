@@ -21,6 +21,7 @@ export class ArticleItemComponent implements OnInit {
   private showImage: boolean = false;
   private showEdit: boolean = false;
   private display: string = 'none';
+  private articleValid: boolean = false;
   private url: string = 'http://localhost:3000/';
 
   constructor(private articleService: ArticleService,
@@ -50,6 +51,8 @@ export class ArticleItemComponent implements OnInit {
               this.showImage = true;
             document.getElementById('theContent').innerHTML = this.article.content;
             this.url += this.router.url;
+            //init the toggle valid article
+            this.articleValid = this.article.valid;
             //show the article
             this.display = 'block';
           },
@@ -57,6 +60,7 @@ export class ArticleItemComponent implements OnInit {
             //disable the loader
             this.loaderService.disableLoader();
             console.error(error)
+            this.errorService.handleError(error);
           }
           );
       });
@@ -106,6 +110,29 @@ export class ArticleItemComponent implements OnInit {
     ).catch(function (error) {
       console.log(error);
     })
+  }
+
+  //toogle validArticle
+  validateArticle(event) {
+    var validation = event.target.checked;
+    //enable the loader
+    this.loaderService.enableLoader();
+    var request_validation = { id: this.id, validation: validation };
+
+    this.articleService.validateArticle(request_validation).subscribe(
+      data => {
+        //disable the loader
+        this.loaderService.disableLoader();
+        this.successService.handleSuccess(data);
+      },
+      error => {
+        //disable the loader
+        this.loaderService.disableLoader();
+        console.log(error);
+        this.errorService.handleError(error);
+      }
+    );
+
   }
 
 }

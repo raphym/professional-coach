@@ -7,14 +7,21 @@
             <h4>Admin Management</h4>
             <button type="button" (click)="onEdit()" class="btn btn-outline-primary">Edit</button>
             <button type="button" (click)="onDelete()" class="btn btn-outline-danger">Delete</button>
+            <br>
+            <br>
+            <!-- Rounded switch -->
+            <label class="switch">
+              <input type="checkbox" [ngModel]="articleValid" (change)="validateArticle($event)">
+              <span class="slider round"></span>
+            </label>
             <hr>
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-md-12" style="padding-top:15px;">
-          <i *ngIf="isItAdmin()" class="fa fa-pencil-square-o" style="margin: auto;width: 100%;text-align: center;" (click)="onShowEdit()"
-            aria-hidden="true"></i>
+          <i *ngIf="isItAdmin()" class="fa fa-pencil-square-o" style="margin: auto;width: 100%;text-align: center;cursor: pointer;"
+            (click)="onShowEdit()" aria-hidden="true"></i>
           <h3 class="text-center">
             {{article?.title}}
           </h3>

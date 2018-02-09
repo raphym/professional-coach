@@ -14,6 +14,7 @@ export class ArticleService {
     GET_Article_ADDRESS = 'http://localhost:3000/article/getArticle';
     GET_LAST_Article_ADDRESS = 'http://localhost:3000/article/getNewLastArticle';
     DELETE_Article_ADDRESS = 'http://localhost:3000/article/deleteArticle';
+    VALIDATE_Article_ADDRESS = 'http://localhost:3000/article/validateArticle';
 
     articles: Article[];
     //EventEmitter to load more articles
@@ -74,7 +75,8 @@ export class ArticleService {
                     result.obj.image,
                     result.obj.content,
                     result.obj.intro,
-                    result.obj.date);
+                    result.obj.date,
+                    result.obj.valid);
                 //this.articles.push(article);
                 return response.json().my_response;
             })
@@ -109,7 +111,8 @@ export class ArticleService {
                     result.obj.image,
                     result.obj.content,
                     result.obj.intro,
-                    result.obj.date);
+                    result.obj.date,
+                    result.obj.valid);
                 // this.articles.push(article);
                 return response.json().my_response;
             })
@@ -130,6 +133,30 @@ export class ArticleService {
             });
     }
 
+    validateArticle(request_validation) {
+
+        const body = JSON.stringify(request_validation);
+        const headers = new Headers({ 'Content-Type': 'application/json' });
+
+        return this.http.post(this.VALIDATE_Article_ADDRESS, body, { headers: headers })
+            .map((response: Response) => {
+                return response.json().my_response;
+            })
+            .catch((error: Response) => {
+
+                if (error.status == 413) {
+                    var personalError = {
+                        title: 'Error occurred (Status Code : ' + error.status + ')',
+                        error: { message: error.statusText },
+                    }
+                    return Observable.throw(personalError)
+                }
+                else {
+                    console.log(error);
+                    return Observable.throw(error);
+                }
+            });
+    }
 
     getArticles() {
         return this.http.get(this.GET_Articles_ADDRESS)
@@ -143,7 +170,8 @@ export class ArticleService {
                         article.image,
                         article.content,
                         article.intro,
-                        article.date));
+                        article.date,
+                        article.valid));
                 }
                 this.articles = transformedArticles;
                 return transformedArticles;
@@ -168,7 +196,8 @@ export class ArticleService {
                     article.image,
                     article.content,
                     article.intro,
-                    article.date);
+                    article.date,
+                    article.valid);
                 return transformedArticle;
             })
             .catch((error: Response) => {

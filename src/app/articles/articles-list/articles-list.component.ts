@@ -117,6 +117,8 @@ export class ArticlesListComponent implements OnInit {
       },
       error => {
         console.log(error);
+        //disable the loader
+        this.loading = false;
       }
       );
   }

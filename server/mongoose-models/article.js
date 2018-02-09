@@ -7,7 +7,8 @@ var schema = new Schema({
     image: { type: String, required: false },
     content: { type: String, required: true },
     intro: { type: String, required: true },
-    date: { type: Date, required: true }
+    date: { type: Date, required: true },
+    valid: { type: Boolean, required: true }
 });
 
 schema.plugin(mongooseUniqueValidator);
