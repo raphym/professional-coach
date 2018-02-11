@@ -14,6 +14,7 @@ var userSpaceRoutes = require('./server/routes/user-space');
 
 var mailService = require('./server/routes/mail-system');
 var article = require('./server/routes/article');
+var social_fb = require('./server/routes/social/facebook');
 
 
 // API file for interacting with MongoDB
@@ -53,6 +54,8 @@ app.use('/user-space', userSpaceRoutes);
 
 app.use('/sendmail', mailService);
 app.use('/article', article);
+app.use('/social_fb', social_fb);
+
 
 app.use('/', appRoutes);
 

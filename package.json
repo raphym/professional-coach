@@ -37,6 +37,7 @@
     "cors": "^2.8.4",
     "debug": "^3.1.0",
     "express": "^4.16.2",
+    "fb": "^2.0.0",
     "flag-icon-css": "^2.9.0",
     "froala-editor": "^2.7.2",
     "handlebars": "^4.0.11",

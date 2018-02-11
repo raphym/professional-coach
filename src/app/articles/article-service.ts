@@ -46,6 +46,7 @@ export class ArticleService {
             });
 
     }
+
     getPartOfArticles(wantedData) {
         const headers = new Headers({ 'Content-Type': 'application/json' });
 
@@ -59,8 +60,6 @@ export class ArticleService {
             });
     }
 
-
-
     addArticle(article: Article) {
 
         const body = JSON.stringify(article);
@@ -68,16 +67,6 @@ export class ArticleService {
 
         return this.http.post(this.ADD_Article_ADDRESS, body, { headers: headers })
             .map((response: Response) => {
-                const result = response.json();
-                const article = new Article(
-                    result.obj._id,
-                    result.obj.title,
-                    result.obj.image,
-                    result.obj.content,
-                    result.obj.intro,
-                    result.obj.date,
-                    result.obj.valid);
-                //this.articles.push(article);
                 return response.json().my_response;
             })
             .catch((error: Response) => {
@@ -104,16 +93,6 @@ export class ArticleService {
 
         return this.http.post(this.UPDATE_Article_ADDRESS, body, { headers: headers })
             .map((response: Response) => {
-                const result = response.json();
-                const article = new Article(
-                    result.obj._id,
-                    result.obj.title,
-                    result.obj.image,
-                    result.obj.content,
-                    result.obj.intro,
-                    result.obj.date,
-                    result.obj.valid);
-                // this.articles.push(article);
                 return response.json().my_response;
             })
             .catch((error: Response) => {

@@ -34,6 +34,7 @@ import { PreviewArticleComponent } from './articles/preview-article/preview-arti
 import { ArticleService } from './articles/article-service';
 import { ArticleModule } from './articles/article.module';
 import { UserSpaceModule } from './user-space/userSpace.module';
+import { ThankBookModule } from './thank-book/thank-book.module';
 
 //export funct of angular2-jwt
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -73,6 +74,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     SharedModule,
     ArticleModule,
     UserSpaceModule,
+    ThankBookModule,
     AppRoutingModule,
 
   ],

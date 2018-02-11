@@ -1,0 +1,4 @@
+<div *ngFor="let thankMessage of thankMessagesArray">
+  <thank-message [createdTime]='thankMessage.created_time' [rating]='thankMessage.rating' [reviewText]="thankMessage.review_text"
+    [name]="thankMessage.name"></thank-message>
+</div>
