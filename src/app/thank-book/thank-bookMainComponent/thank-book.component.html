@@ -1,4 +1,22 @@
-<div *ngFor="let thankMessage of thankMessagesArray">
-  <thank-message [createdTime]='thankMessage.created_time' [rating]='thankMessage.rating' [reviewText]="thankMessage.review_text"
-    [name]="thankMessage.name"></thank-message>
+<div class="container">
+  <div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+      <div class="row" style="text-align: center;">
+        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1">
+          <div style="height:170px;"></div>
+          <i class="fa fa-arrow-circle-left m_but" (click)="previousClicked()"></i>
+        </div>
+        <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10">
+          <div *ngIf="initiate" class="m_box">
+            <thank-message [createdTime]='thankMessage.createdTime' [rating]='thankMessage.rating' [reviewText]="thankMessage.reviewText"
+              [name]="thankMessage.name"></thank-message>
+          </div>
+        </div>
+        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1">
+          <div style="height:170px;"></div>
+          <i class="fa fa-arrow-circle-right m_but" (click)="nextClicked()"></i>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

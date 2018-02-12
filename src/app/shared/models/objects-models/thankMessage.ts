@@ -1,13 +1,13 @@
 export class ThankMessage {
-    created_time: string;
+    createdTime: string;
     rating: number;
-    review_text: string;
+    reviewText: string;
     name: string;
 
-    constructor(created_time: string, rating: number, review_text: string, name: string) {
-        this.created_time = created_time;
+    constructor(createdTime: string, rating: number, reviewText: string, name: string) {
+        this.createdTime = createdTime;
         this.rating = rating;
-        this.review_text = review_text;
+        this.reviewText = reviewText;
         this.name = name;
     }
 }

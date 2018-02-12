@@ -1,4 +1,14 @@
-.wrapper{
-    width: 60%;
-    margin: 60px auto;
-  }
+.m_box{
+  display: table-cell;
+  height: 400px;
+  vertical-align: middle;
+  text-align: center;
+  width: 700px;
+  background-color: #5F9EA0;
+}
+
+.m_but{
+  font-size:48px;
+  color:black;
+  cursor: pointer;
+}

@@ -9,10 +9,18 @@ import { ThankMessage } from '../../shared/models/objects-models/thankMessage';
 })
 export class ThankBookComponent implements OnInit {
 
+  private initiate: boolean = false;
   private thankMessagesArray: ThankMessage[] = [];
+  private thankMessage: ThankMessage;
+  private cursorPosition: number = 0;
+  private maxCursorPosition: number = 0;
   constructor(private thankBookService: ThankBookService) { }
 
   ngOnInit() {
+    this.init();
+  }
+
+  init() {
     this.thankBookService.getFbReviews().subscribe(
       data => {
         var the_data = data.data;
@@ -20,6 +28,13 @@ export class ThankBookComponent implements OnInit {
           var thankMessage: ThankMessage = new ThankMessage(the_data[i].created_time, the_data[i].rating, the_data[i].review_text, the_data[i].reviewer.name);
           this.thankMessagesArray.push(thankMessage);
         }
+
+        //update the value of the max
+        this.maxCursorPosition = this.thankMessagesArray.length - 1;
+        //set the first thankMessage
+        this.setPosition();
+        //initiate the display
+        this.initiate = true;
       },
       error => {
         console.log(error);
@@ -27,4 +42,25 @@ export class ThankBookComponent implements OnInit {
     );
   }
 
+  setPosition() {
+    this.thankMessage = this.thankMessagesArray[this.cursorPosition];
+  }
+
+  previousClicked() {
+    if (this.cursorPosition <= 0)
+      this.cursorPosition = this.maxCursorPosition;
+    else
+      this.cursorPosition--;
+
+    this.setPosition();
+  }
+
+  nextClicked() {
+    if (this.cursorPosition >= this.maxCursorPosition)
+      this.cursorPosition = 0;
+    else
+      this.cursorPosition++;
+
+    this.setPosition();
+  }
 }
