@@ -1,14 +1,11 @@
-<div class="container" style="margin: auto; padding:20px;" [style.direction]="langDirection" [style.text-align]="langTextAlign">
+<div class="container-fluid" style="margin: auto; padding:20px;" [style.direction]="langDirection" [style.text-align]="langTextAlign">
   <h1 style="text-align:center;" translate>CONTACT_US</h1>
   <br>
   <br>
   <div class="row">
-    <div class="col-md-1 col-lg-1">
-    </div>
-    <div class="col-md-6 col-lg-6">
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
       <ng-template [ngIf]="!envoyer">
         <form #f="ngForm" (ngSubmit)="onSubmit(f)">
-          <h3 translate>ANY_QUERY_POP_US_A_MESSAGE</h3>
           <div class="form-group">
             <label for="name" translate>NAME</label>
             <input type="text" id="name" name="name" [(ngModel)]="name" required [readonly]="connected" class="form-control" [style.text-align]="langTextAlign">
@@ -34,15 +31,12 @@
         </ng-template>
       </ng-template>
     </div>
-    <div class="col-md-4 col-lg-4">
-      <h3>
-        <span translate>WHERE_ARE_US</span> ?</h3>
-      <div class="outsidegoogle gmap">
-        <iframe class="googlemap" src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d13566.15753866934!2d35.203464883182775!3d31.783046750534258!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e2!4m5!1s0x150329d3dc03559f%3A0xe8536e10d92ae82f!2sWaldorf+Astoria+Jerusalem%2C+26-28+Agron+Street%2C+Jerusalem%2C+9419008!3m2!1d31.7775447!2d35.221895599999996!4m5!1s0x1502d6303546d5f7%3A0x498456dccedf5c0e!2sThe+International+Convention+Center+(ICC)+-+Binyanei+HaUma%2C+Jerusalem!3m2!1d31.786442299999997!2d35.2023975!5e0!3m2!1sen!2sil!4v1508946708040"
-          width="300" height="300" frameborder="0" allowfullscreen></iframe>
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+      <div class="m_intro">
+        בא ליצור שגרת פעילות ספורטיבית כאורח חיים, לקבל הרגשה עצמית יותר טובה, גוף יותר חזק ויותר בריא, כי אין יותר כייף מלהרגיש
+        שאתה משקיע בעצמך! מעוניין בחיזוק עיצוב וחיטוב הגוף שלך? להוריד במשקל? להעלות מסת שריר? לעבוד על הסיבולת לב ריאה והגמישות
+        שלך? רוצה לשמוע עוד ? תשאיר לנו פרטים ונחזור אליך בהקדם !
       </div>
-    </div>
-    <div class="col-md-1 col-lg-1">
     </div>
   </div>
 </div>

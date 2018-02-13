@@ -22,34 +22,47 @@
     100% { transform: rotate(360deg); }
   }
 
-
-@media only screen and (max-width: 767px) 
-{
-  .outsidegoogle {
-    height: 0;
-    overflow: hidden;
-    margin-top: 20px;
-    padding-bottom: 60%; /* aspect ratio */
-    position: relative;
-  }
-
-  .googlemap {
-    border: 0;
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 100%;
-    border:5px;border-style:solid;border-color:#A9A9A9;    
+  /* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575px) { 
+  .m_intro{
+      font-size: 25px;
+      color:white;
   }
 }
 
-@media only screen and (min-width: 767px) 
-{
-  .outsidegoogle{
-    margin-top: 80px;
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767px) { 
+  .m_intro{
+      text-align: center;
+      font-size: 15px;
+      color:white;
   }
-  .googlemap {
-    border:5px;border-style:solid;border-color:#A9A9A9;    
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991px) { 
+  .m_intro{
+      text-align: center;
+      font-size: 20px;
+      color:white;
   }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199px) { 
+  .m_intro{
+      text-align: center;
+      font-size: 22px;
+      color:white;
+  }
+
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) { 
+  .m_intro{
+      text-align: center;
+      font-size: 25px;
+      color:white;
+  }  
 }

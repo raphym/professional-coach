@@ -1,7 +1,17 @@
 .homePage{
     background: white;
    }
-   
+
+.loadMore{
+    height: 70px;
+    background-color: #00A99D;
+    border: none;
+    text-align: center;
+    padding-top: 8px;
+    color: white;
+    font-weight: bold;
+    font-size: 35px;
+}
 .anchor {
     display: block;
     position: relative;
@@ -30,13 +40,22 @@
     ._before_intro{
         height: 270px;
     }
+
     .m_intro{
-        font-size: 20px;
-         text-align: center;
+        background-color: #00A99D;
+        color:white;
+        text-align: center;
+        font-size: 22px;
+        line-height: 200%;
+        padding-top: 66px;
     }
+
     .articles_section{
      min-height: 900px;
  }  
+ m_before_intro{
+    background-color: #00A99D;
+ }
 }
 
 /* Small devices (landscape phones, 576px and up) */
@@ -48,13 +67,21 @@
     ._before_intro{
         height: 270px;
     }
+
     .m_intro{
+        background-color: #00A99D;
+        text-align: center;
         font-size: 25px;
-         text-align: center;
+        color:white;
+        line-height: 200%;
+        padding-top: 35px;
     }
 
     .articles_section{
      min-height: 400px;
+ }
+ m_before_intro{
+    background-color: #00A99D;
  }
 }
 
@@ -67,13 +94,22 @@
     ._before_intro{
         height: 290px;
     }
+
     .m_intro{
-        font-size: 30px;
-         text-align: center;
+        background-color: #00A99D;
+        text-align: center;
+        font-size: 26px;
+        color:white;
+        line-height: 200%;
+        padding-top: 46px;
     }
+
     .articles_section{
      min-height: 600px;
  }    
+ m_before_intro{
+    background-color: #00A99D;
+ }
 }
 
 /* Large devices (desktops, 992px and up) */
@@ -86,14 +122,22 @@
     ._before_intro{
         height: 275px;
     }
+
     .m_intro{
-        font-size: 35px;
-         text-align: center;
+        background-color: #00A99D;
+        text-align: center;
+        font-size: 29px;
+        color:white;
+        line-height: 200%;
+        padding-top: 42px;
     }
 
     .articles_section{
      min-height: 800px;
  }    
+ m_before_intro{
+    background-color: #00A99D;
+ }
 }
 
 /* Extra large devices (large desktops, 1200px and up) */
@@ -105,12 +149,21 @@
     ._before_intro{
         height: 270px;
     }
+
     .m_intro{
-        font-size: 35px;
-         text-align: center;
+        background-color: #00A99D;
+        text-align: center;
+        font-size: 30px;
+        color:white;
+        line-height: 200%;
+        padding-top: 55px;
     }
 
     .articles_section{
      min-height: 800px;
  }    
+
+ m_before_intro{
+    background-color: #00A99D;
+ }
 }

@@ -13,25 +13,35 @@
         margin-right:auto;
         cursor: pointer;
     }
-    .m_text{
-        width: 60%;
-        display:block;
-        margin-left:auto;
-        margin-right:auto;
-    }
     .push{
         height: 8px;
     }
-    .m_title{
+    .m_titleLeft{
         text-align: center;
-        color: blue;
-        font-size: 18px;
+        color: black;
+        font-size: 25px;
         cursor: pointer;
+        font-weight: bold;
     }
-    .m_intro{
-        text-align: right;
-        font-size: 14px;
+    .m_introLeft{
+        text-align: center;
+        font-size: 10px;
         cursor: pointer;
+        color:#696969;
+    }
+
+    .m_titleRight{
+        text-align: center;
+        color: black;
+        font-size: 25px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+    .m_introRight{
+        text-align: center;
+        font-size: 10px;
+        cursor: pointer;
+        color:#696969;
     }
     
 }
@@ -40,22 +50,38 @@
 @media (min-width: 576px) and (max-width: 767px) { 
     .m_image{
         width: 100%;
-        max-height: 150px;
+        max-height: 200px;
         cursor: pointer;
     }
     .push{
-        height: 5px;
+        height: 15px;
     }
-    .m_title{
-        text-align: center;
-        color: blue;
-        font-size: 16px;
+    .m_titleLeft{
+        text-align: left;
+        color: black;
+        font-size: 15px;
         cursor: pointer;
+        font-weight: bold;
     }
-    .m_intro{
+    .m_introLeft{
+        text-align: left;
+        font-size: 10px;
+        cursor: pointer;
+        color:#696969;
+    }
+
+    .m_titleRight{
+        text-align: right;
+        color: black;
+        font-size: 15px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+    .m_introRight{
         text-align: right;
         font-size: 10px;
         cursor: pointer;
+        color:#696969;
     }
     
 }
@@ -68,18 +94,34 @@
         cursor: pointer;
     }
     .push{
-        height: 20px;
+        height: 25px;
     }
-    .m_title{
-        text-align: center;
-        color: blue;
-        font-size: 18px;
+    .m_titleLeft{
+        text-align: left;
+        color: black;
+        font-size: 20px;
         cursor: pointer;
+        font-weight: bold;
     }
-    .m_intro{
+    .m_introLeft{
+        text-align: left;
+        font-size: 10px;
+        cursor: pointer;
+        color:#696969;
+    }
+
+    .m_titleRight{
         text-align: right;
-        font-size: 14px;
+        color: black;
+        font-size: 20px;
         cursor: pointer;
+        font-weight: bold;
+    }
+    .m_introRight{
+        text-align: right;
+        font-size: 10px;
+        cursor: pointer;
+        color:#696969;
     }
     
 }
@@ -94,16 +136,32 @@
     .push{
         height: 25px;
     }
-    .m_title{
-        text-align: center;
-        color: blue;
-        font-size: 20px;
+    .m_titleLeft{
+        text-align: left;
+        color: black;
+        font-size: 30px;
         cursor: pointer;
+        font-weight: bold;
     }
-    .m_intro{
-        text-align: right;
-        font-size: 20px;
+    .m_introLeft{
+        text-align: left;
+        font-size: 15px;
         cursor: pointer;
+        color:#696969;
+    }
+
+    .m_titleRight{
+        text-align: right;
+        color: black;
+        font-size: 30px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+    .m_introRight{
+        text-align: right;
+        font-size: 15px;
+        cursor: pointer;
+        color:#696969;
     }
     
 }
@@ -118,14 +176,28 @@
     .push{
         height: 25px;
     }
-    .m_title{
-        text-align: center;
+    .m_titleLeft{
+        text-align: left;
         color: black;
         font-size: 35px;
         cursor: pointer;
         font-weight: bold;
     }
-    .m_intro{
+    .m_introLeft{
+        text-align: left;
+        font-size: 20px;
+        cursor: pointer;
+        color:#696969;
+    }
+
+    .m_titleRight{
+        text-align: right;
+        color: black;
+        font-size: 35px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+    .m_introRight{
         text-align: right;
         font-size: 20px;
         cursor: pointer;
