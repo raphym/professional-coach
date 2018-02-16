@@ -2,9 +2,9 @@
 min-height: 100%;
 height: auto !important;
 height:100%;
-margin: 0 auto -40px;
+margin: 0 auto -200px;
 }
 
 .push{
-    height: 40px; /* .push must be the same height as .footer */
+    height: 200px; /* .push must be the same height as .footer */
   }

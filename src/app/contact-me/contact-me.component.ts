@@ -10,7 +10,7 @@ import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { JwtHelper } from "angular2-jwt";
 import { UsefulService } from '../shared/services/utility/useful.service';
 
-
+const HEADER_SIZE = 56;
 @Component({
     selector: 'app-contact-me',
     templateUrl: './contact-me.component.html',
@@ -27,6 +27,9 @@ export class ContactMeComponent implements OnInit {
     private email = '';
     private langDirection;
     private langTextAlign;
+    private heightPage = window.innerHeight - HEADER_SIZE;
+    private widthPage = window.innerWidth;
+    private fontSize = 0;
 
     public constructor(
         private mailService: MailService,
@@ -36,6 +39,7 @@ export class ContactMeComponent implements OnInit {
         private usefulService: UsefulService) {
     }
     ngOnInit() {
+        this.onResize();
         //subscribe to the langage
         this.usefulService.langTransmitter.subscribe(
             config_langage => {
@@ -58,6 +62,19 @@ export class ContactMeComponent implements OnInit {
                 this.email = user.email;
         }
     }
+
+    onResize() {
+        this.heightPage = window.innerHeight - HEADER_SIZE;
+        this.widthPage = window.innerWidth;
+        this.calculateFontSize();
+    }
+
+    //calcul to get the font size
+    calculateFontSize() {
+        var average_width_height = (this.widthPage + this.heightPage) / 2;
+        this.fontSize = average_width_height * (28 / 1280);
+    }
+
 
     onSubmit(form: NgForm) {
 
@@ -85,14 +102,14 @@ export class ContactMeComponent implements OnInit {
         this.mailService.sendMail('admin', 'G-Fit', mail_content, 'text')
             .subscribe(
 
-            data => {
-                this.markDone();
-                this.successService.handleSuccess(data.json());
-            },
-            error => {
-                this.markDone();
-                this.errorService.handleError(error);
-            }
+                data => {
+                    this.markDone();
+                    this.successService.handleSuccess(data.json());
+                },
+                error => {
+                    this.markDone();
+                    this.errorService.handleError(error);
+                }
             );
         //send mail back to the user
         //english
@@ -101,8 +118,8 @@ export class ContactMeComponent implements OnInit {
         var reponsehtml = '<!DOCTYPE html><html><body style="text-align: right;direction: rtl;color: blue;align: right;">ההודעה שלך נשלחה, אנו נענה לך בהקדם<br>תודה<br>G-Fit</body></html>';
         this.mailService.sendMail(value.email, 'G-Fit', reponsehtml, 'html')
             .subscribe(
-            data => { },
-            error => { }
+                data => { },
+                error => { }
             );
         if (this.connected)
             this.form.value.description = '';

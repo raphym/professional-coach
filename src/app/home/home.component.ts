@@ -15,6 +15,8 @@ export class HomeComponent implements OnInit {
   private langDirection;
   private langTextAlign;
   private heightPage = window.innerHeight - HEADER_SIZE; 
+  private widthPage = window.innerWidth; 
+
   //for the anchor in the page
   private scrollExecuted: boolean = false;
   constructor(private usefulService: UsefulService,
@@ -35,6 +37,7 @@ export class HomeComponent implements OnInit {
 
   onResize() {
     this.heightPage = window.innerHeight - HEADER_SIZE; 
+    this.widthPage = window.innerWidth;
   }
 
   ngAfterViewChecked() {

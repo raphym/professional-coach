@@ -26,144 +26,62 @@
     margin-left:auto;
     margin-right:auto;
 }
+
+.m_box_intro{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.m_intro{
+    text-align: center;
+    color:white;
+    line-height: 200%;
+}
+
    
 .betweenSection{
     height: 50px;
 }
+
+
    
 /* Extra small devices (portrait phones, less than 576px) */
 @media (max-width: 575px) { 
-    .carre{
-        padding-top: 180px;
-    }
- 
-    ._before_intro{
-        height: 270px;
-    }
-
-    .m_intro{
-        background-color: #00A99D;
-        color:white;
-        text-align: center;
-        font-size: 22px;
-        line-height: 200%;
-        padding-top: 66px;
-    }
-
     .articles_section{
      min-height: 900px;
  }  
- m_before_intro{
-    background-color: #00A99D;
- }
+
 }
 
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) and (max-width: 767px) { 
-    .carre{
-        padding-top: 172px;
-    }
- 
-    ._before_intro{
-        height: 270px;
-    }
-
-    .m_intro{
-        background-color: #00A99D;
-        text-align: center;
-        font-size: 25px;
-        color:white;
-        line-height: 200%;
-        padding-top: 35px;
-    }
-
     .articles_section{
      min-height: 400px;
  }
- m_before_intro{
-    background-color: #00A99D;
- }
+
 }
 
 /* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) and (max-width: 991px) { 
-    .carre{
-        padding-top: 200px;
-    }
- 
-    ._before_intro{
-        height: 290px;
-    }
-
-    .m_intro{
-        background-color: #00A99D;
-        text-align: center;
-        font-size: 26px;
-        color:white;
-        line-height: 200%;
-        padding-top: 46px;
-    }
-
+@media (min-width: 768px) and (max-width: 991px) {
     .articles_section{
      min-height: 600px;
  }    
- m_before_intro{
-    background-color: #00A99D;
- }
+
 }
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) and (max-width: 1199px) { 
-
-    .carre{
-        padding-top: 190px;
-    }
- 
-    ._before_intro{
-        height: 275px;
-    }
-
-    .m_intro{
-        background-color: #00A99D;
-        text-align: center;
-        font-size: 29px;
-        color:white;
-        line-height: 200%;
-        padding-top: 42px;
-    }
-
     .articles_section{
      min-height: 800px;
  }    
- m_before_intro{
-    background-color: #00A99D;
- }
+
 }
 
 /* Extra large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) { 
-    .carre{
-        padding-top: 175px;
-    }
- 
-    ._before_intro{
-        height: 270px;
-    }
-
-    .m_intro{
-        background-color: #00A99D;
-        text-align: center;
-        font-size: 30px;
-        color:white;
-        line-height: 200%;
-        padding-top: 55px;
-    }
-
+@media (min-width: 1200px) {
     .articles_section{
      min-height: 800px;
  }    
 
- m_before_intro{
-    background-color: #00A99D;
- }
 }

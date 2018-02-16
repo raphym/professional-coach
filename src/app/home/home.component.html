@@ -17,9 +17,8 @@
                 <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1">
                 </div>
                 <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10">
-                    <div [style.height.px]="heightPage">
-                        <!-- <div [style.height.px]="(heightPage/8)"></div> -->
-                        <div class="m_intro">
+                    <div [style.height.px]="heightPage" class="m_box_intro">
+                        <div class="m_intro" [style.font-size]="((widthPage+heightPage)/2) * (35/1280) + 'px'">
                             <span translate>HOME_INTRO_1</span>
                             <br>
                             <span translate>HOME_INTRO_2</span>
@@ -27,6 +26,10 @@
                             <span translate>HOME_INTRO_3</span>
                             <br>
                             <span translate>HOME_INTRO_4</span>
+                            <br>
+                            <!-- <fb-like href="https://www.facebook.com/gfitisrael/" showFaces='false' share='true'></fb-like> -->
+                            <i class="fa fa-envelope-o" style="font-size:24px"></i>
+                            <a routerLink="/" style="text-decoration: none!important;color:white;" fragment="contact-us" translate>JOIN_US</a>
                             <br>
                         </div>
                     </div>
@@ -61,12 +64,8 @@
                 <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1">
                 </div>
                 <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10">
-                    <div [style.min-height.px]="heightPage">
-                        <div class="container">
-                            <div class="anchor" id="contact-us"></div>
-                            <app-contact-me></app-contact-me>
-                        </div>
-                    </div>
+                    <div class="anchor" id="contact-us"></div>
+                    <app-contact-me></app-contact-me>
                 </div>
                 <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
                 </div>

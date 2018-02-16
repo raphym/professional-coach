@@ -1,68 +1,65 @@
 .loaderr {
 
-    display:block;
-    margin-left:auto;
-    margin-right:auto;
-    border: 16px solid #f3f3f3;
-    border-radius: 50%;
-    border-top: 16px solid #3498db;
-    width: 120px;
-    height: 120px;
-    -webkit-animation: spin 2s linear infinite;
-    animation: spin 2s linear infinite;
-  }
-  
-  @-webkit-keyframes spin {
-    0% { -webkit-transform: rotate(0deg); }
-    100% { -webkit-transform: rotate(360deg); }
-  }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
+  display:block;
+  margin-left:auto;
+  margin-right:auto;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
 
-  /* Extra small devices (portrait phones, less than 576px) */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.m_box_intro{
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.m_intro{
+  text-align: center;
+  color:white;
+  line-height: 200%;
+}
+
+/* Extra small devices (portrait phones, less than 576px) */
 @media (max-width: 575px) { 
-  .m_intro{
-      font-size: 25px;
-      color:white;
-  }
+.m_intro{
+    font-size: 20px!important;
+}
 }
 
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) and (max-width: 767px) { 
-  .m_intro{
-      text-align: center;
-      font-size: 15px;
-      color:white;
-  }
+.m_intro{
+  font-size: 15px!important;
+}
 }
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) and (max-width: 991px) { 
-  .m_intro{
-      text-align: center;
-      font-size: 20px;
-      color:white;
-  }
+
 }
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) and (max-width: 1199px) { 
-  .m_intro{
-      text-align: center;
-      font-size: 22px;
-      color:white;
-  }
 
 }
 
 /* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) { 
-  .m_intro{
-      text-align: center;
-      font-size: 25px;
-      color:white;
-  }  
+
 }

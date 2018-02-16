@@ -1,8 +1,20 @@
-<div class="container-fluid" style="margin: auto; padding:20px;" [style.direction]="langDirection" [style.text-align]="langTextAlign">
+<div [style.direction]="langDirection" [style.text-align]="langTextAlign" [style.min-height.px]="heightPage">
+  <div [style.height.px]="(heightPage/5)"></div>
   <h1 style="text-align:center;" translate>CONTACT_US</h1>
   <br>
   <br>
   <div class="row">
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+      <div class="m_box_intro">
+        <div class="m_intro" [style.font-size]="fontSize + 'px'">
+          <span translate>CONTACT_US_INTRO_1</span>
+          <br>
+          <span translate>CONTACT_US_INTRO_2</span>
+          <br>
+          <span translate>CONTACT_US_INTRO_3</span>
+        </div>
+      </div>
+    </div>
     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
       <ng-template [ngIf]="!envoyer">
         <form #f="ngForm" (ngSubmit)="onSubmit(f)">
@@ -22,7 +34,12 @@
                   </textarea>
           </div>
 
-          <button type="submit" [disabled]="!f.valid" class="btn btn-success" translate>SEND</button>
+          <div class="m_box_intro">
+            <button type="submit" style="width:100px;" [disabled]="!f.valid" class="btn btn-secondary">
+              <i class="fa fa-envelope-o" style="font-size:24px"></i>
+              <span translate>SEND</span>
+            </button>
+          </div>
         </form>
       </ng-template>
       <ng-template [ngIf]="envoyer">
@@ -31,12 +48,6 @@
         </ng-template>
       </ng-template>
     </div>
-    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-      <div class="m_intro">
-        בא ליצור שגרת פעילות ספורטיבית כאורח חיים, לקבל הרגשה עצמית יותר טובה, גוף יותר חזק ויותר בריא, כי אין יותר כייף מלהרגיש
-        שאתה משקיע בעצמך! מעוניין בחיזוק עיצוב וחיטוב הגוף שלך? להוריד במשקל? להעלות מסת שריר? לעבוד על הסיבולת לב ריאה והגמישות
-        שלך? רוצה לשמוע עוד ? תשאיר לנו פרטים ונחזור אליך בהקדם !
-      </div>
-    </div>
   </div>
+  <div [style.height.px]="(heightPage/5)"></div>
 </div>

@@ -5,7 +5,7 @@
   text-align: center;
   cursor:pointer;
   font-size:14px;
-  height: 40px; /* .push must be the same height as .footer */
+  height: 200px; /* .push must be the same height as .footer */
   color: white;
   display: flex;
   justify-content: center; /* align horizontal */
