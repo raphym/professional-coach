@@ -38,6 +38,10 @@ a.nav-link{
   cursor: pointer;
 }
 
+.flag-icon{
+  border-radius: 50%;
+}
+
   /* button to open the side nav*/
   .butSide{
     margin: 15px;

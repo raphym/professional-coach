@@ -1,6 +1,35 @@
-.m_box{
-    display: inline-block;
-    height: 200px;
-    text-align: center;
-    width: auto;
+
+.m_beforeBox{
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  -webkit-transition: width 2s; /* For Safari 3.1 to 6.0 */
+    transition: width 2s;
 }
+
+.m_image{
+  width: 200px;
+  height: 200px;
+  /*align the image*/
+  display:block;
+  margin-left:auto;
+  margin-right:auto;
+  border-radius: 50%;
+}
+
+.m_box{
+  text-align: center;
+  line-height: 200%;
+  padding-left: 50px;
+  padding-right: 50px;
+  color: white;
+  font-family: 'Kavivanar', cursive;
+}
+
+.checked {
+  color: orange;
+}
+  

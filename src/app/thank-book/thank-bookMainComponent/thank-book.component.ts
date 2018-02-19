@@ -1,11 +1,58 @@
 import { Component, OnInit } from '@angular/core';
+import { trigger, state, style, animate, transition, keyframes } from '@angular/animations';
 import { ThankBookService } from '../thank-book.service';
 import { ThankMessage } from '../../shared/models/objects-models/thankMessage';
+
+const HEADER_SIZE = 56;
 
 @Component({
   selector: 'app-thank-book',
   templateUrl: './thank-book.component.html',
   styleUrls: ['./thank-book.component.css'],
+  animations: [
+    trigger('movePanel', [
+      transition('active => inactive', [
+        animate(600, keyframes([
+          style({ opacity: 0, transform: 'translateY(-200px)', offset: 0 }),
+          style({ opacity: 1, transform: 'translateY(25px)', offset: .75 }),
+          style({ opacity: 1, transform: 'translateY(0)', offset: 1 }),
+        ]))]),
+      transition('inactive => active', [
+        animate(600, keyframes([
+          style({ opacity: 0, transform: 'translateY(-200px)', offset: 0 }),
+          style({ opacity: 1, transform: 'translateY(25px)', offset: .75 }),
+          style({ opacity: 1, transform: 'translateY(0)', offset: 1 }),
+        ]))]),
+      transition('void => inactive', [
+        animate(600, keyframes([
+          style({ opacity: 0, transform: 'translateY(-200px)', offset: 0 }),
+          style({ opacity: 1, transform: 'translateY(25px)', offset: .75 }),
+          style({ opacity: 1, transform: 'translateY(0)', offset: 1 }),
+        ]))
+      ]),
+      transition('inactive => void', [
+        animate(600, keyframes([
+          style({ opacity: 0, transform: 'translateY(-200px)', offset: 0 }),
+          style({ opacity: 1, transform: 'translateY(25px)', offset: .75 }),
+          style({ opacity: 1, transform: 'translateY(0)', offset: 1 }),
+        ]))
+      ]),
+      transition('void => active', [
+        animate(600, keyframes([
+          style({ opacity: 0, transform: 'translateY(-200px)', offset: 0 }),
+          style({ opacity: 1, transform: 'translateY(25px)', offset: .75 }),
+          style({ opacity: 1, transform: 'translateY(0)', offset: 1 }),
+        ]))
+      ]),
+      transition('active => void', [
+        animate(600, keyframes([
+          style({ opacity: 0, transform: 'translateY(-200px)', offset: 0 }),
+          style({ opacity: 1, transform: 'translateY(25px)', offset: .75 }),
+          style({ opacity: 1, transform: 'translateY(0)', offset: 1 }),
+        ]))
+      ])
+    ])
+  ]
 })
 export class ThankBookComponent implements OnInit {
 
@@ -14,10 +61,26 @@ export class ThankBookComponent implements OnInit {
   private thankMessage: ThankMessage;
   private cursorPosition: number = 0;
   private maxCursorPosition: number = 0;
+  private heightPage = window.innerHeight - HEADER_SIZE;
+  private widthPage = window.innerWidth;
+  private fontSize = 0;
+  private stateAnimation: string = 'inactive';
+
   constructor(private thankBookService: ThankBookService) { }
 
   ngOnInit() {
     this.init();
+    this.onResize();
+  }
+  onResize() {
+    this.heightPage = window.innerHeight - HEADER_SIZE;
+    this.calculateFontSize();
+  }
+
+  //calcul to get the font size
+  calculateFontSize() {
+    var average_width_height = (this.widthPage + this.heightPage) / 2;
+    this.fontSize = average_width_height * (28 / 1280);
   }
 
   init() {
@@ -44,6 +107,7 @@ export class ThankBookComponent implements OnInit {
 
   setPosition() {
     this.thankMessage = this.thankMessagesArray[this.cursorPosition];
+    this.stateAnimation = (this.stateAnimation === 'inactive' ? 'active' : 'inactive');
   }
 
   previousClicked() {

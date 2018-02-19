@@ -35,6 +35,20 @@ import { ArticleService } from './articles/article-service';
 import { ArticleModule } from './articles/article.module';
 import { UserSpaceModule } from './user-space/userSpace.module';
 import { ThankBookModule } from './thank-book/thank-book.module';
+import { ThankBookComponent } from './thank-book/thank-bookMainComponent/thank-book.component';
+import { ThankMessageComponent } from './thank-book/thank-bookMainComponent/thank-message/thank-message.component';
+import { HammerGestureConfig, HAMMER_GESTURE_CONFIG, } from '@angular/platform-browser';
+import 'hammerjs';
+//for the gesture
+declare var Hammer: any;
+export class MyHammerConfig extends HammerGestureConfig {
+  buildHammer(element: HTMLElement) {
+    let mc = new Hammer(element, {
+      touchAction: "pan-y"
+    });
+    return mc;
+  }
+}
 
 //export funct of angular2-jwt
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -56,6 +70,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     ArticlesComponent,
     ArticlesListComponent,
     PreviewArticleComponent,
+    ThankBookComponent,
+    ThankMessageComponent
   ],
   imports: [
     SharedModule,
@@ -92,6 +108,11 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     },
     UsefulService,
     ArticleService,
+    {
+      // hammer instantion with custom config
+      provide: HAMMER_GESTURE_CONFIG,
+      useClass: MyHammerConfig,
+    },
   ],
   bootstrap: [AppComponent],
   exports: []

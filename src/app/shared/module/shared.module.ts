@@ -11,6 +11,7 @@ import { TableService } from "../components/table/table.service";
 import { DpDatePickerModule } from 'ng2-date-picker';
 import { SafePipe } from "../pipe/SafePipe";
 import { FacebookModule } from "ngx-facebook";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //for the translation
 export function createTranslateLoader(http: Http) {
@@ -36,7 +37,8 @@ export function createTranslateLoader(http: Http) {
         }),
         AngularDraggableModule,
         DpDatePickerModule,
-        FacebookModule.forRoot()
+        FacebookModule.forRoot(),
+        BrowserAnimationsModule
     ],
     exports: [
         TableComponent,

@@ -1,10 +1,23 @@
-<div class="row">
-  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-    <div class="m_box">
-      <div>{{name}}</div>
-      <div>{{reviewText}}</div>
-      <div>{{rating}}</div>
-      <div>{{createdTime}}</div>
+<div class="container-fluid m_beforeBox" [style.min-height.px]="heightPage">
+  <div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+      <div class="hideShow text-center">
+        <div class="m_box" [style.font-size]="fontSize + 'px'">
+          <div>{{name}}</div>
+          <br>
+          <img class="m_image" src="../../../../assets/Images/user-space/profile/profile.ico">
+          <br>
+          <br>
+          <div>{{reviewText}}</div>
+          <br>
+          <br>
+          <span class="fa fa-star" id="s1"></span>
+          <span class="fa fa-star" id="s2"></span>
+          <span class="fa fa-star" id="s3"></span>
+          <span class="fa fa-star" id="s4"></span>
+          <span class="fa fa-star" id="s5"></span>
+        </div>
+      </div>
     </div>
   </div>
 </div>
