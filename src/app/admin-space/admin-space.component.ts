@@ -9,8 +9,8 @@ import { TranslateService } from 'ng2-translate';
 })
 export class AdminSpaceComponent implements OnInit {
 
-  constructor(private router:Router,
-    private translate: TranslateService) { }
+  constructor(public router:Router,
+    public translate: TranslateService) { }
 
   ngOnInit() {
   }

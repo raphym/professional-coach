@@ -12,21 +12,21 @@ import { SuccessService } from '../../shared/components/notif-to-user/success/su
 
 })
 export class ProfileComponent implements OnInit {
-  private user: User;
-  private loaded: boolean = false;
-  private langTextAlign;
-  private langDirection;
+  public user: User;
+  public loaded: boolean = false;
+  public langTextAlign;
+  public langDirection;
 
-  private showImage: boolean = false;
+  public showImage: boolean = false;
 
-  @Output() private showEdit: boolean;
-  @Input() private notifyEditFinish;
+  @Output() public showEdit: boolean;
+  @Input() public notifyEditFinish;
 
 
-  constructor(private profileService: ProfileService,
-    private loaderService: LoaderService,
-    private usefulService: UsefulService,
-    private successService: SuccessService
+  constructor(public profileService: ProfileService,
+    public loaderService: LoaderService,
+    public usefulService: UsefulService,
+    public successService: SuccessService
   ) {
 
   }

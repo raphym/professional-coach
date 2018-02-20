@@ -11,19 +11,19 @@ import { LoaderService } from '../../../shared/components/loader/loader.service'
 })
 export class ProfileEditComponent implements OnInit {
 
-  @Input() private user: User;
-  @Input() private showEdit: boolean;
-  @Input() private langDirection: string;
-  @Input() private langTextAlign: string;
+  @Input() public user: User;
+  @Input() public showEdit: boolean;
+  @Input() public langDirection: string;
+  @Input() public langTextAlign: string;
   @Output() notifyEditFinish: EventEmitter<boolean> = new EventEmitter<boolean>();
-  private myForm: FormGroup;
-  private imageBase64: string = '';
-  private imageToDisplay: string = '';
-  private imageExist: boolean = false;
+  public myForm: FormGroup;
+  public imageBase64: string = '';
+  public imageToDisplay: string = '';
+  public imageExist: boolean = false;
 
 
 
-  constructor(private profileService: ProfileService, private loaderService: LoaderService) { }
+  constructor(public profileService: ProfileService, public loaderService: LoaderService) { }
 
   ngOnInit() {
     if (this.user.picture != null && this.user.picture != '') {

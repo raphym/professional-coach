@@ -11,7 +11,7 @@ export class UserSpaceService {
 
     user: User;
 
-    constructor(private http: Http) {
+    constructor(public http: Http) {
     }
 
     getUser() {

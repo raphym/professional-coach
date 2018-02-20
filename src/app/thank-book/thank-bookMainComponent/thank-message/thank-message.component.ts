@@ -8,13 +8,13 @@ const HEADER_SIZE = 56;
 })
 export class ThankMessageComponent implements OnInit {
 
-  @Input() private createdTime: string;
-  @Input() private rating: string;
-  @Input() private reviewText: string;
-  @Input() private name: string;
-  private heightPage = window.innerHeight - HEADER_SIZE;
-  private widthPage = window.innerWidth;
-  private fontSize = 0;
+  @Input() public createdTime: string;
+  @Input() public rating: string;
+  @Input() public reviewText: string;
+  @Input() public name: string;
+  public heightPage = window.innerHeight - HEADER_SIZE;
+  public widthPage = window.innerWidth;
+  public fontSize = 0;
 
 
   constructor() { }

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CookieService } from 'angular2-cookie/services/cookies.service';
+import { CookieService, CookieOptions } from 'angular2-cookie/core';
 
 
 import { AppComponent } from './app.component';
@@ -96,6 +96,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   ],
   providers: [
     CookieService,
+    { provide: CookieOptions, useValue: {} },
     AuthService,
     ErrorService,
     SuccessService,

@@ -16,11 +16,11 @@ const SUPPORT_LINK_ADDRESS = "http://localhost:3000/contact";
 @Injectable()
 export class UserManagementService {
 
-    private CONFIRMATION_REG_LINK_URL: string = "http://localhost:3000/confirmRegistration";
-    constructor(private cookieService: CookieService,
-        private http: Http,
-        private usefulService: UsefulService,
-        private mailService: MailService) {
+    public CONFIRMATION_REG_LINK_URL: string = "http://localhost:3000/confirmRegistration";
+    constructor(public cookieService: CookieService,
+        public http: Http,
+        public usefulService: UsefulService,
+        public mailService: MailService) {
 
     }
 

@@ -56,17 +56,17 @@ const HEADER_SIZE = 56;
 })
 export class ThankBookComponent implements OnInit {
 
-  private initiate: boolean = false;
-  private thankMessagesArray: ThankMessage[] = [];
-  private thankMessage: ThankMessage;
-  private cursorPosition: number = 0;
-  private maxCursorPosition: number = 0;
-  private heightPage = window.innerHeight - HEADER_SIZE;
-  private widthPage = window.innerWidth;
-  private fontSize = 0;
-  private stateAnimation: string = 'inactive';
+  public initiate: boolean = false;
+  public thankMessagesArray: ThankMessage[] = [];
+  public thankMessage: ThankMessage;
+  public cursorPosition: number = 0;
+  public maxCursorPosition: number = 0;
+  public heightPage = window.innerHeight - HEADER_SIZE;
+  public widthPage = window.innerWidth;
+  public fontSize = 0;
+  public stateAnimation: string = 'inactive';
 
-  constructor(private thankBookService: ThankBookService) { }
+  constructor(public thankBookService: ThankBookService) { }
 
   ngOnInit() {
     this.init();

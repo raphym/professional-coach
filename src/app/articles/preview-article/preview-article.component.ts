@@ -8,16 +8,16 @@ import { Router } from '@angular/router';
 })
 export class PreviewArticleComponent implements OnInit {
 
-  @Input() private title;
-  @Input() private image;
-  @Input() private id;
-  @Input() private intro;
-  @Input() private date;
-  @Input() private index;
+  @Input() public title;
+  @Input() public image;
+  @Input() public id;
+  @Input() public intro;
+  @Input() public date;
+  @Input() public index;
 
-  private pair:boolean = false;
+  public pair:boolean = false;
 
-  constructor(private router: Router) { }
+  constructor(public router: Router) { }
 
   onClick() {
     var path = 'view-article/';

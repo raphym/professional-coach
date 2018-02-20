@@ -15,16 +15,16 @@ import { SuccessService } from "../../shared/components/notif-to-user/success/su
 
 })
 export class SigninComponent {
-    private myForm: FormGroup;
-    private langDirection;
-    private langTextAlign;
+    public myForm: FormGroup;
+    public langDirection;
+    public langTextAlign;
 
-    constructor(private authService: AuthService,
-        private router: Router,
-        private loaderService: LoaderService,
-        private usefulService: UsefulService,
-        private errorService: ErrorService,
-        private successService: SuccessService) { }
+    constructor(public authService: AuthService,
+        public router: Router,
+        public loaderService: LoaderService,
+        public usefulService: UsefulService,
+        public errorService: ErrorService,
+        public successService: SuccessService) { }
 
 
     ngOnInit() {

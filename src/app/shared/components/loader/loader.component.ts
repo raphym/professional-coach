@@ -8,8 +8,8 @@ import { LoaderService } from './loader.service';
 })
 export class LoaderComponent implements OnInit {
 
-  private loading = false;
-  constructor(private loaderService: LoaderService) { }
+  public loading = false;
+  constructor(public loaderService: LoaderService) { }
 
   ngOnInit() {
     //on init subscribe to the event emiter of the loader service to get notifs.

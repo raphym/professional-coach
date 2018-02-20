@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { ArticleService } from './article-service';
 import { ArticleItemComponent } from './article-item/article-item.component';
 import { ArticleEditComponent } from './article-edit/article-edit.component';
@@ -21,7 +20,6 @@ import { PreviewArticleComponent } from './preview-article/preview-article.compo
     FroalaViewModule.forRoot()
   ],
   providers: [
-    CookieService,
     ArticleService,
   ],
   exports: []

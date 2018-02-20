@@ -14,47 +14,47 @@ import { EventEmitter } from '@angular/core/src/event_emitter';
 })
 export class ArticlesListComponent implements OnInit {
 
-  private statusText;
+  public statusText;
   @ViewChild('f') form: NgForm;
 
   //variables for the lazy loading of the articles
-  private numsLoadedArticles: number = 0;
-  private numsArticlesPerPage: number = 2;
-  private numsOfArticles: number = 0;
-  private loadingMutex: boolean = false;
-  private loading: boolean = false;
-  private eventLoadMoreArticles: EventEmitter<any>;
-  private current_url: string;
-  private articles_url = '/articles';
+  public numsLoadedArticles: number = 0;
+  public numsArticlesPerPage: number = 2;
+  public numsOfArticles: number = 0;
+  public loadingMutex: boolean = false;
+  public loading: boolean = false;
+  public eventLoadMoreArticles: EventEmitter<any>;
+  public current_url: string;
+  public articles_url = '/articles';
 
   //the word to search
-  private search: string;
+  public search: string;
   //from date search
-  private fromDate;
+  public fromDate;
   //to date search
-  private toDate;
+  public toDate;
   //arrays of select options
-  private selectedSearchOptions = ['חפש לפי', 'חפש לפי כותרת', 'חפש לפי תאריך', 'חפש לפי תאריך וגם לפי כותרת'];
+  public selectedSearchOptions = ['חפש לפי', 'חפש לפי כותרת', 'חפש לפי תאריך', 'חפש לפי תאריך וגם לפי כותרת'];
   //boolean show the search according to the name
-  private showSearchName = false;
+  public showSearchName = false;
   //boolean show the search according to the dates
-  private showSearchDates = false;
+  public showSearchDates = false;
   //search_by
-  private search_by;
+  public search_by;
   //boolean show options
-  private showOption: boolean = false;
+  public showOption: boolean = false;
   //boolean show the button option
-  private showButtonOption: boolean = false;
+  public showButtonOption: boolean = false;
 
 
   //array of articles
   articles: Article[];
   constructor(
-    private articleService: ArticleService,
-    private successService: SuccessService,
-    private errorService: ErrorService,
-    private router: Router,
-    private lc: NgZone
+    public articleService: ArticleService,
+    public successService: SuccessService,
+    public errorService: ErrorService,
+    public router: Router,
+    public lc: NgZone
   ) {
     //Active this automatic load scroll only is we
     //are in the page articles

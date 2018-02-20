@@ -9,11 +9,11 @@ import { LoaderService } from '../shared/components/loader/loader.service';
   styleUrls: ['./UserSpace.component.css']
 })
 export class UserSpaceComponent implements OnInit {
-  private user: User;
-  private loaded: boolean = false;
+  public user: User;
+  public loaded: boolean = false;
 
-  constructor(private userSpaceService: UserSpaceService,
-    private loaderService: LoaderService) {
+  constructor(public userSpaceService: UserSpaceService,
+    public loaderService: LoaderService) {
 
   }
 

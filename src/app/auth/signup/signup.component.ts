@@ -15,16 +15,16 @@ import { Router } from "@angular/router";
     styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-    private myForm: FormGroup;
-    private langDirection;
-    private langTextAlign;
+    public myForm: FormGroup;
+    public langDirection;
+    public langTextAlign;
 
-    constructor(private authService: AuthService,
-        private loaderService: LoaderService,
-        private usefulService: UsefulService,
-        private errorService: ErrorService,
-        private successService: SuccessService,
-        private router:Router ) { }
+    constructor(public authService: AuthService,
+        public loaderService: LoaderService,
+        public usefulService: UsefulService,
+        public errorService: ErrorService,
+        public successService: SuccessService,
+        public router:Router ) { }
 
     ngOnInit() {
         //subscribe to the langage
@@ -82,7 +82,7 @@ export class SignupComponent implements OnInit {
     }
 
     //password validator
-    private passwordValidator(control: FormControl) {
+    public passwordValidator(control: FormControl) {
         if (this.myForm === undefined)
             return null;
         else {

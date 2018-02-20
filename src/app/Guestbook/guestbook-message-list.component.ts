@@ -15,8 +15,8 @@ import { LoaderService } from "../shared/components/loader/loader.service";
         `
 })
 export class GuestbookMessageListComponent implements OnInit {
-    constructor(private guestbookMessageService: GuestbookMessageService,
-        private loaderService: LoaderService) { }
+    constructor(public guestbookMessageService: GuestbookMessageService,
+        public loaderService: LoaderService) { }
     guestbookMessages: GuestbookMessage[];
 
     ngOnInit() {

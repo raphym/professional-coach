@@ -5,9 +5,9 @@ import { TranslateService } from 'ng2-translate';
 @Injectable()
 export class UsefulService {
     @Output() langTransmitter: EventEmitter<any> = new EventEmitter();
-    private loaded = false;
-    private currentLangage;
-    constructor(private translateService: TranslateService) {
+    public loaded = false;
+    public currentLangage;
+    constructor(public translateService: TranslateService) {
         // this language will be used as a fallback when a translation isn't found in the current language
         translateService.setDefaultLang('en');
     }

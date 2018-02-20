@@ -8,34 +8,34 @@ import { TableService } from './table.service';
 })
 export class TableComponent implements OnInit {
 
-  constructor(private tableService: TableService) { }
+  constructor(public tableService: TableService) { }
 
   //array of numbers for result per page
-  private optionsShow = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20];
+  public optionsShow = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20];
   //number if result per page
-  private rowsPerPage: number = this.optionsShow[0];
+  public rowsPerPage: number = this.optionsShow[0];
   //array of buttons for the page
-  private buttonsPage = [];
+  public buttonsPage = [];
   //the number of current page
-  private currentPage = -1;
+  public currentPage = -1;
 
   //start slice button for the button array
-  private start = 0;
+  public start = 0;
   //numbers of button on a page
-  private numbersOfButtons = 2;
+  public numbersOfButtons = 2;
   //end slice button for the button array
-  private end = this.start + this.numbersOfButtons;
+  public end = this.start + this.numbersOfButtons;
   //boolean button back
-  private buttonBackAvailable = false;
+  public buttonBackAvailable = false;
   //boolean button next
-  private buttonNextAvailable = false;
+  public buttonNextAvailable = false;
 
   //the names of the columns
-  private columsName = new Array();
+  public columsName = new Array();
   //the values of the table
-  private rowsValues = new Array();
+  public rowsValues = new Array();
 
-  private configClass = 'abc';
+  public configClass = 'abc';
 
   ngOnInit() {
     this.tableService.configClassEmitter.subscribe(

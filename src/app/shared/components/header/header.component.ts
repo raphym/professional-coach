@@ -14,20 +14,20 @@ import { Router, NavigationEnd } from '@angular/router';
 }
 )
 export class HeaderComponent implements OnInit {
-    private displayName;
-    private isConnect;
-    private isAdmin;
-    private langDirection;
-    private langTextAlign;
-    private floatDirection;
-    private margLeft = "-40";
+    public displayName;
+    public isConnect;
+    public isAdmin;
+    public langDirection;
+    public langTextAlign;
+    public floatDirection;
+    public margLeft = "-40";
 
     constructor(
-        private authService: AuthService,
-        private cookieService: CookieService,
-        private translate: TranslateService,
-        private usefulService: UsefulService,
-        private router: Router) {
+        public authService: AuthService,
+        public cookieService: CookieService,
+        public translate: TranslateService,
+        public usefulService: UsefulService,
+        public router: Router) {
     }
 
     //open the slide menu

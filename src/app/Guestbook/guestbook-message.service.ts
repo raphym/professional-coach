@@ -15,10 +15,10 @@ const DELETE_MESSAGE_ADDRESS = 'http://localhost:3000/guestbook/protect/deleteMe
 
 @Injectable()
 export class GuestbookMessageService {
-    private guestbookMessages: GuestbookMessage[] = [];
+    public guestbookMessages: GuestbookMessage[] = [];
     messageIsEdit = new EventEmitter<GuestbookMessage>();
 
-    constructor(private http: Http, private errorService: ErrorService) { }
+    constructor(public http: Http, public errorService: ErrorService) { }
 
     addMessage(message: GuestbookMessage) {
 

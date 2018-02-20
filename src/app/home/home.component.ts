@@ -12,16 +12,16 @@ const HEADER_SIZE = 56;
 })
 export class HomeComponent implements OnInit {
 
-  private langDirection;
-  private langTextAlign;
-  private heightPage = window.innerHeight - HEADER_SIZE; 
-  private widthPage = window.innerWidth; 
+  public langDirection;
+  public langTextAlign;
+  public heightPage = window.innerHeight - HEADER_SIZE; 
+  public widthPage = window.innerWidth; 
 
   //for the anchor in the page
-  private scrollExecuted: boolean = false;
-  constructor(private usefulService: UsefulService,
-    private articleService: ArticleService,
-    private activatedRoute: ActivatedRoute) { }
+  public scrollExecuted: boolean = false;
+  constructor(public usefulService: UsefulService,
+    public articleService: ArticleService,
+    public activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     //subscribe to the langage

@@ -26,24 +26,24 @@ export class AuthService {
     userLogInEvent = new EventEmitter<{}>();
     userLogOutEvent = new EventEmitter<any>();
 
-    private isConnect = false;
-    private _id = '';
-    private isAdmin = false;
-    private userName = '';
-    private firstName = '';
-    private lastName = '';
-    private email = '';
-    private CONFIRMATION_REG_LINK_URL = "http://localhost:3000/confirmRegistration";
+    public isConnect = false;
+    public _id = '';
+    public isAdmin = false;
+    public userName = '';
+    public firstName = '';
+    public lastName = '';
+    public email = '';
+    public CONFIRMATION_REG_LINK_URL = "http://localhost:3000/confirmRegistration";
 
 
-    constructor(private http: Http,
-        private errorService: ErrorService,
-        private successService: SuccessService,
-        private cookieService: CookieService,
-        private mailService: MailService,
-        private router: Router,
-        private usefulService: UsefulService,
-        private fb: FacebookService
+    constructor(public http: Http,
+        public errorService: ErrorService,
+        public successService: SuccessService,
+        public cookieService: CookieService,
+        public mailService: MailService,
+        public router: Router,
+        public usefulService: UsefulService,
+        public fb: FacebookService
     ) {
 
         //change for prod

@@ -16,21 +16,21 @@ import { ErrorService } from '../../shared/components/notif-to-user/errors/error
 export class ArticleItemComponent implements OnInit {
 
 
-  private article: Article;
-  private id;
-  private showImage: boolean = false;
-  private showEdit: boolean = false;
-  private display: string = 'none';
-  private articleValid: boolean = false;
-  private url: string = 'http://localhost:3000/';
+  public article: Article;
+  public id;
+  public showImage: boolean = false;
+  public showEdit: boolean = false;
+  public display: string = 'none';
+  public articleValid: boolean = false;
+  public url: string = 'http://localhost:3000/';
 
-  constructor(private articleService: ArticleService,
-    private route: ActivatedRoute,
-    private loaderService: LoaderService,
-    private authService: AuthService,
-    private successService: SuccessService,
-    private errorService: ErrorService,
-    private router: Router) { }
+  constructor(public articleService: ArticleService,
+    public route: ActivatedRoute,
+    public loaderService: LoaderService,
+    public authService: AuthService,
+    public successService: SuccessService,
+    public errorService: ErrorService,
+    public router: Router) { }
 
   ngOnInit() {
     //enable the loader

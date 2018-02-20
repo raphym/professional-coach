@@ -15,29 +15,29 @@ import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 })
 export class UserManagementComponent implements OnInit, OnDestroy {
   //the users
-  private users: User[];
+  public users: User[];
   //display of the div edit user
-  private display = 'none';
+  public display = 'none';
   //form for the div edit user
-  private myForm: FormGroup;
+  public myForm: FormGroup;
   //the current edit user
-  private editUser: User = null;
+  public editUser: User = null;
 
   //for the table
-  private config;
-  private pageToDisplay = 0;
+  public config;
+  public pageToDisplay = 0;
 
   //the subscriptions to the emitters
-  private subscriptionRowClicked;
-  private subscriptionRowsConfig;
-  private subscriptionLoadPage;
+  public subscriptionRowClicked;
+  public subscriptionRowsConfig;
+  public subscriptionLoadPage;
 
   constructor(
-    private userManagementService: UserManagementService,
-    private errorService: ErrorService,
-    private successService: SuccessService,
-    private loaderService: LoaderService,
-    private tableService: TableService) {
+    public userManagementService: UserManagementService,
+    public errorService: ErrorService,
+    public successService: SuccessService,
+    public loaderService: LoaderService,
+    public tableService: TableService) {
 
   }
 

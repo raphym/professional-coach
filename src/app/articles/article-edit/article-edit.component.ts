@@ -16,24 +16,24 @@ import { LoaderService } from '../../shared/components/loader/loader.service';
 export class ArticleEditComponent implements OnInit {
 
 
-  private id;
-  private article;
-  private editMode;
-  private rForm: FormGroup;
-  private loaded: boolean;
-  private title: string;
-  private imageBase64: string;
-  private imageBase64Temp: string;
-  private content: string
-  private intro: string;
+  public id;
+  public article;
+  public editMode;
+  public rForm: FormGroup;
+  public loaded: boolean;
+  public title: string;
+  public imageBase64: string;
+  public imageBase64Temp: string;
+  public content: string
+  public intro: string;
 
 
-  constructor(private fb: FormBuilder,
-    private articleService: ArticleService,
-    private successService: SuccessService,
-    private errorService: ErrorService,
-    private route: ActivatedRoute,
-    private loaderService: LoaderService
+  constructor(public fb: FormBuilder,
+    public articleService: ArticleService,
+    public successService: SuccessService,
+    public errorService: ErrorService,
+    public route: ActivatedRoute,
+    public loaderService: LoaderService
   ) {
 
     this.loaded = false;
@@ -75,7 +75,7 @@ export class ArticleEditComponent implements OnInit {
   }
 
 
-  private initForm() {
+  public initForm() {
     let title = '';
     let content = '';
     let intro = '';

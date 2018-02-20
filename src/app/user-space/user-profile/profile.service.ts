@@ -13,7 +13,7 @@ const EDIT_USER_ADDRESS = 'http://localhost:3000/user-space/editUser';
 export class ProfileService {
     user: User;
 
-    constructor(private http: Http) {
+    constructor(public http: Http) {
     }
 
     getUser() {

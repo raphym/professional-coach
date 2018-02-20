@@ -21,7 +21,7 @@ export class SuccessComponent implements OnInit{
     success:TheSuccess;
     display='none';
 
-    constructor(private successService: SuccessService){
+    constructor(public successService: SuccessService){
         this.successService.successOccured.subscribe(
             (success: TheSuccess)=>{
                 this.success = success;

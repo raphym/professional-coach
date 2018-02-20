@@ -29,9 +29,9 @@ export class GuestbookMessageComponent implements OnInit {
     }
 
     constructor(
-        private guestbookMessageService: GuestbookMessageService,
-        private authService: AuthService,
-        private loaderService: LoaderService
+        public guestbookMessageService: GuestbookMessageService,
+        public authService: AuthService,
+        public loaderService: LoaderService
     ) { }
     onEdit() {
         this.guestbookMessageService.editMessage(this.guestbookMessage);

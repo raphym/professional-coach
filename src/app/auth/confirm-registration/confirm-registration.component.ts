@@ -14,17 +14,17 @@ import { SuccessService } from '../../shared/components/notif-to-user/success/su
 export class ConfirmRegistrationComponent implements OnInit {
 
   @ViewChild('f') form: NgForm;
-  private randomHash;
-  private message = '';
-  private userFound = false;
-  private user = null;
-  private validate = false;
+  public randomHash;
+  public message = '';
+  public userFound = false;
+  public user = null;
+  public validate = false;
 
-  constructor(private authService: AuthService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private loaderService: LoaderService,
-    private successService: SuccessService) { }
+  constructor(public authService: AuthService,
+    public route: ActivatedRoute,
+    public router: Router,
+    public loaderService: LoaderService,
+    public successService: SuccessService) { }
 
   ngOnInit() {
 

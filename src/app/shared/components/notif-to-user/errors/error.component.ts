@@ -18,12 +18,12 @@ import { ErrorService } from "./error.service";
     `]
 })
 export class ErrorComponent implements OnInit{
-    error:Error;
+    error:TheError;
     display='none';
 
-    constructor(private errorService: ErrorService){
+    constructor(public errorService: ErrorService){
         this.errorService.errorOccured.subscribe(
-            (error: Error)=>{
+            (error: TheError)=>{
                 this.error = error;
                 this.display='block';
             }

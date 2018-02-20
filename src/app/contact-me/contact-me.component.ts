@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { ErrorService } from '../shared/components/notif-to-user/errors/error.service';
 import { SuccessService } from '../shared/components/notif-to-user/success/success.service';
-import { CookieService } from 'angular2-cookie/services/cookies.service';
+import { CookieService } from 'angular2-cookie/core';
 import { JwtHelper } from "angular2-jwt";
 import { UsefulService } from '../shared/services/utility/useful.service';
 
@@ -19,24 +19,24 @@ const HEADER_SIZE = 56;
 export class ContactMeComponent implements OnInit {
 
     @ViewChild('f') form: NgForm;
-    private envoyer = false;
-    private sent = false;
-    private connected = false;
-    private jwtHelper = new JwtHelper();
-    private name = '';
-    private email = '';
-    private langDirection;
-    private langTextAlign;
-    private heightPage = window.innerHeight - HEADER_SIZE;
-    private widthPage = window.innerWidth;
-    private fontSize = 0;
+    public envoyer = false;
+    public sent = false;
+    public connected = false;
+    public jwtHelper = new JwtHelper();
+    public name = '';
+    public email = '';
+    public langDirection;
+    public langTextAlign;
+    public heightPage = window.innerHeight - HEADER_SIZE;
+    public widthPage = window.innerWidth;
+    public fontSize = 0;
 
     public constructor(
-        private mailService: MailService,
-        private successService: SuccessService,
-        private errorService: ErrorService,
-        private cookieService: CookieService,
-        private usefulService: UsefulService) {
+        public mailService: MailService,
+        public successService: SuccessService,
+        public errorService: ErrorService,
+        public cookieService: CookieService,
+        public usefulService: UsefulService) {
     }
     ngOnInit() {
         this.onResize();

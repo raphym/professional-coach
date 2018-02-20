@@ -21,8 +21,8 @@ export class ArticleService {
     @Input() loadMoreArticlesEmitter: EventEmitter<any> = new EventEmitter();
 
 
-    constructor(private http: Http,
-        private fb: FacebookService
+    constructor(public http: Http,
+        public fb: FacebookService
     ) {
 
         //change for prod

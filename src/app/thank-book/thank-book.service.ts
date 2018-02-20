@@ -8,7 +8,7 @@ const Get_fbReviews_ADDRESS = 'http://localhost:3000/social_fb/getFbReviews';
 @Injectable()
 export class ThankBookService {
 
-    constructor(private http: Http) { }
+    constructor(public http: Http) { }
 
     //get articles count
     getFbReviews() {
