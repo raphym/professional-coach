@@ -128,46 +128,46 @@ export class AuthService {
                 .toPromise()
                 .then(
 
-                (res) => {
-                    //success to create the user , now send the confirm mail
-                    var user = res.json().user;
-                    var randomHash = user.randomHash;
-                    var randomSecretCode = user.randomSecretCode;
+                    (res) => {
+                        //success to create the user , now send the confirm mail
+                        var user = res.json().user;
+                        var randomHash = user.randomHash;
+                        var randomSecretCode = user.randomSecretCode;
 
-                    this.CONFIRMATION_REG_LINK_URL += '/';
-                    this.CONFIRMATION_REG_LINK_URL += randomHash;
+                        this.CONFIRMATION_REG_LINK_URL += '/';
+                        this.CONFIRMATION_REG_LINK_URL += randomHash;
 
-                    var mail_content = this.usefulService.createRegMail(user.userName,
-                        randomSecretCode,
-                        this.CONFIRMATION_REG_LINK_URL,
-                        SUPPORT_LINK_ADDRESS);
+                        var mail_content = this.usefulService.createRegMail(user.userName,
+                            randomSecretCode,
+                            this.CONFIRMATION_REG_LINK_URL,
+                            SUPPORT_LINK_ADDRESS);
 
-                    //send a confirm email to the new user
-                    this.mailService.sendMail(user.email, 'Registration', mail_content, 'html')
-                        .subscribe(
+                        //send a confirm email to the new user
+                        this.mailService.sendMail(user.email, 'Registration', mail_content, 'html')
+                            .subscribe(
 
-                        data => {
-                            //if success sending return a success message to the user
-                            var my_response = {
-                                title: 'Validate your account',
-                                message: 'Confirm your account by confirming the email'
-                            };
-                            this.successService.handleSuccess(my_response);
-                            resolve(data);
-                        },
-                        error => {
-                            //error to send the mail
-                            this.errorService.handleError(error);
-                            resolve(error);
-                        }
-                        );
-                },
+                                data => {
+                                    //if success sending return a success message to the user
+                                    var my_response = {
+                                        title: 'Validate your account',
+                                        message: 'Confirm your account by confirming the email'
+                                    };
+                                    this.successService.handleSuccess(my_response);
+                                    resolve(data);
+                                },
+                                error => {
+                                    //error to send the mail
+                                    this.errorService.handleError(error);
+                                    resolve(error);
+                                }
+                            );
+                    },
 
-                error => {
-                    //error to create the user
-                    this.errorService.handleError(error.json());
-                    reject(error);
-                }
+                    error => {
+                        //error to create the user
+                        this.errorService.handleError(error.json());
+                        reject(error);
+                    }
                 );
         });
     }
@@ -292,6 +292,7 @@ export class AuthService {
         this.firstName = '';
         this.lastName = '';
         this.email = '';
+        this.isLoggedIn();
         if (redirect == true)
             this.router.navigateByUrl('/');
     }

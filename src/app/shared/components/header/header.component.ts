@@ -21,6 +21,7 @@ export class HeaderComponent implements OnInit {
     public langTextAlign;
     public floatDirection;
     public margLeft = "-40";
+    public header_height = '32';
 
     constructor(
         public authService: AuthService,
@@ -159,31 +160,33 @@ export class HeaderComponent implements OnInit {
         else {
             this.authService.isLoggedIn()
                 .subscribe(
-                data => {
-                    if (data.message == null) {
-                        this.onLogout(false);
-                    }
-                    else if (data.message == 'Not Authenticated') {
-                        this.onLogout(false);
-                    }
-                    else if (data.message == 'Authenticated') {
-                        this.isConnect = true;
-                        var the_data = data.data;
-                        var levelRights = the_data.user.levelRights;
-                        if (levelRights != null) {
-                            if (levelRights >= 200)
-                                this.isAdmin = true;
+                    data => {
+                        if (data.message == null) {
+                            this.onLogout(false);
                         }
+                        else if (data.message == 'Not Authenticated') {
+                            this.onLogout(false);
+                        }
+                        else if (data.message == 'Authenticated') {
+                            this.isConnect = true;
+                            var the_data = data.data;
+                            var levelRights = the_data.user.levelRights;
+                            if (levelRights != null) {
+                                if (levelRights >= 200) {
+                                    this.header_height = '80';
+                                    this.isAdmin = true;
+                                }
+                            }
 
-                        var userName = the_data.user.userName;
-                        if (userName != null) {
-                            this.displayName = userName;
+                            var userName = the_data.user.userName;
+                            if (userName != null) {
+                                this.displayName = userName;
+                            }
                         }
+                    },
+                    error => {
+                        this.onLogout(false);
                     }
-                },
-                error => {
-                    this.onLogout(false);
-                }
                 );
         }
     }

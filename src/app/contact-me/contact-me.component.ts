@@ -81,45 +81,87 @@ export class ContactMeComponent implements OnInit {
         const value = form.value;
         this.envoyer = true;
 
-        //english mail
-        //var mail_content = "You receive a mail from " + value.name + " " + value.email + " : \r\n\r\n";
+        var mail_content = '';
+        var reponsehtml = '';
+        var messageTitleOk = '';
+        var messageContentOk = '';
+        var messageTitleNotOk = '';
+        var messageContentNotOk = '';
+        if (this.usefulService.getLangage() == 'he') {
+            //to the admin
+            mail_content = "קבלת הודעה";
+            mail_content += "\r\n";
+            mail_content += "\r\n";
+            mail_content += "שם:  ";
+            mail_content += value.name;
+            mail_content += "\r\n";
+            mail_content += "Email: ";
+            mail_content += value.email;
+            mail_content += "\r\n";
+            mail_content += "\r\n";
+            mail_content += value.description;
+            mail_content += "\r\n";
 
-        //hebrew mail
-        var mail_content = "קבלת הודעה";
-        mail_content += "\r\n";
-        mail_content += "\r\n";
-        mail_content += "שם:  ";
-        mail_content += value.name;
-        mail_content += "\r\n";
-        mail_content += "Email: ";
-        mail_content += value.email;
-        mail_content += "\r\n";
-        mail_content += "\r\n";
-        mail_content += value.description;
-        mail_content += "\r\n";
+            //to the user
+            reponsehtml = '<!DOCTYPE html><html><body style="text-align: right;direction: rtl;color: blue;align: right;">ההודעה שלך נשלחה, אנו נענה לך בהקדם<br>תודה<br>G-Fit</body></html>';
+
+            //return message
+            messageTitleOk = 'תודה';
+            messageContentOk = 'ההודעה שלך נשלחה בהצלחה';
+            messageTitleNotOk = 'סליחה';
+            messageContentNotOk = 'אירעה שגיאה בעת שליחת ההודעה';
+        }
+        else if (this.usefulService.getLangage() == 'en') {
+            //to the admin
+            mail_content = "You receive a mail from " + value.name + " " + value.email + " : \r\n\r\n";
+            mail_content += value.description;
+            mail_content += "\r\n";
+
+            //to the user
+            reponsehtml = '<!DOCTYPE html><html><body style="text-align: left;direction: ltr;color: blue;align: left;">Your message has been sent, we will reply to you shortly<br>Thank you <br>G-Fit</body></html>';
+
+            //return message
+            messageTitleOk = 'Thanks';
+            messageContentOk = 'Your message has been sent successfully';
+            messageTitleNotOk = 'Sorry';
+            messageContentNotOk = 'An error occurred while sending the message';
+        } else if (this.usefulService.getLangage() == 'fr') {
+            //to the admin
+            mail_content = "Vous avez reçu un mail de " + value.name + " " + value.email + " : \r\n\r\n";
+            mail_content += value.description;
+            mail_content += "\r\n";
+
+            //to the user
+            reponsehtml = '<!DOCTYPE html><html><body style="text-align: left;direction: ltr;color: blue;align: left;" >Votre message a été envoyé, nous vous répondrons dans les plus brefs délais <br> Merci <br> G-Fit</body></html>';
+
+            //return message
+            messageTitleOk = 'Merci';
+            messageContentOk = 'Votre message a été envoyé avec succès';
+            messageTitleNotOk = 'Désolé';
+            messageContentNotOk = 'Une erreur s\'est produite pendant l\'envoi du message';
+        }
 
         //send the mail to the admin
         this.mailService.sendMail('admin', 'G-Fit', mail_content, 'text')
             .subscribe(
-
                 data => {
-                    this.markDone();
-                    this.successService.handleSuccess(data.json());
+                    //send mail back to the user
+                    this.mailService.sendMail(value.email, 'G-Fit', reponsehtml, 'html')
+                        .subscribe(
+                            data => {
+                                this.markDone();
+                                this.successService.handleSuccess({ title: messageTitleOk, message: messageContentOk });
+                            },
+                            error => {
+                                this.markDone();
+                                this.errorService.handleError({ title: messageTitleNotOk, message: messageContentNotOk });
+                            }
+                        );
                 },
                 error => {
                     this.markDone();
-                    this.errorService.handleError(error);
+                    this.errorService.handleError({ title: messageTitleNotOk, message: messageContentNotOk });
                 }
-            );
-        //send mail back to the user
-        //english
-        //var reponsehtml = '<!DOCTYPE html><html><body>Your message has been sent, we will reply to you shortly<br>Thank you <br> Gab Coach</body></html>';
-        //hebrew
-        var reponsehtml = '<!DOCTYPE html><html><body style="text-align: right;direction: rtl;color: blue;align: right;">ההודעה שלך נשלחה, אנו נענה לך בהקדם<br>תודה<br>G-Fit</body></html>';
-        this.mailService.sendMail(value.email, 'G-Fit', reponsehtml, 'html')
-            .subscribe(
-                data => { },
-                error => { }
             );
         if (this.connected)
             this.form.value.description = '';

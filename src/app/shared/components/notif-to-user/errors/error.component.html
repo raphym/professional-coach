@@ -1,20 +1,25 @@
-<div class="backdrop" [ngStyle]="{display: display}"></div>
-
-<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{display: display}">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">{{error?.title}}</h4>
+<div [style.direction]="langDirection" [style.text-align]="langTextAlign">
+  <div class="backdrop" [ngStyle]="{display: display}"></div>
+  <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{display: display}">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">{{error?.title}}</h4>
+        </div>
+        <div class="modal-body">
+          <p>{{error?.message}}</p>
+        </div>
+        <div class="modal-footer">
+          <div [style.direction]="langDirection" [style.text-align]="langTextAlign">
+            <button type="button" class="btn btn-default" [style.direction]="langDirection" [style.text-align]="langTextAlign" (click)="onErrorHandled()">
+              <span translate>CLOSE</span>
+            </button>
+          </div>
+        </div>
       </div>
-      <div class="modal-body">
-        <p>{{error?.message}}</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" (click)="onErrorHandled()">Close</button>
-      </div>
+      <!-- /.modal-content -->
     </div>
-    <!-- /.modal-content -->
+    <!-- /.modal-dialog -->
   </div>
-  <!-- /.modal-dialog -->
+  <!-- /.modal -->
 </div>
-<!-- /.modal -->

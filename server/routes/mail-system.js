@@ -33,7 +33,6 @@ router.post('/send', function (req, res, next) {
   var mailOptions;
   if (req.body.text_option == "text") {
     mailOptions = {
-      from: 'no-reply@gab-coach.com',
       to: emaildest,
       subject: req.body.object_mail,
       text: req.body.message
@@ -41,7 +40,6 @@ router.post('/send', function (req, res, next) {
   }
   else if (req.body.text_option == "html") {
     mailOptions = {
-      from: 'no-reply@gab-coach.com',
       to: emaildest,
       subject: req.body.object_mail,
       html: req.body.message

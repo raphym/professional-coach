@@ -1,5 +1,10 @@
 <nav class="fixed-top">
-
+  <div class="hello_admin" *ngIf="isAdmin" [style.direction]="langDirection">
+    <span class="hello_admin_link" routerLink="/admin">
+      <span translate>HELLO</span>
+      <span>{{displayName}}</span>
+    </span>
+  </div>
   <!-- regular nav bar -->
   <div class="row navbare-nav" style="background-color: white!important; text-align: center;">
     <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
@@ -18,15 +23,15 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown" [style.text-align]="langTextAlign">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a routerLink="/" class="nav-link" translate>HOME_PAGE</a>
+              <a routerLink="/" class="nav-link m_link" translate>HOME_PAGE</a>
             </li>
 
             <li class="nav-item">
-              <a routerLink="/" class="nav-link" fragment="about-us" translate>ABOUT_US</a>
+              <a routerLink="/" class="nav-link m_link" fragment="about-us" translate>ABOUT_US</a>
             </li>
 
             <li class="nav-item">
-              <a routerLink="/" fragment="contact-us" class="nav-link" translate>CONTACT_US</a>
+              <a routerLink="/" fragment="contact-us" class="nav-link m_link" translate>CONTACT_US</a>
             </li>
           </ul>
         </div>
@@ -69,5 +74,5 @@
 
 </nav>
 <!--END OF THE HEADER -->
-<div class="push_end_header"></div>
+<div [style.height.px]="header_height"></div>
 <br>

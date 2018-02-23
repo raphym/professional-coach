@@ -7,6 +7,9 @@
       <li routerLinkActive="active" class="theLinkss">
         <a routerLink="/admin/user-management">Users</a>
       </li>
+      <li routerLinkActive="active" class="theLinkss">
+        <a routerLink="/logout">Logout</a>
+      </li>
     </div>
 
     <div class="my_sidenav_smallScreen" id="smallScreen">
@@ -16,6 +19,7 @@
           <option>Choose a page</option>
           <option value="admin/article">Articles</option>
           <option value="admin/user-management">Users</option>
+          <option value="/logout">Logout</option>
         </select>
       </div>
       <br>
@@ -26,7 +30,8 @@
     <div class="col-lg-10 col-md-10 col-sm-9 col-xs-1">
       <br>
       <h5 style="text-align:center;" translate>ADMINISTRATION_SPACE</h5>
-      <hr><br>
+      <hr>
+      <br>
       <router-outlet></router-outlet>
     </div>
   </div>

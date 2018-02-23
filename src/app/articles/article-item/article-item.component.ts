@@ -37,33 +37,33 @@ export class ArticleItemComponent implements OnInit {
     this.loaderService.enableLoader();
     this.route.params
       .subscribe(
-      (params: Params) => {
-        this.id = params['id'];
+        (params: Params) => {
+          this.id = params['id'];
 
-        this.articleService.getTheArticle(this.id)
-          .subscribe(
-          (article: Article) => {
-            //disable the loader
-            this.loaderService.disableLoader();
-            this.article = article;
-            //if there is an image so show it
-            if (this.article.image != undefined && this.article.image != null && this.article.image != '')
-              this.showImage = true;
-            document.getElementById('theContent').innerHTML = this.article.content;
-            this.url += this.router.url;
-            //init the toggle valid article
-            this.articleValid = this.article.valid;
-            //show the article
-            this.display = 'block';
-          },
-          error => {
-            //disable the loader
-            this.loaderService.disableLoader();
-            console.error(error)
-            this.errorService.handleError(error);
-          }
-          );
-      });
+          this.articleService.getTheArticle(this.id)
+            .subscribe(
+              (article: Article) => {
+                //disable the loader
+                this.loaderService.disableLoader();
+                this.article = article;
+                //if there is an image so show it
+                if (this.article.image != undefined && this.article.image != null && this.article.image != '')
+                  this.showImage = true;
+                document.getElementById('theContent').innerHTML = this.article.content;
+                this.url += this.router.url;
+                //init the toggle valid article
+                this.articleValid = this.article.valid;
+                //show the article
+                this.display = 'block';
+              },
+              error => {
+                //disable the loader
+                this.loaderService.disableLoader();
+                console.error(error)
+                this.errorService.handleError(error);
+              }
+            );
+        });
   }
 
   //check if the user is an admin
@@ -88,17 +88,17 @@ export class ArticleItemComponent implements OnInit {
     this.loaderService.enableLoader();
     this.articleService.deleteArticle(this.article._id)
       .subscribe(
-      (data) => {
-        //disable the loader
-        this.loaderService.disableLoader();
-        this.successService.handleSuccess(data);
-        this.router.navigateByUrl('/articles');
-      },
-      error => {
-        //disable the loader
-        this.loaderService.disableLoader();
-        this.errorService.handleError(error.json());
-      }
+        (data) => {
+          //disable the loader
+          this.loaderService.disableLoader();
+          this.successService.handleSuccess(data);
+          this.router.navigateByUrl('/articles');
+        },
+        error => {
+          //disable the loader
+          this.loaderService.disableLoader();
+          this.errorService.handleError(error.json());
+        }
       );
   }
 

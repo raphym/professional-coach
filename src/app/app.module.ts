@@ -71,7 +71,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     ArticlesListComponent,
     PreviewArticleComponent,
     ThankBookComponent,
-    ThankMessageComponent
+    ThankMessageComponent,
   ],
   imports: [
     SharedModule,

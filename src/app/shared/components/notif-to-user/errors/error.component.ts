@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { TheError } from "./error.model";
 import { ErrorService } from "./error.service";
+import { UsefulService } from "../../../services/utility/useful.service";
 
 
 @Component({
@@ -17,26 +18,33 @@ import { ErrorService } from "./error.service";
     }
     `]
 })
-export class ErrorComponent implements OnInit{
-    error:TheError;
-    display='none';
+export class ErrorComponent implements OnInit {
+    error: TheError;
+    display = 'none';
+    public langDirection;
+    public langTextAlign;
 
-    constructor(public errorService: ErrorService){
+    constructor(public errorService: ErrorService, public usefulService: UsefulService) {
         this.errorService.errorOccured.subscribe(
-            (error: TheError)=>{
+            (error: TheError) => {
                 this.error = error;
-                this.display='block';
+                this.display = 'block';
             }
         );
     }
 
-    ngOnInit()
-    {
-
+    ngOnInit() {
+        //subscribe to the langage
+        this.usefulService.langTransmitter.subscribe(
+            config_langage => {
+                this.langDirection = config_langage.direction;
+                this.langTextAlign = config_langage.textAlign;
+            }
+        );
     }
 
-    onErrorHandled(){
-        this.display='none';
+    onErrorHandled() {
+        this.display = 'none';
     }
 
 }

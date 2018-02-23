@@ -28,9 +28,13 @@
                             <span translate>HOME_INTRO_4</span>
                             <br>
                             <!-- <fb-like href="https://www.facebook.com/gfitisrael/" showFaces='false' share='true'></fb-like> -->
-                            <i class="fa fa-envelope-o" style="font-size:24px"></i>
-                            <a routerLink="/" style="text-decoration: none!important;color:white;" fragment="contact-us" translate>JOIN_US</a>
-                            <br>
+                            <div [style.direction]="langDirection">
+                                <a routerLink="/" style="text-decoration: none!important;color:white;" fragment="contact-us">
+                                    <i class="fa fa-envelope-o" style="font-size:24px"></i>
+                                    <span translate>JOIN_US</span>
+                                    <br>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>

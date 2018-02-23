@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { TheSuccess } from "./success.model";
 import { SuccessService } from "./success.service";
+import { UsefulService } from "../../../services/utility/useful.service";
 
 
 @Component({
@@ -17,26 +18,33 @@ import { SuccessService } from "./success.service";
     }
     `]
 })
-export class SuccessComponent implements OnInit{
-    success:TheSuccess;
-    display='none';
+export class SuccessComponent implements OnInit {
+    success: TheSuccess;
+    display = 'none';
+    public langDirection;
+    public langTextAlign;
 
-    constructor(public successService: SuccessService){
+    constructor(public successService: SuccessService, public usefulService: UsefulService) {
         this.successService.successOccured.subscribe(
-            (success: TheSuccess)=>{
+            (success: TheSuccess) => {
                 this.success = success;
-                this.display='block';
+                this.display = 'block';
             }
         );
     }
 
-    ngOnInit()
-    {
-
+    ngOnInit() {
+        //subscribe to the langage
+        this.usefulService.langTransmitter.subscribe(
+            config_langage => {
+                this.langDirection = config_langage.direction;
+                this.langTextAlign = config_langage.textAlign;
+            }
+        );
     }
 
-    onSuccessHandled(){
-        this.display='none';
+    onSuccessHandled() {
+        this.display = 'none';
     }
 
 }
