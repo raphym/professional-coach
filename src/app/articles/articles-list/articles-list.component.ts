@@ -106,20 +106,20 @@ export class ArticlesListComponent implements OnInit {
     this.loading = true;
     this.articleService.getArticlesCount()
       .subscribe(
-      data => {
-        this.numsOfArticles = data.count;
-        this.articles = new Array();
-        if (this.numsOfArticles > 0)
-          this.loadMore();
-        else
+        data => {
+          this.numsOfArticles = data.count;
+          this.articles = new Array();
+          if (this.numsOfArticles > 0)
+            this.loadMore();
+          else
+            //disable the loader
+            this.loading = false;
+        },
+        error => {
+          console.log(error);
           //disable the loader
           this.loading = false;
-      },
-      error => {
-        console.log(error);
-        //disable the loader
-        this.loading = false;
-      }
+        }
       );
   }
 
@@ -161,22 +161,22 @@ export class ArticlesListComponent implements OnInit {
     }
     this.articleService.getPartOfArticles(details)
       .subscribe(
-      data => {
-        var articles = data.articles;
-        this.numsLoadedArticles += articles.length;
-        for (var i = 0; i < articles.length; i++) {
-          this.articles.push(articles[i]);
+        data => {
+          var articles = data.articles;
+          this.numsLoadedArticles += articles.length;
+          for (var i = 0; i < articles.length; i++) {
+            this.articles.push(articles[i]);
+          }
+          this.loadingMutex = false;
+          //disable the loader
+          this.loading = false;
+        },
+        error => {
+          console.log(error);
+          this.loadingMutex = false;
+          //disable the loader
+          this.loading = false;
         }
-        this.loadingMutex = false;
-        //disable the loader
-        this.loading = false;
-      },
-      error => {
-        console.log(error);
-        this.loadingMutex = false;
-        //disable the loader
-        this.loading = false;
-      }
       );
 
   }

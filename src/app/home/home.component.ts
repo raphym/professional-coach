@@ -14,8 +14,8 @@ export class HomeComponent implements OnInit {
 
   public langDirection;
   public langTextAlign;
-  public heightPage = window.innerHeight - HEADER_SIZE; 
-  public widthPage = window.innerWidth; 
+  public heightPage = window.innerHeight - HEADER_SIZE;
+  public widthPage = window.innerWidth;
 
   //for the anchor in the page
   public scrollExecuted: boolean = false;
@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit {
   }
 
   onResize() {
-    this.heightPage = window.innerHeight - HEADER_SIZE; 
+    this.heightPage = window.innerHeight - HEADER_SIZE;
     this.widthPage = window.innerWidth;
   }
 

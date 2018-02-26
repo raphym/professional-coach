@@ -15,7 +15,7 @@ import { ErrorService } from '../../shared/components/notif-to-user/errors/error
 })
 export class ArticleItemComponent implements OnInit {
 
-
+  public loading: boolean = false;
   public article: Article;
   public id;
   public showImage: boolean = false;
@@ -26,7 +26,6 @@ export class ArticleItemComponent implements OnInit {
 
   constructor(public articleService: ArticleService,
     public route: ActivatedRoute,
-    public loaderService: LoaderService,
     public authService: AuthService,
     public successService: SuccessService,
     public errorService: ErrorService,
@@ -34,7 +33,7 @@ export class ArticleItemComponent implements OnInit {
 
   ngOnInit() {
     //enable the loader
-    this.loaderService.enableLoader();
+    this.loading = true;
     this.route.params
       .subscribe(
         (params: Params) => {
@@ -44,7 +43,7 @@ export class ArticleItemComponent implements OnInit {
             .subscribe(
               (article: Article) => {
                 //disable the loader
-                this.loaderService.disableLoader();
+                this.loading = false;
                 this.article = article;
                 //if there is an image so show it
                 if (this.article.image != undefined && this.article.image != null && this.article.image != '')
@@ -58,7 +57,7 @@ export class ArticleItemComponent implements OnInit {
               },
               error => {
                 //disable the loader
-                this.loaderService.disableLoader();
+                this.loading = false;
                 console.error(error)
                 this.errorService.handleError(error);
               }
@@ -85,18 +84,18 @@ export class ArticleItemComponent implements OnInit {
   //when click on delete Article
   onDelete() {
     //enable the loader
-    this.loaderService.enableLoader();
+    this.loading = true;
     this.articleService.deleteArticle(this.article._id)
       .subscribe(
         (data) => {
           //disable the loader
-          this.loaderService.disableLoader();
+          this.loading = false;
           this.successService.handleSuccess(data);
           this.router.navigateByUrl('/articles');
         },
         error => {
           //disable the loader
-          this.loaderService.disableLoader();
+          this.loading = false;
           this.errorService.handleError(error.json());
         }
       );
@@ -116,18 +115,18 @@ export class ArticleItemComponent implements OnInit {
   validateArticle(event) {
     var validation = event.target.checked;
     //enable the loader
-    this.loaderService.enableLoader();
+    this.loading = true;
     var request_validation = { id: this.id, validation: validation };
 
     this.articleService.validateArticle(request_validation).subscribe(
       data => {
         //disable the loader
-        this.loaderService.disableLoader();
+        this.loading = false;
         this.successService.handleSuccess(data);
       },
       error => {
         //disable the loader
-        this.loaderService.disableLoader();
+        this.loading = false;
         console.log(error);
         this.errorService.handleError(error);
       }
