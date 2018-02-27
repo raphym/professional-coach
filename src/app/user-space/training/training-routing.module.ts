@@ -4,7 +4,7 @@ import { TrainingComponent } from "./training.component";
 
 
 const authRoutes : Routes = [
-    {path:'usertraining',component: TrainingComponent},
+    // {path:'usertraining',component: TrainingComponent},
 ];
 
 @NgModule({

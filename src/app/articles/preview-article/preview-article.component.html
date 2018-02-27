@@ -1,35 +1,53 @@
-<div *ngIf="pair" class="row prev_article">
-  <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1">
-  </div>
-  <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5">
-    <div class="m_text">
+<!-- article one after the other right, left -->
+<div class="normal_screen">
+  <div *ngIf="pair" class="row prev_article">
+    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1">
+    </div>
+
+
+    <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5">
       <div class="push"></div>
       <div class="m_titleLeft" (click)="onClick()">{{title}}</div>
       <div class="push"></div>
       <div class="m_introLeft" (click)="onClick()">{{intro}}</div>
     </div>
-  </div>
-  <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5">
-    <img class="m_image" [src]="image" (click)="onClick()">
-  </div>
-  <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1">
-  </div>
-</div>
 
-<div *ngIf="!pair" class="row prev_article">
-  <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1">
+
+    <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5">
+      <img class="m_image" [src]="image" (click)="onClick()">
+    </div>
+    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1">
+    </div>
   </div>
-  <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5">
-    <img class="m_image" [src]="image" (click)="onClick()">
-  </div>
-  <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5">
-    <div class="m_text">
+
+  <div *ngIf="!pair" class="row prev_article">
+    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1">
+    </div>
+
+    <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5">
+      <img class="m_image" [src]="image" (click)="onClick()">
+    </div>
+
+    <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5">
       <div class="push"></div>
       <div class="m_titleRight" (click)="onClick()">{{title}}</div>
       <div class="push"></div>
       <div class="m_introRight" (click)="onClick()">{{intro}}</div>
     </div>
+
+    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1">
+    </div>
   </div>
-  <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1">
+</div>
+
+<!-- (portrait phones) article one after another -->
+<div class="phone_screen">
+  <div class="prev_article">
+    <div class="push"></div>
+    <div class="m_titleLeft" (click)="onClick()">{{title}}</div>
+    <div class="push"></div>
+    <div class="m_introLeft" (click)="onClick()">{{intro}}</div>
+    <div class="push"></div>
+    <img class="m_image" [src]="image" (click)="onClick()">
   </div>
 </div>

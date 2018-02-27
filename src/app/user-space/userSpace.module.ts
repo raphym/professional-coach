@@ -13,6 +13,7 @@ import { ProfileModule } from './user-profile/profile.module';
   imports: [
     SharedModule,
     UserSpaceRoutingModule,
+    // TrainingModule,
     ProfileModule
   ],
   providers: [

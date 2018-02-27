@@ -4,7 +4,7 @@ import { GuestbookMessagesComponent } from "./guestbook-messages.component";
 
 
 const APP_ROUTES: Routes = [
-    { path: 'guestbook', component: GuestbookMessagesComponent },
+    // { path: 'guestbook', component: GuestbookMessagesComponent },
 ];
 
 @NgModule({

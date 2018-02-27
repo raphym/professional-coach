@@ -5,6 +5,12 @@
 
 /* Extra small devices (portrait phones, less than 576px) */
 @media (max-width: 575px) { 
+    .phone_screen{
+        display: block;
+    }
+    .normal_screen{
+        display: none;
+    }
     .m_image{
         width: 60%;
         max-height: 200px;
@@ -14,19 +20,19 @@
         cursor: pointer;
     }
     .push{
-        height: 8px;
+        height: 40px;
     }
     .m_titleLeft{
         text-align: center;
         color: black;
-        font-size: 25px;
+        font-size: 30px;
         cursor: pointer;
         font-weight: bold;
         direction: rtl;
     }
     .m_introLeft{
         text-align: center;
-        font-size: 10px;
+        font-size: 20px;
         cursor: pointer;
         color:#696969;
         direction: rtl;
@@ -35,14 +41,14 @@
     .m_titleRight{
         text-align: center;
         color: black;
-        font-size: 25px;
+        font-size: 30px;
         cursor: pointer;
         font-weight: bold;
         direction: rtl;
     }
     .m_introRight{
         text-align: center;
-        font-size: 10px;
+        font-size: 20px;
         cursor: pointer;
         color:#696969;
         direction: rtl;
@@ -52,10 +58,21 @@
 
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) and (max-width: 767px) { 
+    .phone_screen{
+        display: none;
+    }
+
+    .normal_screen{
+        display: block;
+    }
+    
     .m_image{
-        width: 100%;
+        width: 70%;
         max-height: 200px;
         cursor: pointer;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
     }
     .push{
         height: 15px;
@@ -63,14 +80,14 @@
     .m_titleLeft{
         text-align: left;
         color: black;
-        font-size: 15px;
+        font-size: 20px;
         cursor: pointer;
         font-weight: bold;
         direction: rtl;
     }
     .m_introLeft{
         text-align: left;
-        font-size: 10px;
+        font-size: 16px;
         cursor: pointer;
         color:#696969;
         direction: rtl;
@@ -79,14 +96,14 @@
     .m_titleRight{
         text-align: right;
         color: black;
-        font-size: 15px;
+        font-size: 20px;
         cursor: pointer;
         font-weight: bold;
         direction: rtl;
     }
     .m_introRight{
         text-align: right;
-        font-size: 10px;
+        font-size: 16px;
         cursor: pointer;
         color:#696969;
         direction: rtl;
@@ -96,10 +113,21 @@
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) and (max-width: 991px) { 
+    .phone_screen{
+        display: none;
+    }
+
+    .normal_screen{
+        display: block;
+    }
+
     .m_image{
-        width: 100%;
+        width: 70%;
         max-height: 200px;
         cursor: pointer;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
     }
     .push{
         height: 25px;
@@ -107,14 +135,14 @@
     .m_titleLeft{
         text-align: left;
         color: black;
-        font-size: 20px;
+        font-size: 30px;
         cursor: pointer;
         font-weight: bold;
         direction: rtl;
     }
     .m_introLeft{
         text-align: left;
-        font-size: 10px;
+        font-size: 20px;
         cursor: pointer;
         color:#696969;
         direction: rtl;
@@ -123,14 +151,14 @@
     .m_titleRight{
         text-align: right;
         color: black;
-        font-size: 20px;
+        font-size: 30px;
         cursor: pointer;
         font-weight: bold;
         direction: rtl;
     }
     .m_introRight{
         text-align: right;
-        font-size: 10px;
+        font-size: 20px;
         cursor: pointer;
         color:#696969;
         direction: rtl;
@@ -140,10 +168,21 @@
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) and (max-width: 1199px) { 
+    .phone_screen{
+        display: none;
+    }
+
+    .normal_screen{
+        display: block;
+    }
+
     .m_image{
-        width: 100%;
+        width: 55%;
         max-height: 300px;
         cursor: pointer;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
     }
     .push{
         height: 25px;
@@ -151,14 +190,14 @@
     .m_titleLeft{
         text-align: left;
         color: black;
-        font-size: 30px;
+        font-size: 35px;
         cursor: pointer;
         font-weight: bold;
         direction: rtl;
     }
     .m_introLeft{
         text-align: left;
-        font-size: 15px;
+        font-size: 26px;
         cursor: pointer;
         color:#696969;
         direction: rtl;
@@ -167,14 +206,14 @@
     .m_titleRight{
         text-align: right;
         color: black;
-        font-size: 30px;
+        font-size: 35px;
         cursor: pointer;
         font-weight: bold;
         direction: rtl;
     }
     .m_introRight{
         text-align: right;
-        font-size: 15px;
+        font-size: 26px;
         cursor: pointer;
         color:#696969;
         direction: rtl;
@@ -184,10 +223,21 @@
 
 /* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) { 
+    .phone_screen{
+        display: none;
+    }
+
+    .normal_screen{
+        display: block;
+    }
+
     .m_image{
-        width: 100%;
+        width: 55%;
         max-height: 300px;
         cursor: pointer;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
     }
     .push{
         height: 25px;
@@ -195,14 +245,14 @@
     .m_titleLeft{
         text-align: left;
         color: black;
-        font-size: 35px;
+        font-size: 45px;
         cursor: pointer;
         font-weight: bold;
         direction: rtl;
     }
     .m_introLeft{
         text-align: left;
-        font-size: 20px;
+        font-size: 35px;
         cursor: pointer;
         color:#696969;
         direction: rtl;
@@ -211,14 +261,14 @@
     .m_titleRight{
         text-align: right;
         color: black;
-        font-size: 35px;
+        font-size: 45px;
         cursor: pointer;
         font-weight: bold;
         direction: rtl;
     }
     .m_introRight{
         text-align: right;
-        font-size: 20px;
+        font-size: 35px;
         cursor: pointer;
         color:#696969;
         direction: rtl;

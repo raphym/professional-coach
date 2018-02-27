@@ -13,7 +13,6 @@ import { ErrorService } from './shared/components/notif-to-user/errors/error.ser
 import { SuccessService } from './shared/components/notif-to-user/success/success.service';
 import { AuthService } from './auth/auth.service';
 import { AuthModule } from './auth/auth.module';
-import { TrainingModule } from './user-space/training/training.module';
 import { ErrorComponent } from './shared/components/notif-to-user/errors/error.component';
 import { GuestbookModule } from './Guestbook/guestbook.module';
 import { MailService } from './shared/services/mail/mail.service';
@@ -76,8 +75,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   imports: [
     SharedModule,
     AuthModule,
-    TrainingModule,
-    GuestbookModule,
+    // GuestbookModule,
     AdminModule,
     LoadingModule.forRoot({
       animationType: ANIMATION_TYPES.threeBounce,
@@ -87,7 +85,6 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
       secondaryColour: '#ffffff',
       tertiaryColour: '#ffffff'
     }),
-    SharedModule,
     ArticleModule,
     UserSpaceModule,
     ThankBookModule,
