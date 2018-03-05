@@ -33,6 +33,7 @@ export class HomeComponent implements OnInit {
     );
     //set langage
     this.usefulService.initLangage();
+    this.blinkFunction();
   }
 
   onResize() {
@@ -40,6 +41,13 @@ export class HomeComponent implements OnInit {
     this.widthPage = window.innerWidth;
   }
 
+  blinkFunction() {
+    var m1 = document.getElementById('m1');
+
+    setInterval(function () {
+      m1.style.color = (m1.style.color == 'blue' ? '' : 'blue');
+    }, 500);
+  }
   ngAfterViewChecked() {
 
     //to navigate to the anchor in the page

@@ -2,7 +2,7 @@
     "HOME_PAGE": "Page d'accueil",
 	"ARTICLES": "Articles",
 	"ABOUT_US": "A propos de nous",
-	"CONTACT_US": "Contact nous",
+	"CONTACT_US": "Contactez nous",
 	"GUEST_BOOK": "Livre d'or",
 	"MY_SPACE": "Espace personnel",
 	"REGISTER":"S'inscrire",
@@ -17,6 +17,7 @@
 
 	"HELLO":"Bonjour",
 	"CLOSE":"Fermer",
+	"WHAT_THINK_ABOUT_US":"Que pensez vous de nous ?",
 
 	"GABRIEL":"Gabriel Mazouz",
 	"SPORT_COACH":"Entraîneur de sport",

@@ -2,13 +2,27 @@
     background: white;
    }
 
-.loadMore{
+/* .joinUs{
     height: 70px;
-    background-color: #00A99D;
+    background-color: white;
     border: none;
     text-align: center;
     padding-top: 8px;
-    color: white;
+    color: red;
+    font-weight: bold;
+    font-size: 40px;
+} */
+
+.joinUsBlink{
+    width: 70%;
+}
+
+.loadMore{
+    height: 70px;
+    border: none;
+    text-align: center;
+    padding-top: 8px;
+    color: #00A99D;
     font-weight: bold;
     font-size: 35px;
 }
@@ -37,7 +51,6 @@
     text-align: center;
     color:white;
     line-height: 200%;
-    font-family: 'Kavivanar', cursive;
 }
 
    

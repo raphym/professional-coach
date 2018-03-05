@@ -3,19 +3,20 @@
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
       <div class="hideShow text-center">
         <div class="m_box" [style.font-size]="fontSize + 'px'">
-          <div>{{name}}</div>
-          <br>
-          <img class="m_image" src="../../../../assets/Images/user-space/profile/profile.ico">
-          <br>
-          <br>
-          <div>{{reviewText}}</div>
-          <br>
+          <div [style.direction]="langDirectionName">
+            <span>
+              <i class="fa fa-user-circle"> {{name}} </i>
+            </span>
+          </div>
           <br>
           <span class="fa fa-star" id="s1"></span>
           <span class="fa fa-star" id="s2"></span>
           <span class="fa fa-star" id="s3"></span>
           <span class="fa fa-star" id="s4"></span>
           <span class="fa fa-star" id="s5"></span>
+          <br>
+          <div [style.direction]="langDirection">{{reviewText}}</div>
+          <br>
         </div>
       </div>
     </div>

@@ -1,4 +1,3 @@
-
 .m_beforeBox{
   height: 100%;
   display: flex;
@@ -25,8 +24,7 @@
   line-height: 200%;
   padding-left: 50px;
   padding-right: 50px;
-  color: white;
-  font-family: 'Kavivanar', cursive;
+  color: #00A99D;
 }
 
 .checked {

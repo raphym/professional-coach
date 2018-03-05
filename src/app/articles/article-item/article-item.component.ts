@@ -103,6 +103,7 @@ export class ArticleItemComponent implements OnInit {
 
   //share article 
   shareArticle() {
+    console.log(' here ');
     this.articleService.shareArticle(this.url, this.article.title, this.article.intro).then(
       function (response) {
       }

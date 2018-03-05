@@ -15,7 +15,8 @@ export class ThankMessageComponent implements OnInit {
   public heightPage = window.innerHeight - HEADER_SIZE;
   public widthPage = window.innerWidth;
   public fontSize = 0;
-
+  public langDirectionName;
+  public langDirectionMessage;
 
   constructor() { }
 
@@ -47,6 +48,38 @@ export class ThankMessageComponent implements OnInit {
   //when the @input is changing
   ngOnChanges() {
     this.displayStars();
+    this.detectHebrewName();
+    this.detectHebrewReviewText();
+  }
+
+  //detect hebrew for the text direction
+  detectHebrewName() {
+    if (this.name == null || this.name == '') {
+      this.langDirectionName = 'ltr';
+      return;
+    }
+    var position = this.reviewText.search(/[\u0590-\u05FF]/);
+    if (position >= 0) {
+      this.langDirectionName = 'rtl';
+    }
+    else {
+      this.langDirectionName = 'ltr';
+    }
+  }
+
+  //detect hebrew for the text direction
+  detectHebrewReviewText() {
+    if (this.reviewText == null || this.reviewText == '') {
+      this.langDirectionMessage = 'ltr';
+      return;
+    }
+    var position = this.reviewText.search(/[\u0590-\u05FF]/);
+    if (position >= 0) {
+      this.langDirectionMessage = 'rtl';
+    }
+    else {
+      this.langDirectionMessage = 'ltr';
+    }
   }
 
 }

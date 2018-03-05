@@ -16,7 +16,11 @@
 .my_but{
     margin:auto;
     display:block;
-    margin-top:16px;
+    /* margin-top:16px; */
+    position: fixed;
+    /* transform: rotate(-7deg); */
+    margin-left: -20px;
+    /* z-index: -1; */
 }
 
 .m_article{
@@ -34,6 +38,16 @@
         margin-right:auto;
         margin-top: 20px;
     }
+    .m_title{
+      direction: rtl;
+      font-size: 30px;
+    }
+    .my_but{
+      margin:auto;
+      display:block;
+      position: relative;
+      margin-bottom: 40px;
+  }
 }
 
 /* Small devices (landscape phones, 576px and up) */
@@ -45,6 +59,11 @@
         margin-left:auto;
         margin-right:auto;
         margin-top: 20px;
+    }  
+
+    .m_title{
+      direction: rtl;
+      font-size: 40px;
     }    
 }
 
@@ -58,6 +77,10 @@
         margin-right:auto;
         margin-top: 20px;
     }
+    .m_title{
+      direction: rtl;
+      font-size: 50px;
+    }
 }
 
 /* Large devices (desktops, 992px and up) */
@@ -70,6 +93,11 @@
         margin-right:auto;
         margin-top: 20px;
     }
+
+    .m_title{
+      direction: rtl;
+      font-size: 60px;
+    }
 }
 
 /* Extra large devices (large desktops, 1200px and up) */
@@ -81,6 +109,10 @@
         margin-left:auto;
         margin-right:auto;
         margin-top: 20px;
+    }
+    .m_title{
+      direction: rtl;
+      font-size: 70px;
     }
 }
 

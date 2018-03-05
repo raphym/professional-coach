@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit {
     public langTextAlign;
     public floatDirection;
     public margLeft = "-40";
-    public header_height = '32';
+    public header_height = '80';
 
     constructor(
         public authService: AuthService,

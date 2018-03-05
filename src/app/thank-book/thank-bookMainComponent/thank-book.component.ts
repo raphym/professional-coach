@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, animate, transition, keyframes } from '@angular/animations';
 import { ThankBookService } from '../thank-book.service';
 import { ThankMessage } from '../../shared/models/objects-models/thankMessage';
+import { UsefulService } from '../../shared/services/utility/useful.service';
 
 const HEADER_SIZE = 56;
 
@@ -65,10 +66,21 @@ export class ThankBookComponent implements OnInit {
   public widthPage = window.innerWidth;
   public fontSize = 0;
   public stateAnimation: string = 'inactive';
+  public langDirection;
+  public langTextAlign;
 
-  constructor(public thankBookService: ThankBookService) { }
+  constructor(public thankBookService: ThankBookService, public usefulService: UsefulService) { }
 
   ngOnInit() {
+    //subscribe to the langage
+    this.usefulService.langTransmitter.subscribe(
+      config_langage => {
+        this.langDirection = config_langage.direction;
+        this.langTextAlign = config_langage.textAlign;
+      }
+    );
+    //set langage
+    this.usefulService.initLangage();
     this.init();
     this.onResize();
   }

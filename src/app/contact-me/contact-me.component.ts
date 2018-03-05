@@ -103,11 +103,11 @@ export class ContactMeComponent implements OnInit {
             mail_content += "\r\n";
 
             //to the user
-            reponsehtml = '<!DOCTYPE html><html><body style="text-align: right;direction: rtl;color: blue;align: right;">ההודעה שלך נשלחה, אנו נענה לך בהקדם<br>תודה<br>G-Fit</body></html>';
+            reponsehtml = '<!DOCTYPE html><html><body style="text-align: right;direction: rtl;color: blue;align: right;">פרטיך נקלטו בהצלחה, נחזור אלייך בהקדם. תודה שבחרת G-Fit !<br>G-Fit</body></html>';
 
             //return message
             messageTitleOk = 'תודה';
-            messageContentOk = 'ההודעה שלך נשלחה בהצלחה';
+            messageContentOk = 'פרטיך נקלטו בהצלחה, נחזור אלייך בהקדם. תודה שבחרת G-Fit !';
             messageTitleNotOk = 'סליחה';
             messageContentNotOk = 'אירעה שגיאה בעת שליחת ההודעה';
         }
@@ -118,11 +118,11 @@ export class ContactMeComponent implements OnInit {
             mail_content += "\r\n";
 
             //to the user
-            reponsehtml = '<!DOCTYPE html><html><body style="text-align: left;direction: ltr;color: blue;align: left;">Your message has been sent, we will reply to you shortly<br>Thank you <br>G-Fit</body></html>';
+            reponsehtml = '<!DOCTYPE html><html><body style="text-align: left;direction: ltr;color: blue;align: left;">Your details have been registered, we will contact you as soon as possible. Thank you for choosing G-Fit!<br>G-Fit</body></html>';
 
             //return message
             messageTitleOk = 'Thanks';
-            messageContentOk = 'Your message has been sent successfully';
+            messageContentOk = 'Your details have been registered, we will contact you as soon as possible. Thank you for choosing G-Fit!';
             messageTitleNotOk = 'Sorry';
             messageContentNotOk = 'An error occurred while sending the message';
         } else if (this.usefulService.getLangage() == 'fr') {
@@ -132,11 +132,11 @@ export class ContactMeComponent implements OnInit {
             mail_content += "\r\n";
 
             //to the user
-            reponsehtml = '<!DOCTYPE html><html><body style="text-align: left;direction: ltr;color: blue;align: left;" >Votre message a été envoyé, nous vous répondrons dans les plus brefs délais <br> Merci <br> G-Fit</body></html>';
+            reponsehtml = '<!DOCTYPE html><html><body style="text-align: left;direction: ltr;color: blue;align: left;" >Vos coordonnées ont bien été enregistrée, nous vous contacterons au plus vite. Merci d\'avoir choisis G-Fit ! <br> G-Fit</body></html>';
 
             //return message
             messageTitleOk = 'Merci';
-            messageContentOk = 'Votre message a été envoyé avec succès';
+            messageContentOk = 'Vos coordonnées ont bien été enregistrée, nous vous contacterons au plus vite. Merci d\'avoir choisis G-Fit !';
             messageTitleNotOk = 'Désolé';
             messageContentNotOk = 'Une erreur s\'est produite pendant l\'envoi du message';
         }
