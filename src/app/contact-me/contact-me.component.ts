@@ -99,14 +99,14 @@ export class ContactMeComponent implements OnInit {
             mail_content += value.email;
             mail_content += "\r\n";
             mail_content += "\r\n";
-            mail_content += value.description;
+            mail_content += value.phone;
             mail_content += "\r\n";
 
             //to the user
-            reponsehtml = '<!DOCTYPE html><html><body style="text-align: right;direction: rtl;color: blue;align: right;">פרטיך נקלטו בהצלחה, נחזור אלייך בהקדם. תודה שבחרת G-Fit !<br>G-Fit</body></html>';
+            reponsehtml = '<!DOCTYPE html><html><body style="text-align: right;direction: rtl;color: blue;align: right;">פרטיך נקלטו בהצלחה, נחזור אלייך בהקדם. תודה שבחרת G-Fit !<br><br>צוות G-Fit</body></html>';
 
             //return message
-            messageTitleOk = 'תודה';
+            messageTitleOk = 'צוות G-Fit';
             messageContentOk = 'פרטיך נקלטו בהצלחה, נחזור אלייך בהקדם. תודה שבחרת G-Fit !';
             messageTitleNotOk = 'סליחה';
             messageContentNotOk = 'אירעה שגיאה בעת שליחת ההודעה';
@@ -114,28 +114,28 @@ export class ContactMeComponent implements OnInit {
         else if (this.usefulService.getLangage() == 'en') {
             //to the admin
             mail_content = "You receive a mail from " + value.name + " " + value.email + " : \r\n\r\n";
-            mail_content += value.description;
+            mail_content += value.phone;
             mail_content += "\r\n";
 
             //to the user
-            reponsehtml = '<!DOCTYPE html><html><body style="text-align: left;direction: ltr;color: blue;align: left;">Your details have been registered, we will contact you as soon as possible. Thank you for choosing G-Fit!<br>G-Fit</body></html>';
+            reponsehtml = '<!DOCTYPE html><html><body style="text-align: left;direction: ltr;color: blue;align: left;">Your details have been registered, we will contact you as soon as possible. Thank you for choosing G-Fit !<br><br>G-Fit Team</body></html>';
 
             //return message
-            messageTitleOk = 'Thanks';
+            messageTitleOk = 'G-Fit Team';
             messageContentOk = 'Your details have been registered, we will contact you as soon as possible. Thank you for choosing G-Fit!';
             messageTitleNotOk = 'Sorry';
             messageContentNotOk = 'An error occurred while sending the message';
         } else if (this.usefulService.getLangage() == 'fr') {
             //to the admin
             mail_content = "Vous avez reçu un mail de " + value.name + " " + value.email + " : \r\n\r\n";
-            mail_content += value.description;
+            mail_content += value.phone;
             mail_content += "\r\n";
 
             //to the user
-            reponsehtml = '<!DOCTYPE html><html><body style="text-align: left;direction: ltr;color: blue;align: left;" >Vos coordonnées ont bien été enregistrée, nous vous contacterons au plus vite. Merci d\'avoir choisis G-Fit ! <br> G-Fit</body></html>';
+            reponsehtml = '<!DOCTYPE html><html><body style="text-align: left;direction: ltr;color: blue;align: left;" >Vos coordonnées ont bien été enregistrée, nous vous contacterons au plus vite. Merci d\'avoir choisis G-Fit !<br><br>Équipe G-Fit</body></html>';
 
             //return message
-            messageTitleOk = 'Merci';
+            messageTitleOk = 'Équipe G-Fit';
             messageContentOk = 'Vos coordonnées ont bien été enregistrée, nous vous contacterons au plus vite. Merci d\'avoir choisis G-Fit !';
             messageTitleNotOk = 'Désolé';
             messageContentNotOk = 'Une erreur s\'est produite pendant l\'envoi du message';
@@ -164,13 +164,13 @@ export class ContactMeComponent implements OnInit {
                 }
             );
         if (this.connected)
-            this.form.value.description = '';
+            this.form.value.phone = '';
         else
             this.form.reset();
     }
 
     markDone() {
-        this.sent = true;
+        this.sent = false;
         this.envoyer = false;
     }
 }
