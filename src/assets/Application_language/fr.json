@@ -42,9 +42,8 @@
 	"NAME":"Nom",
 	"EMAIL":"Email",
 	"DESCRIPTION":"Description",
-	
+	"FILL_ALL_FIELDS":"Remplissez tous les champs, s'il vous plaît",
 	"SEND":"Envoyer",
-
 
 	"ANY_QUERY_POP_US_A_MESSAGE":"Des questions ? Envoyez nous un message",
 	"WHERE_ARE_US":"Où sommes nous",

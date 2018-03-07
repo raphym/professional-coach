@@ -40,12 +40,10 @@
 
 	
 	"PLEASE_WRITE_IN_ENGLISH":"Please write in english",
-	
 	"NAME":"Name",
 	"EMAIL":"Email",
 	"DESCRIPTION":"Description",
-
-	
+	"FILL_ALL_FIELDS":"Please complete all fields",
 	"SEND":"Send",
 	
 	"ANY_QUERY_POP_US_A_MESSAGE":"Any Queries? Pop us a message",

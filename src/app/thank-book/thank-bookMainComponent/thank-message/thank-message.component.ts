@@ -32,7 +32,7 @@ export class ThankMessageComponent implements OnInit {
   //calcul to get the font size
   calculateFontSize() {
     var average_width_height = (this.widthPage + this.heightPage) / 2;
-    this.fontSize = average_width_height * (28 / 1280);
+    this.fontSize = average_width_height * (35 / 1280);
   }
 
   //display stars
@@ -54,31 +54,35 @@ export class ThankMessageComponent implements OnInit {
 
   //detect hebrew for the text direction
   detectHebrewName() {
-    if (this.name == null || this.name == '') {
+    if (this.name == null || this.name == undefined || this.name == '') {
       this.langDirectionName = 'ltr';
       return;
     }
-    var position = this.reviewText.search(/[\u0590-\u05FF]/);
-    if (position >= 0) {
-      this.langDirectionName = 'rtl';
-    }
     else {
-      this.langDirectionName = 'ltr';
+      var position = this.name.search(/[\u0590-\u05FF]/);
+      if (position >= 0) {
+        this.langDirectionName = 'rtl';
+      }
+      else {
+        this.langDirectionName = 'ltr';
+      }
     }
   }
 
   //detect hebrew for the text direction
   detectHebrewReviewText() {
-    if (this.reviewText == null || this.reviewText == '') {
+    if (this.reviewText == null || this.reviewText == undefined || this.reviewText == '') {
       this.langDirectionMessage = 'ltr';
       return;
     }
-    var position = this.reviewText.search(/[\u0590-\u05FF]/);
-    if (position >= 0) {
-      this.langDirectionMessage = 'rtl';
-    }
     else {
-      this.langDirectionMessage = 'ltr';
+      var position = this.reviewText.search(/[\u0590-\u05FF]/);
+      if (position >= 0) {
+        this.langDirectionMessage = 'rtl';
+      }
+      else {
+        this.langDirectionMessage = 'ltr';
+      }
     }
   }
 

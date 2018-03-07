@@ -30,6 +30,7 @@ export class ContactMeComponent implements OnInit {
     public heightPage = window.innerHeight - HEADER_SIZE;
     public widthPage = window.innerWidth;
     public fontSize = 0;
+    public complete: boolean = false;
 
     public constructor(
         public mailService: MailService,
@@ -79,6 +80,13 @@ export class ContactMeComponent implements OnInit {
     onSubmit(form: NgForm) {
 
         const value = form.value;
+
+        if (value.name == null || value.name == "" || value.email == null || value.email == "" || value.phone == null || value.phone == "") {
+            this.complete = true;
+            return;
+        }
+        else
+            this.complete = false;
         this.envoyer = true;
 
         var mail_content = '';

@@ -228,7 +228,7 @@ export class ArticleService {
                         'og:url': url,
                         'og:title': title,
                         'og:description': intro,
-                        'og:image': 'http://preprod.test1.g-fit.co.il/assets/Images/logofb.png',
+                        'og:image': 'http://preprod.test1.g-fit.co.il/assets/Images/article/fb/logofb.png',
                         'og:image:width': '50',
                         'og:image:height': '50',
                         'og:image:type': 'image/jpeg'

@@ -33,8 +33,11 @@
             <label for="phone" translate>PHONE</label>
             <input phone type="text" id="phone" name="phone" [(ngModel)]="phone" class="form-control" style="text-align: left;direction: ltr;">
           </div>
+          <div *ngIf="complete">
+            <span translate style="font-size: 15px;color:red">FILL_ALL_FIELDS</span>
+          </div>
           <div class="m_box_intro">
-            <button type="submit" style="width:140px;text-align: center;" [disabled]="!f.valid" class="btn btn-secondary">
+            <button type="submit" style="width:140px;text-align: center;" class="btn btn-secondary">
               <i class="fa fa-envelope-o" style="font-size:24px"></i>
               <span translate>SEND</span>
             </button>

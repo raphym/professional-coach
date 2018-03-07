@@ -40,12 +40,10 @@
 	"CONTACT_US_INTRO_3":"רוצה לשמוע עוד ? תשאיר לנו פרטים ונחזור אליך בהקדם !",
 
 	"PLEASE_WRITE_IN_ENGLISH":"נא לכתוב באנגלית",
-	
 	"NAME":"שם",
 	"EMAIL":"אמייל",
 	"DESCRIPTION":"תיאור",
-	
-	
+	"FILL_ALL_FIELDS":"מלא את כל השדות",	
 	"SEND":"שלח",
 
 	"ANY_QUERY_POP_US_A_MESSAGE":"שאלות? שלח לנו הודעה",

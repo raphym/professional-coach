@@ -51,6 +51,7 @@ a.nav-link:hover {
 .hello_admin_link{
   cursor: pointer;
 }
+
   /* button to open the side nav*/
   .butSide{
     margin: 15px;
@@ -198,6 +199,11 @@ a.nav-link:hover {
     color: black;
     height:56px;
   }
+  .m_minilogo{
+    margin: 15px;
+    width: 60px;
+    height: 30px;
+    }
 }
 
 /* Small devices (landscape phones, 576px and up) */
@@ -205,6 +211,9 @@ a.nav-link:hover {
   .but{display:none}
   .side-nav{display:none}
   .but_side-nav_navbare{display:none}
+  .m_minilogo{
+    display: none;
+    }
 }
 
 /* Medium devices (tablets, 768px and up) */
@@ -212,6 +221,9 @@ a.nav-link:hover {
   .but{display:none}
   .side-nav{display:none}
   .but_side-nav_navbare{display:none}
+  .m_minilogo{
+    display: none;
+    }
 }
 
 /* Large devices (desktops, 992px and up) */
@@ -219,6 +231,9 @@ a.nav-link:hover {
   .but{display:none}
   .side-nav{display:none}
   .but_side-nav_navbare{display:none}
+  .m_minilogo{
+    display: none;
+    }
 }
 
 /* Extra large devices (large desktops, 1200px and up) */
@@ -226,5 +241,8 @@ a.nav-link:hover {
   .but{display:none}
   .side-nav{display:none}
   .but_side-nav_navbare{display:none}
+  .m_minilogo{
+    display: none;
+    }
 }
 

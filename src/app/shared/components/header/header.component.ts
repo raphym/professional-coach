@@ -20,6 +20,7 @@ export class HeaderComponent implements OnInit {
     public langDirection;
     public langTextAlign;
     public floatDirection;
+    public floatDirectionReverse;
     public margLeft = "-40";
     public header_height = '80';
 
@@ -54,6 +55,7 @@ export class HeaderComponent implements OnInit {
         if (langage == 'he') {
 
             this.floatDirection = 'right';
+            this.floatDirectionReverse = 'left';
             this.langDirection = 'rtl';
             this.margLeft = "-40";
             /* side of the side nav */
@@ -77,6 +79,7 @@ export class HeaderComponent implements OnInit {
         else {
             this.floatDirection = 'left';
             this.langDirection = 'ltr';
+            this.floatDirectionReverse = 'right';
             this.margLeft = "0";
             /* side of the side nav */
             var side_nav = document.getElementById('side-menu');
