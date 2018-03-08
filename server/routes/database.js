@@ -9,16 +9,14 @@ var config_database = require('../../config/database');
 const DATABASE_ADDRESS = config_database.api + config_database.user + ':' + config_database.pswd + config_database.server + ':' + config_database.port + '/' + config_database.name;
 mongoose.Promise = global.Promise;
 // Connect to MongoDB
-mongoose.connect(DATABASE_ADDRESS, { useMongoClient: true }, function(err,data){
-    if(err)
-    {
+mongoose.connect(DATABASE_ADDRESS, function (err, data) {
+    if (err) {
         console.log('err : ' + err);
     }
-    else
-    {
-        console.log('Connected to ', data.name ,' on port: ' ,data.port );   
+    else {
+        console.log('Connected to ', data.name, ' on port: ', data.port);
     }
-    });
+});
 
 //connect to local database
 // try {
