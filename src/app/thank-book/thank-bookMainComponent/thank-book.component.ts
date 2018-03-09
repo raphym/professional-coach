@@ -68,6 +68,7 @@ export class ThankBookComponent implements OnInit {
   public stateAnimation: string = 'inactive';
   public langDirection;
   public langTextAlign;
+  public slide_timer;
 
   constructor(public thankBookService: ThankBookService, public usefulService: UsefulService) { }
 
@@ -101,6 +102,9 @@ export class ThankBookComponent implements OnInit {
         var the_data = data.data;
         for (var i = 0; i < the_data.length; i++) {
           var thankMessage: ThankMessage = new ThankMessage(the_data[i].created_time, the_data[i].rating, the_data[i].review_text, the_data[i].reviewer.name);
+          if (thankMessage.reviewText != undefined && thankMessage.reviewText != null && thankMessage.reviewText != '') {
+            thankMessage.reviewText = " “ " + thankMessage.reviewText + " ” ";
+          }
           this.thankMessagesArray.push(thankMessage);
         }
 
@@ -110,6 +114,9 @@ export class ThankBookComponent implements OnInit {
         this.setPosition();
         //initiate the display
         this.initiate = true;
+        //timer to change automatically the messages
+        var _self = this;
+        this.slide_timer = setInterval(_self.nextClicked, 5000, _self);
       },
       error => {
         console.log(error);
@@ -131,12 +138,23 @@ export class ThankBookComponent implements OnInit {
     this.setPosition();
   }
 
-  nextClicked() {
-    if (this.cursorPosition >= this.maxCursorPosition)
-      this.cursorPosition = 0;
-    else
-      this.cursorPosition++;
+  nextClicked(_self) {
+    if (_self == null)
+      _self = this;
 
-    this.setPosition();
+    if (_self.cursorPosition >= _self.maxCursorPosition)
+      _self.cursorPosition = 0;
+    else
+      _self.cursorPosition++;
+
+    _self.setPosition();
   }
+
+  ngOnDestroy() {
+    //remove the onScroll event
+    if (this.slide_timer != null && this.slide_timer != undefined) {
+      clearInterval(this.slide_timer);
+    }
+  }
+
 }

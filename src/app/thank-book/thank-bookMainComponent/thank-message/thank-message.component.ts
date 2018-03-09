@@ -39,8 +39,16 @@ export class ThankMessageComponent implements OnInit {
   displayStars() {
     var i = 1;
     while (i <= parseInt(this.rating)) {
-      var clasIdStars = 's' + i;
-      document.getElementById(clasIdStars).classList.add('checked');
+      try {
+        //normal screen
+        var clasIdStarsA = 's' + i + 'a';
+        document.getElementById(clasIdStarsA).classList.add('checked');
+      } catch (e) { }
+      try {
+        //mini screen
+        var clasIdStarsB = 's' + i + 'b';
+        document.getElementById(clasIdStarsB).classList.add('checked');
+      } catch (e) { }
       i++;
     }
   }

@@ -4,9 +4,9 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-
+  padding-top: 20px;
   -webkit-transition: width 2s; /* For Safari 3.1 to 6.0 */
-    transition: width 2s;
+  transition: width 2s;
 }
 
 .m_image{
@@ -30,4 +30,25 @@
 .checked {
   color: orange;
 }
+
+@media (max-width: 575px) {
+  .m_beforeBox{
+    display: none;
+  }
+  .m_beforeBox_mini{
+    display: block;
+  }
+  .m_box{
+    font-size: 20px;
+  }
+ }
+
+ @media (min-width: 575px) {
+  .m_beforeBox{
+    display: block;
+  }
+  .m_beforeBox_mini{
+    display: none;
+  }
+ }
   

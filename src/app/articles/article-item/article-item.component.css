@@ -63,7 +63,7 @@
 
     .m_title{
       direction: rtl;
-      font-size: 40px;
+      font-size: 35px;
     }    
 }
 
@@ -79,7 +79,7 @@
     }
     .m_title{
       direction: rtl;
-      font-size: 50px;
+      font-size: 40px;
     }
 }
 
@@ -96,7 +96,7 @@
 
     .m_title{
       direction: rtl;
-      font-size: 60px;
+      font-size: 50px;
     }
 }
 
@@ -112,7 +112,7 @@
     }
     .m_title{
       direction: rtl;
-      font-size: 70px;
+      font-size: 60px;
     }
 }
 

@@ -52,7 +52,8 @@ export function createTranslateLoader(http: Http) {
         AngularDraggableModule,
         DpDatePickerModule,
         SafePipe,
-        FacebookModule
+        FacebookModule,
+        BrowserAnimationsModule
     ],
     providers: [
         TableService
