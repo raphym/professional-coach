@@ -14,7 +14,6 @@ import { SuccessService } from './shared/components/notif-to-user/success/succes
 import { AuthService } from './auth/auth.service';
 import { AuthModule } from './auth/auth.module';
 import { ErrorComponent } from './shared/components/notif-to-user/errors/error.component';
-import { GuestbookModule } from './Guestbook/guestbook.module';
 import { MailService } from './shared/services/mail/mail.service';
 import { SuccessComponent } from './shared/components/notif-to-user/success/success.component';
 import { AdminModule } from './admin-space/admin.module';
@@ -75,7 +74,6 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   imports: [
     SharedModule,
     AuthModule,
-    // GuestbookModule,
     AdminModule,
     LoadingModule.forRoot({
       animationType: ANIMATION_TYPES.threeBounce,
