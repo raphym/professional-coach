@@ -5,7 +5,7 @@
         <div class="m_box" [style.font-size]="fontSize + 'px'">
           <div [style.direction]="langDirectionName">
             <span>
-              <i class="fa fa-user-circle" style="color:red;"> {{name}} </i>
+              <i class="fa fa-user-circle" style="color:blue;"> {{name}} </i>
             </span>
           </div>
           <br>
@@ -23,27 +23,21 @@
   </div>
 </div>
 
-<div class="container-fluid m_beforeBox_mini">
-  <div class="row">
-    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-      <div class="text-center">
-        <div class="m_box">
-          <div [style.direction]="langDirectionName">
-            <span>
-              <i class="fa fa-user-circle"> {{name}} </i>
-            </span>
-          </div>
-          <br>
-          <span class="fa fa-star" id="s1b"></span>
-          <span class="fa fa-star" id="s2b"></span>
-          <span class="fa fa-star" id="s3b"></span>
-          <span class="fa fa-star" id="s4b"></span>
-          <span class="fa fa-star" id="s5b"></span>
-          <br>
-          <div [style.direction]="langDirectionMessage">{{reviewText}}</div>
-          <br>
-        </div>
-      </div>
+<div class="m_beforeBox_mini">
+  <div class="m_box">
+    <div [style.direction]="langDirectionName">
+      <span>
+        <i class="fa fa-user-circle" style="color:blue;"> {{name}} </i>
+      </span>
     </div>
+    <br>
+    <span class="fa fa-star" id="s1b"></span>
+    <span class="fa fa-star" id="s2b"></span>
+    <span class="fa fa-star" id="s3b"></span>
+    <span class="fa fa-star" id="s4b"></span>
+    <span class="fa fa-star" id="s5b"></span>
+    <br>
+    <div [style.direction]="langDirectionMessage">{{reviewText}}</div>
+    <br>
   </div>
 </div>

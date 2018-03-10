@@ -9,6 +9,14 @@
   transition: width 2s;
 }
 
+.m_beforeBox_mini{
+  display: none;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-top: 20px;
+}
+
 .m_image{
   width: 200px;
   height: 200px;
