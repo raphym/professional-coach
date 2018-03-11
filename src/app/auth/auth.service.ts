@@ -285,6 +285,7 @@ export class AuthService {
         } catch (e) {
 
         }
+        this.userLogOutEvent.emit();
         this.isConnect = false;
         this._id = '';
         this.isAdmin = false;
@@ -292,7 +293,6 @@ export class AuthService {
         this.firstName = '';
         this.lastName = '';
         this.email = '';
-        this.isLoggedIn();
         if (redirect == true)
             this.router.navigateByUrl('/');
     }
