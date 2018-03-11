@@ -89,6 +89,9 @@ export class ContactMeComponent implements OnInit {
     }
 
     onSubmit(form: NgForm) {
+        this.notValidEmail = false;
+        this.notValidPhone = false;
+        this.complete = false;
 
         const value = form.value;
 
