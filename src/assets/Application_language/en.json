@@ -74,6 +74,7 @@
 	"MY_PROFILE":"my profile",
 	"EDIT":"Edit",
 	"PHONE":"Phone",
+	"INVALID_PHONE_NUMBER":"Invalid phone number",
 	"STREET":"Street",
 	"STREET_NUM":"Street number",
 	"CITY":"City",

@@ -72,6 +72,7 @@
 	"MY_PROFILE":"mon profile",
 	"EDIT":"Modifier",
 	"PHONE":"Téléphone",
+	"INVALID_PHONE_NUMBER":"Numéro de téléphone invalide",
 	"STREET":"Rue",
 	"STREET_NUM":"Numéro de rue",
 	"CITY":"Ville",

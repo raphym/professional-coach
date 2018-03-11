@@ -31,6 +31,8 @@ export class ContactMeComponent implements OnInit {
     public widthPage = window.innerWidth;
     public fontSize = 0;
     public complete: boolean = false;
+    public notValidEmail: boolean = false;
+    public notValidPhone: boolean = false;
 
     public constructor(
         public mailService: MailService,
@@ -76,6 +78,15 @@ export class ContactMeComponent implements OnInit {
         this.fontSize = average_width_height * (28 / 1280);
     }
 
+    validateEmail(email) {
+        var regularExpression = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return regularExpression.test(String(email).toLowerCase());
+    }
+
+    phoneValidation(phone) {
+        var regularExpression = /^((?:\+|00)[17](?: |\-)?|(?:\+|00)[1-9]\d{0,2}(?: |\-)?|(?:\+|00)1\-\d{3}(?: |\-)?)?(0\d|\([0-9]{3}\)|[1-9]{0,3})(?:((?: |\-)[0-9]{2}){4}|((?:[0-9]{2}){4})|((?: |\-)[0-9]{3}(?: |\-)[0-9]{4})|([0-9]{7}))$/;
+        return regularExpression.test(phone);
+    }
 
     onSubmit(form: NgForm) {
 
@@ -85,9 +96,20 @@ export class ContactMeComponent implements OnInit {
             this.complete = true;
             return;
         }
+        else if (!this.validateEmail(value.email)) {
+            this.notValidEmail = true;
+            return;
+        }
+        else if (!this.phoneValidation(value.phone)) {
+            this.notValidPhone = true;
+            return;
+        }
         else
             this.complete = false;
         this.envoyer = true;
+        this.notValidEmail = false;
+        this.notValidPhone = false;
+
 
         var mail_content = '';
         var reponsehtml = '';

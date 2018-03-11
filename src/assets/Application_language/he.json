@@ -74,6 +74,7 @@
 	"MY_PROFILE":"הפרופיל שלי",	
 	"EDIT":"ערוך את",
 	"PHONE":"טלפון",
+	"INVALID_PHONE_NUMBER":"מספר טלפון לא תקין",	
 	"STREET":"רחוב",
 	"STREET_NUM":"מספר רחוב",
 	"CITY":"עיר",

@@ -26,12 +26,18 @@
           </div>
           <div class="form-group">
             <label for="email" translate>EMAIL</label>
-            <input email type="email" id="email" name="email" [(ngModel)]="email" required [readonly]="connected" class="form-control"
+            <input email type="email" id="email" name="email" [(ngModel)]="email" email required [readonly]="connected" class="form-control"
               style="text-align: left;direction: ltr;">
+          </div>
+          <div *ngIf="notValidEmail">
+            <span translate style="font-size: 15px;color:red">EMAIL_IS_REQUIRED_WITH_THE_CORRECT_FORMAT</span>
           </div>
           <div class="form-group">
             <label for="phone" translate>PHONE</label>
             <input phone type="text" id="phone" name="phone" [(ngModel)]="phone" class="form-control" style="text-align: left;direction: ltr;">
+          </div>
+          <div *ngIf="notValidPhone">
+            <span translate style="font-size: 15px;color:red">INVALID_PHONE_NUMBER</span>
           </div>
           <div *ngIf="complete">
             <span translate style="font-size: 15px;color:red">FILL_ALL_FIELDS</span>
