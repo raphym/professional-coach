@@ -18,6 +18,10 @@ export class SigninComponent {
     public myForm: FormGroup;
     public langDirection;
     public langTextAlign;
+    public enterEmail: boolean = false;
+    public enterPassword: boolean = false;
+    public alreadyPasswordForgot: boolean = false;
+
 
     constructor(public authService: AuthService,
         public router: Router,
@@ -47,8 +51,26 @@ export class SigninComponent {
         });
     }
 
+    validateEmail(email) {
+        var regularExpression = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return regularExpression.test(String(email).toLowerCase());
+    }
+
     onSubmit() {
-        const user = new User(null, this.myForm.value.userName, this.myForm.value.email, this.myForm.value.password, null, null, null, null, null, null);
+        this.enterEmail = false;
+        this.enterPassword = false;
+
+        var email = this.myForm.value.email;
+        var password = this.myForm.value.password;
+        if (email == undefined || email == null || email == '' || !this.validateEmail(email)) {
+            this.enterEmail = true;
+            return;
+        }
+        if (password == undefined || password == null || password == '') {
+            this.enterPassword = true;
+            return;
+        }
+        const user = new User(null, null, email, password, null, null, null, null, null, null);
         //enable the loader
         this.loaderService.enableLoader();
         this.authService.signin(user).subscribe(
@@ -87,6 +109,37 @@ export class SigninComponent {
                     this.errorService.handleError(my_error);
                 }
             });
+    }
+
+    forgotPassword() {
+        this.alreadyPasswordForgot = true;
+        this.enterEmail = false;
+        var email = this.myForm.value.email;
+        if (email == undefined || email == null || email == '' || !this.validateEmail(email)) {
+            this.enterEmail = true;
+            return;
+        }
+
+        const user = new User(null, null, email, null, null, null, null, null, null, null);
+        //enable the loader
+        this.loaderService.enableLoader();
+
+        this.authService.forgotPassword(user).subscribe(
+            data => {
+                //disable the loader
+                this.loaderService.disableLoader();
+                this.successService.handleSuccess({ title: 'Success', message: 'Please check your email to reset your password' });
+
+            },
+            error => {
+                //disable the loader
+                this.loaderService.disableLoader();
+                this.alreadyPasswordForgot = false;
+                this.errorService.handleError({ title: 'Error', message: error.message });
+            }
+        );
+
+        this.myForm.reset();
     }
 
 }

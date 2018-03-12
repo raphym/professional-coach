@@ -24,8 +24,17 @@
                             <label for="password" translate>PASSWORD</label>
                             <input type="password" id="password" class="form-control" formControlName="password">
                         </div>
-                        <button class="btn btn-primary" type="submit" [disabled]="!myForm.valid" translate>LOGIN</button>
+                        <button class="btn btn-primary" type="submit" translate>LOGIN</button>
                     </form>
+                    <div *ngIf="enterEmail" translate [style.text-align]="langTextAlign">
+                        <span translate style="font-size: 13px;color:red">EMAIL_IS_REQUIRED_WITH_THE_CORRECT_FORMAT</span>
+                    </div>
+                    <div *ngIf="enterPassword" translate [style.text-align]="langTextAlign">
+                        <span translate style="font-size: 13px;color:red">PASSWORD_IS_REQUIRED</span>
+                    </div>
+                    <div *ngIf="!alreadyPasswordForgot" translate [style.text-align]="langTextAlign">
+                        <span translate style="font-size: 12px;color:blue;cursor: pointer;" (click)="forgotPassword()">FORGOT_PASSWORD</span>
+                    </div>
                     <div translate [style.text-align]="langTextAlign">
                         <br> CONNECT_WITH
                         <br>

@@ -5,6 +5,7 @@ import { SignupComponent } from "./signup/signup.component";
 import { SigninComponent } from "./signin/signin.component";
 import { ConfirmRegistrationComponent } from './confirm-registration/confirm-registration.component';
 import { SharedModule } from "../shared/module/shared.module";
+import { ConfirmForgotPasswordComponent } from './confirm-forgot-password/confirm-forgot-password.component';
 
 
 
@@ -14,6 +15,7 @@ import { SharedModule } from "../shared/module/shared.module";
         SignupComponent,
         SigninComponent,
         ConfirmRegistrationComponent,
+        ConfirmForgotPasswordComponent,
     ],
     imports: [
         SharedModule,

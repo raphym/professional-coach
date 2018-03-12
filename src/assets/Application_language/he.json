@@ -27,7 +27,7 @@
 	"STABILITY_COORDINATION":"יציבות וקואורדינציה",
 	
 	"CONNECT_WITH":"התחבר עם",
-	"REGISTER_WITH":"הרשם עם",
+	"REGISTER_WITH":"הירשם עם",
 	
 
 	"HOME_INTRO_1":"; פעילות גופנית הינה גורם משפיע וחד משמעי על המצב הבריאותי, הגופני והמנטלי שלנו",
@@ -70,6 +70,7 @@
 	"PASSWORD":"סיסמה",
 	"CONFIRM_PASSWORD":"אמת סיסמתך",
 	"SIGNUP":"הירשם",
+	"FORGOT_PASSWORD":"שכחתי את הסיסמה",
 	
 	"MY_PROFILE":"הפרופיל שלי",	
 	"EDIT":"ערוך את",

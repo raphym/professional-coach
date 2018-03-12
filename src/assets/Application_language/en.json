@@ -70,6 +70,7 @@
 	"PASSWORD":"Password",
 	"CONFIRM_PASSWORD":"Confirm your password",
 	"SIGNUP":"Signup",
+	"FORGOT_PASSWORD":"Forgot password",
 	
 	"MY_PROFILE":"my profile",
 	"EDIT":"Edit",

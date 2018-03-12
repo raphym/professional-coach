@@ -12,11 +12,15 @@ import { UsefulService } from "../shared/services/utility/useful.service";
 
 const SIGNUP_ADDRESS = 'http://localhost:3000/users-auth/signup';
 const SIGNIN_ADDRESS = 'http://localhost:3000/users-auth/signin';
+const FORGOT_PASSWORD_ADDRESS = 'http://localhost:3000/users-auth/forgotPassword';
+
 const ISLOGIN_ADDRESS = 'http://localhost:3000/users-auth/islogin';
 
 const SUPPORT_LINK_ADDRESS = "http://localhost:3000/contact";
 const CONFIRMATION_REG_INIT_ADDRESS = "http://localhost:3000/users-auth/confirmRegInit";
 const CONFIRMATION_REG_VALID_ADDRESS = "http://localhost:3000/users-auth/confirmRegValidation";
+const CONFIRMATION_FORGOT_PASSWORD_ADDRESS = "http://localhost:3000/users-auth/confirmForgotPassword";
+
 import { FacebookService, InitParams, LoginResponse } from 'ngx-facebook';
 
 
@@ -34,7 +38,6 @@ export class AuthService {
     public lastName = '';
     public email = '';
     public CONFIRMATION_REG_LINK_URL = "http://localhost:3000/confirmRegistration";
-
 
     constructor(public http: Http,
         public errorService: ErrorService,
@@ -297,6 +300,50 @@ export class AuthService {
             this.router.navigateByUrl('/');
     }
 
+    //forgotPassword
+    forgotPassword(user: User) {
+        const body = JSON.stringify(user);
+        const headers = new Headers({ 'Content-Type': 'application/json' });
+        return this.http.post(FORGOT_PASSWORD_ADDRESS, body, { headers: headers })
+            .map((response: Response) => {
+                var data = response.json().data;
+                return response.json()
+            })
+            .catch((error: Response) => {
+                this.errorService.handleError(error.json());
+                return Observable.throw(error.json())
+            });
+    }
+
+    //confirmation forgot Password Init
+    confirmForgotPasswordInit(randomHash: string) {
+        const body = JSON.stringify({ randomHash: randomHash });
+        const headers = new Headers({ 'Content-Type': 'application/json' });
+        return this.http.post(CONFIRMATION_REG_INIT_ADDRESS, body, { headers: headers })
+            .map((response: Response) => {
+                if (response.json().title == 'Success') {
+                    return response.json();
+                }
+            })
+            .catch((error: Response) => {
+                return Observable.throw(error.json());
+            });
+    }
+
+    //confirmation forgot Password
+    confirmForgotPassword(email: string, randomHash: string, password: string, confirmPassword: string) {
+        const body = JSON.stringify({ email: email, randomHash: randomHash, password: password, confirmPassword: confirmPassword });
+        const headers = new Headers({ 'Content-Type': 'application/json' });
+        return this.http.post(CONFIRMATION_FORGOT_PASSWORD_ADDRESS, body, { headers: headers })
+            .map((response: Response) => {
+                if (response.json().message == 'success') {
+                    return response.json();
+                }
+            })
+            .catch((error: Response) => {
+                return Observable.throw(error.json());
+            });
+    }
 
     //return true if connect
     isItConnect() {

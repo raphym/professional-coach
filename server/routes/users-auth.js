@@ -1,5 +1,10 @@
 var express = require('express');
 var router = express.Router();
+
+var nodemailer = require('nodemailer');
+var smtpTransport = require('nodemailer-smtp-transport');
+var emails_config = require('../../config/emails_config');
+
 //to encrypt password and also compare
 var bcrypt = require('bcryptjs');
 
@@ -151,6 +156,8 @@ router.route('/auth/facebook')
             });
         }
     });
+
+
 
 //Signup
 router.post('/signup', function (req, res, next) {
@@ -317,6 +324,96 @@ router.post('/signin', function (req, res, next) {
     });
 });
 
+//forgotPassword
+router.post('/forgotPassword', function (req, res, next) {
+    User.findOne({ email: req.body.email }, function (err, user) {
+        if (err) {//if error request
+            console.log(err);
+            return res.status(500).json({
+                title: 'An error occured',
+                message: 'error'
+            });
+        }
+        if (!user) {//if error email
+            return res.status(401).json({
+                title: 'Error',
+                message: 'User not found'
+            });
+        }
+        //check if the User is registered
+        if (!user.registered) {
+            return res.status(401).json({
+                title: 'Status Not Registered',
+                message: 'Please confirm your account before loggin'
+            });
+        }
+        var usefulFunctions = new UsefulFunctions();
+        var randomHash = usefulFunctions.makeRandomString(20);
+        user.randomHash = randomHash;
+        //update the user
+        user.save(function (err, user) {
+            if (err) {
+                var my_response = { title: 'Error', message: 'Error during the update of the User Data' };
+                return res.status(500).json(my_response);
+            }
+            else if (user) {
+                var message_mail = '<a href="http://localhost:3000/confirmForgotPassword/';
+                message_mail += randomHash;
+                message_mail += '">Please click here to reset your password</a><br><br>G-Fit Team';
+                sendEmail(user.email, message_mail, 'G-Fit Team', "html").then(function (response) {
+                    res.status(200).json({
+                        message: 'success',
+                    });
+                }).catch(function (error) {
+                    console.log(error)
+                    var my_response = { title: 'Error', message: 'Error to send the mail' };
+                    return res.status(500).json(my_response);
+                })
+            }
+        });
+    });
+});
+
+//confirm forgotPassword for change now
+router.post('/confirmForgotPassword', function (req, res, next) {
+    User.findOne({ email: req.body.email, randomHash: req.body.randomHash }, function (err, user) {
+        if (err) {//if error request
+            console.log(err);
+            return res.status(500).json({
+                title: 'An error occured',
+                message: 'error'
+            });
+        }
+        if (!user) {//if error email
+            return res.status(401).json({
+                title: 'Error',
+                message: 'User not found'
+            });
+        }
+        //check if the User is registered
+        if (!user.registered) {
+            return res.status(401).json({
+                title: 'Status Not Registered',
+                message: 'Please confirm your account before loggin'
+            });
+        }
+        user.randomHash = -1;
+        user.password = bcrypt.hashSync(req.body.password, 10);
+        //update the user
+        user.save(function (err, user) {
+            if (err) {
+                var my_response = { title: 'Error', message: 'Error during the update of the User Data' };
+                return res.status(500).json(my_response);
+            }
+            else if (user) {
+                res.status(200).json({
+                    message: 'success',
+                });
+            }
+        });
+    });
+});
+
 //islogin
 router.post('/islogin', function (req, res, next) {
     jwt.verify(req.cookies['token'], jwt_sign_pswd.SECRET, function (err, decoded) {
@@ -332,6 +429,74 @@ router.post('/islogin', function (req, res, next) {
         });
     });
 });
+
+sendEmail = function (emaildest, message, object_mail, text_option) {
+    return new Promise(function (resolve, reject) {
+        if (emaildest == 'admin') {
+            emaildest = emails_config.EMAIL_ADDRESS;
+        }
+        var regularExpression = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+        if (emaildest != 'admin' && !regularExpression.test(String(emaildest).toLowerCase())) {
+            reject({
+                title: 'Mail error',
+                message: 'An error occurred while sending mail'
+            });
+        }
+        else {
+            //Transporter with OAuth2
+            let transporter = nodemailer.createTransport({
+                host: 'smtp.gmail.com',
+                port: 465,
+                secure: true,
+                auth: {
+                    type: 'OAuth2',
+                    user: emails_config.EMAIL_ADDRESS,
+                    clientId: emails_config.clientId,
+                    clientSecret: emails_config.clientSecret,
+                    refreshToken: emails_config.refreshToken,
+                    expires: 1484314697598
+                }
+            });
+
+            //mail options
+            var mailOptions;
+            if (text_option == "text") {
+                mailOptions = {
+                    to: emaildest,
+                    subject: object_mail,
+                    text: message
+                };
+            }
+            else if (text_option == "html") {
+                mailOptions = {
+                    to: emaildest,
+                    subject: object_mail,
+                    html: message
+                };
+            }
+
+
+            //send the mail
+            transporter.sendMail(mailOptions, function (error, info) {
+                if (error) {
+                    console.log(error);
+                    reject({
+                        title: 'Mail error',
+                        message: 'An error occurred while sending mail'
+                    });
+                } else {
+                    resolve({
+                        title: 'Mail Success',
+                        message: 'Your message has been successfully sent'
+                    });
+                }
+            });
+
+        }
+    });
+
+}
 
 
 module.exports = router;
