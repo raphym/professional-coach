@@ -2,17 +2,17 @@ import { Http, Response, Headers, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Injectable, Input, EventEmitter } from "@angular/core";
 
-const Get_fbReviews_ADDRESS = 'http://localhost:3000/social_fb/getFbReviews';
-
-
 @Injectable()
 export class ThankBookService {
+    getUrl = window.location;
+    baseUrl = this.getUrl.protocol + "//" + this.getUrl.host + "/";
 
+    Get_fbReviews_ADDRESS = this.baseUrl + 'social_fb/getFbReviews';
     constructor(public http: Http) { }
 
     //get articles count
     getFbReviews() {
-        return this.http.get(Get_fbReviews_ADDRESS)
+        return this.http.get(this.Get_fbReviews_ADDRESS)
             .map((response: Response) => {
                 return response.json();
             })

@@ -6,7 +6,9 @@ import { Injectable } from "@angular/core";
 
 @Injectable()
 export class MailService {
-    POST_ADDRESS = 'http://localhost:3000/sendmail/send';
+    getUrl = window.location;
+    baseUrl = this.getUrl.protocol + "//" + this.getUrl.host + "/";
+    POST_ADDRESS = this.baseUrl + 'sendmail/send';
     constructor(public http: Http, public errorService: ErrorService, public successService: SuccessService) { }
 
 

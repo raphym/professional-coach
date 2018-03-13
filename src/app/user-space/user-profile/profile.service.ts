@@ -4,13 +4,15 @@ import { Observable } from 'rxjs/Observable';
 import { Injectable } from "@angular/core";
 import { User } from '../../shared/models/objects-models/user.model';
 
-//address to the server
-const GET_USER_ADDRESS = 'http://localhost:3000/user-space/getUser';
-const EDIT_USER_ADDRESS = 'http://localhost:3000/user-space/editUser';
-
-
 @Injectable()
 export class ProfileService {
+    getUrl = window.location;
+    baseUrl = this.getUrl.protocol + "//" + this.getUrl.host + "/";
+
+    //address to the server
+    GET_USER_ADDRESS = this.baseUrl + 'user-space/getUser';
+    EDIT_USER_ADDRESS = this.baseUrl + 'user-space/editUser';
+
     user: User;
 
     constructor(public http: Http) {
@@ -19,7 +21,7 @@ export class ProfileService {
     getUser() {
         const headers = new Headers({ 'Content-Type': 'application/json' });
 
-        return this.http.get(GET_USER_ADDRESS, { headers: headers })
+        return this.http.get(this.GET_USER_ADDRESS, { headers: headers })
             .map((response: Response) => {
                 return response.json();
             })
@@ -27,11 +29,11 @@ export class ProfileService {
                 return Observable.throw(error.json());
             });
     }
-    
-    updateUser(user){
+
+    updateUser(user) {
         const headers = new Headers({ 'Content-Type': 'application/json' });
         const body = JSON.stringify(user);
-        return this.http.post(EDIT_USER_ADDRESS,body, { headers: headers })
+        return this.http.post(this.EDIT_USER_ADDRESS, body, { headers: headers })
             .map((response: Response) => {
                 return response.json();
             })

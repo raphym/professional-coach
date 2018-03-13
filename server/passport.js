@@ -2,16 +2,17 @@
 var fb_config = require('../config/fb_config');
 var passport = require('passport');
 var FacebookTokenStrategy = require('passport-facebook-token');
-
+var getUrl = window.location;
+var baseUrl = this.getUrl.protocol + "//" + this.getUrl.host + "/";
 module.exports = function () {
 
     passport.use(new FacebookTokenStrategy({
         clientID: fb_config.clientID,
         clientSecret: fb_config.clientSecret,
         enableProof: true,
-        callbackURL: "http://localhost:3000/auth/facebook/callback",
+        callbackURL: this.baseUrl + "auth/facebook/callback",
         profileFields: ['id', 'displayName', 'email', 'birthday', 'friends', 'first_name', 'last_name', 'middle_name', 'gender', 'link'],
-        
+
 
         // passReqToCallback : true,
         // profileFields: ["id", "emails"]
@@ -29,11 +30,11 @@ module.exports = function () {
             // console.log(profile);
             // console.log('---------------------');
 
-            
+
             // console.log('---------------------');
             // console.log(profile);
             // console.log('---------------------');
-            return done(null,profile);
+            return done(null, profile);
         }));
 
 };

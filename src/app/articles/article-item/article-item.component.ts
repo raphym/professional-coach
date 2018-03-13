@@ -14,6 +14,8 @@ import { ErrorService } from '../../shared/components/notif-to-user/errors/error
   styleUrls: ['./article-item.component.css']
 })
 export class ArticleItemComponent implements OnInit {
+  public getUrl = window.location;
+  public baseUrl = this.getUrl.protocol + "//" + this.getUrl.host + "/";
 
   public loading: boolean = false;
   public article: Article;
@@ -22,7 +24,7 @@ export class ArticleItemComponent implements OnInit {
   public showEdit: boolean = false;
   public display: string = 'none';
   public articleValid: boolean = false;
-  public url: string = 'http://localhost:3000/';
+  public url: string = this.baseUrl;
 
   constructor(public articleService: ArticleService,
     public route: ActivatedRoute,

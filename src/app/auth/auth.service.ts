@@ -9,23 +9,24 @@ import { Router } from "@angular/router";
 import { SuccessService } from "../shared/components/notif-to-user/success/success.service";
 import { MailService } from "../shared/services/mail/mail.service";
 import { UsefulService } from "../shared/services/utility/useful.service";
-
-const SIGNUP_ADDRESS = 'http://localhost:3000/users-auth/signup';
-const SIGNIN_ADDRESS = 'http://localhost:3000/users-auth/signin';
-const FORGOT_PASSWORD_ADDRESS = 'http://localhost:3000/users-auth/forgotPassword';
-
-const ISLOGIN_ADDRESS = 'http://localhost:3000/users-auth/islogin';
-
-const SUPPORT_LINK_ADDRESS = "http://localhost:3000/contact";
-const CONFIRMATION_REG_INIT_ADDRESS = "http://localhost:3000/users-auth/confirmRegInit";
-const CONFIRMATION_REG_VALID_ADDRESS = "http://localhost:3000/users-auth/confirmRegValidation";
-const CONFIRMATION_FORGOT_PASSWORD_ADDRESS = "http://localhost:3000/users-auth/confirmForgotPassword";
-
 import { FacebookService, InitParams, LoginResponse } from 'ngx-facebook';
 
 
 @Injectable()
 export class AuthService {
+    getUrl = window.location;
+    baseUrl = this.getUrl.protocol + "//" + this.getUrl.host + "/";
+
+    SIGNUP_ADDRESS = this.baseUrl + 'users-auth/signup';
+    SIGNIN_ADDRESS = this.baseUrl + 'users-auth/signin';
+    FORGOT_PASSWORD_ADDRESS = this.baseUrl + 'users-auth/forgotPassword';
+    ISLOGIN_ADDRESS = this.baseUrl + 'users-auth/islogin';
+    SUPPORT_LINK_ADDRESS = this.baseUrl + 'contact';
+    CONFIRMATION_REG_INIT_ADDRESS = this.baseUrl + 'users-auth/confirmRegInit';
+    CONFIRMATION_REG_VALID_ADDRESS = this.baseUrl + 'users-auth/confirmRegValidation';
+    CONFIRMATION_FORGOT_PASSWORD_ADDRESS = this.baseUrl + 'users-auth/confirmForgotPassword';
+    CONFIRMATION_REG_LINK_URL = this.baseUrl + 'confirmRegistration';
+    FB_CONNECT_URL = this.baseUrl + 'users-auth/auth/facebook';
 
     userLogInEvent = new EventEmitter<{}>();
     userLogOutEvent = new EventEmitter<any>();
@@ -37,7 +38,6 @@ export class AuthService {
     public firstName = '';
     public lastName = '';
     public email = '';
-    public CONFIRMATION_REG_LINK_URL = "http://localhost:3000/confirmRegistration";
 
     constructor(public http: Http,
         public errorService: ErrorService,
@@ -68,7 +68,7 @@ export class AuthService {
                 .then((result: LoginResponse) => {
                     console.log('auth.service fblogin');
                     console.log(result);
-                    return this.http.post(`http://localhost:3000/users-auth/auth/facebook`, { access_token: result.authResponse.accessToken })
+                    return this.http.post(this.FB_CONNECT_URL, { access_token: result.authResponse.accessToken })
                         .toPromise()
                         .then(response => {
 
@@ -127,7 +127,7 @@ export class AuthService {
         return new Promise((resolve, reject) => {
 
             //go to signup the new user
-            this.http.post(SIGNUP_ADDRESS, body, { headers: headers })
+            this.http.post(this.SIGNUP_ADDRESS, body, { headers: headers })
                 .toPromise()
                 .then(
 
@@ -143,7 +143,7 @@ export class AuthService {
                         var mail_content = this.usefulService.createRegMail(user.userName,
                             randomSecretCode,
                             this.CONFIRMATION_REG_LINK_URL,
-                            SUPPORT_LINK_ADDRESS);
+                            this.SUPPORT_LINK_ADDRESS);
 
                         //send a confirm email to the new user
                         this.mailService.sendMail(user.email, 'Registration', mail_content, 'html')
@@ -179,7 +179,7 @@ export class AuthService {
     confirmRegInit(randomHash: string) {
         const body = JSON.stringify({ randomHash: randomHash });
         const headers = new Headers({ 'Content-Type': 'application/json' });
-        return this.http.post(CONFIRMATION_REG_INIT_ADDRESS, body, { headers: headers })
+        return this.http.post(this.CONFIRMATION_REG_INIT_ADDRESS, body, { headers: headers })
             .map((response: Response) => {
                 if (response.json().title == 'Success') {
                     return response.json();
@@ -194,7 +194,7 @@ export class AuthService {
     confirmRegValid(randomHash: string, secretCode: string) {
         const body = JSON.stringify({ randomHash: randomHash, secretCode: secretCode });
         const headers = new Headers({ 'Content-Type': 'application/json' });
-        return this.http.post(CONFIRMATION_REG_VALID_ADDRESS, body, { headers: headers })
+        return this.http.post(this.CONFIRMATION_REG_VALID_ADDRESS, body, { headers: headers })
             .map((response: Response) => {
                 if (response.json().title == 'Success') {
                     return response.json();
@@ -209,7 +209,7 @@ export class AuthService {
     signin(user: User) {
         const body = JSON.stringify(user);
         const headers = new Headers({ 'Content-Type': 'application/json' });
-        return this.http.post(SIGNIN_ADDRESS, body, { headers: headers })
+        return this.http.post(this.SIGNIN_ADDRESS, body, { headers: headers })
             .map((response: Response) => {
                 var data = response.json().data;
                 if (response.json().message == 'Successfully logged in') {
@@ -248,7 +248,7 @@ export class AuthService {
     isLoggedIn() {
         const body = '';
         const headers = new Headers({ 'Content-Type': 'application/json' });
-        return this.http.post(ISLOGIN_ADDRESS, body, { headers: headers })
+        return this.http.post(this.ISLOGIN_ADDRESS, body, { headers: headers })
             .map((response: Response) => {
                 if (response.json().message == 'Authenticated') {
                     var data = response.json().data;
@@ -304,7 +304,7 @@ export class AuthService {
     forgotPassword(user: User) {
         const body = JSON.stringify(user);
         const headers = new Headers({ 'Content-Type': 'application/json' });
-        return this.http.post(FORGOT_PASSWORD_ADDRESS, body, { headers: headers })
+        return this.http.post(this.FORGOT_PASSWORD_ADDRESS, body, { headers: headers })
             .map((response: Response) => {
                 var data = response.json().data;
                 return response.json()
@@ -319,7 +319,7 @@ export class AuthService {
     confirmForgotPasswordInit(randomHash: string) {
         const body = JSON.stringify({ randomHash: randomHash });
         const headers = new Headers({ 'Content-Type': 'application/json' });
-        return this.http.post(CONFIRMATION_REG_INIT_ADDRESS, body, { headers: headers })
+        return this.http.post(this.CONFIRMATION_REG_INIT_ADDRESS, body, { headers: headers })
             .map((response: Response) => {
                 if (response.json().title == 'Success') {
                     return response.json();
@@ -334,7 +334,7 @@ export class AuthService {
     confirmForgotPassword(email: string, randomHash: string, password: string, confirmPassword: string) {
         const body = JSON.stringify({ email: email, randomHash: randomHash, password: password, confirmPassword: confirmPassword });
         const headers = new Headers({ 'Content-Type': 'application/json' });
-        return this.http.post(CONFIRMATION_FORGOT_PASSWORD_ADDRESS, body, { headers: headers })
+        return this.http.post(this.CONFIRMATION_FORGOT_PASSWORD_ADDRESS, body, { headers: headers })
             .map((response: Response) => {
                 if (response.json().message == 'success') {
                     return response.json();

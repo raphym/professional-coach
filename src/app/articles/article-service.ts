@@ -7,14 +7,19 @@ import { UIParams, UIResponse, FacebookService, InitParams, LoginResponse } from
 
 @Injectable()
 export class ArticleService {
+    getUrl = window.location;
+    baseUrl = this.getUrl.protocol + "//" + this.getUrl.host + "/";
 
-    ADD_Article_ADDRESS = 'http://localhost:3000/article/addArticle';
-    UPDATE_Article_ADDRESS = 'http://localhost:3000/article/updateArticle';
-    GET_Articles_ADDRESS = 'http://localhost:3000/article/getArticles';
-    GET_Article_ADDRESS = 'http://localhost:3000/article/getArticle';
-    GET_LAST_Article_ADDRESS = 'http://localhost:3000/article/getNewLastArticle';
-    DELETE_Article_ADDRESS = 'http://localhost:3000/article/deleteArticle';
-    VALIDATE_Article_ADDRESS = 'http://localhost:3000/article/validateArticle';
+    ADD_Article_ADDRESS = this.baseUrl + 'article/addArticle';
+    UPDATE_Article_ADDRESS = this.baseUrl + 'article/updateArticle';
+    GET_Articles_ADDRESS = this.baseUrl + 'article/getArticles';
+    GET_Article_ADDRESS = this.baseUrl + 'article/getArticle';
+    GET_LAST_Article_ADDRESS = this.baseUrl + 'article/getNewLastArticle';
+    DELETE_Article_ADDRESS = this.baseUrl + 'article/deleteArticle';
+    VALIDATE_Article_ADDRESS = this.baseUrl + 'article/validateArticle';
+    GET_ARTICLES_COUNT_ADDRESS = this.baseUrl + 'article/getArticlesCount';
+    GET_PART_OF_ARTICLES_ADDRESS = this.baseUrl + 'article/getPartOfArticles';
+    FB_LOGO_ARTICLE_SHARE = this.baseUrl + 'assets/Images/article/fb/logofb.png';
 
     articles: Article[];
     //EventEmitter to load more articles
@@ -22,9 +27,8 @@ export class ArticleService {
 
 
     constructor(public http: Http,
-        public fb: FacebookService
+        public fb: FacebookService,
     ) {
-
         //change for prod
         let initParams: InitParams = {
             appId: '330446087441402',
@@ -37,7 +41,7 @@ export class ArticleService {
 
     //get articles count
     getArticlesCount() {
-        return this.http.get('http://localhost:3000/article/getArticlesCount')
+        return this.http.get(this.GET_ARTICLES_COUNT_ADDRESS)
             .map((response: Response) => {
                 return response.json();
             })
@@ -51,7 +55,7 @@ export class ArticleService {
         const headers = new Headers({ 'Content-Type': 'application/json' });
 
         const body = JSON.stringify(wantedData);
-        return this.http.post('http://localhost:3000/article/getPartOfArticles', body, { headers: headers })
+        return this.http.post(this.GET_PART_OF_ARTICLES_ADDRESS, body, { headers: headers })
             .map((response: Response) => {
                 return response.json();
             })
@@ -212,14 +216,6 @@ export class ArticleService {
     //share article on facebook
     shareArticle(url: string, title: string, intro: string) {
         return new Promise((resolve, reject) => {
-            //with method share
-            // let params: UIParams = {
-            //     method: 'share',
-            //     href: '',     // The same than link in feed method
-            //     picture: 'https://www.g-fit.co.il/assets/Images/slide3.jpg',  
-            //     caption: 'caption',  
-            //     description: 'desc',
-            // };
             let params: UIParams = {
                 method: 'share',/* share_open_graph */
                 action_type: 'og.shares',
@@ -228,13 +224,13 @@ export class ArticleService {
                         'og:url': url,
                         'og:title': title,
                         'og:description': intro,
-                        'og:image': 'http://preprod.test1.g-fit.co.il/assets/Images/article/fb/logofb.png',
+                        'og:image': this.FB_LOGO_ARTICLE_SHARE,
                         'og:image:width': '50',
                         'og:image:height': '50',
                         'og:image:type': 'image/jpeg'
                     }
                 }),
-                href: 'https://www.g-fit.co.il/'
+                href: this.baseUrl
             };
 
             this.fb.ui(params)
