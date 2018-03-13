@@ -28,8 +28,6 @@ var bodyParser = require('body-parser');
 var passport = require('passport');
 var passportConfig = require('../passport');
 
-var getUrl = window.location;
-var baseUrl = this.getUrl.protocol + "//" + this.getUrl.host + "/";
 //setup configuration for facebook login
 passportConfig();
 
@@ -328,6 +326,9 @@ router.post('/signin', function (req, res, next) {
 
 //forgotPassword
 router.post('/forgotPassword', function (req, res, next) {
+
+    var baseUrl = req.protocol + '://' + req.get('host') + '/';
+
     User.findOne({ email: req.body.email }, function (err, user) {
         if (err) {//if error request
             console.log(err);
@@ -359,9 +360,9 @@ router.post('/forgotPassword', function (req, res, next) {
                 return res.status(500).json(my_response);
             }
             else if (user) {
-                var message_mail = '<a href=';
-                message_mail += this.baseUrl;
-                message_mail += '"confirmForgotPassword/';
+                var message_mail = '<a href="';
+                message_mail += baseUrl;
+                message_mail += 'confirmForgotPassword/';
                 message_mail += randomHash;
                 message_mail += '">Please click here to reset your password</a><br><br>G-Fit Team';
                 sendEmail(user.email, message_mail, 'G-Fit Team', "html").then(function (response) {

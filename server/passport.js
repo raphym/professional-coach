@@ -2,20 +2,14 @@
 var fb_config = require('../config/fb_config');
 var passport = require('passport');
 var FacebookTokenStrategy = require('passport-facebook-token');
-var getUrl = window.location;
-var baseUrl = this.getUrl.protocol + "//" + this.getUrl.host + "/";
 module.exports = function () {
 
     passport.use(new FacebookTokenStrategy({
         clientID: fb_config.clientID,
         clientSecret: fb_config.clientSecret,
         enableProof: true,
-        callbackURL: this.baseUrl + "auth/facebook/callback",
+        callbackURL: fb_config.callbackURL + "auth/facebook/callback",
         profileFields: ['id', 'displayName', 'email', 'birthday', 'friends', 'first_name', 'last_name', 'middle_name', 'gender', 'link'],
-
-
-        // passReqToCallback : true,
-        // profileFields: ["id", "emails"]
     },
         function (accessToken, refreshToken, profile, done) {
             // User.upsertFbUser(accessToken, refreshToken, profile, function (err, user) {
