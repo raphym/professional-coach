@@ -21,7 +21,7 @@ export class AuthService {
     SIGNIN_ADDRESS = this.baseUrl + 'users-auth/signin';
     FORGOT_PASSWORD_ADDRESS = this.baseUrl + 'users-auth/forgotPassword';
     ISLOGIN_ADDRESS = this.baseUrl + 'users-auth/islogin';
-    SUPPORT_LINK_ADDRESS = this.baseUrl + 'contact';
+    SUPPORT_LINK_ADDRESS = this.baseUrl + '#contact-us';
     CONFIRMATION_REG_INIT_ADDRESS = this.baseUrl + 'users-auth/confirmRegInit';
     CONFIRMATION_REG_VALID_ADDRESS = this.baseUrl + 'users-auth/confirmRegValidation';
     CONFIRMATION_FORGOT_PASSWORD_ADDRESS = this.baseUrl + 'users-auth/confirmForgotPassword';

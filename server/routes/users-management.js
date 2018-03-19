@@ -14,7 +14,7 @@ var jwt = require('jsonwebtoken');
 
 var User = require('../mongoose-models/user');
 
-//UsefulFunctions is the backend
+//UsefulFunctions in the backend
 var UsefulFunctions = require('../classes/useful_functions');
 
 
