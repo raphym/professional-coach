@@ -45,6 +45,7 @@ export class ConfirmForgotPasswordComponent implements OnInit {
                 password: new FormControl(null, [Validators.required, Validators.minLength(6)]),
                 confirmPassword: new FormControl(null, this.passwordValidator)
               });
+              this.myForm.controls.confirmPassword.setValue('');
             },
             error => {
               //disable the loader
@@ -82,9 +83,11 @@ export class ConfirmForgotPasswordComponent implements OnInit {
   //password validator
   public passwordValidator(control: FormControl) {
     if (this.myForm === undefined)
-      return null;
+      return { isEqual: false };
     else {
-      if (control.value === this.myForm.controls.password.value)
+      if (control.value === '')
+        return { isEqual: false };
+      else if (control.value === this.myForm.controls.password.value)
         return null;
       else
         return { isEqual: false };

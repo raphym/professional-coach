@@ -4,6 +4,8 @@ const cookieParser = require('cookie-parser');
 const path = require('path');
 const http = require('http');
 const app = express();
+const LogFunctions = require('./server/classes/log_functions');
+
 
 //routes
 var appRoutes = require('./server/routes/appRoutes');
@@ -70,5 +72,12 @@ app.set('port', port);
 
 const server = http.createServer(app);
 
+//logs
+logFunctions = new LogFunctions();
 
-server.listen(port, () => console.log(`Running on server:${port}`));
+//listen server start
+server.listen(port, () => {
+    logFunctions.generalStream('server', 'Start on port: ' + port, null, null);
+    console.log('server started on port: ', port);
+}
+);

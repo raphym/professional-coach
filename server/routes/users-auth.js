@@ -18,6 +18,10 @@ var User = require('../mongoose-models/user');
 //UsefulFunctions is the backend
 var UsefulFunctions = require('../classes/useful_functions');
 
+//logs
+const LogFunctions = require('../classes/log_functions');
+logFunctions = new LogFunctions();
+
 var cors = require('cors');
 var bodyParser = require('body-parser');
 
@@ -49,119 +53,134 @@ router.route('/auth/facebook')
         session: false, authType: 'rerequest',
         scope: ['user_friends', 'email', 'public_profile']
     }), function (req, res, next) {
+        var userIp = req.header('x-forwarded-for') || req.connection.remoteAddress;
         if (!req.user) {
             console.log('!req.user');
+            logFunctions.errorStream('users-auth', 'Error FB passport.authenticate', null, userIp);
             return res.send(401, 'User Not Authenticated');
         }
-
-        //get the email from facebook
-        var email = req.user.emails[0].value;
-        if (email == null || email == undefined || email == '') {
-            console.log('user get from fb:');
-            console.log(req.user);
-            return res.status(500).json({
-                title: 'An error occured',
-                message: 'Your facebook email is not confirmed'
-            });
-        }
-        //get the display name from facebook
-        var displayName = req.user.displayName;
-        if (displayName == null || displayName == undefined || displayName == '') {
-            console.log('user get from fb:');
-            console.log(req.user);
-            return res.status(500).json({
-                title: 'An error occured',
-                message: 'Your facebook name is not existing'
-            });
-        }
         else {
-
-            User.findOne({ email: email }, function (err, user) {
-                if (err) {
+            //get the email from facebook
+            var email = req.user.emails[0].value;
+            if (email == null || email == undefined || email == '') {
+                console.log('user get from fb:');
+                console.log(req.user);
+                logFunctions.errorStream('users-auth', 'Error FB passport facebook email is not confirmed', null, userIp);
+                return res.status(500).json({
+                    title: 'An error occured',
+                    message: 'Your facebook email is not confirmed'
+                });
+            }
+            else {
+                //get the display name from facebook
+                var displayName = req.user.displayName;
+                if (displayName == null || displayName == undefined || displayName == '') {
+                    console.log('user get from fb:');
+                    logFunctions.errorStream('users-auth', 'Error FB passport facebook name is not existing', null, userIp);
                     return res.status(500).json({
                         title: 'An error occured',
-                        message: 'Please contact the administrator'
+                        message: 'Your facebook name is not existing'
                     });
                 }
-                else if (user) {
-                    //the user already exist so sign in
-                    //here we create the token
-                    user_token = {
-                        _id: user._id,
-                        levelRights: user.levelRights,
-                        userName: displayName,
-                        firstName: user.firstName,
-                        lastName: user.lastName,
-                        email: user.email
-                    };
-                    var token = jwt.sign({ user: user_token }, jwt_sign_pswd.SECRET, { expiresIn: 7200 });
-
-                    //insert the token into the cookies
-                    //send the response
-                    res.cookie('token', token);
-                    res.status(200).json({
-                        message: 'Successfully logged in',
-                        data: user_token
-                    });
-                }
-                else if (!user) {
-                    //constuct the user with the facebook data
-                    var usefulFunctions = new UsefulFunctions();
-                    var password = usefulFunctions.makeRandomString(15);
-                    var user = new User({
-                        userName: displayName,
-                        password: bcrypt.hashSync(password, 10),
-                        email: email,
-                        levelRights: level_rights.USER,
-                        registered: true,
-                    });
-
-                    //save the user
-                    user.save(function (err, user) {
+                else {
+                    User.findOne({ email: email }, function (err, user) {
                         if (err) {
-                            console.log('-------------------------------');
-                            console.log('User Save Error:');
-                            console.log(err);
-                            console.log('-------------------------------');
+                            var the_err = '';
+                            try {
+                                the_err = JSON.stringify(err);
+                            } catch (e) {
+                                the_err = err;
+                            }
+                            logFunctions.errorStream('users-auth', 'error find user with FB ' + the_err, null, userIp);
                             return res.status(500).json({
                                 title: 'An error occured',
                                 message: 'Please contact the administrator'
                             });
                         }
-                        //now signin the user
-                        //here we create the token
-                        user_token = {
-                            _id: user._id,
-                            levelRights: user.levelRights,
-                            userName: displayName,
-                            firstName: user.firstName,
-                            lastName: user.lastName,
-                            email: user.email
-                        };
-                        var token = jwt.sign({ user: user_token }, jwt_sign_pswd.SECRET, { expiresIn: 7200 });
+                        else if (user) {
+                            //the user already exist so sign in
+                            //here we create the token
+                            user_token = {
+                                _id: user._id,
+                                levelRights: user.levelRights,
+                                userName: displayName,
+                                firstName: user.firstName,
+                                lastName: user.lastName,
+                                email: user.email
+                            };
+                            var token = jwt.sign({ user: user_token }, jwt_sign_pswd.SECRET, { expiresIn: 7200 });
 
-                        //insert the token into the cookies
-                        //send the response
-                        res.cookie('token', token);
-                        res.status(200).json({
-                            message: 'Successfully logged in',
-                            data: user_token
-                        });
+                            //insert the token into the cookies
+                            //send the response
+                            res.cookie('token', token);
+                            logFunctions.generalStream('users-auth', 'signin user passed throught FB: ' + user.email, user._id, userIp);
+                            res.status(200).json({
+                                message: 'Successfully logged in',
+                                data: user_token
+                            });
+                        }
+                        else if (!user) {
+                            //constuct the user with the facebook data
+                            var usefulFunctions = new UsefulFunctions();
+                            var password = usefulFunctions.makeRandomString(15);
+                            var user = new User({
+                                userName: displayName,
+                                password: bcrypt.hashSync(password, 10),
+                                email: email,
+                                levelRights: level_rights.USER,
+                                registered: true,
+                            });
+
+                            //save the user
+                            user.save(function (err, user) {
+                                if (err) {
+                                    var the_err = '';
+                                    try {
+                                        the_err = JSON.stringify(err);
+                                    } catch (e) {
+                                        the_err = err;
+                                    }
+                                    logFunctions.errorStream('users-auth', 'error save user from FB ' + the_err, null, userIp);
+                                    return res.status(500).json({
+                                        title: 'An error occured',
+                                        message: 'Please contact the administrator'
+                                    });
+                                }
+                                //now signin the user
+                                //here we create the token
+                                user_token = {
+                                    _id: user._id,
+                                    levelRights: user.levelRights,
+                                    userName: displayName,
+                                    firstName: user.firstName,
+                                    lastName: user.lastName,
+                                    email: user.email
+                                };
+                                var token = jwt.sign({ user: user_token }, jwt_sign_pswd.SECRET, { expiresIn: 7200 });
+
+                                //insert the token into the cookies
+                                //send the response
+                                res.cookie('token', token);
+                                logFunctions.generalStream('users-auth', 'created and signed user passed throught FB: ' + user.email, user._id, userIp);
+                                res.status(200).json({
+                                    message: 'Successfully logged in',
+                                    data: user_token
+                                });
+                            });
+                        }
                     });
                 }
-            });
+            }
         }
     });
 
-
-
 //Signup
 router.post('/signup', function (req, res, next) {
+    var userIp = req.header('x-forwarded-for') || req.connection.remoteAddress;
     //create the random randomSecretCode and randomHash
     var usefulFunctions = new UsefulFunctions();
     var randomSecretCode = usefulFunctions.makeRandomString(6);
     var randomHash = usefulFunctions.makeRandomString(20);
-
     var user = new User({
         userName: req.body.userName,
         password: bcrypt.hashSync(req.body.password, 10),
@@ -180,7 +199,13 @@ router.post('/signup', function (req, res, next) {
             console.log('User Save Error:');
             console.log(err);
             console.log('-------------------------------');
-
+            var the_err = '';
+            try {
+                the_err = JSON.stringify(err);
+            } catch (e) {
+                the_err = err;
+            }
+            logFunctions.errorStream('users-auth', 'Error to create new user  ' + the_err, null, userIp);
             if (err.message.includes(' Error, expected `email` to be unique.')) {
                 return res.status(500).json({
                     title: 'An error occured',
@@ -194,54 +219,76 @@ router.post('/signup', function (req, res, next) {
                 });
             }
         }
-
-        res.status(201).json({
-            title: 'User created',
-            user: result
-        });
+        else {
+            logFunctions.generalStream('users-auth', 'New User created: ' + user.email, result._id, userIp);
+            res.status(201).json({
+                title: 'User created',
+                user: result
+            });
+        }
     });
 });
 
 //Confirm Registration init
 router.post('/confirmRegInit', function (req, res, next) {
+    var userIp = req.header('x-forwarded-for') || req.connection.remoteAddress;
     var randomHash = req.body.randomHash;
     User.findOne({ randomHash: randomHash }, function (err, user) {
         if (err) {//if error request
+            var the_err = '';
+            try {
+                the_err = JSON.stringify(err);
+            } catch (e) {
+                the_err = err;
+            }
+            logFunctions.errorStream('users-auth', 'Confirm Registration init error  ' + the_err, null, userIp);
             return res.status(500).json({
                 title: 'An error occured',
                 message: err
             });
         }
-        if (!user) {//if error email
+        else if (!user) {//if error email
+            logFunctions.errorStream('users-auth', 'Confirm Registration init User Not Found', null, userIp);
             return res.status(401).json({
                 title: 'User Not Found',
                 message: 'The user does not exist'
             });
         }
-        var my_response = { title: 'Success', user: user };
-        res.status(200).json(my_response);
+        else {
+            logFunctions.generalStream('users-auth', 'Confirm Registration init Found: ' + user.email, user._id, userIp);
+            var my_response = { title: 'Success', user: user };
+            res.status(200).json(my_response);
+        }
     });
 });
 
 //Confirm Registration validation
 router.post('/confirmRegValidation', function (req, res, next) {
+    var userIp = req.header('x-forwarded-for') || req.connection.remoteAddress;
     var randomHash = req.body.randomHash;
     var randomSecretCode = req.body.secretCode;
     User.findOne({ randomHash: randomHash }, function (err, user) {
         if (err) {//if error request
+            var the_err = '';
+            try {
+                the_err = JSON.stringify(err);
+            } catch (e) {
+                the_err = err;
+            }
+            logFunctions.errorStream('users-auth', 'Confirm Registration validation error  ' + the_err, null, userIp);
             return res.status(500).json({
                 title: 'An error occured',
                 message: err
             });
         }
-        if (!user) {//if error email
+        else if (!user) {//if error email
+            logFunctions.errorStream('users-auth', 'Confirm Registration validation User Not Found', null, userIp);
             return res.status(401).json({
                 title: 'User Not Found',
                 message: 'The user does not exist'
             });
         }
-
-        if (user.randomSecretCode == randomSecretCode) {
+        else if (user.randomSecretCode == randomSecretCode.trim()) {
             //assign the registered: true,
             user.registered = true;
             //erase the randomHash
@@ -250,18 +297,26 @@ router.post('/confirmRegValidation', function (req, res, next) {
             user.randomSecretCode = -1;
             //update the user
             user.save(function (err, user) {
-                if (user) {
-                    var my_response = { title: 'Success', message: 'User validate' };
-                    return res.status(200).json(my_response);
-                }
                 if (err) {
+                    var the_err = '';
+                    try {
+                        the_err = JSON.stringify(err);
+                    } catch (e) {
+                        the_err = err;
+                    }
+                    logFunctions.errorStream('users-auth', 'Confirm Registration validation :Error during the update of the User Data ' + user.email + ' ' + the_err, user._id, userIp);
                     var my_response = { title: 'Error', message: 'Error during the update of the User Data' };
                     return res.status(500).json(my_response);
                 }
+                else if (user) {
+                    logFunctions.generalStream('users-auth', 'Confirm Registration validation Updated ' + user.email, user._id, userIp);
+                    var my_response = { title: 'Success', message: 'User validate' };
+                    return res.status(200).json(my_response);
+                }
             });
-
         }
         else {
+            logFunctions.errorStream('security_$_users-auth', 'Confirm Registration validation User Not Validate ' + user.email, user._id, userIp);
             return res.status(401).json({
                 title: 'No Validate',
                 message: 'User Not Validate'
@@ -272,147 +327,203 @@ router.post('/confirmRegValidation', function (req, res, next) {
 
 //Signin
 router.post('/signin', function (req, res, next) {
+    var userIp = req.header('x-forwarded-for') || req.connection.remoteAddress;
     User.findOne({ email: req.body.email }, function (err, user) {
         if (err) {//if error request
+            var the_err = '';
+            try {
+                the_err = JSON.stringify(err);
+            } catch (e) {
+                the_err = err;
+            }
+            logFunctions.errorStream('users-auth', 'signin error  ' + req.body.email + ' ' + the_err, null, userIp);
             return res.status(500).json({
                 title: 'An error occured',
                 message: err
             });
         }
-        if (!user) {//if error email
+        else if (!user) {//if error email
+            logFunctions.errorStream('security_$_users-auth', 'signin Login failed user not found ' + req.body.email, null, userIp);
             return res.status(401).json({
                 title: 'Login failed',
                 message: 'Invalid login credentials'
             });
         }
         //compare the encrypted password with the has of the passwords entered in the signin
-        if (!bcrypt.compareSync(req.body.password, user.password)) {//if error password
+        else if (!bcrypt.compareSync(req.body.password, user.password)) {//if error password
+            logFunctions.errorStream('security_$_users-auth', 'signin Login failed password error ' + user.email, user._id, userIp);
             return res.status(401).json({
                 title: 'Login failed',
                 message: 'Invalid login credentials'
             });
         }
-        //check if the User is registered
-        if (!user.registered) {
-            return res.status(401).json({
-                title: 'Status Not Registered',
-                message: 'Please confirm your account before loggin'
-            });
-        }
-        //here we create the token
-        user_token = {
-            _id: user._id,
-            levelRights: user.levelRights,
-            userName: user.userName,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            email: user.email
-        };
-        var token = jwt.sign({ user: user_token }, jwt_sign_pswd.SECRET, { expiresIn: 7200 });
+        else {
+            //check if the User is registered
+            if (!user.registered) {
+                logFunctions.errorStream('security_$_users-auth', 'signin user email not validated ' + user.email, user._id, userIp);
+                return res.status(401).json({
+                    title: 'Status Not Registered',
+                    message: 'Please confirm your account before loggin'
+                });
+            }
+            else {
+                //here we create the token
+                user_token = {
+                    _id: user._id,
+                    levelRights: user.levelRights,
+                    userName: user.userName,
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    email: user.email
+                };
+                var token = jwt.sign({ user: user_token }, jwt_sign_pswd.SECRET, { expiresIn: 7200 });
 
-        //insert the token into the cookies
-        //send the response
-        res.cookie('token', token);
-        res.status(200).json({
-            message: 'Successfully logged in',
-            data: user_token
-        });
+                //insert the token into the cookies
+                //send the response
+                res.cookie('token', token);
+                logFunctions.generalStream('users-auth', 'signin user passed: ' + user.email, user._id, userIp);
+                res.status(200).json({
+                    message: 'Successfully logged in',
+                    data: user_token
+                });
+            }
+        }
     });
 });
 
 //forgotPassword
 router.post('/forgotPassword', function (req, res, next) {
-
+    var userIp = req.header('x-forwarded-for') || req.connection.remoteAddress;
     var baseUrl = req.protocol + '://' + req.get('host') + '/';
 
     User.findOne({ email: req.body.email }, function (err, user) {
         if (err) {//if error request
             console.log(err);
+            var the_err = '';
+            try {
+                the_err = JSON.stringify(err);
+            } catch (e) {
+                the_err = err;
+            }
+            logFunctions.errorStream('users-auth', 'forgotPassword error ' + req.body.email + ' ' + the_err, null, userIp);
             return res.status(500).json({
                 title: 'An error occured',
                 message: 'error'
             });
         }
-        if (!user) {//if error email
+        else if (!user) {//if error email
+            logFunctions.errorStream('security_$_users-auth', 'forgotPassword error User not found ' + req.body.email, null, userIp);
             return res.status(401).json({
                 title: 'Error',
                 message: 'User not found'
             });
         }
         //check if the User is registered
-        if (!user.registered) {
+        else if (!user.registered) {
+            logFunctions.errorStream('security_$_users-auth', 'forgotPassword error User not registered ' + user.email, user._id, userIp);
             return res.status(401).json({
                 title: 'Status Not Registered',
                 message: 'Please confirm your account before loggin'
             });
         }
-        var usefulFunctions = new UsefulFunctions();
-        var randomHash = usefulFunctions.makeRandomString(20);
-        user.randomHash = randomHash;
-        //update the user
-        user.save(function (err, user) {
-            if (err) {
-                var my_response = { title: 'Error', message: 'Error during the update of the User Data' };
-                return res.status(500).json(my_response);
-            }
-            else if (user) {
-                var usefulFunctions = new UsefulFunctions();
-                var message_mail = '<a href="';
-                message_mail += baseUrl;
-                message_mail += 'confirmForgotPassword/';
-                message_mail += randomHash;
-                message_mail += '">Please click here to reset your password</a><br><br>G-Fit Team';
-                usefulFunctions.sendEmail(user.email, message_mail, 'G-Fit Team', "html").then(function (response) {
-                    res.status(200).json({
-                        message: 'success',
-                    });
-                }).catch(function (error) {
-                    console.log(error)
-                    var my_response = { title: 'Error', message: 'Error to send the mail' };
+        else {
+            var usefulFunctions = new UsefulFunctions();
+            var randomHash = usefulFunctions.makeRandomString(20);
+            user.randomHash = randomHash;
+            //update the user
+            user.save(function (err, user) {
+                if (err) {
+                    var the_err = '';
+                    try {
+                        the_err = JSON.stringify(err);
+                    } catch (e) {
+                        the_err = err;
+                    }
+                    logFunctions.errorStream('users-auth', 'forgotPassword error during the update of the User Data ' + user.email + ' ' + the_err, user._id, userIp);
+                    var my_response = { title: 'Error', message: 'Error during the update of the User Data' };
                     return res.status(500).json(my_response);
-                })
-            }
-        });
+                }
+                else if (user) {
+                    var usefulFunctions = new UsefulFunctions();
+                    var message_mail = '<a href="';
+                    message_mail += baseUrl;
+                    message_mail += 'confirmForgotPassword/';
+                    message_mail += randomHash;
+                    message_mail += '">Please click here to reset your password</a><br><br>G-Fit Team';
+                    usefulFunctions.sendEmail(user.email, message_mail, 'G-Fit Team', "html").then(function (response) {
+                        logFunctions.generalStream('users-auth', 'forgotPassword email sent: ' + user.email, user._id, userIp);
+                        res.status(200).json({
+                            message: 'success',
+                        });
+                    }).catch(function (error) {
+                        console.log(error)
+                        logFunctions.errorStream('users-auth', 'forgotPassword error to send forgotPassword email ' + user.email, user._id, userIp);
+                        var my_response = { title: 'Error', message: 'Error to send the mail' };
+                        return res.status(500).json(my_response);
+                    })
+                }
+            });
+        }
     });
 });
 
 //confirm forgotPassword for change now
 router.post('/confirmForgotPassword', function (req, res, next) {
+    var userIp = req.header('x-forwarded-for') || req.connection.remoteAddress;
     User.findOne({ email: req.body.email, randomHash: req.body.randomHash }, function (err, user) {
         if (err) {//if error request
             console.log(err);
+            var the_err = '';
+            try {
+                the_err = JSON.stringify(err);
+            } catch (e) {
+                the_err = err;
+            }
+            logFunctions.errorStream('users-auth', 'confirmForgotPassword error ' + req.body.email + ' ' + the_err, null, userIp);
             return res.status(500).json({
                 title: 'An error occured',
                 message: 'error'
             });
         }
-        if (!user) {//if error email
+        else if (!user) {//if error email
+            logFunctions.errorStream('security_$_users-auth', 'confirmForgotPassword error User not found ' + req.body.email, null, userIp);
             return res.status(401).json({
                 title: 'Error',
                 message: 'User not found'
             });
         }
         //check if the User is registered
-        if (!user.registered) {
+        else if (!user.registered) {
+            logFunctions.errorStream('security_$_users-auth', 'confirmForgotPassword error User not registered ' + user.email, user._id, userIp);
             return res.status(401).json({
                 title: 'Status Not Registered',
                 message: 'Please confirm your account before loggin'
             });
         }
-        user.randomHash = -1;
-        user.password = bcrypt.hashSync(req.body.password, 10);
-        //update the user
-        user.save(function (err, user) {
-            if (err) {
-                var my_response = { title: 'Error', message: 'Error during the update of the User Data' };
-                return res.status(500).json(my_response);
-            }
-            else if (user) {
-                res.status(200).json({
-                    message: 'success',
-                });
-            }
-        });
+        else {
+            user.randomHash = -1;
+            user.password = bcrypt.hashSync(req.body.password, 10);
+            //update the user
+            user.save(function (err, user) {
+                if (err) {
+                    var the_err = '';
+                    try {
+                        the_err = JSON.stringify(err);
+                    } catch (e) {
+                        the_err = err;
+                    }
+                    logFunctions.errorStream('users-auth', 'confirmForgotPassword error during the update of the User Data ' + user.email + ' ' + the_err, user._id, userIp);
+                    var my_response = { title: 'Error', message: 'Error during the update of the User Data' };
+                    return res.status(500).json(my_response);
+                }
+                else if (user) {
+                    logFunctions.generalStream('users-auth', 'forgotPassword password changed : ' + user.email, user._id, userIp);
+                    res.status(200).json({
+                        message: 'success',
+                    });
+                }
+            });
+        }
     });
 });
 

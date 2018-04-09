@@ -5,6 +5,9 @@ const ObjectID = require('mongodb').ObjectID;
 var mongoose = require('mongoose');
 var mail = require("nodemailer").mail;
 var config_database = require('../../config/database');
+//logs
+const LogFunctions = require('../classes/log_functions');
+logFunctions = new LogFunctions();
 
 const DATABASE_ADDRESS = config_database.api + config_database.user + ':' + config_database.pswd + config_database.server + ':' + config_database.port + '/' + config_database.name;
 mongoose.Promise = global.Promise;
@@ -12,9 +15,17 @@ mongoose.Promise = global.Promise;
 mongoose.connect(DATABASE_ADDRESS, function (err, data) {
     if (err) {
         console.log('err : ' + err);
+        var the_err = '';
+        try {
+            the_err = JSON.stringify(err);
+        } catch (e) {
+            the_err = err;
+        }
+        logFunctions.errorStream('database', 'Error to connect to the DB  ' + the_err, null, null);
     }
     else {
         console.log('Connected to ', data.name, ' on port: ', data.port);
+        logFunctions.generalStream('database', 'Connected to: ' + data.name + ' on port: ' + data.port, null, null);
     }
 });
 
