@@ -44,6 +44,7 @@
     "hammerjs": "^2.0.8",
     "handlebars": "^4.0.11",
     "hbs": "^4.0.1",
+    "html-pdf": "^2.2.0",
     "jsonwebtoken": "^8.2.0",
     "mongodb": "^3.0.4",
     "mongoose": "^5.0.9",
