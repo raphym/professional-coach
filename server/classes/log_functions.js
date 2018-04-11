@@ -25,14 +25,16 @@ connectLogDb = function () {
 }
 connectLogDb();
 
-Logs = conn.model('log', new Schema({
-    title: { type: String, required: true },
-    content: { type: String, required: true },
-    type: { type: String, required: true },
-    itemId: { type: String, required: false },
-    userIp: { type: String, required: false },
-    date: { type: Date, required: true }
-}));
+if (conn != null && conn != undefined) {
+    Logs = conn.model('log', new Schema({
+        title: { type: String, required: true },
+        content: { type: String, required: true },
+        type: { type: String, required: true },
+        itemId: { type: String, required: false },
+        userIp: { type: String, required: false },
+        date: { type: Date, required: true }
+    }));
+}
 
 //script for the logs
 logScript = async function () {
