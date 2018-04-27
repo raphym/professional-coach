@@ -69,6 +69,7 @@ export class ThankBookComponent implements OnInit {
   public langDirection;
   public langTextAlign;
   public slide_timer;
+  public timerDuration = 6000;
 
   constructor(public thankBookService: ThankBookService, public usefulService: UsefulService) { }
 
@@ -116,7 +117,7 @@ export class ThankBookComponent implements OnInit {
         this.initiate = true;
         //timer to change automatically the messages
         var _self = this;
-        this.slide_timer = setInterval(_self.nextClicked, 5000, _self);
+        this.slide_timer = setInterval(_self.nextClicked, this.timerDuration, _self);
       },
       error => {
         console.log(error);
@@ -135,6 +136,11 @@ export class ThankBookComponent implements OnInit {
     else
       this.cursorPosition--;
 
+    var _self = this;
+    if (this.slide_timer != null && this.slide_timer != undefined) {
+      clearInterval(this.slide_timer);
+      this.slide_timer = setInterval(_self.nextClicked, this.timerDuration, _self);
+    }
     this.setPosition();
   }
 
@@ -147,11 +153,16 @@ export class ThankBookComponent implements OnInit {
     else
       _self.cursorPosition++;
 
+    if (this.slide_timer != null && this.slide_timer != undefined) {
+      clearInterval(this.slide_timer);
+      this.slide_timer = setInterval(_self.nextClicked, this.timerDuration, _self);
+    }
+
     _self.setPosition();
   }
 
   ngOnDestroy() {
-    //remove the onScroll event
+    //remove the slide_timer
     if (this.slide_timer != null && this.slide_timer != undefined) {
       clearInterval(this.slide_timer);
     }

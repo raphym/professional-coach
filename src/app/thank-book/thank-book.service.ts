@@ -7,7 +7,10 @@ export class ThankBookService {
     getUrl = window.location;
     baseUrl = this.getUrl.protocol + "//" + this.getUrl.host + "/";
 
-    Get_fbReviews_ADDRESS = this.baseUrl + 'social_fb/getFbReviews';
+    //online
+    //Get_fbReviews_ADDRESS = this.baseUrl + 'social_fb/getFbReviews';
+    //offline
+    Get_fbReviews_ADDRESS = this.baseUrl + 'social_fb/getFbReviewsOffline';
     constructor(public http: Http) { }
 
     //get articles count

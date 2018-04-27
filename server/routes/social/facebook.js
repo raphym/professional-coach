@@ -18,6 +18,10 @@ var fb = new FB.Facebook({ appId: fb_config.clientID, appSecret: fb_config.clien
 const LogFunctions = require('../../classes/log_functions');
 logFunctions = new LogFunctions();
 
+//UsefulFunctions
+const UsefulFunctions = require('../../classes/useful_functions');
+usefulFunctions = new UsefulFunctions();
+
 //get Facebook Reviews
 router.get('/getFbReviews', function (req, res, next) {
     var userIp = req.header('x-forwarded-for') || req.connection.remoteAddress;
@@ -44,6 +48,19 @@ router.get('/getFbReviews', function (req, res, next) {
         }
     });
 });
+
+//get Facebook Reviews offline
+router.get('/getFbReviewsOffline', function (req, res, next) {
+    var userIp = req.header('x-forwarded-for') || req.connection.remoteAddress;
+    var data = usefulFunctions.getOfflineReviews();
+    logFunctions.generalStream('social-facebook', 'get fb reviews offline', null, userIp);
+    return res.status(200).json({
+        title: 'ok',
+        message: 'success',
+        data: data
+    });
+});
+
 
 
 module.exports = router;
