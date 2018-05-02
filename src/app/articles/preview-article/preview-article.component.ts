@@ -15,19 +15,18 @@ export class PreviewArticleComponent implements OnInit {
   @Input() public date;
   @Input() public index;
 
-  public pair:boolean = false;
+  public pair: boolean = false;
 
   constructor(public router: Router) { }
 
   onClick() {
-    var path = 'view-article/';
+    var path = 'articles/view-article/';
     path += this.id;
     this.router.navigateByUrl(path);
   }
   ngOnInit() {
-    // console.log("index: " + this.index);
-    if(this.index % 2==0)
-      this.pair=true;
+    if (this.index % 2 == 0)
+      this.pair = true;
   }
 
 }

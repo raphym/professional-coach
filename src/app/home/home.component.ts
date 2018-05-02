@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, EventEmitter } from '@angular/core';
-import { UsefulService } from '../shared/services/utility/useful.service';
 import { ArticleService } from '../articles/article-service';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { LangService } from '../shared/services/langService/langService.service';
 
 const HEADER_SIZE = 56;
 @Component({
@@ -19,20 +19,19 @@ export class HomeComponent implements OnInit {
 
   //for the anchor in the page
   public scrollExecuted: boolean = false;
-  constructor(public usefulService: UsefulService,
+  constructor(public langService: LangService,
     public articleService: ArticleService,
     public activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     //subscribe to the langage
-    this.usefulService.langTransmitter.subscribe(
+    this.langService.langTransmitter.subscribe(
       config_langage => {
         this.langDirection = config_langage.direction;
         this.langTextAlign = config_langage.textAlign;
       }
     );
-    //set langage
-    this.usefulService.initLangage();
+    this.langService.initLangage();
     this.blinkFunction();
   }
 

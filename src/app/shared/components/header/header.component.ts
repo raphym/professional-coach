@@ -3,8 +3,8 @@ import { Response } from "@angular/http";
 import { CookieService } from 'angular2-cookie/core';
 import { AuthService } from "../../../auth/auth.service";
 import { TranslateService } from 'ng2-translate';
-import { UsefulService } from '../../services/utility/useful.service';
 import { Router, NavigationEnd } from '@angular/router';
+import { LangService } from '../../services/langService/langService.service';
 
 @Component({
     selector: 'app-header',
@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit {
         public authService: AuthService,
         public cookieService: CookieService,
         public translate: TranslateService,
-        public usefulService: UsefulService,
+        public langService: LangService,
         public router: Router) {
     }
 
@@ -51,7 +51,7 @@ export class HeaderComponent implements OnInit {
 
     //change langage
     changeLangage(langage) {
-        this.usefulService.setLangage(langage);
+        this.langService.setLangage(langage);
         if (langage == 'he') {
 
             this.floatDirection = 'right';
@@ -107,15 +107,14 @@ export class HeaderComponent implements OnInit {
         this.isAdmin = false;
 
         //subscribe to the langage
-        this.usefulService.langTransmitter.subscribe(
+        this.langService.langTransmitter.subscribe(
             config_langage => {
                 this.langDirection = config_langage.direction;
                 this.langTextAlign = config_langage.textAlign;
                 this.floatDirection = config_langage.floatDirection;
             }
         );
-        //set langage
-        this.changeLangage('he');
+        this.langService.initLangage();
 
         //User Login Event
         this.authService.userLogInEvent.subscribe(

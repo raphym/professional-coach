@@ -8,7 +8,7 @@ import { ErrorService } from '../shared/components/notif-to-user/errors/error.se
 import { SuccessService } from '../shared/components/notif-to-user/success/success.service';
 import { CookieService } from 'angular2-cookie/core';
 import { JwtHelper } from "angular2-jwt";
-import { UsefulService } from '../shared/services/utility/useful.service';
+import { LangService } from '../shared/services/langService/langService.service';
 
 const HEADER_SIZE = 56;
 @Component({
@@ -39,19 +39,18 @@ export class ContactMeComponent implements OnInit {
         public successService: SuccessService,
         public errorService: ErrorService,
         public cookieService: CookieService,
-        public usefulService: UsefulService) {
+        public langService: LangService) {
     }
     ngOnInit() {
         this.onResize();
         //subscribe to the langage
-        this.usefulService.langTransmitter.subscribe(
+        this.langService.langTransmitter.subscribe(
             config_langage => {
                 this.langDirection = config_langage.direction;
                 this.langTextAlign = config_langage.textAlign;
             }
         );
-        //set langage
-        this.usefulService.initLangage();
+        this.langService.initLangage();
 
         var token = this.cookieService.get('token');
         if (token != null && token != '') {
@@ -120,7 +119,7 @@ export class ContactMeComponent implements OnInit {
         var messageContentOk = '';
         var messageTitleNotOk = '';
         var messageContentNotOk = '';
-        if (this.usefulService.getLangage() == 'he') {
+        if (this.langService.getLangage() == 'he') {
             //to the admin
             mail_content = "קבלת הודעה";
             mail_content += "\r\n";
@@ -144,7 +143,7 @@ export class ContactMeComponent implements OnInit {
             messageTitleNotOk = 'סליחה';
             messageContentNotOk = 'אירעה שגיאה בעת שליחת ההודעה';
         }
-        else if (this.usefulService.getLangage() == 'en') {
+        else if (this.langService.getLangage() == 'en') {
             //to the admin
             mail_content = "You receive a mail from " + value.name + " " + value.email + " : \r\n\r\n";
             mail_content += value.phone;
@@ -158,7 +157,7 @@ export class ContactMeComponent implements OnInit {
             messageContentOk = 'Your details have been registered, we will contact you as soon as possible. Thank you for choosing G-Fit!';
             messageTitleNotOk = 'Sorry';
             messageContentNotOk = 'An error occurred while sending the message';
-        } else if (this.usefulService.getLangage() == 'fr') {
+        } else if (this.langService.getLangage() == 'fr') {
             //to the admin
             mail_content = "Vous avez reçu un mail de " + value.name + " " + value.email + " : \r\n\r\n";
             mail_content += value.phone;

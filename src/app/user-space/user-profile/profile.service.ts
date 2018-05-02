@@ -1,5 +1,4 @@
 import { Http, Response, Headers, URLSearchParams } from '@angular/http';
-
 import { Observable } from 'rxjs/Observable';
 import { Injectable } from "@angular/core";
 import { User } from '../../shared/models/objects-models/user.model';

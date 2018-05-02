@@ -8,10 +8,10 @@
         <a routerLink="/admin/user-management">Users</a>
       </li>
       <li routerLinkActive="active" class="theLinkss">
-        <a routerLink="/profile">Profile</a>
+        <a routerLink="/userspace/profile">Profile</a>
       </li>
       <li routerLinkActive="active" class="theLinkss">
-        <a routerLink="/logout">Logout</a>
+        <a routerLink="/auth/logout">Logout</a>
       </li>
     </div>
 
@@ -20,10 +20,10 @@
       <div class="select">
         <select name="slct" id="slct" (change)="onChange($event.target.value)">
           <option>Choose a page</option>
-          <option value="admin/article">Articles</option>
-          <option value="admin/user-management">Users</option>
-          <option value="/profile">Profile</option>
-          <option value="/logout">Logout</option>
+          <option value="/admin/article">Articles</option>
+          <option value="/admin/user-management">Users</option>
+          <option value="/userspace/profile">Profile</option>
+          <option value="/auth/logout">Logout</option>
         </select>
       </div>
       <br>

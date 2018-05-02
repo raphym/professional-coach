@@ -5,7 +5,7 @@ import { AuthGuardUserLogged } from "../../auth/auth-guard-userLogged.service";
 
 const AUTH_ROUTES: Routes = [
 
-    { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardUserLogged] },
+    { path: '', component: ProfileComponent, canActivate: [AuthGuardUserLogged] },
 ];
 
 export const ProfileRoutingModule = RouterModule.forChild(AUTH_ROUTES);

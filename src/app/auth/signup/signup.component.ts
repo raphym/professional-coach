@@ -3,10 +3,10 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { AuthService } from "../auth.service";
 import { User } from "../../shared/models/objects-models/user.model";
 import { LoaderService } from "../../shared/components/loader/loader.service";
-import { UsefulService } from "../../shared/services/utility/useful.service";
 import { ErrorService } from "../../shared/components/notif-to-user/errors/error.service";
 import { SuccessService } from "../../shared/components/notif-to-user/success/success.service";
 import { Router } from "@angular/router";
+import { LangService } from "../../shared/services/langService/langService.service";
 
 
 @Component({
@@ -21,21 +21,20 @@ export class SignupComponent implements OnInit {
 
     constructor(public authService: AuthService,
         public loaderService: LoaderService,
-        public usefulService: UsefulService,
+        public langService: LangService,
         public errorService: ErrorService,
         public successService: SuccessService,
         public router: Router) { }
 
     ngOnInit() {
         //subscribe to the langage
-        this.usefulService.langTransmitter.subscribe(
+        this.langService.langTransmitter.subscribe(
             config_langage => {
                 this.langDirection = config_langage.direction;
                 this.langTextAlign = config_langage.textAlign;
             }
         );
-        //set langage
-        this.usefulService.initLangage();
+        this.langService.initLangage();
 
         //bind the passwordValidator
         this.passwordValidator = this.passwordValidator.bind(this);

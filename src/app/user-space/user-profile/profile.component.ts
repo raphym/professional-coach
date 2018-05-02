@@ -2,8 +2,8 @@ import { Component, OnInit, Input, Output } from '@angular/core';
 import { User } from '../../shared/models/objects-models/user.model';
 import { ProfileService } from './profile.service';
 import { LoaderService } from '../../shared/components/loader/loader.service';
-import { UsefulService } from '../../shared/services/utility/useful.service';
 import { SuccessService } from '../../shared/components/notif-to-user/success/success.service';
+import { LangService } from '../../shared/services/langService/langService.service';
 
 @Component({
   selector: 'app-profile',
@@ -25,7 +25,7 @@ export class ProfileComponent implements OnInit {
 
   constructor(public profileService: ProfileService,
     public loaderService: LoaderService,
-    public usefulService: UsefulService,
+    public langService: LangService,
     public successService: SuccessService
   ) {
 
@@ -33,14 +33,13 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     //subscribe to the langage
-    this.usefulService.langTransmitter.subscribe(
+    this.langService.langTransmitter.subscribe(
       config_langage => {
         this.langTextAlign = config_langage.textAlign;
         this.langDirection = config_langage.direction;
       }
     );
-    //set langage
-    this.usefulService.initLangage();
+    this.langService.initLangage();
 
     //get the profile of the user
     this.init();
@@ -52,19 +51,19 @@ export class ProfileComponent implements OnInit {
     this.loaded = false;
     this.profileService.getUser()
       .subscribe(
-      (response) => {
-        //disable the loader
-        this.loaderService.disableLoader();
-        this.user = response.user;
-        if (this.user.picture != null && this.user.picture != '')
-          this.showImage = true;
-        this.loaded = true;
-      },
-      error => {
-        //disable the loader
-        this.loaderService.disableLoader();
-        console.error(error)
-      }
+        (response) => {
+          //disable the loader
+          this.loaderService.disableLoader();
+          this.user = response.user;
+          if (this.user.picture != null && this.user.picture != '')
+            this.showImage = true;
+          this.loaded = true;
+        },
+        error => {
+          //disable the loader
+          this.loaderService.disableLoader();
+          console.error(error)
+        }
       );
   }
 

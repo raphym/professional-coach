@@ -7,10 +7,9 @@ import { AuthGuardPreventIfAlreadyConnected } from "./auth-guard-prevent-if-alre
 import { ConfirmForgotPasswordComponent } from "./confirm-forgot-password/confirm-forgot-password.component";
 
 
-
 const AUTH_ROUTES: Routes = [
+    { path: '', component: SigninComponent, canActivate: [AuthGuardPreventIfAlreadyConnected] },
     { path: 'signup', component: SignupComponent, canActivate: [AuthGuardPreventIfAlreadyConnected] },
-    { path: 'signin', component: SigninComponent, canActivate: [AuthGuardPreventIfAlreadyConnected] },
     { path: 'logout', component: LogoutComponent },
     { path: 'confirmRegistration/:randomHash', component: ConfirmRegistrationComponent, canActivate: [AuthGuardPreventIfAlreadyConnected] },
     { path: 'confirmRegistration', component: ConfirmRegistrationComponent, canActivate: [AuthGuardPreventIfAlreadyConnected] },

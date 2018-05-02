@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, animate, transition, keyframes } from '@angular/animations';
 import { ThankBookService } from '../thank-book.service';
 import { ThankMessage } from '../../shared/models/objects-models/thankMessage';
-import { UsefulService } from '../../shared/services/utility/useful.service';
+import { LangService } from '../../shared/services/langService/langService.service';
 
 const HEADER_SIZE = 56;
 
@@ -71,18 +71,17 @@ export class ThankBookComponent implements OnInit {
   public slide_timer;
   public timerDuration = 6000;
 
-  constructor(public thankBookService: ThankBookService, public usefulService: UsefulService) { }
+  constructor(public thankBookService: ThankBookService, public langService: LangService) { }
 
   ngOnInit() {
     //subscribe to the langage
-    this.usefulService.langTransmitter.subscribe(
+    this.langService.langTransmitter.subscribe(
       config_langage => {
         this.langDirection = config_langage.direction;
         this.langTextAlign = config_langage.textAlign;
       }
     );
-    //set langage
-    this.usefulService.initLangage();
+    this.langService.initLangage();
     this.init();
     this.onResize();
   }

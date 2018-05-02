@@ -25,7 +25,7 @@ export class AuthService {
     CONFIRMATION_REG_INIT_ADDRESS = this.baseUrl + 'users-auth/confirmRegInit';
     CONFIRMATION_REG_VALID_ADDRESS = this.baseUrl + 'users-auth/confirmRegValidation';
     CONFIRMATION_FORGOT_PASSWORD_ADDRESS = this.baseUrl + 'users-auth/confirmForgotPassword';
-    CONFIRMATION_REG_LINK_URL = this.baseUrl + 'confirmRegistration';
+    CONFIRMATION_REG_LINK_URL = this.baseUrl + 'auth/confirmRegistration';
     FB_CONNECT_URL = this.baseUrl + 'users-auth/auth/facebook';
 
     userLogInEvent = new EventEmitter<{}>();
@@ -66,8 +66,6 @@ export class AuthService {
             /* {scope:'email'}*/
             this.fb.login({ scope: 'email' })
                 .then((result: LoginResponse) => {
-                    console.log('auth.service fblogin');
-                    console.log(result);
                     return this.http.post(this.FB_CONNECT_URL, { access_token: result.authResponse.accessToken })
                         .toPromise()
                         .then(response => {
@@ -286,7 +284,6 @@ export class AuthService {
         try {
             this.cookieService.remove('token');
         } catch (e) {
-
         }
         this.userLogOutEvent.emit();
         this.isConnect = false;

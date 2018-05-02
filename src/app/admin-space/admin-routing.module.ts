@@ -8,7 +8,7 @@ import { UserManagementComponent } from "./user-management/user-management.compo
 const AUTH_ROUTES: Routes = [
 
     {
-        path: 'admin', component: AdminSpaceComponent, canActivate: [AuthGuardAdmin], children: [
+        path: '', component: AdminSpaceComponent, canActivate: [AuthGuardAdmin], children: [
             { path: 'article', component: ArticleAdminComponent },
             { path: 'user-management', component: UserManagementComponent },
         ]

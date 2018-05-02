@@ -9,15 +9,13 @@ import { TranslateService } from 'ng2-translate';
 })
 export class AdminSpaceComponent implements OnInit {
 
-  constructor(public router:Router,
+  constructor(public router: Router,
     public translate: TranslateService) { }
 
   ngOnInit() {
   }
 
   onChange(newValue) {
-    console.log(newValue);
     this.router.navigate([newValue]);
-
   }
 }

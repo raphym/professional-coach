@@ -7,6 +7,7 @@ import { ArticleRoutingModule } from './article-routing.module';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { SharedModule } from '../shared/module/shared.module';
 import { PreviewArticleComponent } from './preview-article/preview-article.component';
+import { SharedArticleModule } from '../shared/module/sharedArticleModule/sharedArticle.module';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { PreviewArticleComponent } from './preview-article/preview-article.compo
   ],
   imports: [
     SharedModule,
+    SharedArticleModule,
     ArticleRoutingModule,
     FroalaEditorModule.forRoot(),
     FroalaViewModule.forRoot()

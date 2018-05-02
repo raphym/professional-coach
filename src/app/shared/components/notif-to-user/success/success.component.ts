@@ -1,8 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { TheSuccess } from "./success.model";
 import { SuccessService } from "./success.service";
-import { UsefulService } from "../../../services/utility/useful.service";
-
+import { LangService } from "../../../services/langService/langService.service";
 
 @Component({
     selector: 'app-success',
@@ -24,7 +23,7 @@ export class SuccessComponent implements OnInit {
     public langDirection;
     public langTextAlign;
 
-    constructor(public successService: SuccessService, public usefulService: UsefulService) {
+    constructor(public successService: SuccessService, public langService: LangService) {
         this.successService.successOccured.subscribe(
             (success: TheSuccess) => {
                 this.success = success;
@@ -35,12 +34,13 @@ export class SuccessComponent implements OnInit {
 
     ngOnInit() {
         //subscribe to the langage
-        this.usefulService.langTransmitter.subscribe(
+        this.langService.langTransmitter.subscribe(
             config_langage => {
                 this.langDirection = config_langage.direction;
                 this.langTextAlign = config_langage.textAlign;
             }
         );
+        this.langService.initLangage();
     }
 
     onSuccessHandled() {

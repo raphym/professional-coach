@@ -110,9 +110,9 @@ router.route('/auth/facebook')
                             };
                             var token = jwt.sign({ user: user_token }, jwt_sign_pswd.SECRET, { expiresIn: 7200 });
 
-                            //insert the token into the cookies
+                            //insert the token into the cookies (valid 24 Hours)
                             //send the response
-                            res.cookie('token', token);
+                            res.cookie('token', token, { expires: new Date(Date.now() + (60000 * 1440)) });
                             logFunctions.generalStream('users-auth', 'signin user passed throught FB: ' + user.email, user._id, userIp);
                             res.status(200).json({
                                 message: 'Successfully logged in',
@@ -158,9 +158,9 @@ router.route('/auth/facebook')
                                 };
                                 var token = jwt.sign({ user: user_token }, jwt_sign_pswd.SECRET, { expiresIn: 7200 });
 
-                                //insert the token into the cookies
+                                //insert the token into the cookies (valid 24 Hours)
                                 //send the response
-                                res.cookie('token', token);
+                                res.cookie('token', token, { expires: new Date(Date.now() + (60000 * 1440)) });
                                 logFunctions.generalStream('users-auth', 'created and signed user passed throught FB: ' + user.email, user._id, userIp);
                                 res.status(200).json({
                                     message: 'Successfully logged in',
@@ -378,9 +378,9 @@ router.post('/signin', function (req, res, next) {
                 };
                 var token = jwt.sign({ user: user_token }, jwt_sign_pswd.SECRET, { expiresIn: 7200 });
 
-                //insert the token into the cookies
+                //insert the token into the cookies (valid 24 Hours)
                 //send the response
-                res.cookie('token', token);
+                res.cookie('token', token, { expires: new Date(Date.now() + (60000 * 1440)) });
                 logFunctions.generalStream('users-auth', 'signin user passed: ' + user.email, user._id, userIp);
                 res.status(200).json({
                     message: 'Successfully logged in',
@@ -447,7 +447,7 @@ router.post('/forgotPassword', function (req, res, next) {
                     var usefulFunctions = new UsefulFunctions();
                     var message_mail = '<a href="';
                     message_mail += baseUrl;
-                    message_mail += 'confirmForgotPassword/';
+                    message_mail += 'auth/confirmForgotPassword/';
                     message_mail += randomHash;
                     message_mail += '">Please click here to reset your password</a><br><br>G-Fit Team';
                     usefulFunctions.sendEmail(user.email, message_mail, 'G-Fit Team', "html").then(function (response) {

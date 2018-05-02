@@ -15,7 +15,7 @@ export class UserManagementService {
     EDIT_USER_ADDRESS = this.baseUrl + "users-management/editUser";
     CHECK_EMAIL_USER_ADDRESS = this.baseUrl + "users-management/checkEmail";
     SUPPORT_LINK_ADDRESS = this.baseUrl + "contact";
-    CONFIRMATION_REG_LINK_URL = this.baseUrl + "confirmRegistration";
+    CONFIRMATION_REG_LINK_URL = this.baseUrl + "auth/confirmRegistration";
     GET_USERS_COUNT = this.baseUrl + 'users-management/getUsersCount';
     GET_PART_OF_USERS = this.baseUrl + 'users-management/getPartOfUsers';
 

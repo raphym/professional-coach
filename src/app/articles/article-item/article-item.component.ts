@@ -78,7 +78,7 @@ export class ArticleItemComponent implements OnInit {
   }
   //when click on edit Article
   onEdit() {
-    var path = "/edit-article/";
+    var path = "articles/edit-article/";
     path += this.article._id;
     this.router.navigateByUrl(path);
   }
@@ -105,7 +105,6 @@ export class ArticleItemComponent implements OnInit {
 
   //share article 
   shareArticle() {
-    console.log(' here ');
     this.articleService.shareArticle(this.url, this.article.title, this.article.intro).then(
       function (response) {
       }

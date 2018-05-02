@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const path = require('path');
 const http = require('http');
+const compression = require('compression');
 const app = express();
 const LogFunctions = require('./server/classes/log_functions');
 
@@ -24,6 +25,7 @@ const database = require('./server/routes/database');
 
 //set views
 app.set('views', path.join(__dirname, 'public'));
+app.use(compression()) //compressing public folder 
 app.set('view engine', 'hbs');
 
 // Parsers

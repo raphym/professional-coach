@@ -4,9 +4,9 @@ import { User } from "../../shared/models/objects-models/user.model";
 import { AuthService } from "../auth.service";
 import { Router } from "@angular/router";
 import { LoaderService } from "../../shared/components/loader/loader.service";
-import { UsefulService } from "../../shared/services/utility/useful.service";
 import { ErrorService } from "../../shared/components/notif-to-user/errors/error.service";
 import { SuccessService } from "../../shared/components/notif-to-user/success/success.service";
+import { LangService } from "../../shared/services/langService/langService.service";
 
 @Component({
     selector: 'app-signin',
@@ -26,21 +26,20 @@ export class SigninComponent {
     constructor(public authService: AuthService,
         public router: Router,
         public loaderService: LoaderService,
-        public usefulService: UsefulService,
+        public langService: LangService,
         public errorService: ErrorService,
         public successService: SuccessService) { }
 
 
     ngOnInit() {
         //subscribe to the langage
-        this.usefulService.langTransmitter.subscribe(
+        this.langService.langTransmitter.subscribe(
             config_langage => {
                 this.langDirection = config_langage.direction;
                 this.langTextAlign = config_langage.textAlign;
             }
         );
-        //set langage
-        this.usefulService.initLangage();
+        this.langService.initLangage();
 
         this.myForm = new FormGroup({
             email: new FormControl(null, [
