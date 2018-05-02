@@ -114,7 +114,6 @@ export class HeaderComponent implements OnInit {
                 this.floatDirection = config_langage.floatDirection;
             }
         );
-        this.langService.initLangage();
 
         //User Login Event
         this.authService.userLogInEvent.subscribe(
@@ -149,6 +148,9 @@ export class HeaderComponent implements OnInit {
                 }
             }
         });
+
+        //set langage
+        this.changeLangage('he');
 
         //call the function IsLoggedIn 
         this.isLoggedIn();
