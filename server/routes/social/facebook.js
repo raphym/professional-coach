@@ -32,19 +32,35 @@ router.get('/getFbReviews', function (req, res, next) {
     FB.api(requestToFb, function (res_fb) {
         if (!res_fb || res_fb.error) {
             logFunctions.errorStream('social-facebook', 'Error to get fb reviews', null, userIp);
-            console.log(!res_fb ? 'error occurred' : res_fb.error);
             return res.status(500).json({
                 title: 'error',
                 message: 'error'
             });
         }
         else {
-            logFunctions.generalStream('social-facebook', 'get fb reviews', null, userIp);
-            return res.status(200).json({
-                title: 'ok',
-                message: 'success',
-                data: res_fb.data
-            });
+            //check if there are all the data and the data is valid
+            if (res_fb == null || res_fb == undefined || res_fb.data == null || res_fb.data == undefined || res_fb.data.length == 0) {
+                logFunctions.errorStream('social-facebook', 'Pb with fb reviews data', null, userIp);
+                return res.status(500).json({
+                    title: 'error',
+                    message: 'error'
+                });
+            }
+            else if (res_fb.data[0].reviewer == null || res_fb.data[0].reviewer == undefined || res_fb.data[0].reviewer.name == null || res_fb.data[0].reviewer.name == undefined || res_fb.data[0].created_time == null || res_fb.data[0].created_time == undefined) {
+                //pb with access token to get the name of the reviewer
+                logFunctions.errorStream('social-facebook', 'pb with access token to get the names of the reviewers', null, userIp);
+                return res.status(500).json({
+                    title: 'error',
+                    message: 'error'
+                });
+            } else {
+                logFunctions.generalStream('social-facebook', 'get fb reviews', null, userIp);
+                return res.status(200).json({
+                    title: 'ok',
+                    message: 'success',
+                    data: res_fb.data
+                });
+            }
         }
     });
 });

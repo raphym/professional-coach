@@ -8,20 +8,26 @@ export class ThankBookService {
     baseUrl = this.getUrl.protocol + "//" + this.getUrl.host + "/";
 
     //online
-    //Get_fbReviews_ADDRESS = this.baseUrl + 'social_fb/getFbReviews';
+    get_fbReviews_online_ADDRESS = this.baseUrl + 'social_fb/getFbReviews';
     //offline
-    Get_fbReviews_ADDRESS = this.baseUrl + 'social_fb/getFbReviewsOffline';
+    Get_fbReviews_offline_ADDRESS = this.baseUrl + 'social_fb/getFbReviewsOffline';
     constructor(public http: Http) { }
 
     //get articles count
     getFbReviews() {
-        return this.http.get(this.Get_fbReviews_ADDRESS)
+        return this.http.get(this.get_fbReviews_online_ADDRESS)
             .map((response: Response) => {
                 return response.json();
             })
             .catch((error: Response) => {
-                return Observable.throw(error.json());
+                //error to get live reviews , so go to the server to quey the offline reviews
+                return this.http.get(this.Get_fbReviews_offline_ADDRESS)
+                    .map((response: Response) => {
+                        return response.json();
+                    })
+                    .catch((error: Response) => {
+                        return Observable.throw(error.json());
+                    });
             });
-
     }
 }
